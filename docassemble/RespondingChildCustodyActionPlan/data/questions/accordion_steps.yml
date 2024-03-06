@@ -54,7 +54,7 @@ code: |
   expect_after_motion = ''
   reply_certificate_list.append({'image': service_cert_reply_image, 'text': "Certificate of Service at the bottom of the Reply form."})
   # motion_type used in expect_after_motion_step "What to expect after you file a ${ motion_type }"
-  motion_type = 'motion'
+  motion_type = 'motion or Answer'
   
 
   add_unique_step((get_help, "get_help_idx"), step_list)
@@ -83,4 +83,180 @@ code: |
         is_unique = False
     if is_unique:
       image_list.append(new_image)
+---
+template: improper_service_step
+subject: |
+  Step ${ improper_service_idx }: If you were not "served" correctly
+content: |
+  <div class="step-subheading">Watch out for a Default Judgment</div>
+---
+template: jurisdiction_step
+subject: |
+  Step ${ jurisdiction_idx }: If you were not "served" correctly
+content: |
+  <div class="step-subheading">Watch out for a Default Judgment</div>
+  % if not jurisdiction:
+  Decide if Alaska is the right state for your case (jurisdiction tf)
+  % else:
+  Resources to learn more about jurisdiction
+  % endif
+---
+template: aka2j_jurisdiction_step
+subject: |
+  Step ${ aka2j_jurisdiction_step }: Make sure that the Alaska court has the authority to change the order (from changing a divorce/custody order interview)
+content: |
+  <div class="step-subheading">Watch out for a Default Judgment</div>
+---
+template: decide_or_dismiss_step
+subject: |
+  Step ${ decide_or_dismiss_idx }: 
+  % if stage_of_case == 'still going':
+  Decide which court you want to hear your case(which court tf)
+  % else:
+  File a motion to dismiss your Alaska case (motion to dismiss tf)
+  % endif 
+content: |
+  <div class="step-subheading">Watch out for a Default Judgment</div>
+---
+template: answer_step
+subject: |
+  Step ${ answer_idx }: Fill out an **Answer form** to respond to the complaint (answer form tf)
+content: |
+  <div class="step-subheading">Remember</div>
+---
+template: aka2j_file_answer_step
+subject: |
+  Step ${ aka2j_file_answer_idx }: File the original with your local court & serve the other parent (file tf)
+content: |
+  <div class="step-subheading">Remember</div>
+---
+template: aka2j_drpo_step
+subject: |
+  Step ${ aka2j_drpo_idx }: Read the "domestic relations procedural order" or "standing order" if the clerk gives you one when you file your case (read drpo tf)
+content: |
+  This is the first order from your judge that sets out the basic rules for you and the other parent to follow during the case.  Violating this order can affect the outcome of your case.  The order usually state you cannot take your children out of Alaska unless the other parent agrees or the court gives permission.
+---
+template: aka2j_learn_process_step
+subject: |
+  Step ${ aka2j_learn_process_idx }: Learn more about the process (learn more tf)
+content: |
+  <div class="step-subheading">Read</div>
+  
+    * Flow Chart for Case Process, SHC-185: Word | PDF
+    * The Life of a Case, SHC-180
+  
+  <div class="step-subheading">Watch a Video </div>
+  
+    *	Introduction to Divorce and Custody Cases in Alaska
+    *	Overview and Timeline of the Case
+    *	Find other Alaska Videos: English | Spanish | Tagalog
+    *	Find Alaska Family Law Hearing & Trial Preparation Videos
+---
+template: default_options_step
+subject: |
+  Step ${ default_options_idx }: Options when the other parent asks for a default judgment
+content: |
+  <div class="step-subheading">Service</div>
+---
+template: parent_agreements_step
+subject: |
+  Step ${ parent_agreements_idx }: 
+  % if type_of_response == 'parent agreement_options':
+  Options if the other parent wants to talk about a parenting plan & starting a custody case (agreement options tf)
+  % endif
+  % if response_to_custody_complaint in('agree', 'some'):
+  Review your options when you agree with 
+  %  if response_to_custody_complaint == 'some':
+  some of (some agreement tf)
+  % endif
+  what the other parent is asking (full agreement tf)
+  % endif
+  % if parent_agreement_info:
+  Resources to help you reach an agreement with the other parent(reach agreement tf)
+  % endif
+content: |
+  <div class="step-subheading">The benefits of reaching an agreement </div>
+---
+template: aka2j_learn_reconsider_step
+subject: |
+  Step ${ aka2j_learn_reconsider_idx }: aka2j_Learn about Motions to Reconsider
+content: |
+  <p>To ask your judge to reconsider a decision, file a <strong>Motion to Reconsider</strong>. Add period in AKBranding package.</p>
+---
+template:  aka2j_fill_reconsider_step
+subject: |
+  Step ${ aka2j_ill_reconsider_idx }:  aka2j_Fill out the Motion to Reconsider forms
+content: |
+  <div class='step-subheading'>Use</div>
+---
+template: aka2j_learn_set_aside_step
+subject: |
+  Step ${ aka2j_learn_set_aside_idx }: aka2j_Learn about the Motion to Set Aside Judgment or Order
+content: |
+  <p>A <strong>Motion to Set Aside Judgment or Order</strong> asks the judge to</a></p>
+---
+template: aka2j_fill_set_aside_step
+subject: |
+  Step ${ aka2j_fill_set_aside_idx }: aka2j_Fill out forms if you want to file a Motion to Set Aside
+content: |
+  If you decide to file a **Motion to Set Aside** because it fits your case:
+---
+template: aka2j_cert_of_service_step
+subject: |
+  Step ${ aka2j_cert_of_service_idx }: aka2j_Fill out the Certificate of Service
+content: |
+  You must give ${ other_party_in_case } 1 copy of everything you file with the court. This is called “service.”
+---
+template: aka2j_file_step
+subject: |
+  Step ${ aka2j_file_idx }: 
+  % if defined('file_step_heading'):
+  ${ file_step_heading }
+  % else:
+  aka2j_File your motion forms
+  % endif
+content: |
+  ${ file_motion_to_set_aside }
+  ${ file_motion_to_enforce }
+  Make 2 copies of everything you are going to give the court.
+---
+template: aka2j_expect_reconsider_step
+subject: |
+  Step ${ aka2j_expect_reconsider_idx }: aka2j_What to expect after you file a Motion to Reconsider 
+content: |
+  <p>A <strong>Motion to Reconsider</strong> is different from other motions.</p>
+---
+template: aka2j_expect_after_motion_step
+subject: |
+  Step ${ aka2j_expect_after_motion_idx }: aka2j_What to expect after you file a ${ motion_type }
+content: |
+  <div class='step-subheading'>${ capitalize(other_party_in_case) } may file a response or "opposition"</div>
+---
+template: aka2j_uncontested_custody_forms_step
+subject: |
+  Step ${ aka2j_uncontested_custody_forms_idx }: aka2j_Fill out the forms to start your uncontested custody case 
+content: |
+  If you and the other parent agree on everything (a parenting plan including decision-making and schedule, paternity, and child support), you can fill out forms to start the case together.  This is called an uncontested case.
+  
+  You will not know your case number until you file your documents with the court.  You can write the case number on all your forms then.
+  <div class="step-subheading">Required forms – 1 copy that both parents sign if signatures are needed</div>
+---
+template: custody_domestic_violence_step
+subject: |
+  Step ${ custody_domestic_violence_idx }: 
+  % if response_to_custody_complaint in('agree', 'some') or (response_to_custody_complaint == 'none' and parents_agree_documents):
+  Abuse or domestic violence resources and reaching an agreement(dv agree tf)
+  % else:
+  Abuse or domestic violence and parenting(dv contested tf)
+  % endif 
+content: |
+  compare this step with AKA2J domestic_violence_step  headings and content.
+  <div class="step-subheading">If you are in immediate danger, call 911</div>
+---
+template: custody_paternity_step
+subject: |
+  Step ${ custody_paternity__idx }: Learn about paternity
+content: |
+  compare this step with AKA2J paternity_step  can we combine?
+  <div class="step-subheading">General paternity information</div>
 ---
