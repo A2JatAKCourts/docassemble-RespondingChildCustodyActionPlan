@@ -1,0 +1,303 @@
+---
+include:
+  - docassemble.AssemblyLine:assembly_line.yml
+  - docassemble.AKA2JBranding:custom_organization.yml  
+  - docassemble.AKA2JBranding:aka2j_templates.yml    
+  - docassemble.AKA2JBranding:aka2j_motion_response_templates.yml    
+  - docassemble.AKA2JBranding:aka2j_mod_cust_div_templates.yml
+  # - accordion_steps.yml
+---
+metadata:
+  title: >-
+    Responding in your child custody case  - action plan
+  short title: >-
+    Child custody responding
+  description: |-
+    Action plan for responding in your child custody case
+  tags:
+    - "FA-04-00-00-00"
+  authors:
+    - Alaska Court System
+  help_page_url: >-
+    https://courts.alaska.gov/shc/family/answer.htm
+  help_page_title: >-
+    Responding to a Complaint Served on You
+  allowed_courts: []
+  typical_role: "defendant"
+  al_weaver_version: "1.10.3"
+  generated_on: "2024-03-05"
+---
+code: |
+  # This controls the default country and list of states in address field questions
+  AL_DEFAULT_COUNTRY = "US"
+---
+code: |
+  # This controls the default state in address field questions
+  AL_DEFAULT_STATE = "Alaska"
+---
+code: |
+  github_repo_name =  'docassemble-RespondingChildCustodyActionPlan'
+---
+code: |
+  interview_short_title = "Responding in child custody"
+---
+code: |
+  al_form_type = "other" 
+---
+objects:
+  - users: ALPeopleList
+---
+sections:
+  - review_Responding_child_custody_action_plan: Review your answers
+---
+#################### Interview order #####################
+comment: |
+  Controls order and branching logic for questions specific to this form
+id: interview_order_Responding_child_custody_action_plan
+code: |
+  # Set the allowed courts for this interview
+  # allowed_courts = []
+  # nav.set_section("review_Responding_child_custody_action_plan")
+  # user_role = "defendant"
+  # user_ask_role = "defendant"
+  user_need
+  type_of_response
+  type_of_response['default']
+  parents_agree_documents
+  set_progress(25)
+  domestic_violence
+  paternity
+  get_steps
+  interview_order_Responding_child_custody_action_plan = True
+---
+###################### Main order ######################
+comment: |
+  This block includes the logic for standalone interviews.
+  Delete mandatory: True to include in another interview
+mandatory: True
+code: |
+  # al_intro_screen
+  Responding_child_custody_action_plan_intro
+  interview_order_Responding_child_custody_action_plan
+  # signature_date
+  # Store anonymous data for analytics / statistics
+  store_variables_snapshot(
+      persistent=True,
+      data={
+          "zip": showifdef("users[0].address.zip"),
+          "reached_interview_end": True,
+      },
+  )
+  # Responding_child_custody_action_plan_download
+  confirmation_and_download
+---
+comment: |
+  This question is used to introduce your interview. Please customize
+id: Responding_in_your_child_custody_case__action_plan
+continue button field: Responding_child_custody_action_plan_intro
+question: |
+  Responding in your child custody case  - action plan
+subquestion: |
+  Before you get started, you need to...
+---
+id: Parents agree documents
+question: |
+  Parents agree documents
+fields:
+  - "Parents agree documents": parents_agree_documents
+  - "Parent agreement info": parent_agreement_info
+  - "Proper service": proper_service
+  - "Distribution certificate list": distribution_certificate_list
+  - "Response to custody complaint": response_to_custody_complaint
+  - "User need": user_need
+---
+id: Paternity
+question: |
+  Paternity
+fields:
+  - "Paternity": paternity
+---
+id: Domestic violence
+question: |
+  Domestic violence
+fields:
+  - "Domestic violence": domestic_violence
+  - "Military": military
+---
+id: Type of response
+question: |
+  Type of response
+fields:
+  - "Type of response": type_of_response
+  - "Motion for reconsideration": motion_for_reconsideration
+  - "Other party in case": other_party_in_case
+  - "Stage of default": stage_of_default
+  - "Case type": case_type
+  - "Stage of case": stage_of_case
+  - "More than one step of a kind": more_than_one_step_of_a_kind
+---
+id: Type of response default
+question: |
+  Type of response['default']
+fields:
+  - "Type of response['default']": type_of_response['default']
+  - "Image data['text']": image_data['text']
+  - "Image data['image']": image_data['image']
+---
+id: preview Responding_child_custody_action_plan
+question: |
+  Preview your form before you sign it
+subquestion: |
+  Here is a preview of the form you will sign on the next page.   
+  
+  ${ al_court_bundle.as_pdf(key='preview') }
+
+  Click the image to open it in a new tab. Click the "Edit answers" button
+  to edit your answers.
+
+  ${ action_button_html(url_action('review_Responding_child_custody_action_plan'), label='Edit answers', color='info') }
+  
+  Remember to come back to this window to continue and sign your form.
+continue button field: Responding_child_custody_action_plan_preview_question    
+---
+code: |
+  signature_fields = []
+---
+code: |
+  # This is a placeholder for the addresses that will be searched
+  # for matching address to court. Edit if court venue is based on 
+  # a different address than the user's
+  [user.address.address for user in users.complete_elements()]
+  addresses_to_search = [user.address for user in users.complete_elements()]
+---
+id: Responding child custody action plan review screen
+event: review_Responding_child_custody_action_plan
+question: |
+  Review your answers
+review:
+  - Edit: type_of_response
+    button: |
+      **Type of response**:
+      ${ type_of_response }
+  - Edit: parents_agree_documents
+    button: |
+      **Parents agree documents**:
+      ${ parents_agree_documents }
+  - Edit: motion_for_reconsideration
+    button: |
+      **Motion for reconsideration**:
+      ${ motion_for_reconsideration }
+  - Edit: domestic_violence
+    button: |
+      **Domestic violence**:
+      ${ domestic_violence }
+  - Edit: parent_agreement_info
+    button: |
+      **Parent agreement info**:
+      ${ parent_agreement_info }
+  - Edit: type_of_response['default']
+    button: |
+      **Type of response['default']**:
+      ${ type_of_response['default'] }
+  - Edit: paternity
+    button: |
+      **Paternity**:
+      ${ paternity }
+  - Edit: proper_service
+    button: |
+      **Proper service**:
+      ${ proper_service }
+  - Edit: other_party_in_case
+    button: |
+      **Other party in case**:
+      ${ other_party_in_case }
+  - Edit: distribution_certificate_list
+    button: |
+      **Distribution certificate list**:
+      ${ distribution_certificate_list }
+  - Edit: military
+    button: |
+      **Military**:
+      ${ military }
+  - Edit: response_to_custody_complaint
+    button: |
+      **Response to custody complaint**:
+      ${ response_to_custody_complaint }
+  - Edit: user_need
+    button: |
+      **User need**:
+      ${ user_need }
+  - Edit: stage_of_default
+    button: |
+      **Stage of default**:
+      ${ stage_of_default }
+  - Edit: case_type
+    button: |
+      **Case type**:
+      ${ case_type }
+  - Edit: stage_of_case
+    button: |
+      **Stage of case**:
+      ${ stage_of_case }
+  - Edit: more_than_one_step_of_a_kind
+    button: |
+      **More than one step of a kind**:
+      ${ more_than_one_step_of_a_kind }
+  - Edit: image_data['text']
+    button: |
+      **Image data['text']**:
+      ${ image_data['text'] }
+  - Edit: image_data['image']
+    button: |
+      **Image data['image']**:
+      ${ image_data['image'] }
+---
+id: download Responding_child_custody_action_plan
+event: Responding_child_custody_action_plan_download
+question: |
+  All done
+subquestion: |
+  Thank you ${users}. Your form is ready to download and deliver.
+  
+  View, download and send your form below. Click the "Edit answers" button to fix any mistakes.
+
+  ${ action_button_html(url_action('review_Responding_child_custody_action_plan'), label='Edit answers', color='info') }
+  
+  
+  ${ al_user_bundle.download_list_html() }
+  
+
+  ${ al_user_bundle.send_button_html(show_editable_checkbox=True) }
+
+progress: 100
+---
+# ALDocument objects specify the metadata for each template
+objects:
+  - responding_child_custody_action_plan_attachment: ALDocument.using(title="Responding in your child custody case - Action Plan", filename="responding_child_custody_action_plan", enabled=True, has_addendum=False, suffix_to_append="")
+---
+# Bundles group the ALDocuments into separate downloads, such as for court and for the user
+objects:
+  - al_user_bundle: ALDocumentBundle.using(elements=[Responding_child_custody_action_plan_attachment], filename="Responding_child_custody_action_plan", title="All forms to download for your records", enabled=True)
+  # - al_court_bundle: ALDocumentBundle.using(elements=[Responding_child_custody_action_plan_attachment],  filename="Responding_child_custody_action_plan", title="All forms to deliver to court", enabled=True)
+---
+# Each attachment defines a key in an ALDocument. We use `i` as the placeholder here so the same template is 
+# used for "preview" and "final" keys, and logic in the template checks the value of 
+# `i` to show or hide the user's signature
+---
+attachment:
+  name: Responding child custody action plan
+  filename: responding_child_custody_action_plan
+  variable name: responding_child_custody_action_plan_attachment[i]
+  skip undefined: True
+  docx template file: responding_child_custody_action_plan.docx
+  tagged pdf: True
+---
+attachment:
+  name: Responding child custody action plan
+  filename: responding_child_custody_action_plan
+  variable name: docx.responding_child_custody_action_plan_attachment
+  skip undefined: True
+  docx template file: responding_child_custody_action_plan.docx
+  tagged pdf: True
+
+

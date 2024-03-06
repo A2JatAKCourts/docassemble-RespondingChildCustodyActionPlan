@@ -1,0 +1,86 @@
+comment: |
+  After testing:
+  1. Replace:
+      ${ al_user_bundle.download_list_html() }
+      [get the docx file](${ docx_changing_divorce_order_attachment.docx.url_for() })
+    with:
+      ${ download_buttons_html(al_user_bundle) }
+  2. comment out:
+       script: |
+         <script>
+           Array.from(document.querySelectorAll('.al_collapse_template .collapse')).forEach((elem) => { elem.className += " show" })
+         </script>
+---
+id: final screen
+decoration: pen-to-square
+event: confirmation_and_download
+question: |
+  % if len(step_list) < 2:
+  Get more information or help
+  % else:
+  # <i class="fa-thin fa-list"></i>Your Personal Action Plan is ready!
+  % endif
+subquestion: |
+  #### Your Personal Action Plan for responding in your child custody case in ${ len(step_list) } steps
+ 
+  % for iteration_index, step_tuple in enumerate( step_list ):
+  ${ collapse_template(step_tuple[0], closed_icon="plus", open_icon="minus") }
+  % endfor
+  
+  ${ al_user_bundle.download_list_html() }
+  [get the docx file](${ docx_changing_divorce_order_attachment.docx.url_for() })
+  
+buttons:
+  - Start over: restart
+script: |
+  <script>
+    Array.from(document.querySelectorAll('.al_collapse_template .collapse')).forEach((elem) => { elem.className += " show" })
+  </script>
+---
+code: |
+  step_list = []
+  if len(step_list) >= 2:
+    pdf_pap_multistep_subtitle = True
+  images_list = []
+  distribution_certificate_list = []
+  reply_certificate_list = []
+  other_party_in_case  = 'your spouse or ex'
+  case_type = 'divorce'
+  distribution_certificate_list.append({'image': distrib_cert_custody_divorce_image, 'text': "Certificate of Distribution shows the date the court sent your order to you."})
+  file_motion_to_set_aside = ''
+  file_motion_to_enforce = ''
+  file_modify_filing_fee = ''
+  # expect_after_motion is in what to expect step for filing motion for interim order w complaint, or answer/response, cannot use variable in docx template, must insert condition in what to expect step.
+  expect_after_motion = ''
+  reply_certificate_list.append({'image': service_cert_reply_image, 'text': "Certificate of Service at the bottom of the Reply form."})
+  # motion_type used in expect_after_motion_step "What to expect after you file a ${ motion_type }"
+  motion_type = 'motion'
+  
+
+  add_unique_step((get_help, "get_help_idx"), step_list)
+    
+  for iter_idx, step_tuple in enumerate( step_list ):
+    define(step_tuple[ 1 ], iter_idx + 1)
+  get_steps = True
+---
+code: |
+  def add_unique_step(step, step_list):
+    is_unique = True
+    for chair in step_list:
+      if chair[1] == step[1]:
+        is_unique = False
+    if is_unique:
+      step_list.append(step)
+      
+  #if foo:
+  #  add_unique_step((file_step, "file_idx"), step_list)
+---
+code: |
+  def add_unique_image(new_image, image_list):
+    is_unique = True
+    for image in image_list:
+      if image['image'] == new_image['image']:
+        is_unique = False
+    if is_unique:
+      image_list.append(new_image)
+---
