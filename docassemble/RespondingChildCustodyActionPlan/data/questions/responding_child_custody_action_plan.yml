@@ -60,7 +60,7 @@ code: |
   # nav.set_section("review_Responding_child_custody_action_plan")
   # user_role = "defendant"
   # user_ask_role = "defendant"
-  user_need
+  user_need = 'respond to custody case' 
   type_of_response
   type_of_response['default']
   parents_agree_documents
@@ -77,7 +77,7 @@ comment: |
 mandatory: True
 code: |
   # al_intro_screen
-  Responding_child_custody_action_plan_intro
+  responding_child_custody_action_plan_intro
   interview_order_Responding_child_custody_action_plan
   # signature_date
   # Store anonymous data for analytics / statistics
@@ -93,56 +93,231 @@ code: |
 ---
 comment: |
   This question is used to introduce your interview. Please customize
-id: Responding_in_your_child_custody_case__action_plan
-continue button field: Responding_child_custody_action_plan_intro
+id: Responding_in_your_child_custody_case__action_plan - intro
+continue button field: responding_child_custody_action_plan_intro
 question: |
-  Responding in your child custody case  - action plan
+  Responding in your child custody case
 subquestion: |
-  Before you get started, you need to...
+  This Guided Assistant asks you questions and uses your answers to build a Personal Action Plan - a list of steps to help you respond in your child custody case. Your Action Plan will include information about the Alaska court process and other resources.
+  
+  What information do you need?
+fields: 
+  - no label: type_of_response
+    datatype: checkboxes
+    choices:
+      - "The other parent started a custody case and I want to respond.": ak custody case
+      - "The other parent started a custody case, but did not give me the filed documents in the correct way": improper service
+        help: |
+          The other parent is supposed to give you a copy by process server, or send it by certified mail/restricted delivery/return receipt. 
+      - "The other parent started a custody case in Alaska, but I think the case should be in a different state.": wrong state
+      - "2 custody cases were filed – Alaska and another state.": case in 2 states
+      - "Someone started a custody case against me, I did not respond, and I got papers about a 'default judgment.'": default
+      - "The other parent has not started a custody case yet, but wants to see if we can agree on a parenting plan and custody order.": parents agreement options
+    none of the above: False
+under: |
+  #### <i class="fa-regular fa-lightbulb"></i> Learn more ####
+  We provide information about the process in Alaska only. Look for information in other states on their [court](https://www.ncsc.org/information-and-resources/state-court-websites) and [legal aid programs'](https://lawhelp.org) websites.   
 ---
-id: Parents agree documents
+id: Have children lived in AK long enough
 question: |
-  Parents agree documents
-fields:
-  - "Parents agree documents": parents_agree_documents
-  - "Parent agreement info": parent_agreement_info
-  - "Proper service": proper_service
-  - "Distribution certificate list": distribution_certificate_list
-  - "Response to custody complaint": response_to_custody_complaint
-  - "User need": user_need
+  Have your children lived in Alaska for at least the last 6 months?
+fields: 
+  - no label: jurisdiction
+    datatype: yesnoradio
+under: |
+  #### <i class="fa-regular fa-lightbulb"></i> Learn more ####
+  Why does it matter where our children live?
+  
+  The court may not have the authority to make decisions in your case if your children have not lived in Alaska long enough.   
 ---
-id: Paternity
+comment: |
+  I think we do not need this question if we present choices as checkboxes at the beginning of the interview.
+id: No jurisdiction
 question: |
-  Paternity
+  Do you want to continue answering questions, or stop and get your Action Plan?
+fields: 
+  - no label: continue_after_jurisdiction
+    datatype: yesnoradio
+---
+comment: |
+  I think we do not need this question if we present choices as checkboxes at the beginning of the interview.
+id: Improper Service
+question: |
+  Do you want to continue answering questions, or stop and get your Action Plan?
+subquestion: |
+  Your spouse is supposed to give you a copy of the paperwork filed in court by (1) process server, or (2) sending it by certified mail/restricted delivery/return receipt.  This is called “serving you.”  Information about “serving” has been added to your Action Plan.
+fields: 
+  - no label: improper_service
+    datatype: yesnoradio
+---
+question: |
+  Did the other parent send you documents to start the case by?
 fields:
-  - "Paternity": paternity
+  - Fruit: proper_service
+    datatype: radio
+    code: |
+      servicetypes
+under: |
+  #### <i class="fa-regular fa-lightbulb"></i> Learn more ####
+  Why does this matter?
+  
+  Before the court can default you, the other parent is supposed to give you copies of the Complaint and the attached documents (called “service”) by process server or certified mail.  If the other parent did not, you may be able to challenge a default judgment.
+---
+code: |
+  servicetypes = [
+                 {'server': "a process server who brought  the documents to you or a responsible person at your home."},
+                 {'mail': "certified mail, restricted delivery, and return receipt so that you had to sign the green postcard when you got the documents in the mail."},
+                 {'neither': "I did not get the documents either of these ways."}
+               ]
+---
+id: Military
+question: |
+  Are you in the military? 
+fields: 
+  - no label: military
+    datatype: yesnoradio
+under: |
+  #### <i class="fa-regular fa-lightbulb"></i> Learn more ####
+  Why does this matter?
+  
+  Before the court can default you, the other parent is supposed to give you copies of the Complaint and the attached documents (called “service”) by process server or certified mail.  If the other parent did not, you may be able to challenge a default judgment.  
+---
+id: Stage of default
+question: |
+  What stage of the default process are you at?
+fields: 
+  - no label: default
+    datatype: radio
+    code: |
+      defaultstages
+under: |
+  #### <i class="fa-regular fa-lightbulb"></i> Learn more ####
+  How do I know the stage my case is at?
+  
+  You can search for your case on the Alaska Court System website, or ask your local court.
+---
+code: |
+  defaultstages = [
+                    {'application filed': "The other parent filed a “Default Application” with the court."},
+                    {'hearing scheduled': "The court signed an “Entry of Default” or “Default Entry” and set a “Default Hearing” but it has not happened yet."},
+                    {'judgment entered': "The court held a 'Default Hearing' without me and entered a 'Default Judgment' against me."}
+                  ]
+---
+id: Answer forms
+question: |
+  Do you want more information?
+fields:
+  - I want to: continue_for_answer
+    input type: radio
+    choices:
+      - Quit and get my Action Plan: quit
+      - Get the information I need to fill out an Answer in my case.: continue 
+---
+id: Step 4 Q. 1 Info on agree
+question: |
+  Do you want your Action Plan to include information about the documents to use if you reach an agreement with the other parent?
+subquestion: 
+  Information about talking to the other parent about agreeing on a parenting plan and custody order has been added to your Action Plan.
+fields: 
+  - no label: parents_agree_documents
+    datatype: yesnoradio
+---
+id: Step 5, Q2 No agree - want info on agreeing?
+question: |
+  Do you want your Action Plan to include information about resources to help you and your spouse reach an agreement on the issues in your case?
+fields:
+  - no label: parents_agreement_info
+    datatype: yesnoradio
 ---
 id: Domestic violence
 question: |
-  Domestic violence
+  Do you want your Action Plan to include information about domestic violence resources and how domestic violence 
+  % if response_to_custody_complaint == 'none' and not parent_agreement_info:
+  affects your case?
+  % else:
+  can affect your agreement?
+  % endif
+subquestion: |
+  If there is 
+  % if response_to_custody_complaint == 'none' and not parent_agreement_info:
+  a history of 
+  % endif
+  abuse or domestic violence between you and the other parent, it may affect your case and 
+  % if not (response_to_custody_complaint == 'none' and not parent_agreement_info):
+  what you can agree to in 
+  % endif
+  your parenting plan.
+
 fields:
   - "Domestic violence": domestic_violence
-  - "Military": military
+under: |
+  #### <i class="fa-regular fa-lightbulb"></i> Learn more ####
+  % if not (response_to_custody_complaint == 'none' and not parent_agreement_info):
+  Sometimes a person in a relationship with domestic violence feels pressured to agree to things they do not want. And the
+  % else:
+  The 
+  % endif
+  law presumes that a parent with a "history of domestic violence" may not get custody and unsupervised visitation without completing some court-approved treatment. The parent’s domestic violence behavior needs to fit under one of the domestic violence crimes in the law. A "history of domestic violence" is defined as one incident that caused serious physical injury, or more than one incident. The court can find domestic violence based on one parent’s testimony even if there was no protective order or criminal case.
 ---
-id: Type of response
+id: Agree
 question: |
-  Type of response
+  Do you agree with everything the other parent asked for in their complaint?
 fields:
-  - "Type of response": type_of_response
+  - no label: response_to_custody_complaint
+    input type: radio
+    choices:
+      - I agree with everything the other parent asked for in the Complaint.: agree
+      - I agree with some of what the other parent asked for in the Complaint.: some
+      - I do not agree with what the other parent asked for in the Complaint.: none
+---
+id: Paternity
+question: |
+  Do you want your Action Plan to include information about paternity?
+fields:
+  - no label: paternity
+    datatype: yesnoradio
+---
+id: Cases in 2 states - still going?
+question: |
+  Is the case in the other state still going on?
+fields:
+  - no label: stage_of_other_case
+    input type: radio
+    choices:
+      - Yes.: agree
+      - No, it is over and the court inthat case issued a custody order.: some
+      - No, the case was closed before it was finished and the court did not issue a custody order: none  
+---
+id: Ongoing
+question: |
+  One of the courts will close their case
+subquestion: |
+  Only one state court can enter a custody order and parenting plan, so one of the courts will close their case.  Information about figuring out the correct state for your case has been added to your Action Plan. 
+continue button field: ongoing
+---
+id: Dismiss
+question: |
+  you can file a “Motion to Dismiss” in your Alaska case
+subquestion: |
+  If the case in another state is over and the other court issued a custody order, you can file a “Motion to Dismiss” in your Alaska case.  Information about this has been added to your Action Plan.
+continue button field: dismiss
+---
+id: Other over
+question: |
+  You can move forward with the Alaska case.
+subquestion: |
+  If the case in the other state is over and there is no custody order or parenting plan, you can move forward with the Alaska case.  
+continue button field: other_case_over  
+---
+id: fields in docx
+question: |
+  fields in docx are
+fields:
   - "Motion for reconsideration": motion_for_reconsideration
   - "Other party in case": other_party_in_case
   - "Stage of default": stage_of_default
   - "Case type": case_type
-  - "Stage of case": stage_of_case
   - "More than one step of a kind": more_than_one_step_of_a_kind
----
-id: Type of response default
-question: |
-  Type of response['default']
-fields:
-  - "Type of response['default']": type_of_response['default']
-  - "Image data['text']": image_data['text']
-  - "Image data['image']": image_data['image']
 ---
 id: preview Responding_child_custody_action_plan
 question: |
