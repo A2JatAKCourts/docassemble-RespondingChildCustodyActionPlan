@@ -56,6 +56,56 @@ code: |
   # motion_type used in expect_after_motion_step "What to expect after you file a ${ motion_type }"
   motion_type = 'motion or Answer'
   
+  if type_of_response.any_true('wrong state','case in 2 states'):
+    jurisdiction
+    continue_after_jurisdiction
+    add_unique_step((jurisdiction_step, "jurisdiction_service_idx"), step_list)
+    add_unique_step((aka2j_jurisdiction_step, "aka2j_jurisdiction_step"), step_list)
+    if type_of_response['case in 2 states']:
+      if stage_of_other_case == 'still ongoing':
+        ongoing
+      if stage_of_other_case == 'ended with order':
+        dismiss
+      if stage_of_other_case == 'ended with no order':
+        other_case_over
+      add_unique_step((decide_or_dismiss_step, "decide_or_dismiss_step"), step_list)
+  if type_of_response['default']:
+    proper_service
+    military
+    stage_of_default
+    add_unique_step((default_options_step, "default_options_idx"), step_list)
+  if type_of_response.any_true('ak custody case', 'improper service'):
+    if not type_of_response['default']:
+      add_unique_step((improper_service_step, "improper_service_idx"), step_list)
+    add_unique_step((aka2j_learn_reconsider_step, "aka2j_learn_reconsider_idx"), step_list)
+    add_unique_step((aka2j_fill_reconsider_step, "aka2j_fill_reconsider_idx"), step_list)
+    add_unique_step((aka2j_learn_set_aside_step, "aka2j_learn_set_aside_idx"), step_list)
+    add_unique_step((aka2j_fill_set_aside_step, "aka2j_fill_set_aside_idx"), step_list)
+    add_unique_step((aka2j_cert_of_service_step, "aka2j_cert_of_service_idx"), step_list)
+    add_unique_step((aka2j_file_step, "aka2j_file_idx"), step_list)
+    add_unique_step((aka2j_expect_reconsider_step, "aka2j_expect_reconsider_idx"), step_list)
+    add_unique_step((aka2j_expect_after_motion_step, "aka2j_expect_after_motion_idx"), step_list)
+    if type_of_response['ak custody case']:
+      if response_to_custody_complaint == 'none':
+        if parent_agreement_info:
+          add_unique_step((parent_agreements_step, "parent_agreements_idx"), step_list)
+      
+      add_unique_step((answer_step, "answer_idx"), step_list)
+      add_unique_step((aka2j_file_answer_step, "aka2j_file_answer_idx"), step_list)
+      add_unique_step((aka2j_drpo_step, "aka2j_drpo_step"), step_list)
+      add_unique_step((aka2j_learn_process_step, "aka2j_learn_process_idx"), step_list)
+      if domestic_violence:
+         add_unique_step((domestic_violence_step, "domestic_violence_idx"), step_list)
+      if paternity:
+         add_unique_step((paternity_step, "paternity_idx"), step_list)
+  if type_of_response['parent agreement options']:
+    if parents_agree_info:
+      add_unique_step((parent_agreements_step, "parent_agreements_idx"), step_list)
+      add_unique_step((aka2j_uncontested_custody_forms_step, "aka2j_uncontested_custody_forms_idx"), step_list)
+      if domestic_violence:
+        add_unique_step((custody_domestic_violence_step, "custody_domestic_violence_idx"), step_list)
+    
+  
 
   add_unique_step((get_help, "get_help_idx"), step_list)
     
@@ -92,31 +142,81 @@ content: |
 ---
 template: jurisdiction_step
 subject: |
-  Step ${ jurisdiction_idx }: If you were not "served" correctly
-content: |
-  <div class="step-subheading">Watch out for a Default Judgment</div>
+  Step ${ jurisdiction_idx }:
   % if not jurisdiction:
-  Decide if Alaska is the right state for your case (jurisdiction tf)
+  Decide if Alaska is the right state for your case(jurisdiction tf)
   % else:
   Resources to learn more about jurisdiction
+  % endif
+content: |
+  % if not jurisdiction:
+  <div class="step-subheading">Jurisdiction</div>
+  % endif
+  To enter a parenting plan, custody or child support order the court needs the authority, called "jurisdiction," to decide the case.  Generally, only the court in the state where the child has lived for the last 6 months has jurisdiction to make decisions, enter a parenting plan, or order child support. This is called the child's "home state."
+
+  Jurisdiction and residency can be very complicated.  For example, if a baby is less than 6 months old and has moved between states, there may not be a "home state."  This is one example of an exception when the Alaska court may be able to decide issues about a child that hasn't lived here for 6 months.
+  % if not jurisdiction:
+  <div class="step-subheading">Tell the court if you think Alaska is the wrong state</div>
+  If you think Alaska is not the "home state," you can ask the court to dismiss your case.
+
+  * 	State your objection in the "Affirmative Defense" section of your "Answer" 
+  * File a "motion" asking the court to dismiss your case.  You can learn about motions by answering more questions.  If you want to save this Action Plan, be sure to download, save, or print it.  Then return to the Guided Assist page and use the Guided Assist search box to find "Asking for an Order in a Divorce Case When the Issue Can't Wait for the Court's Final Decision (Filing a Motion) and Responding to a Motion."
+  * Check the box at the beginning of the "Counterclaims" section that says, "I have stated above that the case should be dismissed because the Alaska court does not have jurisdiction over the child(ren)."
+
+  If you have any questions about whether Alaska is the correct place for your case or you want to ask the court to dismiss your case, you may want to talk to a lawyer. 
   % endif
 ---
 template: aka2j_jurisdiction_step
 subject: |
   Step ${ aka2j_jurisdiction_step }: Make sure that the Alaska court has the authority to change the order (from changing a divorce/custody order interview)
 content: |
-  <div class="step-subheading">Watch out for a Default Judgment</div>
+  * A court must have the authority called jurisdiction to issue an order about a custody or parenting plan or a child support order.
+  * Generally, only the court in the state where the child has lived for the last 6 months can make decisions, enter a parenting plan, or order child support.  This is called the child’s "home state."
+  * Jurisdiction can be very complicated.  For example, if a baby is less than 6 months old and has moved between states, there may not be a “home state.”  This is one example of an exception when the Alaska court may be able to decide issues about a child that hasn’t lived here for 6 months. [Talking to a lawyer](https://courts.alaska.gov/shc/shclawyer.htm) can help you decide which is the best state for your case.
+
 ---
 template: decide_or_dismiss_step
 subject: |
   Step ${ decide_or_dismiss_idx }: 
   % if stage_of_case == 'still going':
-  Decide which court you want to hear your case(which court tf)
+  <Decide which court you want to hear your case(which court tf)
   % else:
   File a motion to dismiss your Alaska case (motion to dismiss tf)
   % endif 
 content: |
-  <div class="step-subheading">Watch out for a Default Judgment</div>
+  % if stage_of_case == 'still going':
+  div class="step-subheading">Check if the Alaska courts have Jurisdiction</div>
+  If you and the other parent have open custody cases in two states, one of the courts will close their case.  To decide the correct state for your case, the courts will look at which court has the authority, called “jurisdiction” to decide the case.  Generally, only the court in the state where the child has lived for the last 6 months has jurisdiction to make decisions, enter a parenting plan, or order child support.  This is called the child’s "home state."
+
+  Jurisdiction can be very complicated. For example, if a baby is less than 6 months old and has moved between states, there may not be a “home state.” This is one example of an exception when the Alaska court may be able to decide issues about a child that hasn’t lived here for 6 months.
+  
+  If you and the other parent disagree about which state, the courts will decide after hearing both side’s arguments.
+
+  <div class="step-subheading">Take steps based on which court you want to continue with the case</div>
+  **If you want to have your case in Alaska**
+
+    1.	Fill out and file your Answer
+      *	Fill out and file your Answer form and tell the court what you want to happen in the divorce
+    2.	Ask the other state court to close its case
+      *	You will have to ask the other state court to close its case.  Talk to a lawyer in the other state or search the internet to learn about that state’s self-help resources and forms.
+  **If you want your case in the other state**
+  % endif
+  1.	Tell the Alaska court about the other case in your answer
+  
+      * Check the “other” box in the “Affirmative Defenses” section of your Answer, tell the Alaska court there is another case, the court location, and the case number.
+      * Check the “other” box in the “Request for Relief” section of your Answer, and ask the Alaska court to dismiss your Alaska case.
+  2.	Fill out and file a Motion to Dismiss with your Answer
+
+      * Use: **Motion, SHC-1300** [Word](http://courts.alaska.gov/shc/family/docs/shc-1300.doc) | [PDF](http://courts.alaska.gov/shc/family/docs/shc-1300n.pdf), and title it “Motion to Dismiss.”
+      * You can learn about motions by answering more questions.  If you want to save this Action Plan, be sure to download, save, or print it.  Then return to the Guided Assist page and use the Guided Assist search box to find "Asking for an Order in a Divorce Case When the Issue Can’t Wait for the Court’s Final Decision (Filing a Motion) and Responding to a Motion."
+  % if stage_of_case == 'still going':
+   <div class="step-subheading">What to expect</div>
+
+   * Every case is different, but sometimes it is clear only one of the courts has jurisdiction over the case. When this happens, one state court may close its case.
+   * If it is not clear, the Alaska court will often hold a hearing and call the other court to talk about which case will move forward.
+   * It is important to pay attention to what is happening in both cases until you know which state will decide the case.
+   * Jurisdiction can be very complicated.  Talking to a lawyer can help you decide which is the best state for your case.
+  % endif
 ---
 template: answer_step
 subject: |

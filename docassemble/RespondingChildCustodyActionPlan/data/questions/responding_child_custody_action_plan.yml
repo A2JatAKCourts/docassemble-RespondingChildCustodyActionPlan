@@ -5,7 +5,7 @@ include:
   - docassemble.AKA2JBranding:aka2j_templates.yml    
   - docassemble.AKA2JBranding:aka2j_motion_response_templates.yml    
   - docassemble.AKA2JBranding:aka2j_mod_cust_div_templates.yml
-  # - accordion_steps.yml
+  - accordion_steps.yml
 ---
 metadata:
   title: >-
@@ -61,12 +61,12 @@ code: |
   # user_role = "defendant"
   # user_ask_role = "defendant"
   user_need = 'respond to custody case' 
-  type_of_response
-  type_of_response['default']
-  parents_agree_documents
-  set_progress(25)
-  domestic_violence
-  paternity
+  # type_of_response
+  # type_of_response['default']
+  # parents_agree_documents
+  # set_progress(25)
+  # domestic_violence
+  # paternity
   get_steps
   interview_order_Responding_child_custody_action_plan = True
 ---
@@ -135,6 +135,14 @@ comment: |
 id: No jurisdiction
 question: |
   Do you want to continue answering questions, or stop and get your Action Plan?
+subquestion: |
+  Generally, your children have to live in Alaska for at least the last 6 months for the Alaska courts to have the authority, called “jurisdiction,” to decide your case.
+  
+  % if jurisdiction:
+  If you think your case may be an exception, you may want to talk to a lawyer or contact the Alaska Family Law Self-Help Center.
+  % endif
+  
+  Information about jurisdiction has been added to your Action Plan.  
 fields: 
   - no label: continue_after_jurisdiction
     datatype: yesnoradio
