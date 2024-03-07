@@ -28,7 +28,7 @@ subquestion: |
   % endfor
   
   ${ al_user_bundle.download_list_html() }
-  [get the docx file](${ docx_changing_divorce_order_attachment.docx.url_for() })
+  [get the docx file](${ docx_responding_child_custody_action_plan_attachment.docx.url_for() })
   
 buttons:
   - Start over: restart
@@ -59,7 +59,7 @@ code: |
   if type_of_response.any_true('wrong state','case in 2 states'):
     jurisdiction
     continue_after_jurisdiction
-    add_unique_step((jurisdiction_step, "jurisdiction_service_idx"), step_list)
+    add_unique_step((jurisdiction_step, "jurisdiction_idx"), step_list)
     add_unique_step((aka2j_jurisdiction_step, "aka2j_jurisdiction_step"), step_list)
     if type_of_response['case in 2 states']:
       if stage_of_other_case == 'still ongoing':
@@ -152,7 +152,9 @@ content: |
   % if not jurisdiction:
   <div class="step-subheading">Jurisdiction</div>
   % endif
-  To enter a parenting plan, custody or child support order the court needs the authority, called "jurisdiction," to decide the case.  Generally, only the court in the state where the child has lived for the last 6 months has jurisdiction to make decisions, enter a parenting plan, or order child support. This is called the child's "home state."
+  To enter a parenting plan, custody or child support order the court needs the authority, called "jurisdiction," to decide the case.  
+  
+  Generally, only the court in the state where the child has lived for the last 6 months has jurisdiction to make decisions, enter a parenting plan, or order child support. This is called the child's "home state."
 
   Jurisdiction and residency can be very complicated.  For example, if a baby is less than 6 months old and has moved between states, there may not be a "home state."  This is one example of an exception when the Alaska court may be able to decide issues about a child that hasn't lived here for 6 months.
   % if not jurisdiction:

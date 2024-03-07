@@ -112,7 +112,7 @@ fields:
       - "The other parent started a custody case in Alaska, but I think the case should be in a different state.": wrong state
       - "2 custody cases were filed – Alaska and another state.": case in 2 states
       - "Someone started a custody case against me, I did not respond, and I got papers about a 'default judgment.'": default
-      - "The other parent has not started a custody case yet, but wants to see if we can agree on a parenting plan and custody order.": parents agreement options
+      - "The other parent has not started a custody case yet, but wants to see if we can agree on a parenting plan and custody order.": parent agreement options
     none of the above: False
 under: |
   #### <i class="fa-regular fa-lightbulb"></i> Learn more ####
@@ -134,18 +134,14 @@ comment: |
   I think we do not need this question if we present choices as checkboxes at the beginning of the interview.
 id: No jurisdiction
 question: |
-  Do you want to continue answering questions, or stop and get your Action Plan?
+  Information about jurisdiction has been added to your Action Plan
 subquestion: |
   Generally, your children have to live in Alaska for at least the last 6 months for the Alaska courts to have the authority, called “jurisdiction,” to decide your case.
   
   % if jurisdiction:
   If you think your case may be an exception, you may want to talk to a lawyer or contact the Alaska Family Law Self-Help Center.
   % endif
-  
-  Information about jurisdiction has been added to your Action Plan.  
-fields: 
-  - no label: continue_after_jurisdiction
-    datatype: yesnoradio
+continue button field: continue_after_jurisdiction
 ---
 comment: |
   I think we do not need this question if we present choices as checkboxes at the beginning of the interview.
@@ -460,8 +456,8 @@ objects:
 ---
 # Bundles group the ALDocuments into separate downloads, such as for court and for the user
 objects:
-  - al_user_bundle: ALDocumentBundle.using(elements=[Responding_child_custody_action_plan_attachment], filename="Responding_child_custody_action_plan", title="All forms to download for your records", enabled=True)
-  # - al_court_bundle: ALDocumentBundle.using(elements=[Responding_child_custody_action_plan_attachment],  filename="Responding_child_custody_action_plan", title="All forms to deliver to court", enabled=True)
+  - al_user_bundle: ALDocumentBundle.using(elements=[responding_child_custody_action_plan_attachment], filename="Responding_child_custody_action_plan", title="All forms to download for your records", enabled=True)
+  # - al_court_bundle: ALDocumentBundle.using(elements=[responding_child_custody_action_plan_attachment],  filename="Responding_child_custody_action_plan", title="All forms to deliver to court", enabled=True)
 ---
 # Each attachment defines a key in an ALDocument. We use `i` as the placeholder here so the same template is 
 # used for "preview" and "final" keys, and logic in the template checks the value of 
@@ -478,7 +474,7 @@ attachment:
 attachment:
   name: Responding child custody action plan
   filename: responding_child_custody_action_plan
-  variable name: docx.responding_child_custody_action_plan_attachment
+  variable name: docx_responding_child_custody_action_plan_attachment
   skip undefined: True
   docx template file: responding_child_custody_action_plan.docx
   tagged pdf: True
