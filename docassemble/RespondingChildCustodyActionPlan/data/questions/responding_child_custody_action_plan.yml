@@ -68,7 +68,7 @@ code: |
   # domestic_violence
   # paternity
   get_steps
-  interview_order_Responding_child_custody_action_plan = True
+  interview_order_responding_child_custody_action_plan = True
 ---
 ###################### Main order ######################
 comment: |
@@ -78,7 +78,7 @@ mandatory: True
 code: |
   # al_intro_screen
   responding_child_custody_action_plan_intro
-  interview_order_Responding_child_custody_action_plan
+  interview_order_responding_child_custody_action_plan
   # signature_date
   # Store anonymous data for analytics / statistics
   store_variables_snapshot(
@@ -93,7 +93,7 @@ code: |
 ---
 comment: |
   This question is used to introduce your interview. Please customize
-id: Responding_in_your_child_custody_case__action_plan - intro
+id: Responding_in_your_child_custody_case_action_plan - intro
 continue button field: responding_child_custody_action_plan_intro
 question: |
   Responding in your child custody case
@@ -190,7 +190,7 @@ id: Stage of default
 question: |
   What stage of the default process are you at?
 fields: 
-  - no label: default
+  - no label: stage_of_default
     datatype: radio
     code: |
       defaultstages
@@ -254,6 +254,7 @@ subquestion: |
 
 fields:
   - "Domestic violence": domestic_violence
+    datatype: yesnoradio
 under: |
   #### <i class="fa-regular fa-lightbulb"></i> Learn more ####
   % if not (response_to_custody_complaint == 'none' and not parent_agreement_info):
@@ -277,6 +278,14 @@ fields:
 id: Paternity
 question: |
   Do you want your Action Plan to include information about paternity?
+subquestion: |
+  Sometimes paternity is an issue in a custody case.  
+  
+  Establishing paternity means legally determining the biological father of a child.  
+  
+  Once established, the father's name can be placed on the child's birth certificate and he has legal and financial responsibility for the child. 
+  
+  Disestablishing paternity is legally un-naming a man as the child's biological father.  
 fields:
   - no label: paternity
     datatype: yesnoradio
@@ -318,9 +327,6 @@ question: |
   fields in docx are
 fields:
   - "Motion for reconsideration": motion_for_reconsideration
-  - "Other party in case": other_party_in_case
-  - "Stage of default": stage_of_default
-  - "Case type": case_type
   - "More than one step of a kind": more_than_one_step_of_a_kind
 ---
 id: preview Responding_child_custody_action_plan
