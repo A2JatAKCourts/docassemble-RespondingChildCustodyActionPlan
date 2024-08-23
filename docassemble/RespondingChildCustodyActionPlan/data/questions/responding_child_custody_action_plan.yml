@@ -36,7 +36,7 @@ code: |
   AL_DEFAULT_STATE = "Alaska"
 ---
 code: |
-  github_repo_name =  'docassemble-RespondingChildCustodyActionPlan'
+  github_repo_name =  'docassemble-RespondingInCustodyIssues'
 ---
 code: |
   interview_short_title = "Responding in child custody"
@@ -47,8 +47,8 @@ code: |
 objects:
   - users: ALPeopleList
 ---
-sections:
-  - review_Responding_child_custody_action_plan: Review your answers
+# sections:
+#   - review_Responding_child_custody_action_plan: Review your answers
 ---
 #################### Interview order #####################
 comment: |
@@ -60,7 +60,7 @@ code: |
   # nav.set_section("review_Responding_child_custody_action_plan")
   # user_role = "defendant"
   # user_ask_role = "defendant"
-  user_need = 'respond to custody case' 
+  user_need = 'answer custody' 
   # type_of_response
   # type_of_response['default']
   # parents_agree_documents
@@ -106,12 +106,12 @@ fields:
     datatype: checkboxes
     choices:
       - "The other parent started a custody case and I want to respond.": ak custody case
-      - "The other parent started a custody case, but did not give me the filed documents in the correct way": improper service
+      - "The other parent started a custody case, but did not give me the filed documents in the correct way.": improper service
         help: |
           The other parent is supposed to give you a copy by process server, or send it by certified mail/restricted delivery/return receipt. 
       - "The other parent started a custody case in Alaska, but I think the case should be in a different state.": wrong state
       - "2 custody cases were filed – Alaska and another state.": case in 2 states
-      - "Someone started a custody case against me, I did not respond, and I got papers about a 'default judgment.'": default
+      - "The other parent started a custody case against me, I did not respond, and I got papers about a 'default judgment.'": default
       - "The other parent has not started a custody case yet, but wants to see if we can agree on a parenting plan and custody order.": parent agreement options
     none of the above: False
 under: |
@@ -143,29 +143,73 @@ subquestion: |
   % endif
 continue button field: continue_after_jurisdiction
 ---
-comment: |
-  I think we do not need this question if we present choices as checkboxes at the beginning of the interview.
-id: Improper Service
-question: |
-  Do you want to continue answering questions, or stop and get your Action Plan?
-subquestion: |
-  Your spouse is supposed to give you a copy of the paperwork filed in court by (1) process server, or (2) sending it by certified mail/restricted delivery/return receipt.  This is called “serving you.”  Information about “serving” has been added to your Action Plan.
-fields: 
-  - no label: improper_service
-    datatype: yesnoradio
+# comment: |
+#   I think we do not need this question if we present choices as checkboxes at the beginning of the interview - but if update with step content, gives users a chance to get more information in their Action Plan.
+#   This was the original subquestion
+#   Your spouse is supposed to give you a copy of the paperwork filed in court by (1) process server, or (2) sending it by certified mail/restricted delivery/return receipt.  This is called “serving you.”  Information about “serving” has been added to your Action Plan.
+#   
+#   ${ capitalize(other_party_in_case) } is supposed to "serve" you by giving you a copy of the paperwork they filed in court by:
+#     
+#   *	process server, or 
+#   *	sending it by certified mail/restricted delivery/return receipt. This means you sign the green postcard when you get the mail.
+#   
+#   After you are served, you have **20 days** to file an **Answer**. 
+#   <div class="step-subheading">If the other parent did not serve you correctly</div>
+# id: Improper Service
+# question: |
+#   Options if you were not served correctly
+# subquestion: |
+#   You can:
+#   
+#   * move forward with the case, or
+#   * wait.    
+#   
+#   <div class="step-subheading">Move forward</div>
+#     File an **Answer** within 20 days if:
+#     
+#     * You agree with ${other_party_in_case } that there should be a case to get a Parenting Plan and custody order. Or 
+#     * You do not want to risk a **Default Judgment**.
+#     
+#   <div class="step-subheading">Wait</div>
+#   If you do not want to do anything unless the other parent serves you properly: 
+#   
+#     *	Wait for proper service and then file your **Answer**. Or
+#     *	Do nothing. **If** neither you nor the other parent files anything, the court will close your case. You can always look the case up on [CourtView](https://records.courts.alaska.gov/eaccess/home.page.2) to see if anything has been filed or ordered.
+#   
+#    <div class="step-subheading">${ capitalize(other_party_in_case) } could apply for a Default Judgment</div>
+#   
+#   If you do not file an answer within 20 days, even if they did not serve you correctly, ${ other_party_in_case } could still ask the court for a **Default Judgment**.  Then you will have to tell the court you think you were not served the correct way. 
+# fields: 
+#   - Do you want any more information in your Action Plan?: improper_service
+#     datatype: checkboxes
+#     choices:
+#       - "Yes, I want information about filing an **Answer**.": answer
+#       - "Yes, I want information about my options if the other parent files for a **Default Judgment**.": default
+#     none of the above: No, this is enough for now.
+# 
+# under: |
+#   #### <i class="fa-regular fa-lightbulb"></i> Learn more ####
+#  Why does it matter if the other parent files for a **Default Judgment**?
+#  
+#  If ${ other_party_in_case } asks the court for a default judgment, the judge can decide the case without hearing your side of the story. 
 ---
+id: Proper service
 question: |
-  Did the other parent send you documents to start the case by?
+  Did ${ other_party_in_case } send you documents to start the case by?
 fields:
-  - Fruit: proper_service
-    datatype: radio
-    code: |
-      servicetypes
+  - How did ${ other_party_in_case } tell you they had started a court case?: proper_service
+    input type: radio
+    choices:
+      - "A process server brought the documents to me or a responsible person at my home.": server
+        help: |
+          A process server is licensed by the State of Alaska to serve legal documents.
+      - "They used certified mail, restricted delivery, with a green return receipt I had to sign.": mail
+      - "I did not get the documents either of these ways.": neither
 under: |
   #### <i class="fa-regular fa-lightbulb"></i> Learn more ####
   Why does this matter?
   
-  Before the court can default you, the other parent is supposed to give you copies of the Complaint and the attached documents (called “service”) by process server or certified mail.  If the other parent did not, you may be able to challenge a default judgment.
+  Before the court can default you, ${ other_party_in_case } is supposed to "serve" you with copies of the complaint and the attached documents by process server or certified mail.  If they  did not, you may be able to challenge a default judgment.
 ---
 code: |
   servicetypes = [
@@ -191,21 +235,16 @@ question: |
   What stage of the default process are you at?
 fields: 
   - no label: stage_of_default
-    datatype: radio
-    code: |
-      defaultstages
+    input type: radio
+    choices:
+      - "The other parent filed a “Default Application” with the court.": application filed
+      - "The court signed an “Entry of Default” or “Default Entry” and set a “Default Hearing” but it has not happened yet.": hearing scheduled
+      - "The court held a 'Default Hearing' without me and entered a 'Default Judgment' against me.": judgment entered
 under: |
   #### <i class="fa-regular fa-lightbulb"></i> Learn more ####
   How do I know the stage my case is at?
   
   You can search for your case on the Alaska Court System website, or ask your local court.
----
-code: |
-  defaultstages = [
-                    {'application filed': "The other parent filed a “Default Application” with the court."},
-                    {'hearing scheduled': "The court signed an “Entry of Default” or “Default Entry” and set a “Default Hearing” but it has not happened yet."},
-                    {'judgment entered': "The court held a 'Default Hearing' without me and entered a 'Default Judgment' against me."}
-                  ]
 ---
 id: Answer forms
 question: |
@@ -230,7 +269,7 @@ id: Step 5, Q2 No agree - want info on agreeing?
 question: |
   Do you want your Action Plan to include information about resources to help you and your spouse reach an agreement on the issues in your case?
 fields:
-  - no label: parents_agreement_info
+  - no label: parent_agreement_info
     datatype: yesnoradio
 ---
 id: Domestic violence
@@ -253,7 +292,7 @@ subquestion: |
   your parenting plan.
 
 fields:
-  - "Domestic violence": domestic_violence
+  - no label: domestic_violence
     datatype: yesnoradio
 under: |
   #### <i class="fa-regular fa-lightbulb"></i> Learn more ####
@@ -297,9 +336,9 @@ fields:
   - no label: stage_of_other_case
     input type: radio
     choices:
-      - Yes.: agree
-      - No, it is over and the court inthat case issued a custody order.: some
-      - No, the case was closed before it was finished and the court did not issue a custody order: none  
+      - Yes.: still going
+      - No, it is over and the court in that case issued a custody order.: ended with order
+      - No, the case was closed before it was finished and the court did not issue a custody order: ended with no order
 ---
 id: Ongoing
 question: |
