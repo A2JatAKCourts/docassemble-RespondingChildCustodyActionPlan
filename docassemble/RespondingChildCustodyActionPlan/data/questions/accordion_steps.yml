@@ -74,15 +74,18 @@ code: |
   reply_certificate_list.append({'image': service_cert_reply_image, 'text': "Certificate of Service at the bottom of the Reply form."})
   # motion_type used in expect_after_motion_step "What to expect after you file a ${ motion_type }"
   motion_type = 'motion or Answer'
+
   
+  if len(type_of_response.true_values()) > 1:
+    add_unique_step((pick_a_step_step, "pick_a_step_idx"), step_list)
   
   if type_of_response['improper service']:
     if not type_of_response['default']: 
       add_unique_step((improper_service_step, "improper_service_idx"), step_list)
-      if proper_service == 'neither' and improper_service['answer']:
-        add_unique_step((answer_step, "answer_idx"), step_list)
-      if proper_service == 'neither' and improper_service['default']:
-        add_unique_step((default_options_step, "default_options_idx"), step_list)
+      # if proper_service == 'neither' and improper_service['answer']:
+      #   add_unique_step((answer_step, "answer_idx"), step_list)
+      # if proper_service == 'neither' and improper_service['default']:
+      #   add_unique_step((default_options_step, "default_options_idx"), step_list)
   if type_of_response.any_true('wrong state','case in 2 states'):
     jurisdiction
     continue_after_jurisdiction
@@ -138,12 +141,13 @@ code: |
        add_unique_step((custody_domestic_violence_step, "custody_domestic_violence_idx"), step_list)
     if paternity:
        add_unique_step((custody_paternity_step, "custody_paternity_idx"), step_list)
-  if type_of_response['parent agreement options']:
+  if type_of_response.all_false():
     if parents_agree_info:
       add_unique_step((parent_agreements_step, "parent_agreements_idx"), step_list)
       add_unique_step((aka2j_uncontested_custody_forms_step, "aka2j_uncontested_custody_forms_idx"), step_list)
-      if domestic_violence:
-        add_unique_step((custody_domestic_violence_step, "custody_domestic_violence_idx"), step_list)
+
+  if domestic_violence:
+    add_unique_step((custody_domestic_violence_step, "custody_domestic_violence_idx"), step_list)
 
   add_unique_step((get_help, "get_help_idx"), step_list)
     

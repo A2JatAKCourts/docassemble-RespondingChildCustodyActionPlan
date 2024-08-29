@@ -112,8 +112,11 @@ fields:
       - "The other parent started a custody case in Alaska, but I think the case should be in a different state.": wrong state
       - "2 custody cases were filed – Alaska and another state.": case in 2 states
       - "The other parent started a custody case against me, I did not respond, and I got papers about a 'default judgment.'": default
-      - "The other parent has not started a custody case yet, but wants to see if we can agree on a parenting plan and custody order.": parent agreement options
-    none of the above: False
+#      - "The other parent has not started a custody case yet, but wants to see if we can agree on a parenting plan and custody order.": parent agreement options
+    
+    none of the above: |
+      The other parent has not started a custody case yet, but wants to see if we can agree on a parenting plan and custody order.
+#    none of the above: False
 under: |
   #### <i class="fa-regular fa-lightbulb"></i> Learn more ####
   We provide information about the process in Alaska only. Look for information in other states on their [court](https://www.ncsc.org/information-and-resources/state-court-websites) and [legal aid programs'](https://lawhelp.org) websites.   
@@ -368,6 +371,15 @@ fields:
   - "Motion for reconsideration": motion_for_reconsideration
   - "More than one step of a kind": more_than_one_step_of_a_kind
 ---
+id: info on Agree
+question: |
+  Do you want your Action Plan to include information about the documents to use if you reach an agreement with the other parent?
+subquestion: |
+  Information about talking to the other parent about agreeing on a parenting plan and custody order has been added to your Action Plan.
+fields:
+  - Do you want information about the documents to use if you agree?: parents_agree_info
+    datatype: yesnoradio
+---
 id: preview Responding_child_custody_action_plan
 question: |
   Preview your form before you sign it
@@ -513,6 +525,7 @@ attachment:
   filename: responding_child_custody_action_plan
   variable name: responding_child_custody_action_plan_attachment[i]
   skip undefined: True
+  update references: True
   docx template file: responding_child_custody_action_plan.docx
   tagged pdf: True
 ---
@@ -521,6 +534,7 @@ attachment:
   filename: responding_child_custody_action_plan
   variable name: docx_responding_child_custody_action_plan_attachment
   skip undefined: True
+  update references: True
   docx template file: responding_child_custody_action_plan.docx
   tagged pdf: True
 
