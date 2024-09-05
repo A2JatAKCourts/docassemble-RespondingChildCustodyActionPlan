@@ -41,7 +41,7 @@ subquestion: |
   ${ al_user_bundle.send_button_html(show_editable_checkbox=False) }
   
   % if "docassembledev" in interview_url():
-  [get the docx file](${ docx_changing_divorce_order_attachment.docx.url_for() })
+  [get the docx file](${ docx_responding_child_custody_action_plan_attachment.docx.url_for() })
   % endif 
    
 buttons:
@@ -142,8 +142,8 @@ code: |
     if paternity:
        add_unique_step((custody_paternity_step, "custody_paternity_idx"), step_list)
   if type_of_response.all_false():
+    add_unique_step((parent_agreements_step, "parent_agreements_idx"), step_list)
     if parents_agree_info:
-      add_unique_step((parent_agreements_step, "parent_agreements_idx"), step_list)
       add_unique_step((aka2j_uncontested_custody_forms_step, "aka2j_uncontested_custody_forms_idx"), step_list)
 
   if domestic_violence:
@@ -637,7 +637,7 @@ content: |
    </ul>
   3.	Keep 1 copy for your own records.
   4.	Give the 2nd copy to ${ other_party_in_case } on the date and way you wrote on your **Certificate of Service**.  
-  5.	Read ${ serve_idx }: Serve ${ other_party_in_case }.
+  5.	Read ${ serve_motion_idx }: Serve ${ other_party_in_case }.
 ---
 template: aka2j_drpo_step
 subject: |
@@ -664,12 +664,13 @@ content: |
 template: parent_agreements_step
 subject: |
   Step ${ parent_agreements_idx }: 
-  % if type_of_response == 'parent agreement_options':
+  % if type_of_response.all_false():
   Options if the other parent wants to talk about a parenting plan & starting a custody case (agreement options tf)
   % endif
-  % if response_to_custody_complaint in('agree', 'some'):
+  % if type_of_response['ak custody case']:
+  % if response_to_custody_complaint in('agree', 'some'): 
   Review your options when you agree with 
-  %  if response_to_custody_complaint == 'some':
+  % elif response_to_custody_complaint == 'some':
   some of (some agreement tf)
   % endif
   what the other parent is asking (full agreement tf)
@@ -746,11 +747,13 @@ content: |
 ---
 template: custody_domestic_violence_step
 subject: |
-  Step ${ custody_domestic_violence_idx }: 
-  % if response_to_custody_complaint in('agree', 'some') or (response_to_custody_complaint == 'none' and parents_agree_documents):
+  Step ${ custody_domestic_violence_idx }:
+  % if type_of_response.any_true():
+  % if type_of_response['ak custody case'] and (response_to_custody_complaint in('agree', 'some') or (response_to_custody_complaint == 'none' and parents_agree_documents)):
   Abuse or domestic violence resources and reaching an agreement(dv agree tf)
   % else:
   Abuse or domestic violence and parenting(dv contested tf)
+  % endif 
   % endif 
 content: |
   compare this step with AKA2J domestic_violence_step  headings and content.
