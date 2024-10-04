@@ -76,8 +76,8 @@ code: |
   motion_type = 'motion or Answer'
 
   
-  if len(type_of_response.true_values()) > 1:
-    add_unique_step((pick_a_step_step, "pick_a_step_idx"), step_list)
+  # if len(type_of_response.true_values()) > 1:
+  #   add_unique_step((pick_a_step_step, "pick_a_step_idx"), step_list)
   
   if type_of_response['improper service']:
     if not type_of_response['default']: 
@@ -91,17 +91,17 @@ code: |
     continue_after_jurisdiction
     add_unique_step((ak_jurisdiction_step, "ak_jurisdiction_idx"), step_list)
     # add_unique_step((aka2j_jurisdiction_step, "aka2j_jurisdiction_idx"), step_list)
-    if type_of_response['case in 2 states']:
-      if stage_of_other_case == 'still going':
-        ongoing          
-        add_unique_step((decide_court_step, "decide_court_idx"), step_list)
-        add_unique_step((answer_step, "answer_idx"), step_list)
-        add_unique_step((dismiss_step, "dismiss_idx"), step_list)
-      if stage_of_other_case == 'ended with order':
-        dismiss
-      if stage_of_other_case == 'ended with no order':
-        other_case_over
-      add_unique_step((decide_or_dismiss_step, "decide_or_dismiss_idx"), step_list)
+  if type_of_response['case in 2 states']:
+    if stage_of_other_case == 'still going':
+      ongoing          
+      add_unique_step((decide_court_step, "decide_court_idx"), step_list)
+      add_unique_step((answer_step, "answer_idx"), step_list)
+      add_unique_step((dismiss_step, "dismiss_idx"), step_list)
+    if stage_of_other_case == 'ended with order':
+      dismiss
+    if stage_of_other_case == 'ended with no order':
+      other_case_over
+    add_unique_step((decide_or_dismiss_step, "decide_or_dismiss_idx"), step_list)
   if type_of_response['default']:
     proper_service
     military
@@ -119,11 +119,11 @@ code: |
       add_unique_step((aka2j_expect_reconsider_step, "aka2j_expect_reconsider_idx"), step_list)
       add_unique_step((aka2j_expect_after_motion_step, "aka2j_expect_after_motion_idx"), step_list)
   if type_of_response['ak custody case']:
-    if response_to_custody_complaint == 'none' and parent_agreement_info:
+    if response_to_complaint == 'none' and parent_agreement_info:
       add_unique_step((parent_agreements_step, "parent_agreements_idx"), step_list)
   if type_of_response['ak custody case'] \
     or (type_of_response['wrong state'] and continue_after_jurisdiction) \
-    or (type_of_response['improper service'] and improper_service['answer']):
+    or type_of_response['improper service']:
     add_unique_step((answer_step, "answer_idx"), step_list)
     if type_of_response['wrong state'] and not jurisdiction and continue_after_jurisdiction:
       add_unique_step((dismiss_step, "dismiss_idx"), step_list)
@@ -135,7 +135,7 @@ code: |
     add_unique_step((aka2j_drpo_step, "aka2j_drpo_idx"), step_list)
     add_unique_step((aka2j_learn_process_step, "aka2j_learn_process_idx"), step_list)
   if type_of_response['ak custody case']:
-    if response_to_custody_complaint in('agree','some'):
+    if response_to_complaint in('agree','some'):
       add_unique_step((parent_agreements_step, "parent_agreements_idx"), step_list)
     if domestic_violence:
        add_unique_step((custody_domestic_violence_step, "custody_domestic_violence_idx"), step_list)
@@ -668,9 +668,9 @@ subject: |
   Options if the other parent wants to talk about a parenting plan & starting a custody case (agreement options tf)
   % endif
   % if type_of_response['ak custody case']:
-  % if response_to_custody_complaint in('agree', 'some'): 
+  % if response_to_complaint in('agree', 'some'): 
   Review your options when you agree with 
-  % elif response_to_custody_complaint == 'some':
+  % elif response_to_complaint == 'some':
   some of (some agreement tf)
   % endif
   what the other parent is asking (full agreement tf)
@@ -749,7 +749,7 @@ template: custody_domestic_violence_step
 subject: |
   Step ${ custody_domestic_violence_idx }:
   % if type_of_response.any_true():
-  % if type_of_response['ak custody case'] and (response_to_custody_complaint in('agree', 'some') or (response_to_custody_complaint == 'none' and parents_agree_documents)):
+  % if type_of_response['ak custody case'] and (response_to_complaint in('agree', 'some') or (response_to_complaint == 'none' and parents_agree_documents)):
   Abuse or domestic violence resources and reaching an agreement(dv agree tf)
   % else:
   Abuse or domestic violence and parenting(dv contested tf)
