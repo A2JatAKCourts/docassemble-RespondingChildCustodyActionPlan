@@ -145,9 +145,8 @@ code: |
     add_unique_step((parent_agreements_step, "parent_agreements_idx"), step_list)
     if parents_agree_info:
       add_unique_step((aka2j_uncontested_custody_forms_step, "aka2j_uncontested_custody_forms_idx"), step_list)
-
-  if domestic_violence:
-    add_unique_step((custody_domestic_violence_step, "custody_domestic_violence_idx"), step_list)
+    if domestic_violence:
+      add_unique_step((custody_domestic_violence_step, "custody_domestic_violence_idx"), step_list)
 
   add_unique_step((get_help, "get_help_idx"), step_list)
     
@@ -314,7 +313,7 @@ content: |
   <li>Tell the Alaska court about the other case in your answer.</br>
   See ${ answer_idx }: Fill out an **Answer form** to respond to the complaint (answer form tf). And</li>
   <li>Ask the Alaska court to dismiss your Alaska case.</br>
-  See Step ${ dismiss_idx }: File a motion to Dismiss your Alaska case.</li>
+  See Step ${ dismiss_idx }: File a motion to dismiss your Alaska case.</li>
   </ol>
 ---
 template: decide_or_dismiss_step
@@ -505,7 +504,7 @@ content: |
   <ol>
   <li>State your objection in the "Affirmative Defense" section of your Answer.</li>
   <li>Check the box at the beginning of the "Counterclaims" section that says, "I have stated above that the case should be dismissed because the Alaska court does not have jurisdiction over the child(ren)."</li>
-  <li>File a "motion" asking the court to dismiss your case. See Step X Motion to dismiss</li>
+  <li>File a "motion" asking the court to dismiss your case. See Step ${ dismiss_idx } File a Motion to Dismiss your Alaska Case</li>
   </ol>
   If you have any questions about whether Alaska is the correct place for your case or you want to ask the court to dismiss your case, you may want to talk to a lawyer.
   % endif
@@ -551,7 +550,7 @@ subject: |
 content: |
   <ol>
   % if (type_of_response['case in 2 states'] and stage_of_other_case == 'still going')  or (type_of_response['wrong state'] and not jurisdiction):
-  <li>Fill out and a <strong>Motion to Dismiss</strong></br>
+  <li>Fill out and file a <strong>Motion to Dismiss</strong></br>
    Use: <strong>Motion, SHC-1300</strong> <a href="http://courts.alaska.gov/shc/family/docs/shc-1300.doc">Word</a> | <a href = "http://courts.alaska.gov/shc/family/docs/shc-1300n.pdf">PDF</a>, and
    title it “Motion to Dismiss.”</li>
   % if type_of_response['wrong state'] and not jurisdiction:
@@ -561,7 +560,7 @@ content: |
   % endif
   % endif
   % if type_of_response['default']:  
-  <li>Fill out and a <strong>Motion to Dismiss</strong></br>
+  <li>Fill out and file a <strong>Motion to Dismiss</strong></br>
   Use: <strong>Motion, SHC-1300</strong> <a href="http://courts.alaska.gov/shc/family/docs/shc-1300.doc">Word</a> | <a href = "http://courts.alaska.gov/shc/family/docs/shc-1300n.pdf">PDF</a>, and
    title it "Motion to Dismiss for Failure to Correctly Serve the Complaint”.</li>
    <li>Explain that the other parent did not serve you one of the correct ways and you want the case dismissed.</li>
@@ -629,15 +628,12 @@ content: |
   
   1.	Make 2 copies of everything you are going to give the court.
   2.	Give the original version of your documents to the court that is listed on the top of the complaint.</br>
-  Find the address on the court's [Court Directory](https://courts.alaska.gov/courtdir/index.htm#trial) web page and
-    <ul>
-  <li>Give the documents to the clerk at the court yourself.</li>
+  Find the address on the court's [Court Directory](https://courts.alaska.gov/courtdir/index.htm#trial) web page and:
+    <ul><li>Give the documents to the clerk at the court yourself.</li>
    <li>Mail the documents by first-class mail. or</li>
-   <li>Use the court’s <a href="https://courts.alaska.gov/efile">TrueFile eFiling system</a> to send the documents to the court electronically.</li>
-   </ul>
+   <li>Use the court’s <a href="https://courts.alaska.gov/efile">TrueFile eFiling system</a> to send the documents to the court electronically.</li></ul>
   3.	Keep 1 copy for your own records.
-  4.	Give the 2nd copy to ${ other_party_in_case } on the date and way you wrote on your **Certificate of Service**.  
-  5.	Read ${ serve_motion_idx }: Serve ${ other_party_in_case }.
+  4.	Give the 2nd copy to ${ other_party_in_case } on the date and way you wrote on your **Certificate of Service**. Read Step ${ serve_motion_idx }: Serve ${ other_party_in_case }.
 ---
 template: aka2j_drpo_step
 subject: |

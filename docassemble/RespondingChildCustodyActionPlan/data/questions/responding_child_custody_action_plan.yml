@@ -279,18 +279,18 @@ fields:
 id: Domestic violence
 question: |
   Do you want your Action Plan to include information about domestic violence resources and how domestic violence
-  % if type_of_response.any_true() and response_to_complaint == 'none' and not parent_agreement_info:
+  % if type_of_response['ak custody case'] and response_to_complaint == 'none' and not parent_agreement_info:
   affects your case?
   % else:
   can affect your agreement?
   % endif
 subquestion: |
   If there is 
-  % if type_of_response.any_true() and response_to_complaint == 'none' and not parent_agreement_info:
+  % if type_of_response['ak custody case'] and response_to_complaint == 'none' and not parent_agreement_info:
   a history of 
   % endif
   abuse or domestic violence between you and the other parent, it may affect your case and 
-  % if type_of_response.any_true() and not (response_to_complaint == 'none' and not parent_agreement_info):
+  % if type_of_response['ak custody case'] and not (response_to_complaint == 'none' and not parent_agreement_info):
   what you can agree to in 
   % endif
   your parenting plan.
@@ -300,7 +300,7 @@ fields:
     datatype: yesnoradio
 under: |
   #### <i class="fa-regular fa-lightbulb"></i> Learn more ####
-  % if type_of_response.any_true() and not response_to_complaint == 'none' and not parent_agreement_info:
+  % if type_of_response['ak custody case'] and response_to_complaint in('agree', 'some') and not parent_agreement_info:
   Sometimes a person in a relationship with domestic violence feels pressured to agree to things they do not want. And the
   % else:
   The 
@@ -527,8 +527,9 @@ attachment:
   update references: True
   variable name: responding_child_custody_action_plan_attachment[i]
   skip undefined: True
-  # docx template file: responding_child_custody_action_plan.docx
-  docx template file: responding_child_custody_action_plan_lo_version.docx
+  # docx template file: responding_end_marriage_action_plan.docx
+  docx template file: responding_child_custody_action_plan.docx
+  # docx template file: responding_child_custody_action_plan_lo_version.docx
   tagged pdf: True
 ---
 attachment:
@@ -537,6 +538,7 @@ attachment:
   update references: True
   variable name: docx_responding_child_custody_action_plan_attachment
   skip undefined: True
-  # docx template file: responding_child_custody_action_plan.docx
-  docx template file: responding_child_custody_action_plan_lo_version.docx
+  # docx template file: responding_end_marriage_action_plan.docx
+  docx template file: responding_child_custody_action_plan.docx
+  # docx template file: responding_child_custody_action_plan_lo_version.docx
   tagged pdf: True
