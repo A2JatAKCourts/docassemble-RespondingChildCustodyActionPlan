@@ -348,14 +348,14 @@ id: Ongoing
 question: |
   One of the courts will close their case
 subquestion: |
-  Only one state court can enter a custody order and parenting plan, so one of the courts will close their case.  Information about figuring out the correct state for your case has been added to your Action Plan. 
+  Only one state court can enter a custody order and parenting plan, so one of the courts will close their case. 
 continue button field: ongoing
 ---
 id: Dismiss
 question: |
   You can file a “Motion to Dismiss” in your Alaska case
 subquestion: |
-  If the case in another state is over and the other court issued a custody order, you can file a “Motion to Dismiss” in your Alaska case.
+  If the case in the other state is over and the other court issued a custody order, you can file a “Motion to Dismiss”  with your Answer when you respond in your Alaska case.
 continue button field: dismiss
 ---
 id: Other over
@@ -528,7 +528,8 @@ attachment:
   variable name: responding_child_custody_action_plan_attachment[i]
   skip undefined: True
   # docx template file: responding_end_marriage_action_plan.docx
-  docx template file: responding_child_custody_action_plan.docx
+  docx template file: dummy.docx
+  # responding_child_custody_action_plan.docx
   # docx template file: responding_child_custody_action_plan_lo_version.docx
   tagged pdf: True
 ---
@@ -539,6 +540,7 @@ attachment:
   variable name: docx_responding_child_custody_action_plan_attachment
   skip undefined: True
   # docx template file: responding_end_marriage_action_plan.docx
-  docx template file: responding_child_custody_action_plan.docx
+  docx template file: dummy.docx
+  # responding_child_custody_action_plan.docx
   # docx template file: responding_child_custody_action_plan_lo_version.docx
   tagged pdf: True
