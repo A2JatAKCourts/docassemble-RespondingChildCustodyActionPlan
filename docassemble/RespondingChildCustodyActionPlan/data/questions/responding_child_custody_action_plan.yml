@@ -266,31 +266,31 @@ question: |
 subquestion: 
   Information about talking to the other parent about agreeing on a parenting plan and custody order has been added to your Action Plan.
 fields: 
-  - no label: parents_agree_documents
+  - no label: agreement_documents
     datatype: yesnoradio
 ---
 id: Step 5, Q2 No agree - want info on agreeing?
 question: |
   Do you want your Action Plan to include information about resources to help you and your spouse reach an agreement on the issues in your case?
 fields:
-  - no label: parent_agreement_info
+  - no label: want_help_to_agree
     datatype: yesnoradio
 ---
 id: Domestic violence
 question: |
   Do you want your Action Plan to include information about domestic violence resources and how domestic violence
-  % if type_of_response['ak custody case'] and response_to_complaint == 'none' and not parent_agreement_info:
+  % if type_of_response['ak custody case'] and response_to_complaint == 'none' and not want_help_to_agree:
   affects your case?
   % else:
   can affect your agreement?
   % endif
 subquestion: |
   If there is 
-  % if type_of_response['ak custody case'] and response_to_complaint == 'none' and not parent_agreement_info:
+  % if type_of_response['ak custody case'] and response_to_complaint == 'none' and not want_help_to_agree:
   a history of 
   % endif
   abuse or domestic violence between you and the other parent, it may affect your case and 
-  % if type_of_response['ak custody case'] and not (response_to_complaint == 'none' and not parent_agreement_info):
+  % if type_of_response['ak custody case'] and not (response_to_complaint == 'none' and not want_help_to_agree):
   what you can agree to in 
   % endif
   your parenting plan.
@@ -300,7 +300,7 @@ fields:
     datatype: yesnoradio
 under: |
   #### <i class="fa-regular fa-lightbulb"></i> Learn more ####
-  % if type_of_response['ak custody case'] and response_to_complaint in('agree', 'some') and not parent_agreement_info:
+  % if type_of_response['ak custody case'] and response_to_complaint in('agree', 'some'):
   Sometimes a person in a relationship with domestic violence feels pressured to agree to things they do not want. And the
   % else:
   The 
@@ -416,10 +416,10 @@ review:
     button: |
       **Type of response**:
       ${ type_of_response }
-  - Edit: parents_agree_documents
+  - Edit: agreement_documents
     button: |
       **Parents agree documents**:
-      ${ parents_agree_documents }
+      ${ agreement_documents }
   - Edit: motion_for_reconsideration
     button: |
       **Motion for reconsideration**:
@@ -428,10 +428,10 @@ review:
     button: |
       **Domestic violence**:
       ${ domestic_violence }
-  - Edit: parent_agreement_info
+  - Edit: want_help_to_agree
     button: |
       **Parent agreement info**:
-      ${ parent_agreement_info }
+      ${ want_help_to_agree }
   - Edit: type_of_response['default']
     button: |
       **Type of response['default']**:
