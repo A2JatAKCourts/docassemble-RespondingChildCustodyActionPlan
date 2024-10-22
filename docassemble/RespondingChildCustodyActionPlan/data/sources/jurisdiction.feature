@@ -51,7 +51,7 @@ Scenario: Row #49
     | type_of_response['case in 2 states'] | True           |         | 
     | stage_of_other_case                  | still going    |         | 
     | ongoing                              | True           |         | 
-    | jurisdiction                         | True           |         | 
+    # | jurisdiction                         | True           |         | 
     And I should see the phrase "Your Personal Action Plan for responding in your child custody case in 5 steps"
     And I should see the phrase "Check if the Alaska courts have jurisdiction"
     And I should see the phrase "Decide which court you want to hear your case"
@@ -76,7 +76,7 @@ Scenario: Row #49
     | user_need                            | answer custody |         | 
     | type_of_response['case in 2 states'] | True           |         | 
     | stage_of_other_case                  | still going    |         | 
-    | jurisdiction                         | False          |         | 
+    # | jurisdiction                         | False          |         | 
     | ongoing                              | True           |         | 
     And I should see the phrase "Your Personal Action Plan for responding in your child custody case in 12 steps"
     And I should see the phrase "Check if the Alaska courts have jurisdiction"
