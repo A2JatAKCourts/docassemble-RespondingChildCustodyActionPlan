@@ -16,8 +16,8 @@ Scenario: Row #46
     And I should see the phrase "Resources to learn more about jurisdiction"
     And I should see the phrase "Get more information or help"
     And I take a screenshot
-    # And I download "responding_child_custody_action_plan.pdf"
-    # And I download "responding_child_custody_action_plan.docx
+    And I download "responding_child_custody_action_plan.pdf"
+    And I download "responding_child_custody_action_plan.docx
 
 @row47
 Scenario: Row #47
@@ -39,8 +39,8 @@ Scenario: Row #47
     And I should see the phrase "Learn more about the process"
     And I should see the phrase "Get more information or help"
     And I take a screenshot
-    # And I download "responding_child_custody_action_plan.pdf"
-    # And I download "responding_child_custody_action_plan.docx
+# And I download "responding_child_custody_action_plan.pdf"
+# And I download "responding_child_custody_action_plan.docx
 
 @row48
 Scenario: Row #48
@@ -51,7 +51,7 @@ Scenario: Row #48
     | type_of_response['case in 2 states'] | True           |         | 
     | stage_of_other_case                  | still going    |         | 
     | ongoing                              | True           |         | 
-    # | jurisdiction                         | True           |         | 
+# | jurisdiction                         | True           |         | 
     And I should see the phrase "Your Personal Action Plan for responding in your child custody case in 11 steps"
     And I should see the phrase "Check if the Alaska courts have jurisdiction"
     And I should see the phrase "Decide which court you want to hear your case"
@@ -65,9 +65,8 @@ Scenario: Row #48
     And I should see the phrase "Learn more about the process"
     And I should see the phrase "Get more information or help"
     And I take a screenshot
-    # And I download "responding_child_custody_action_plan.pdf"
-    # And I download "responding_child_custody_action_plan.docx
-
+# And I download "responding_child_custody_action_plan.pdf"
+# And I download "responding_child_custody_action_plan.docx
 
 @row49
 Scenario: Row #49
@@ -90,10 +89,9 @@ Scenario: Row #49
     And I should see the phrase "Learn more about the process"
     And I should see the phrase "Get more information or help"
     And I take a screenshot
-    # And I download "responding_child_custody_action_plan.pdf"
-    # And I download "responding_child_custody_action_plan.docx
+# And I download "responding_child_custody_action_plan.pdf"
+# And I download "responding_child_custody_action_plan.docx
 
-    
 @row50
 Scenario: Row #50
   Given I start the interview at "responding_child_custody_action_plan.yml"
@@ -103,8 +101,8 @@ Scenario: Row #50
     | type_of_response['case in 2 states'] | True                |         | 
     | stage_of_other_case                  | ended with no order |         | 
     | other_case_over                      | True                |         | 
-    | response_to_complaint                      | agree                |         | 
-    
+    | response_to_complaint                | agree               |         | 
+
     And I should see the phrase "Your Personal Action Plan for responding in your child custody case in 10 steps"
     And I should see the phrase "You can move forward with your Alaska case"
     And I should see the phrase "Review your options when you agree with what the other parent is asking"
@@ -117,5 +115,7 @@ Scenario: Row #50
     And I should see the phrase "Learn more about the process"
     And I should see the phrase "Get more information or help"
     And I take a screenshot
-    # And I download "responding_child_custody_action_plan.pdf"
-    # And I download "responding_child_custody_action_plan.docx
+# And I download "responding_child_custody_action_plan.pdf"
+# And I download "responding_child_custody_action_plan.docx
+
+
