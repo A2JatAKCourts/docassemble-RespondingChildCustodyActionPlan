@@ -17,7 +17,7 @@ Scenario: Row #46
     And I should see the phrase "Get more information or help"
     And I take a screenshot
     And I download "responding_child_custody_action_plan.pdf"
-    And I download "responding_child_custody_action_plan.docx
+    And I download "responding_child_custody_action_plan.docx"
 
 @row47
 Scenario: Row #47
@@ -39,8 +39,8 @@ Scenario: Row #47
     And I should see the phrase "Learn more about the process"
     And I should see the phrase "Get more information or help"
     And I take a screenshot
-# And I download "responding_child_custody_action_plan.pdf"
-# And I download "responding_child_custody_action_plan.docx
+    And I download "responding_child_custody_action_plan.pdf"
+    And I download "responding_child_custody_action_plan.docx"
 
 @row48
 Scenario: Row #48
@@ -65,8 +65,8 @@ Scenario: Row #48
     And I should see the phrase "Learn more about the process"
     And I should see the phrase "Get more information or help"
     And I take a screenshot
-# And I download "responding_child_custody_action_plan.pdf"
-# And I download "responding_child_custody_action_plan.docx
+    And I download "responding_child_custody_action_plan.pdf"
+    And I download "responding_child_custody_action_plan.docx"
 
 @row49
 Scenario: Row #49
@@ -89,8 +89,8 @@ Scenario: Row #49
     And I should see the phrase "Learn more about the process"
     And I should see the phrase "Get more information or help"
     And I take a screenshot
-# And I download "responding_child_custody_action_plan.pdf"
-# And I download "responding_child_custody_action_plan.docx
+    And I download "responding_child_custody_action_plan.pdf"
+    And I download "responding_child_custody_action_plan.docx"
 
 @row50
 Scenario: Row #50
@@ -115,7 +115,84 @@ Scenario: Row #50
     And I should see the phrase "Learn more about the process"
     And I should see the phrase "Get more information or help"
     And I take a screenshot
-# And I download "responding_child_custody_action_plan.pdf"
-# And I download "responding_child_custody_action_plan.docx
+    And I download "responding_child_custody_action_plan.pdf"
+    And I download "responding_child_custody_action_plan.docx"
 
+@row51
+Scenario: Row #51
+  Given I start the interview at "responding_child_custody_action_plan.yml"
+    And I get to the question id "final screen" with this data:
+    | var                                  | value               | trigger | 
+    | user_need                            | answer custody      |         | 
+    | type_of_response['case in 2 states'] | True                |         | 
+    | stage_of_other_case                  | ended with no order |         | 
+    | other_case_over                      | True                |         | 
+    | response_to_complaint                | some                |         | 
 
+    And I should see the phrase "Your Personal Action Plan for responding in your child custody case in 10 steps"
+    And I should see the phrase "You can move forward with your Alaska case"
+    And I should see the phrase "Review your options when you agree with some of what the other parent is asking"
+    And I should see the phrase "Fill out the forms you need to answer the complaint and respond within 20 days"
+    And I should see the phrase "Fill out the Certificate of Service"
+    And I should see the phrase "File the originals"
+    And I should see the phrase "Serve the other parent"
+    And I should see the phrase "Read the “domestic relations procedural order” or “standing order” if the clerk gives you one when you file your case"
+    And I should see the phrase "What to expect after you file a motion or Answer"
+    And I should see the phrase "Learn more about the process"
+    And I should see the phrase "Get more information or help"
+    And I take a screenshot
+    And I download "responding_child_custody_action_plan.pdf"
+    And I download "responding_child_custody_action_plan.docx"
+
+@row52
+Scenario: Row #52
+  Given I start the interview at "responding_child_custody_action_plan.yml"
+    And I get to the question id "final screen" with this data:
+    | var                                  | value               | trigger | 
+    | user_need                            | answer custody      |         | 
+    | type_of_response['case in 2 states'] | True                |         | 
+    | stage_of_other_case                  | ended with no order |         | 
+    | other_case_over                      | True                |         | 
+    | response_to_complaint                | none                |         | 
+    | want_help_to_agree                   | True                |         | 
+
+    And I should see the phrase "Your Personal Action Plan for responding in your child custody case in 10 steps"
+    And I should see the phrase "You can move forward with your Alaska case"
+    And I should see the phrase "Resources to help you reach an agreement with the other parent"
+    And I should see the phrase "Fill out the forms you need to answer the complaint and respond within 20 days"
+    And I should see the phrase "Fill out the Certificate of Service"
+    And I should see the phrase "File the originals"
+    And I should see the phrase "Serve the other parent"
+    And I should see the phrase "Read the “domestic relations procedural order” or “standing order” if the clerk gives you one when you file your case"
+    And I should see the phrase "What to expect after you file a motion or Answer"
+    And I should see the phrase "Learn more about the process"
+    And I should see the phrase "Get more information or help"
+    And I take a screenshot
+    And I download "responding_child_custody_action_plan.pdf"
+    And I download "responding_child_custody_action_plan.docx"
+
+@row52
+Scenario: Row #52
+  Given I start the interview at "responding_child_custody_action_plan.yml"
+    And I get to the question id "final screen" with this data:
+    | var                                  | value               | trigger | 
+    | user_need                            | answer custody      |         | 
+    | type_of_response['case in 2 states'] | True                |         | 
+    | stage_of_other_case                  | ended with no order |         | 
+    | other_case_over                      | True                |         | 
+    | response_to_complaint                | none                |         | 
+    | want_help_to_agree                   | False               |         | 
+
+    And I should see the phrase "Your Personal Action Plan for responding in your child custody case in 9 steps"
+    And I should see the phrase "You can move forward with your Alaska case"
+    And I should see the phrase "Fill out the forms you need to answer the complaint and respond within 20 days"
+    And I should see the phrase "Fill out the Certificate of Service"
+    And I should see the phrase "File the originals"
+    And I should see the phrase "Serve the other parent"
+    And I should see the phrase "Read the “domestic relations procedural order” or “standing order” if the clerk gives you one when you file your case"
+    And I should see the phrase "What to expect after you file a motion or Answer"
+    And I should see the phrase "Learn more about the process"
+    And I should see the phrase "Get more information or help"
+    And I take a screenshot
+    And I download "responding_child_custody_action_plan.pdf"
+    And I download "responding_child_custody_action_plan.docx"

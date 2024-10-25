@@ -108,7 +108,8 @@ code: |
     if stage_of_other_case == 'ended with no order':
       other_case_over
       add_unique_step((answer_jurisdiction_step, "answer_jurisdiction_idx"), step_list)
-      add_unique_step((want_help_to_agree_step, "want_help_to_agree_idx"), step_list)
+      if response_to_complaint in('agree','some') or (response_to_complaint== 'none' and want_help_to_agree):
+        add_unique_step((want_help_to_agree_step, "want_help_to_agree_idx"), step_list)
       add_unique_step((answer_step, "answer_idx"), step_list)
     add_unique_image({'image': service_cert_image, 'text': "Certificate of Service"}, images_list)
     add_unique_step((cert_of_service_step, "cert_of_service_idx"), step_list)
@@ -630,7 +631,6 @@ content: |
     1. File these forms with the court. And
     2. Mail, email or give a copy of the forms to ${other_party_in_case}.
 
-  
   % if type_of_response['case in 2 states'] and stage_of_other_case == 'still going':
   <div class="step-subheading">If you want to have your case in Alaska</div>
   % endif
@@ -647,7 +647,6 @@ content: |
   % endif
   % endif
   
-  
   % if (type_of_response['case in 2 states'] and stage_of_other_case in('still going', 'ended with order')) or (type_of_response.all_false('case in 2 states') and type_of_response['wrong state'] and not jurisdiction):
   % if type_of_response['case in 2 states'] and stage_of_other_case == 'still going':
   <div class="step-subheading">If you want your case in the other state</div>
@@ -657,7 +656,6 @@ content: |
   File the motion forms with your Answer.
   % endif
   
-    
   <div class="step-subheading">Use</div>
   % if user_need == 'answer custody':
   **Answer & Counterclaim to a Custody Complaint, SHC-117** <a href ="https://courts.alaska.gov/shc/family/docs/shc-117.doc">Word</a> | <a href = "https://courts.alaska.gov/shc/family/docs/shc-117n.pdf">PDF</a>
@@ -693,7 +691,7 @@ content: |
   <ul>
   <li>Look at each paragraph in ${other_party_in_case}'s complaint and decide if you agree, disagree or, you are not sure.</li>
   
-  % if (user_need == 'custody' and type_of_response['ak custody case']) or (user_need == 'divorce' and type_of_response['ak divorce case']):
+  % if (user_need == 'custody' and type_of_response['ak custody case']) or (user_need == 'divorce' and type_of_response['ak divorce case']) or (type_of_response['case in 2 states'] and stage_of_other_case == 'ended with no order'):
   % if (case_type == 'custody' or case_type == 'divorce' or (case_type == 'legal separation' and want_legal_separation == 'yes')) and response_to_complaint == 'agree':
   <li>If you agree with what ${other_party_in_case} asked for in their complaint, check the box in this section that says you “agree with all of the statements in the complaint.”</li>
   % elif (case_type == 'custody' or case_type == 'divorce' or (case_type == 'legal separation' and want_legal_separation == 'yes')) and response_to_complaint == 'some': 
@@ -972,8 +970,7 @@ subject: |
   % elif response_to_complaint == 'some':
   Review your options when you agree with some of what ${other_party_in_case} is asking
   % elif response_to_complaint == 'none' and want_help_to_agree:
-  Resources to help you reach an agreement with ${other_party_in_case}
-  Decide if you want to try to reach an agreement with ${other_party_in_case}
+  Resources to help you reach an agreement with ${other_party_in_case}  
   % endif
   % endif
   
@@ -1186,11 +1183,6 @@ content: |
   * Use **Reply to Opposition to Motion, SHC-1305** [Word](https://courts.alaska.gov/shc/family/docs/shc-1305.doc) | [PDF](https://courts.alaska.gov/shc/family/docs/shc-1305n.pdf).</br>
   Remember to fill out the Certificate of Service that tells the court how and when you deliver your reply to ${ other_party_in_case }.
  
-
-
-
-
-  
 ---
 template: aka2j_uncontested_custody_forms_step
 subject: |
