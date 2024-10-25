@@ -36,8 +36,9 @@ code: |
   AL_DEFAULT_STATE = "Alaska"
 ---
 code: |
-  github_repo_name =  'docassemble-RespondingInCustodyIssues'
+  github_repo_name =  'AnswerCustodyIssues'
 ---
+
 code: |
   interview_short_title = "Responding in child custody"
 ---
@@ -112,8 +113,11 @@ fields:
       - "The other parent started a custody case in Alaska, but I think the case should be in a different state.": wrong state
       - "2 custody cases were filed – Alaska and another state.": case in 2 states
       - "The other parent started a custody case against me, I did not respond, and I got papers about a 'default judgment.'": default
-      - "The other parent has not started a custody case yet, but wants to see if we can agree on a parenting plan and custody order.": parent agreement options
-    none of the above: False
+#      - "The other parent has not started a custody case yet, but wants to see if we can agree on a parenting plan and custody order.": parent agreement options
+    
+    none of the above: |
+      The other parent has not started a custody case yet, but wants to see if we can agree on a parenting plan and custody order.
+#    none of the above: False
 under: |
   #### <i class="fa-regular fa-lightbulb"></i> Learn more ####
   We provide information about the process in Alaska only. Look for information in other states on their [court](https://www.ncsc.org/information-and-resources/state-court-websites) and [legal aid programs'](https://lawhelp.org) websites.   
@@ -262,31 +266,31 @@ question: |
 subquestion: 
   Information about talking to the other parent about agreeing on a parenting plan and custody order has been added to your Action Plan.
 fields: 
-  - no label: parents_agree_documents
+  - no label: agreement_documents
     datatype: yesnoradio
 ---
 id: Step 5, Q2 No agree - want info on agreeing?
 question: |
   Do you want your Action Plan to include information about resources to help you and your spouse reach an agreement on the issues in your case?
 fields:
-  - no label: parent_agreement_info
+  - no label: want_help_to_agree
     datatype: yesnoradio
 ---
 id: Domestic violence
 question: |
-  Do you want your Action Plan to include information about domestic violence resources and how domestic violence 
-  % if response_to_custody_complaint == 'none' and not parent_agreement_info:
+  Do you want your Action Plan to include information about domestic violence resources and how domestic violence
+  % if type_of_response['ak custody case'] and response_to_complaint == 'none' and not want_help_to_agree:
   affects your case?
   % else:
   can affect your agreement?
   % endif
 subquestion: |
   If there is 
-  % if response_to_custody_complaint == 'none' and not parent_agreement_info:
+  % if type_of_response['ak custody case'] and response_to_complaint == 'none' and not want_help_to_agree:
   a history of 
   % endif
   abuse or domestic violence between you and the other parent, it may affect your case and 
-  % if not (response_to_custody_complaint == 'none' and not parent_agreement_info):
+  % if type_of_response['ak custody case'] and not (response_to_complaint == 'none' and not want_help_to_agree):
   what you can agree to in 
   % endif
   your parenting plan.
@@ -296,7 +300,7 @@ fields:
     datatype: yesnoradio
 under: |
   #### <i class="fa-regular fa-lightbulb"></i> Learn more ####
-  % if not (response_to_custody_complaint == 'none' and not parent_agreement_info):
+  % if type_of_response['ak custody case'] and response_to_complaint in('agree', 'some'):
   Sometimes a person in a relationship with domestic violence feels pressured to agree to things they do not want. And the
   % else:
   The 
@@ -307,7 +311,7 @@ id: Agree
 question: |
   Do you agree with everything the other parent asked for in their complaint?
 fields:
-  - no label: response_to_custody_complaint
+  - no label: response_to_complaint
     input type: radio
     choices:
       - I agree with everything the other parent asked for in the Complaint.: agree
@@ -344,19 +348,19 @@ id: Ongoing
 question: |
   One of the courts will close their case
 subquestion: |
-  Only one state court can enter a custody order and parenting plan, so one of the courts will close their case.  Information about figuring out the correct state for your case has been added to your Action Plan. 
+  Only one state court can enter a custody order and parenting plan, so one of the courts will close their case. 
 continue button field: ongoing
 ---
 id: Dismiss
 question: |
-  you can file a “Motion to Dismiss” in your Alaska case
+  You can file a “Motion to Dismiss” in your Alaska case
 subquestion: |
-  If the case in another state is over and the other court issued a custody order, you can file a “Motion to Dismiss” in your Alaska case.  Information about this has been added to your Action Plan.
+  If the case in the other state is over and the other court issued a custody order, you can file a “Motion to Dismiss”  with your Answer when you respond in your Alaska case.
 continue button field: dismiss
 ---
 id: Other over
 question: |
-  You can move forward with the Alaska case.
+  You can move forward with the Alaska case
 subquestion: |
   If the case in the other state is over and there is no custody order or parenting plan, you can move forward with the Alaska case.  
 continue button field: other_case_over  
@@ -367,6 +371,15 @@ question: |
 fields:
   - "Motion for reconsideration": motion_for_reconsideration
   - "More than one step of a kind": more_than_one_step_of_a_kind
+---
+id: info on Agree
+question: |
+  Do you want your Action Plan to include information about the documents to use if you reach an agreement with the other parent?
+subquestion: |
+  Information about talking to the other parent about agreeing on a parenting plan and custody order has been added to your Action Plan.
+fields:
+  - Do you want information about the documents to use if you agree?: parents_agree_info
+    datatype: yesnoradio
 ---
 id: preview Responding_child_custody_action_plan
 question: |
@@ -403,10 +416,10 @@ review:
     button: |
       **Type of response**:
       ${ type_of_response }
-  - Edit: parents_agree_documents
+  - Edit: agreement_documents
     button: |
       **Parents agree documents**:
-      ${ parents_agree_documents }
+      ${ agreement_documents }
   - Edit: motion_for_reconsideration
     button: |
       **Motion for reconsideration**:
@@ -415,10 +428,10 @@ review:
     button: |
       **Domestic violence**:
       ${ domestic_violence }
-  - Edit: parent_agreement_info
+  - Edit: want_help_to_agree
     button: |
       **Parent agreement info**:
-      ${ parent_agreement_info }
+      ${ want_help_to_agree }
   - Edit: type_of_response['default']
     button: |
       **Type of response['default']**:
@@ -443,10 +456,10 @@ review:
     button: |
       **Military**:
       ${ military }
-  - Edit: response_to_custody_complaint
+  - Edit: response_to_complaint
     button: |
       **Response to custody complaint**:
-      ${ response_to_custody_complaint }
+      ${ response_to_complaint }
   - Edit: user_need
     button: |
       **User need**:
@@ -511,17 +524,23 @@ objects:
 attachment:
   name: Responding child custody action plan
   filename: responding_child_custody_action_plan
+  update references: True
   variable name: responding_child_custody_action_plan_attachment[i]
   skip undefined: True
-  docx template file: responding_child_custody_action_plan.docx
+  # docx template file: responding_end_marriage_action_plan.docx
+  docx template file: dummy.docx
+  # responding_child_custody_action_plan.docx
+  # docx template file: responding_child_custody_action_plan_lo_version.docx
   tagged pdf: True
 ---
 attachment:
   name: Responding child custody action plan
   filename: responding_child_custody_action_plan
+  update references: True
   variable name: docx_responding_child_custody_action_plan_attachment
   skip undefined: True
-  docx template file: responding_child_custody_action_plan.docx
+  # docx template file: responding_end_marriage_action_plan.docx
+  docx template file: dummy.docx
+  # responding_child_custody_action_plan.docx
+  # docx template file: responding_child_custody_action_plan_lo_version.docx
   tagged pdf: True
-
-
