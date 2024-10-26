@@ -86,38 +86,41 @@ code: |
       #   add_unique_step((answer_step, "answer_idx"), step_list)
       # if proper_service == 'neither' and improper_service['default']:
       #   add_unique_step((default_options_step, "default_options_idx"), step_list)
+  
   if type_of_response['wrong state']:
     jurisdiction
     continue_after_jurisdiction = True
     add_unique_step((answer_jurisdiction_step, "answer_jurisdiction_idx"), step_list)
     # add_unique_step((ak_jurisdiction_step, "ak_jurisdiction_idx"), step_list)
     # add_unique_step((aka2j_jurisdiction_step, "aka2j_jurisdiction_idx"), step_list)
+  
   if type_of_response['case in 2 states']:
+    add_unique_step((answer_jurisdiction_step, "answer_jurisdiction_idx"), step_list)
     if stage_of_other_case == 'still going':
       ongoing
       # jurisdiction
-      add_unique_step((answer_jurisdiction_step, "answer_jurisdiction_idx"), step_list)
+      # add_unique_step((answer_jurisdiction_step, "answer_jurisdiction_idx"), step_list)
       add_unique_step((decide_court_step, "decide_court_idx"), step_list)
-      add_unique_step((answer_step, "answer_idx"), step_list)
-      add_unique_step((dismiss_step, "dismiss_idx"), step_list)
+      # add_unique_step((answer_step, "answer_idx"), step_list)
+      # add_unique_step((dismiss_step, "dismiss_idx"), step_list)
     if stage_of_other_case == 'ended with order':
       dismiss
-      add_unique_step((answer_jurisdiction_step, "answer_jurisdiction_idx"), step_list)
-      add_unique_step((answer_step, "answer_idx"), step_list)
-      add_unique_step((dismiss_step, "dismiss_idx"), step_list)
+      # add_unique_step((answer_jurisdiction_step, "answer_jurisdiction_idx"), step_list)
+      # add_unique_step((answer_step, "answer_idx"), step_list)
+      # add_unique_step((dismiss_step, "dismiss_idx"), step_list)
     if stage_of_other_case == 'ended with no order':
       other_case_over
-      add_unique_step((answer_jurisdiction_step, "answer_jurisdiction_idx"), step_list)
-      if response_to_complaint in('agree','some') or (response_to_complaint== 'none' and want_help_to_agree):
-        add_unique_step((want_help_to_agree_step, "want_help_to_agree_idx"), step_list)
+      # add_unique_step((answer_jurisdiction_step, "answer_jurisdiction_idx"), step_list)
+    if stage_of_other_case in('still going', 'ended with order'):
       add_unique_step((answer_step, "answer_idx"), step_list)
-    add_unique_image({'image': service_cert_image, 'text': "Certificate of Service"}, images_list)
-    add_unique_step((cert_of_service_step, "cert_of_service_idx"), step_list)
-    add_unique_step((aka2j_file_answer_step, "aka2j_file_answer_idx"), step_list)
-    add_unique_step((serve_motion_step, "serve_motion_idx"), step_list)
-    add_unique_step((aka2j_drpo_step, "aka2j_drpo_idx"), step_list)
-    add_unique_step((aka2j_expect_after_motion_step, "aka2j_expect_after_motion_idx"), step_list)
-    add_unique_step((aka2j_learn_process_step, "aka2j_learn_process_idx"), step_list)
+      add_unique_step((dismiss_step, "dismiss_idx"), step_list)
+      # add_unique_image({'image': service_cert_image, 'text': "Certificate of Service"}, images_list)
+      # add_unique_step((cert_of_service_step, "cert_of_service_idx"), step_list)
+      # add_unique_step((aka2j_file_answer_step, "aka2j_file_answer_idx"), step_list)
+      # add_unique_step((serve_motion_step, "serve_motion_idx"), step_list)
+      # add_unique_step((aka2j_drpo_step, "aka2j_drpo_idx"), step_list)
+      # add_unique_step((aka2j_expect_after_motion_step, "aka2j_expect_after_motion_idx"), step_list)
+      # add_unique_step((aka2j_learn_process_step, "aka2j_learn_process_idx"), step_list)
   if type_of_response['default']:
     proper_service
     military
@@ -134,11 +137,11 @@ code: |
       add_unique_step((serve_motion_step, "serve_motion_idx"), step_list)
       add_unique_step((aka2j_expect_reconsider_step, "aka2j_expect_reconsider_idx"), step_list)
       add_unique_step((aka2j_expect_after_motion_step, "aka2j_expect_after_motion_idx"), step_list)
-  if type_of_response['ak custody case']:
-    if response_to_complaint == 'agree'or (response_to_complaint in('some', 'none') and want_help_to_agree):
+  if type_of_response['ak custody case'] or (type_of_response['case in 2 states'] and stage_of_other_case == 'ended with no order'): 
+    if response_to_complaint in('agree', 'some') or (response_to_complaint == 'none' and want_help_to_agree):
       add_unique_step((want_help_to_agree_step, "want_help_to_agree_idx"), step_list)
-    if response_to_complaint == 'agree':
-      agreement_documents = True
+    #if response_to_complaint == 'agree':
+    #  agreement_documents = True
       # add_unique_step((parent_agreements_step, "parent_agreements_idx"), step_list)
   if type_of_response['ak custody case'] \
     or (type_of_response['wrong state'] and not jurisdiction and continue_after_jurisdiction) \
@@ -155,15 +158,14 @@ code: |
     add_unique_step((aka2j_drpo_step, "aka2j_drpo_idx"), step_list)
     add_unique_step((aka2j_expect_after_motion_step, "aka2j_expect_after_motion_idx"), step_list)
     add_unique_step((aka2j_learn_process_step, "aka2j_learn_process_idx"), step_list)
-  
-  if type_of_response['ak custody case']:
-    # if response_to_complaint in('agree','some'):
-    add_unique_step((want_help_to_agree_step, "want_help_to_agree_idx"), step_list)
-      # add_unique_step((parent_agreements_step, "parent_agreements_idx"), step_list)
+
+
+  if type_of_response['ak custody case'] or (type_of_response['case in 2 states'] and stage_of_other_case == 'ended with no order'): 
     if domestic_violence:
        add_unique_step((custody_domestic_violence_step, "custody_domestic_violence_idx"), step_list)
     if paternity:
        add_unique_step((custody_paternity_step, "custody_paternity_idx"), step_list)
+  
   if type_of_response.all_false():
     add_unique_step((want_help_to_agree_step, "want_help_to_agree_idx"), step_list)  
     # add_unique_step((parent_agreements_step, "parent_agreements_idx"), step_list)
@@ -267,10 +269,10 @@ subject: |
   Step ${ answer_jurisdiction_idx }: Check if there is residency & jurisdiction in Alaska
   % endif
   % endif
-  % if type_of_response['case in 2 states']and stage_of_other_case == 'ended with no order':
+  % if type_of_response['case in 2 states'] and stage_of_other_case == 'ended with no order':
   Step ${ answer_jurisdiction_idx }: You can move forward with your Alaska case
   % endif
-  % if type_of_response['case in 2 states']and stage_of_other_case == 'ended with order':
+  % if type_of_response['case in 2 states'] and stage_of_other_case == 'ended with order':
   Step ${ answer_jurisdiction_idx }: Tell the Alaska court the case in the other state is over and the court in the other state 
   % if user_need == 'answer custody':
   issued a custody order
@@ -826,7 +828,18 @@ content: |
   <li>If you cannot get to a notary or someone with the power to take oaths, you can "self-certify." Use:</br>
   <strong>Self-Certification (No Notary Available), TF-835</strong> [<a href="https://public.courts.alaska.gov/web/forms/docs/tf-835.pdf">Fill-In PDF</a>]</li>
   </ul>
+  % if (user_need == 'answer custody' and type_of_response['ak custody case']) or (user_need == 'answer divorce' and type_of_response['ak divorce case']) or (type_of_response['case in 2 states'] and stage_of_other_case == 'ended with no order'):
+  % if response_to_complaint in('agree','some') or (response_to_complaint == 'none' and want_help_to_agree):
+  <div class="step-subheading">Forms to use if you and ${ other_party_in_case } write out your agreement</div>
+  If you want to work with the other parent to write out the agreement and both sign it, use:
 
+  * **Parenting Plan Agreement & Order, SHC-1128** [Word](https://courts.alaska.gov/shc/family/docs/shc-110.doc) | [PDF](https://courts.alaska.gov/shc/family/docs/shc-1128n.pdf)<br>
+  Do **not** sign the Order section)
+  * **Joint Motion to Put Settlement on the Record, SHC-1063** [Word](https://courts.alaska.gov/shc/family/docs/shc-1063.doc) | [PDF](https://courts.alaska.gov/shc/family/docs/shc-1063n.pdf)
+  * **Custody Findings of Fact & Conclusions of Law, DR-460** [[Fill-In PDF](https://public.courts.alaska.gov/web/forms/docs/dr-460.pdf)]
+  * **Custody Judgment, DR-465** [[Fill-In PDF](https://public.courts.alaska.gov/web/forms/docs/dr-465.pdf)]
+  % endif
+  % endif
 
 
   
@@ -1197,7 +1210,7 @@ template: custody_domestic_violence_step
 subject: |
   Step ${ custody_domestic_violence_idx }:
   % if type_of_response.any_true():
-  % if user_need == 'answer custody' and type_of_response['ak custody case'] and (response_to_complaint in('agree', 'some') or (response_to_complaint == 'none' and agreement_documents)):
+  % if (user_need == 'answer custody' and type_of_response['ak custody case']) or (user_need == 'answer divorce' and type_of_response['ak divorce case']) or (type_of_response['case in 2 states'] and stage_of_case == 'ended with no order') and (response_to_complaint in('agree', 'some') or (response_to_complaint == 'none' and want_help_to_agree)):
   Abuse or domestic violence resources and reaching an agreement(dv agree tf)
   % else:
   Abuse or domestic violence and parenting(dv contested tf)
@@ -1205,7 +1218,96 @@ subject: |
   % endif 
 content: |
   compare this step with AKA2J domestic_violence_step  headings and content.
+  [Comparing domestic violence in answering divorce google sheet](https://docs.google.com/spreadsheets/d/1AUnHuheq_VsuTufg75G9cM5TGnd3OAa7-jd-RzIwnA4/edit?usp=sharing), tab for asking cust div and 
   <div class="step-subheading">If you are in immediate danger, call 911</div>
+
+  People who have experienced domestic violence can be at greater risk when they separate from their spouse or start a court case to end the marriage. During this time, safety is very important. The dynamics in a relationship with domestic violence may also cause people to feel pressured to agree to something they don’t want. If this is your situation, these resources may help:
+  
+  * Find a domestic violence program in your area to learn about what services they offer (counseling, financial assistance, housing and safe shelter, resources for children, and help with court)
+  * You can get information about asking the court for a protective order by answering more questions. If you want to save this Action Plan, be sure to download, save, or print it. then return to the Guided Assist page and use the Guided Assist search box to find "Protective Orders.”
+  * See if you qualify for legal assistance through your local domestic violence program or a free lawyer if you are a victim of domestic violence from Alaska Legal Services Corporation"
+  
+  
+  
+  
+  
+  However, some people in a marriage with domestic violence are comfortable reaching an agreement about a parenting plan and dividing marital property and debt for a variety of reasons. Sometimes:
+  the domestic violence does not make either spouse uncomfortable or afraid to ask for what they want in the parenting plan or property & debt division;
+  if the domestic violence does make a spouse uncomfortable or afraid, provisions are used to make the process of trying to reach an agreement feel safer (having a support person present, having a mediator or a trusted third person help with discussions, not meeting in-person, meeting in different rooms, or talking about an agreement through email, text or telephone);
+  one spouse’s main goal is to finish the case and be done in a safe manner so they are willing to give up some things in the agreement that they may be entitled to under the law
+  You can decide whether you are comfortable trying to reach an agreement with your spouse based on the facts and circumstances of your case. As explained below, if you want to try to reach an agreement with your spouse about the parenting plan, your options may be limited if there has been domestic violence
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  Your parenting plan agreement may be limited if there is domestic violence
+  
+  
+  
+  
+  
+  The law presumes that a parent with a "history of domestic violence" not get custody or unsupervised visitation unless he or she meets certain requirements. These may include completing a batterer’s intervention or substance abuse treatment program.
+  A "history of domestic violence" is defined by the law as either one incident of domestic violence that caused serious physical injury, or more than one incident. The parent's domestic violence behavior needs to fit under one of the domestic violence crimes in the law. There does not have to be a protective order or criminal case for the court to find a parent has a history of domestic violence. The court can find domestic violence based on one parent's testimony
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  Considerations if you and your spouse do not reach an agreement
+  
+  
+  
+  If you think the other parent should not have any contact with your children you will need to convince the judge that it is in the children’s best interest. Generally, it is unusual for a judge in a divorce or custody case to decide that a parent cannot see his or her children. There is research that shows it is important for children to have a relationship with both parents if it can happen in a safe manner. If the judge finds the domestic violence presumption applies, the judge will usually permit supervised contact between the parent and the children while the parent is completing a batterer’s intervention or substance abuse treatment program. After the parent finishes the program and any other requirements the judge ordered, the judge may lift the supervision restriction and allow a different parenting schedule
+  
+  
+  
+  The judge will only know about your domestic violence concerns if you state them in the documents you file and when you talk in court. If you have concerns for the children’s safety when in the care of the other parent, or for yourself when interacting with the other parent, describe them to the judge. If the judge is going to allow the other parent to have parenting time (visitation) with the children, you can suggest ways to address your concerns. Some options include:
+  
+  no drugs or alcohol prior to or during the visits,
+  drug or alcohol testing and/or treatment,
+  no overnight visitation,
+  no excessive discipline or spanking,
+  no emotional abuse such as cursing at or name calling,
+  no saying anything bad about you to or in front the children or letting anyone else do it,
+  no inappropriate exposure to adult activities such as pornography,
+  exchanges only at public or specified places,
+  supervised exchanges by a willing and available third party who you trust,
+  parenting time only occur in a public or specified place,
+  supervised parenting time with a willing and available third party who you trust, or
+  · no contact between the children and specific individuals you are concerned about
+  
+  If you think you or your children's health, safety, or liberty would be harmed by providing the information on the Child Custody Jurisdiction Affidavit, DR-150 to the other parent:
+  
+  do not give the other parent a copy of the completed Child Custody Jurisdiction Affidavit after you file it with the court, and
+  file Direction to Seal Child Custody Jurisdiction Affidavit, DR-151
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
 ---
 template: custody_paternity_step
 subject: |

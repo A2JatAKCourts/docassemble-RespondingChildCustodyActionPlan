@@ -102,6 +102,8 @@ Scenario: Row #50
     | stage_of_other_case                  | ended with no order |         | 
     | other_case_over                      | True                |         | 
     | response_to_complaint                | agree               |         | 
+    | domestic_violence                    | False               |         | 
+    | paternity                            | False               |         | 
 
     And I should see the phrase "Your Personal Action Plan for responding in your child custody case in 10 steps"
     And I should see the phrase "You can move forward with your Alaska case"
@@ -127,7 +129,10 @@ Scenario: Row #51
     | type_of_response['case in 2 states'] | True                |         | 
     | stage_of_other_case                  | ended with no order |         | 
     | other_case_over                      | True                |         | 
-    | response_to_complaint                | some                |         | 
+    | response_to_complaint                | some                |         |  
+    | want_help_to_agree                   | True                |         |
+    | domestic_violence                    | False               |         | 
+    | paternity                            | False               |         | 
 
     And I should see the phrase "Your Personal Action Plan for responding in your child custody case in 10 steps"
     And I should see the phrase "You can move forward with your Alaska case"
@@ -155,6 +160,8 @@ Scenario: Row #52
     | other_case_over                      | True                |         | 
     | response_to_complaint                | none                |         | 
     | want_help_to_agree                   | True                |         | 
+    | domestic_violence                    | False               |         | 
+    | paternity                            | False               |         | 
 
     And I should see the phrase "Your Personal Action Plan for responding in your child custody case in 10 steps"
     And I should see the phrase "You can move forward with your Alaska case"
@@ -171,8 +178,8 @@ Scenario: Row #52
     And I download "responding_child_custody_action_plan.pdf"
     And I download "responding_child_custody_action_plan.docx"
 
-@row52
-Scenario: Row #52
+@row53
+Scenario: Row #53
   Given I start the interview at "responding_child_custody_action_plan.yml"
     And I get to the question id "final screen" with this data:
     | var                                  | value               | trigger | 
@@ -182,6 +189,8 @@ Scenario: Row #52
     | other_case_over                      | True                |         | 
     | response_to_complaint                | none                |         | 
     | want_help_to_agree                   | False               |         | 
+    | domestic_violence                    | False               |         | 
+    | paternity                            | False               |         | 
 
     And I should see the phrase "Your Personal Action Plan for responding in your child custody case in 9 steps"
     And I should see the phrase "You can move forward with your Alaska case"
@@ -196,3 +205,5 @@ Scenario: Row #52
     And I take a screenshot
     And I download "responding_child_custody_action_plan.pdf"
     And I download "responding_child_custody_action_plan.docx"
+
+
