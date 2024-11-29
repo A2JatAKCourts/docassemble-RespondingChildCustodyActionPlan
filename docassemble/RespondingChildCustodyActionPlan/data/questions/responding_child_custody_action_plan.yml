@@ -528,9 +528,8 @@ attachment:
   variable name: responding_child_custody_action_plan_attachment[i]
   skip undefined: True
   # docx template file: responding_end_marriage_action_plan.docx
-  docx template file: dummy.docx
-  # responding_child_custody_action_plan.docx
-  # docx template file: responding_child_custody_action_plan_lo_version.docx
+  # docx template file: dummy2.docx
+  docx template file: responding_child_custody_action_plan.docx
   tagged pdf: True
 ---
 attachment:
@@ -540,7 +539,6 @@ attachment:
   variable name: docx_responding_child_custody_action_plan_attachment
   skip undefined: True
   # docx template file: responding_end_marriage_action_plan.docx
-  docx template file: dummy.docx
-  # responding_child_custody_action_plan.docx
-  # docx template file: responding_child_custody_action_plan_lo_version.docx
+  # docx template file: dummy2.docx
+  docx template file: responding_child_custody_action_plan.docx
   tagged pdf: True
