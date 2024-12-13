@@ -147,77 +147,39 @@ subquestion: |
   % endif
 continue button field: continue_after_jurisdiction
 ---
-# comment: |
-#   I think we do not need this question if we present choices as checkboxes at the beginning of the interview - but if update with step content, gives users a chance to get more information in their Action Plan.
-#   This was the original subquestion
-#   Your spouse is supposed to give you a copy of the paperwork filed in court by (1) process server, or (2) sending it by certified mail/restricted delivery/return receipt.  This is called “serving you.”  Information about “serving” has been added to your Action Plan.
-#   
-#   ${ capitalize(other_party_in_case) } is supposed to "serve" you by giving you a copy of the paperwork they filed in court by:
-#     
-#   *	process server, or 
-#   *	sending it by certified mail/restricted delivery/return receipt. This means you sign the green postcard when you get the mail.
-#   
-#   After you are served, you have **20 days** to file an **Answer**. 
-#   <div class="step-subheading">If the other parent did not serve you correctly</div>
-# id: Improper Service
-# question: |
-#   Options if you were not served correctly
-# subquestion: |
-#   You can:
-#   
-#   * move forward with the case, or
-#   * wait.    
-#   
-#   <div class="step-subheading">Move forward</div>
-#     File an **Answer** within 20 days if:
-#     
-#     * You agree with ${other_party_in_case } that there should be a case to get a Parenting Plan and custody order. Or 
-#     * You do not want to risk a **Default Judgment**.
-#     
-#   <div class="step-subheading">Wait</div>
-#   If you do not want to do anything unless the other parent serves you properly: 
-#   
-#     *	Wait for proper service and then file your **Answer**. Or
-#     *	Do nothing. **If** neither you nor the other parent files anything, the court will close your case. You can always look the case up on [CourtView](https://records.courts.alaska.gov/eaccess/home.page.2) to see if anything has been filed or ordered.
-#   
-#    <div class="step-subheading">${ capitalize(other_party_in_case) } could apply for a Default Judgment</div>
-#   
-#   If you do not file an answer within 20 days, even if they did not serve you correctly, ${ other_party_in_case } could still ask the court for a **Default Judgment**.  Then you will have to tell the court you think you were not served the correct way. 
-# fields: 
-#   - Do you want any more information in your Action Plan?: improper_service
-#     datatype: checkboxes
-#     choices:
-#       - "Yes, I want information about filing an **Answer**.": answer
-#       - "Yes, I want information about my options if the other parent files for a **Default Judgment**.": default
-#     none of the above: No, this is enough for now.
-# 
-# under: |
-#   #### <i class="fa-regular fa-lightbulb"></i> Learn more ####
-#  Why does it matter if the other parent files for a **Default Judgment**?
-#  
-#  If ${ other_party_in_case } asks the court for a default judgment, the judge can decide the case without hearing your side of the story. 
+
 ---
 id: Proper service
 question: |
-  Did ${ other_party_in_case } send you documents to start the case by?
+  How did you first find out about the case?
+subquestion: |
+  ${ capitalize(other_party_in_case) } is supposed to give you a copy of the paperwork filed in court by:
+  
+  1. a process server, a person licensed by the State of Alaska to serve legal documents, or
+  1. sending it by certified mail/restricted delivery/return receipt.
+  
+  This is called “serving you.”   
 fields:
-  - How did ${ other_party_in_case } tell you they had started a court case?: proper_service
+  - How did ${ other_party_in_case } tell you they started this case?: proper_service
     input type: radio
     choices:
-      - "A process server brought the documents to me or a responsible person at my home.": server
-        help: |
-          A process server is licensed by the State of Alaska to serve legal documents.
-      - "They used certified mail, restricted delivery, with a green return receipt I had to sign.": mail
-      - "I did not get the documents either of these ways.": neither
-under: |
-  #### <i class="fa-regular fa-lightbulb"></i> Learn more ####
-  Why does this matter?
-  
-  Before the court can default you, ${ other_party_in_case } is supposed to "serve" you with copies of the complaint and the attached documents by process server or certified mail.  If they  did not, you may be able to challenge a default judgment.
+      - "A process server gave the documents to me.": server to me
+      - "A process server gave the documents to a responsible person at my home.": server to responsible person
+      - "${ capitalize(other_party_in_case) } used certified mail, restricted delivery, with a green postcard return receipt I had to sign.": mail
+      - "I did not get the documents in any of these ways.": neither
+  - note: |
+      #### <i class="fa-regular fa-lightbulb"></i> Learn more ####
+      Why does this matter?
+    
+      Before the court can default you, ${ other_party_in_case } is supposed to "serve" you with copies of the complaint and the attached documents by process server or certified mail.  If they  did not, you may be able to challenge a default judgment.     
+    show if:
+      variable: type_of_response
+      is: default
+    
 ---
 code: |
   servicetypes = [
-                 {'server': "a process server who brought  the documents to you or a responsible person at your home."},
+                 {'server': "a process server who brought the documents to you or a responsible person at your home."},
                  {'mail': "certified mail, restricted delivery, and return receipt so that you had to sign the green postcard when you got the documents in the mail."},
                  {'neither': "I did not get the documents either of these ways."}
                ]

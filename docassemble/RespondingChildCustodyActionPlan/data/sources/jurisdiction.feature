@@ -4,8 +4,8 @@ Feature: User paths
 Background: 
   Given the maximum seconds for each Step is 90
 
-@row46
-Scenario: Row #46
+@row21
+Scenario: Row #21
   Given I start the interview at "responding_child_custody_action_plan.yml"
     And I get to the question id "final screen" with this data:
     | var                             | value          | trigger | 
@@ -19,8 +19,8 @@ Scenario: Row #46
     And I download "responding_child_custody_action_plan.pdf"
     And I download "responding_child_custody_action_plan.docx"
 
-@row47
-Scenario: Row #47
+@row22
+Scenario: Row #22
   Given I start the interview at "responding_child_custody_action_plan.yml"
     And I get to the question id "final screen" with this data:
     | var                             | value          | trigger | 
@@ -29,7 +29,7 @@ Scenario: Row #47
     | jurisdiction                    | False          |         | 
     And I should see the phrase "Your Personal Action Plan for responding in your child custody case in 10 steps"
     And I should see the phrase "Decide if Alaska is the right state for your case"
-    And I should see the phrase "Fill out the forms you need to tell the court Alaska is the wrong state and respond within 20 days"
+    And I should see the phrase "Fill out the forms to tell the court Alaska is the wrong state and respond within 20 days"
     And I should see the phrase "File a motion to dismiss your Alaska case"
     And I should see the phrase "Fill out the Certificate of Service"
     And I should see the phrase "File the originals"
@@ -42,8 +42,8 @@ Scenario: Row #47
     And I download "responding_child_custody_action_plan.pdf"
     And I download "responding_child_custody_action_plan.docx"
 
-@row48
-Scenario: Row #48
+@row24
+Scenario: Row #24
   Given I start the interview at "responding_child_custody_action_plan.yml"
     And I get to the question id "final screen" with this data:
     | var                                  | value          | trigger | 
@@ -55,21 +55,21 @@ Scenario: Row #48
     And I should see the phrase "Your Personal Action Plan for responding in your child custody case in 11 steps"
     And I should see the phrase "Check if the Alaska courts have jurisdiction"
     And I should see the phrase "Decide which court you want to hear your case"
-    And I should see the phrase "Fill out the forms you need to answer the complaint and respond within 20 days"
+    And I should see the phrase "Fill out the forms to answer the complaint and respond within 20 days"
     And I should see the phrase "File a motion to dismiss your Alaska case"
     And I should see the phrase "Fill out the Certificate of Service"
     And I should see the phrase "File the originals"
     And I should see the phrase "Serve the other parent"
     And I should see the phrase "Read the “domestic relations procedural order” or “standing order” if the clerk gives you one when you file your case"
-    And I should see the phrase "What to expect after you file a motion or Answer"
+    And I should see the phrase "What to expect after you file your Answer"
     And I should see the phrase "Learn more about the process"
     And I should see the phrase "Get more information or help"
     And I take a screenshot
     And I download "responding_child_custody_action_plan.pdf"
     And I download "responding_child_custody_action_plan.docx"
 
-@row49
-Scenario: Row #49
+@row23
+Scenario: Row #23
   Given I start the interview at "responding_child_custody_action_plan.yml"
     And I get to the question id "final screen" with this data:
     | var                                  | value            | trigger | 
@@ -77,23 +77,22 @@ Scenario: Row #49
     | type_of_response['case in 2 states'] | True             |         | 
     | stage_of_other_case                  | ended with order |         | 
     | dismiss                              | True             |         | 
-    And I should see the phrase "Your Personal Action Plan for responding in your child custody case in 10 steps"
-    And I should see the phrase "Tell the Alaska court the case in the other state is over and the court in the other state issued a custody order"
-    And I should see the phrase "Fill out the forms you need to answer the complaint and respond within 20 days"
+    And I should see the phrase "Your Personal Action Plan for responding in your child custody case in 9 steps"
+# And I should see the phrase "Tell the Alaska court the case in the other state is over and the court in the other state issued a custody order"
     And I should see the phrase "File a motion to dismiss your Alaska case"
     And I should see the phrase "Fill out the Certificate of Service"
     And I should see the phrase "File the originals"
     And I should see the phrase "Serve the other parent"
-    And I should see the phrase "Read the “domestic relations procedural order” or “standing order” if the clerk gives you one when you file your case"
-    And I should see the phrase "What to expect after you file a motion or Answer"
-    And I should see the phrase "Learn more about the process"
+# And I should see the phrase "Read the “domestic relations procedural order” or “standing order” if the clerk gives you one when you file your case"
+    And I should see the phrase "What to expect after you file a motion"
+# And I should see the phrase "Learn more about the process"
     And I should see the phrase "Get more information or help"
     And I take a screenshot
     And I download "responding_child_custody_action_plan.pdf"
     And I download "responding_child_custody_action_plan.docx"
 
-@row50
-Scenario: Row #50
+@row28
+Scenario: Row #28
   Given I start the interview at "responding_child_custody_action_plan.yml"
     And I get to the question id "final screen" with this data:
     | var                                  | value               | trigger | 
@@ -108,20 +107,20 @@ Scenario: Row #50
     And I should see the phrase "Your Personal Action Plan for responding in your child custody case in 10 steps"
     And I should see the phrase "You can move forward with your Alaska case"
     And I should see the phrase "Review your options when you agree with what the other parent is asking"
-    And I should see the phrase "Fill out the forms you need to answer the complaint and respond within 20 days"
+    And I should see the phrase "Fill out the forms to answer the complaint and respond within 20 days"
     And I should see the phrase "Fill out the Certificate of Service"
     And I should see the phrase "File the originals"
     And I should see the phrase "Serve the other parent"
     And I should see the phrase "Read the “domestic relations procedural order” or “standing order” if the clerk gives you one when you file your case"
-    And I should see the phrase "What to expect after you file a motion or Answer"
+    And I should see the phrase "What to expect after you file your Answer"
     And I should see the phrase "Learn more about the process"
     And I should see the phrase "Get more information or help"
     And I take a screenshot
     And I download "responding_child_custody_action_plan.pdf"
     And I download "responding_child_custody_action_plan.docx"
 
-@row51
-Scenario: Row #51
+@row32
+Scenario: Row #32
   Given I start the interview at "responding_child_custody_action_plan.yml"
     And I get to the question id "final screen" with this data:
     | var                                  | value               | trigger | 
@@ -129,28 +128,28 @@ Scenario: Row #51
     | type_of_response['case in 2 states'] | True                |         | 
     | stage_of_other_case                  | ended with no order |         | 
     | other_case_over                      | True                |         | 
-    | response_to_complaint                | some                |         |  
-    | want_help_to_agree                   | True                |         |
-    | domestic_violence                    | False               |         | 
-    | paternity                            | False               |         | 
+    | response_to_complaint                | some                |         | 
+# | want_help_to_agree                   | True                |         |
+    | domestic_violence | False |  | 
+    | paternity         | False |  | 
 
     And I should see the phrase "Your Personal Action Plan for responding in your child custody case in 10 steps"
     And I should see the phrase "You can move forward with your Alaska case"
     And I should see the phrase "Review your options when you agree with some of what the other parent is asking"
-    And I should see the phrase "Fill out the forms you need to answer the complaint and respond within 20 days"
+    And I should see the phrase "Fill out the forms to answer the complaint and respond within 20 days"
     And I should see the phrase "Fill out the Certificate of Service"
     And I should see the phrase "File the originals"
     And I should see the phrase "Serve the other parent"
     And I should see the phrase "Read the “domestic relations procedural order” or “standing order” if the clerk gives you one when you file your case"
-    And I should see the phrase "What to expect after you file a motion or Answer"
+    And I should see the phrase "What to expect after you file your Answer"
     And I should see the phrase "Learn more about the process"
     And I should see the phrase "Get more information or help"
     And I take a screenshot
     And I download "responding_child_custody_action_plan.pdf"
     And I download "responding_child_custody_action_plan.docx"
 
-@row52
-Scenario: Row #52
+@row36
+Scenario: Row #36
   Given I start the interview at "responding_child_custody_action_plan.yml"
     And I get to the question id "final screen" with this data:
     | var                                  | value               | trigger | 
@@ -166,20 +165,20 @@ Scenario: Row #52
     And I should see the phrase "Your Personal Action Plan for responding in your child custody case in 10 steps"
     And I should see the phrase "You can move forward with your Alaska case"
     And I should see the phrase "Resources to help you reach an agreement with the other parent"
-    And I should see the phrase "Fill out the forms you need to answer the complaint and respond within 20 days"
+    And I should see the phrase "Fill out the forms to answer the complaint and respond within 20 days"
     And I should see the phrase "Fill out the Certificate of Service"
     And I should see the phrase "File the originals"
     And I should see the phrase "Serve the other parent"
     And I should see the phrase "Read the “domestic relations procedural order” or “standing order” if the clerk gives you one when you file your case"
-    And I should see the phrase "What to expect after you file a motion or Answer"
+    And I should see the phrase "What to expect after you file a motion your Answer"
     And I should see the phrase "Learn more about the process"
     And I should see the phrase "Get more information or help"
     And I take a screenshot
     And I download "responding_child_custody_action_plan.pdf"
     And I download "responding_child_custody_action_plan.docx"
 
-@row53
-Scenario: Row #53
+@row40
+Scenario: Row #40
   Given I start the interview at "responding_child_custody_action_plan.yml"
     And I get to the question id "final screen" with this data:
     | var                                  | value               | trigger | 
@@ -194,16 +193,14 @@ Scenario: Row #53
 
     And I should see the phrase "Your Personal Action Plan for responding in your child custody case in 9 steps"
     And I should see the phrase "You can move forward with your Alaska case"
-    And I should see the phrase "Fill out the forms you need to answer the complaint and respond within 20 days"
+    And I should see the phrase "Fill out the forms to answer the complaint and respond within 20 days"
     And I should see the phrase "Fill out the Certificate of Service"
     And I should see the phrase "File the originals"
     And I should see the phrase "Serve the other parent"
     And I should see the phrase "Read the “domestic relations procedural order” or “standing order” if the clerk gives you one when you file your case"
-    And I should see the phrase "What to expect after you file a motion or Answer"
+    And I should see the phrase "What to expect after you file a motion your Answer"
     And I should see the phrase "Learn more about the process"
     And I should see the phrase "Get more information or help"
     And I take a screenshot
     And I download "responding_child_custody_action_plan.pdf"
     And I download "responding_child_custody_action_plan.docx"
-
-

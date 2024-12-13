@@ -80,12 +80,10 @@ code: |
   #   add_unique_step((pick_a_step_step, "pick_a_step_idx"), step_list)
   
   if type_of_response['improper service']:
-    if not type_of_response['default']: 
-      add_unique_step((improper_service_step, "improper_service_idx"), step_list)
-      # if proper_service == 'neither' and improper_service['answer']:
-      #   add_unique_step((answer_step, "answer_idx"), step_list)
-      # if proper_service == 'neither' and improper_service['default']:
-      #   add_unique_step((default_options_step, "default_options_idx"), step_list)
+    proper_service
+    # if not type_of_response['default']: 
+    #  add_unique_step((proper_service_step, "proper_service_idx"), step_list)
+      
   
   if type_of_response['wrong state']:
     jurisdiction
@@ -94,70 +92,69 @@ code: |
     # add_unique_step((ak_jurisdiction_step, "ak_jurisdiction_idx"), step_list)
     # add_unique_step((aka2j_jurisdiction_step, "aka2j_jurisdiction_idx"), step_list)
   
-  if type_of_response['case in 2 states']:
+  if type_of_response['case in 2 states'] and stage_of_other_case == 'ended with order':
+      dismiss
+      add_unique_step((answer_jurisdiction_step, "answer_jurisdiction_idx"), step_list)
+      add_unique_step((dismiss_step, "dismiss_idx"), step_list)
+      add_unique_step((cert_of_service_step, "cert_of_service_idx"), step_list)
+      add_unique_step((file_answer_step, "file_answer_idx"), step_list)
+      add_unique_step((serve_motion_step, "serve_motion_idx"), step_list)
+      add_unique_step((expect_after_motion_step, "expect_after_motion_idx"), step_list)
+  
+  if type_of_response['case in 2 states'] and stage_of_other_case in('still going','ended with no order'):
     add_unique_step((answer_jurisdiction_step, "answer_jurisdiction_idx"), step_list)
     if stage_of_other_case == 'still going':
       ongoing
-      # jurisdiction
-      # add_unique_step((answer_jurisdiction_step, "answer_jurisdiction_idx"), step_list)
-      add_unique_step((decide_court_step, "decide_court_idx"), step_list)
-      # add_unique_step((answer_step, "answer_idx"), step_list)
-      # add_unique_step((dismiss_step, "dismiss_idx"), step_list)
-    if stage_of_other_case == 'ended with order':
-      dismiss
-      # add_unique_step((answer_jurisdiction_step, "answer_jurisdiction_idx"), step_list)
-      # add_unique_step((answer_step, "answer_idx"), step_list)
-      # add_unique_step((dismiss_step, "dismiss_idx"), step_list)
+      add_unique_step((decide_court_step, "decide_court_idx"), step_list)   
+  
     if stage_of_other_case == 'ended with no order':
       other_case_over
-      # add_unique_step((answer_jurisdiction_step, "answer_jurisdiction_idx"), step_list)
-    if stage_of_other_case in('still going', 'ended with order'):
+  
+    if stage_of_other_case =='still going':
       add_unique_step((answer_step, "answer_idx"), step_list)
       add_unique_step((dismiss_step, "dismiss_idx"), step_list)
-      # add_unique_image({'image': service_cert_image, 'text': "Certificate of Service"}, images_list)
-      # add_unique_step((cert_of_service_step, "cert_of_service_idx"), step_list)
-      # add_unique_step((aka2j_file_answer_step, "aka2j_file_answer_idx"), step_list)
-      # add_unique_step((serve_motion_step, "serve_motion_idx"), step_list)
-      # add_unique_step((aka2j_drpo_step, "aka2j_drpo_idx"), step_list)
-      # add_unique_step((aka2j_expect_after_motion_step, "aka2j_expect_after_motion_idx"), step_list)
-      # add_unique_step((aka2j_learn_process_step, "aka2j_learn_process_idx"), step_list)
+      add_unique_step((cert_of_service_step, "cert_of_service_idx"), step_list)
+      add_unique_step((file_answer_step, "file_answer_idx"), step_list)
+      add_unique_step((serve_motion_step, "serve_motion_idx"), step_list)
+      add_unique_step((expect_after_motion_step, "expect_after_motion_idx"), step_list)
+  
   if type_of_response['default']:
     proper_service
     military
+    add_unique_step((proper_service_step, "proper_service_idx"), step_list)
     if stage_of_default in('application filed','hearing scheduled','judgment entered'):
       add_unique_step((default_options_step, "default_options_idx"), step_list)
       if stage_of_default == 'judgment entered':
-        add_unique_step((aka2j_learn_reconsider_step, "aka2j_learn_reconsider_idx"), step_list)
-        add_unique_step((aka2j_fill_reconsider_step, "aka2j_fill_reconsider_idx"), step_list)
-        add_unique_step((aka2j_learn_set_aside_step, "aka2j_learn_set_aside_idx"), step_list)
-        add_unique_step((aka2j_fill_set_aside_step, "aka2j_fill_set_aside_idx"), step_list)
+        add_unique_step((learn_reconsider_step, "learn_reconsider_idx"), step_list)
+        add_unique_step((fill_reconsider_step, "fill_reconsider_idx"), step_list)
+        add_unique_step((learn_set_aside_step, "learn_set_aside_idx"), step_list)
+        add_unique_step((fill_set_aside_step, "fill_set_aside_idx"), step_list)
       add_unique_step((answer_step, "answer_idx"), step_list)
-      add_unique_step((aka2j_cert_of_service_step, "aka2j_cert_of_service_idx"), step_list)
-      add_unique_step((aka2j_file_step, "aka2j_file_idx"), step_list)
+      add_unique_step((cert_of_service_step, "cert_of_service_idx"), step_list)
+      add_unique_step((file_answer_step, "file_answer_idx"), step_list)
       add_unique_step((serve_motion_step, "serve_motion_idx"), step_list)
-      add_unique_step((aka2j_expect_reconsider_step, "aka2j_expect_reconsider_idx"), step_list)
-      add_unique_step((aka2j_expect_after_motion_step, "aka2j_expect_after_motion_idx"), step_list)
+      add_unique_step((expect_reconsider_step, "expect_reconsider_idx"), step_list)
+      add_unique_step((expect_after_motion_step, "expect_after_motion_idx"), step_list)
+  
   if type_of_response['ak custody case'] or (type_of_response['case in 2 states'] and stage_of_other_case == 'ended with no order'): 
     if response_to_complaint in('agree', 'some') or (response_to_complaint == 'none' and want_help_to_agree):
       add_unique_step((want_help_to_agree_step, "want_help_to_agree_idx"), step_list)
-    #if response_to_complaint == 'agree':
-    #  agreement_documents = True
-      # add_unique_step((parent_agreements_step, "parent_agreements_idx"), step_list)
+  
   if type_of_response['ak custody case'] \
     or (type_of_response['wrong state'] and not jurisdiction and continue_after_jurisdiction) \
-    or type_of_response['case in 2 states'] \
-    or type_of_response['improper service']:
+    or (type_of_response['case in 2 states'] and stage_of_other_case != 'ended with order'):
     add_unique_step((answer_step, "answer_idx"), step_list)
     if type_of_response['wrong state'] and not jurisdiction and continue_after_jurisdiction:
       add_unique_step((dismiss_step, "dismiss_idx"), step_list)
     add_unique_step((answer_step, "answer_idx"), step_list)
     add_unique_image({'image': service_cert_image, 'text': "Certificate of Service"}, images_list)
     add_unique_step((cert_of_service_step, "cert_of_service_idx"), step_list)
-    add_unique_step((aka2j_file_answer_step, "aka2j_file_answer_idx"), step_list)
+    add_unique_step((file_answer_step, "file_answer_idx"), step_list)
     add_unique_step((serve_motion_step, "serve_motion_idx"), step_list)
-    add_unique_step((aka2j_drpo_step, "aka2j_drpo_idx"), step_list)
-    add_unique_step((aka2j_expect_after_motion_step, "aka2j_expect_after_motion_idx"), step_list)
-    add_unique_step((aka2j_learn_process_step, "aka2j_learn_process_idx"), step_list)
+    add_unique_step((read_drpo_step, "read_drpo_idx"), step_list)
+    add_unique_step((expect_after_motion_step, "expect_after_motion_idx"), step_list)
+    # add_unique_step((expect_after_motion_step, "expect_after_motion_idx"), step_list)
+    add_unique_step((learn_more_about_process_step, "learn_more_about_process_idx"), step_list)
 
 
   if type_of_response['ak custody case'] or (type_of_response['case in 2 states'] and stage_of_other_case == 'ended with no order'): 
@@ -201,52 +198,67 @@ code: |
     if is_unique:
       image_list.append(new_image)
 ---
-template: improper_service_step
+template: proper_service_step
 subject: |
-  Step ${ improper_service_idx }: If you were not "served" correctly
+  Step ${ proper_service_idx }:
+  % if type_of_response['improper service']:
+  % if proper_service == 'neither':
+  Move forward with the case or wait
+  % else:
+  Watch out for a Default Judgment
+  % endif
+  % else:
+  Learn about 'proper service'
+  % endif
 content: |
-  If the other parent starts a custody case by filing documents in court, they are supposed to give you a copy of the documents they filed. They should: 
+  If the other parent starts a ${ case_type } case by filing documents in court, they are supposed to give you a copy of the documents they filed. They should: 
   
   *	Use a process server, someone who is licensed by the state of Alaska to deliver legal documents. Or 
   *	Send the documents by certified mail/restricted delivery/return receipt. This means you sign a green postcard receipt when you get the mail.
   
-  This is “proper service.”  After you are served, you have **20 days** to file an **Answer**.  
-  
-  If the other parent gave you the documents another way, you can move forward with the case or wait.    
+  This is “proper service.”  After you are served, you have **20 days** to file an **Answer**.
+
+  % if type_of_response['improper service'] and proper_service == 'neither':
+  If ${ other_party_in_case }  gave you the documents another way, you can move forward with the case, or wait.
   <div class="step-subheading">Move forward</div>
   Even if you were served a different way, you can file an **Answer** if:
     
-    * You agree with ${ other_party_in_case } that there should be a case to get a Parenting Plan and custody order. Or 
+    * You agree with ${ other_party_in_case } that there should be a case to 
+  % if user_need == 'answer custody':
+  get a custody, Parenting Plan and child support order. Or
+  % elif user_need == 'answer divorce':
+  end your marriage. Or
+  % endif  
     * You do not want to risk a **Default Judgment**.
   
-  If you do not have a copy of the documents they filed, you can ask ${ other_party_in_case } or get a copy from your file at the courthouse.
+  % if type_of_response.any_true('ak custody case', 'ak divorce case'):
+  See Step ${ answer_idx }: Fill out the forms to answer the complaint and respond within 20 days.
+  % endif  
   
-  % if improper_service['answer']:
-  See Step ${ answer_idx }: Fill out an Answer form to respond to the complaint (answer form tf).
-  % endif
-    
   <div class="step-subheading">Wait</div>
   If you do not want to do anything unless the other parent serves you properly: 
-  
-    *	Wait for proper service and then file your **Answer**. Or
-    *	Do nothing. If neither you nor the other parent files anything the court will close your case.  You can always look the case up on [CourtView](https://records.courts.alaska.gov/eaccess/home.page.2) to see if anything has been filed or ordered.
-  
-  % if improper_service['answer']:
-  See Step ${ answer_idx }: Fill out an Answer form to respond to the complaint (answer form tf).
+  <ul>
+  <li>Wait for proper service and then file your <strong>Answer</strong>. 
+   % if type_of_response.any_true('ak custody case', 'ak divorce case'):
+   See Step ${ answer_idx }: Fill out the forms to answer the complaint and respond within 20 days. 
   % endif
+  Or</li>
+  <li>Do nothing. If neither you nor ${ other_party_in_case }  files anything, the court will close your case.</li>
+  </ul>
+  You can always look the case up on <a href="https://https://records.courts.alaska.gov/eaccess/home.page.2">CourtView</a> to see if anything has been filed or ordered.</li>  
+
   
+  % elif type_of_response['improper service'] and proper_service != 'neither':  
   <div class="step-subheading">Watch out for a Default Judgment</div>
-  % if proper_service != 'neither':
-  If you were served by either a process server or certified mail, and you do not file an Answer in 20 days, the other parent may ask the court for a **Default Judgment**.
-  % endif
-  A **Default Judgment** is when the court decides your case without hearing from you.
-  
-  % if proper_service == 'neither':
-  Even if you did not get the documents from a proces server or by certified mail, ${ other_party_in_case } could ask for a **Default Judgment**. Then you will have to tell the court you think you were not served the correct way.
+  If you were served by either a process server or certified mail, and you do not file an Answer in 20 days, ${ other_party_in_case } may ask the court for a **Default Judgment**. 
   % endif
   
-  % if improper_service['default']:
-  See Step ${ default_options_idx }: Options when the other parent asks for a default judgment.
+  A **Default Judgment** is when the judge decides your case without hearing from you.
+  
+  If you do not have a copy of the documents ${ other_party_in_case } filed, you can ask them for a copy or get a copy from your file at the courthouse.
+  
+  % if type_of_response['default']:
+  See Step ${ default_options_idx }: Options when ${ other_party_in_case } asks for a default judgment.
   % endif
 ---
 template: answer_jurisdiction_step
@@ -514,17 +526,7 @@ template: default_options_step
 subject: |
   Step ${ default_options_idx }: Options when the other parent asks for a default judgment
 content: |
-  % if not type_of_response['improper service']:
-  <div class="step-subheading">Service</div>
-  If the other parent starts a custody case by filing documents in court, they are supposed to give you a copy of the documents they filed by: 
-  
-    * process server, or
-    * sending it by certified mail/restricted delivery/return receipt (this means you sign the green postcard when you get the mail).
-    
-    This is called “serving you.” After you are served, you have **20 days** to file an **Answer**.
-  % endif # not type_of_response['improper service']
   <div class="step-subheading">Default judgment</div>
-    
   If you do not file your Answer within 20 days, the other parent can ask for a **Default Judgment** which means the court will decide the case without hearing your side of the story. There are 3 steps to get a **Default Judgment**:
     
     1. The other parent files a **Default Application** and gives you a copy by mailing it or by hand delivery.
@@ -568,27 +570,28 @@ content: |
   
   If you want to court to hear your side of the story, file an **Answer** and ask the court not to enter an **Entry of Default** or set a default hearing.
   % endif # proper_service == 'neither'
-  % if proper_service in('process server', 'return receipt mail'):
+  % if proper_service != 'neither':
   <div class="step-subheading">Tell the court your side of the story</div>
-  % endif # proper_service in('process server', 'return receipt mail')
+  % endif # != 'neither'
   
     * Fill out and file an **Answer**. 
   
-  % if type_of_response['default'] or (type_of_response['improper service'] and improper_service == 'answer'):
+  % if type_of_response.any_true('default','ak custody case','ak divorce case'):
   See Step { answer_idx }: Fill out an **Answer form** to respond to the complaint (answer form tf).
   % endif
   
   Learn about filing an **Answer**. See the court's web page [Responding to a Complaint Served on You](https://courts.alaska.gov/shc/family/answer.htm).
 
-  % if type_of_response['improper service'] or (type_of_response['default'] and stage_of_default == 'application filed'):
+  % if type_of_response['default'] and stage_of_default == 'application filed':
   
     *	Fill out and file a “motion."
       
       *	Title it "Motion and Affidavit to Accept Late Filed Answer,"
       *	Ask the court to accept your **Answer** even though it is late. And
-      *	Ask the court to not enter an **Entry of Default**.
+      *	Ask the court not to enter an **Entry of Default**.
       
-  See Asking for an Order in a Divorce Case When the Issue Can't Wait for the Court's Final Decision (Filing a Motion)”
+  See the [Court Guide: Asking for an Order in a Divorce Case When the Issue Can't Wait for the Court's Final Decision (Filing a Motion)](https://docassemble.akcourts.gov/start/FilingAMotion)
+  
   % elif type_of_response['default'] and stage_of_default == 'hearing scheduled':
   
     * Fill out and file **Motion and Affidavit to Set Aside Entry of Default and Accept Late Filed Answer, SHC-410** Word | PDF.  This motion asks the court to undo the **Entry of Default** and to accept your **Answer** even though it is late.
@@ -623,9 +626,9 @@ comment: |
 template: answer_step
 subject: |
   % if type_of_response['wrong state'] and not jurisdiction:
-  Step ${ answer_idx }: Fill out the forms you need to tell the court Alaska is the wrong state and respond within 20 days
+  Step ${ answer_idx }: Fill out the forms to tell the court Alaska is the wrong state and respond within 20 days
   % else:
-  Step ${ answer_idx }: Fill out the forms you need to answer the complaint and respond within 20 days
+  Step ${ answer_idx }: Fill out the forms to answer the complaint and respond within 20 days
   % endif
 content: |
   You have 20 days from the date you get the complaint to:
@@ -693,7 +696,7 @@ content: |
   <ul>
   <li>Look at each paragraph in ${other_party_in_case}'s complaint and decide if you agree, disagree or, you are not sure.</li>
   
-  % if (user_need == 'custody' and type_of_response['ak custody case']) or (user_need == 'divorce' and type_of_response['ak divorce case']) or (type_of_response['case in 2 states'] and stage_of_other_case == 'ended with no order'):
+  % if (user_need == 'answer custody' and type_of_response['ak custody case']) or (user_need == 'answer divorce' and type_of_response['ak divorce case']) or (type_of_response['case in 2 states'] and stage_of_other_case == 'ended with no order'):
   % if (case_type == 'custody' or case_type == 'divorce' or (case_type == 'legal separation' and want_legal_separation == 'yes')) and response_to_complaint == 'agree':
   <li>If you agree with what ${other_party_in_case} asked for in their complaint, check the box in this section that says you “agree with all of the statements in the complaint.”</li>
   % elif (case_type == 'custody' or case_type == 'divorce' or (case_type == 'legal separation' and want_legal_separation == 'yes')) and response_to_complaint == 'some': 
@@ -714,7 +717,7 @@ content: |
   </br>If you think Alaska is not the "home state," you can ask the court to dismiss your case.
   <ul>
   <li>Check the box that describes the reason you think Alaska is the wrong state to decide custody of your children.</li>    
-  <li>Check the box that says you are attaching a Motion to Dismiss the Child Custody Claim.</li>
+  <li>Check the box that says you are attaching a <strong>Motion to Dismiss the Child Custody Claim</strong>.</li>
   </ul>
   % endif
   % if user_need == 'divorce' and type_of_response['wrong state'] and not residency:
@@ -767,11 +770,11 @@ content: |
   % if type_of_response['wrong state'] and (not jurisdiction or (user_need == 'answer divorce' and not residency)):
   <ul><li>Check the box at the beginning of this section that says, "I have stated above that the case should be dismissed because the Alaska court does not have jurisdiction over 
   % if user_need == 'answer custody':
-  the child(ren).
+  the child(ren)."
   % elif user_need == 'answer divorce' and minor_children:
-  the marital estate and/or child custody.
+  the marital estate and/or child custody."
   % elif user_need == 'answer divorce' and not minor_children:
-  the marital estate.
+  the marital estate."
   % endif
   </li>
   </ul>
@@ -808,15 +811,15 @@ content: |
   </ul>
   
   % if user_need == 'answer custody' or (user_need == 'divorce' and minor_children):
-  **Child Custody Jurisdiction Affidavit, DR-150** [[Fill-In PDF](<a href="https://public.courts.alaska.gov/web/forms/docs/dr-150.pdf)]</br>
-  Wait to sign this affidavit until you can sign in front of a notary or file the form at court.
+  <strong>Child Custody Jurisdiction Affidavit, DR-150</strong>* [[Fill-In PDF](<a href="https://public.courts.alaska.gov/web/forms/docs/dr-150.pdf)]</br>
+  <strong>Wait</strong> to sign this affidavit until you can sign in front of a notary or file the form at court.
   
-  **Child Support Guidelines Affidavit, DR-305** [[Fill-In PDF](https://public.courts.alaska.gov/web/forms/docs/dr-305.pdf)]
+  <strong>Child Support Guidelines Affidavit, DR-305</strong> [[Fill-In PDF](https://public.courts.alaska.gov/web/forms/docs/dr-305.pdf)]
   
     *	See [How to Fill out the Child Support Guidelines Affidavit](http://courts.alaska.gov/shc/family/docs/shc-dr305f-sample.pdf) 
     to help you fill in this form
-    *	Attach your most recent tax return and pay stubs to the Child Support Guidelines Affidavit.
-    *	Wait to sign this affidavit until you can sign in front of a notary or file the form at court.
+    *	Attach your most recent tax return and pay stubs to the **Child Support Guidelines Affidavit**.
+    * **Wait** to sign this affidavit until you can sign in front of a notary or file the form at court.
 
   % endif
   <div class="step-subheading">Wait</div>
@@ -848,11 +851,16 @@ template: dismiss_step
 subject: |
   Step ${ dismiss_idx }: 
   % if type_of_response.any_true('wrong state','case in 2 states'):
-  File a motion to dismiss your Alaska case (motion to dismiss tf dismiss step)
+  File a motion to dismiss your Alaska case
   % else:
   Fill out a Motion to Dismiss
   % endif 
 content: |
+  % if user_need == 'answer divorce' and type_of_response['case in 2 states'] and stage_of_case == 'ended with order':
+  If the case in the other state is over and the other court ended your marriage, you can file a Motion to Dismiss your Alaska case.
+  % elif user_need == 'answer custody' and type_of_response['case in 2 states'] and stage_of_case == 'ended with order':
+  If the case in another state is over and the other court issued an order about custody, a parenting plan or a child support order, you can file a Motion to Dismiss your Alaska case.
+  % endif
   <ol>
   <li>Fill out a Motion to Dismiss</br>
    Use: 
@@ -926,47 +934,6 @@ content: |
    * It is important to pay attention to what is happening in both cases until you know which state will decide the case.
    * Jurisdiction can be very complicated.  Talking to a lawyer can help you decide which is the best state for your case.
   % endif
----
-template: aka2j_file_answer_step
-subject: |
-  Step ${ aka2j_file_answer_idx }: File the originals (file tf)
-content: |
-  You have **20 days** to file and serve ${ other_party_in_case } your **Answer**, **Affidavits**, **Information Sheet**
-  % if (type_of_response['wrong state'] and not jurisdiction) or (type_of_response['case in 2 states'] and stage_of_other_case == 'still going') or (type_of_response['default'] and proper_service == 'neither'):
-  , **Motion to Dismiss**,
-  % endif
-  and other documents.
-  
-  1.	Make 2 copies of everything you are going to give the court.
-  2.	Give the original version of your documents to the court that is listed on the top of the complaint.</br>
-  Find the address on the court's [Court Directory](https://courts.alaska.gov/courtdir/index.htm#trial) web page and:
-    <ul><li>Give the documents to the clerk at the court yourself.</li>
-   <li>Mail the documents by first-class mail. or</li>
-   <li>Use the court's <a href="https://courts.alaska.gov/efile">TrueFile eFiling system</a> to send the documents to the court electronically.</li></ul>
-  3.	Keep 1 copy for your own records.
-  4.	Give the 2nd copy to ${ other_party_in_case } on the date and way you wrote on your **Certificate of Service**. Read Step ${ serve_motion_idx }: Serve ${ other_party_in_case }.
----
-template: aka2j_drpo_step
-subject: |
-  Step ${ aka2j_drpo_idx }: Read the "domestic relations procedural order" or "standing order" if the clerk gives you one when you file your case (read drpo tf)
-content: |
-  This is the first order from your judge that sets out the basic rules for you and the other parent to follow during the case.  Violating this order can affect the outcome of your case.  The order usually state you cannot take your children out of Alaska unless the other parent agrees or the court gives permission.
----
-template: aka2j_learn_process_step
-subject: |
-  Step ${ aka2j_learn_process_idx }: Learn more about the process (learn more tf)
-content: |
-  <div class="step-subheading">Read</div>
-  
-    * Flow Chart for Case Process, SHC-185: Word | PDF
-    * The Life of a Case, SHC-180
-  
-  <div class="step-subheading">Watch a Video </div>
-  
-    *	Introduction to Divorce and Custody Cases in Alaska
-    *	Overview and Timeline of the Case
-    *	Find other Alaska Videos: English | Spanish | Tagalog
-    *	Find Alaska Family Law Hearing & Trial Preparation Videos
 ---
 template: want_help_to_agree_step
 subject: |
@@ -1121,83 +1088,6 @@ subject: |
   % endif
 content: |
   <div class="step-subheading">The benefits of reaching an agreement </div>
----
-template: aka2j_learn_reconsider_step
-subject: |
-  Step ${ aka2j_learn_reconsider_idx }: aka2j_Learn about Motions to Reconsider
-content: |
-  <p>To ask your judge to reconsider a decision, file a <strong>Motion to Reconsider</strong>. Add period in AKBranding package.</p>
----
-template:  aka2j_fill_reconsider_step
-subject: |
-  Step ${ aka2j_fill_reconsider_idx }:  aka2j_Fill out the Motion to Reconsider forms
-content: |
-  <div class='step-subheading'>Use</div>
----
-template: aka2j_learn_set_aside_step
-subject: |
-  Step ${ aka2j_learn_set_aside_idx }: aka2j_Learn about the Motion to Set Aside Judgment or Order
-content: |
-  <p>A <strong>Motion to Set Aside Judgment or Order</strong> asks the judge to</a></p>
----
-template: aka2j_fill_set_aside_step
-subject: |
-  Step ${ aka2j_fill_set_aside_idx }: aka2j_Fill out forms if you want to file a Motion to Set Aside
-content: |
-  If you decide to file a **Motion to Set Aside** because it fits your case:
----
-template: aka2j_cert_of_service_step
-subject: |
-  Step ${ aka2j_cert_of_service_idx }: aka2j_Fill out the Certificate of Service
-content: |
-  You must give ${ other_party_in_case } 1 copy of everything you file with the court. This is called “service.”
----
-template: aka2j_file_step
-subject: |
-  Step ${ aka2j_file_idx }: 
-  % if defined('file_step_heading'):
-  ${ file_step_heading }
-  % else:
-  aka2j_File your motion forms
-  % endif
-content: |
-  ${ file_motion_to_set_aside }
-  ${ file_motion_to_enforce }
-  Make 2 copies of everything you are going to give the court.
----
-template: aka2j_expect_reconsider_step
-subject: |
-  Step ${ aka2j_expect_reconsider_idx }: aka2j_What to expect after you file a Motion to Reconsider 
-content: |
-  <p>A <strong>Motion to Reconsider</strong> is different from other motions.</p>
----
-template: aka2j_expect_after_motion_step
-subject: |
-  Step ${ aka2j_expect_after_motion_idx }: aka2j_What to expect after you file a ${ motion_type }
-content: |
-  % if user_need in('answer custody', 'answer divorce') and type_of_response['case in 2 states']and stage_of_other_case == 'still going':
-  
-  Every case is different, but sometimes it is clear only one court has jurisdiction over the case. When this happens, one state court may close its case.
-  
-  If it is not clear, the Alaska court will often hold a hearing and call the other court to talk about which case will move forward.
-  
-  Pay attention to what is happening in both cases until you know which state will decide the case.
-  
-  Jurisdiction can be very complicated. Talking to a lawyer can help you decide which is the best state for your case.
-  % endif  
-  
-  See [GitHub Motion to Dismiss issue #30](https://github.com/A2JatAKCourts/docassemble-DivorceIssues/issues/30)
-  <div class='step-subheading'>${ capitalize(other_party_in_case) } may file a response or "opposition"</div>
-  
-  If ${ other_party_in_case } files a response to your Motion to Dismiss, you can file a reply:
-  
-  * Watch 2 videos:
-      * [Motions Part 3: Preparing a Reply](https://youtube.com/watch?v=egoBeRFB_Uw), and
-      * [Motions Part 4: Mailings and Deadlines](https://youtu.be/YQvG7GEGeoo)
-  * Read: [How do I reply to an opposition?](https://courts.alaska.gov/shc/family/motions.htm#reply) on the court's website
-  * Use **Reply to Opposition to Motion, SHC-1305** [Word](https://courts.alaska.gov/shc/family/docs/shc-1305.doc) | [PDF](https://courts.alaska.gov/shc/family/docs/shc-1305n.pdf).</br>
-  Remember to fill out the Certificate of Service that tells the court how and when you deliver your reply to ${ other_party_in_case }.
- 
 ---
 template: aka2j_uncontested_custody_forms_step
 subject: |
