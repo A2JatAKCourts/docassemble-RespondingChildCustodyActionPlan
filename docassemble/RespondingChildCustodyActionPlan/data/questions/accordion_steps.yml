@@ -67,7 +67,9 @@ code: |
   distribution_certificate_list = []
   reply_certificate_list = []
   other_party_in_case  = 'the other parent'
-  case_type = 'custody'
+  case_type = 'custody'  
+  type_of_response['ak divorce case'] = False  
+  type_of_response['stay married'] = False
   distribution_certificate_list.append({'image': distrib_cert_custody_divorce_image, 'text': "Certificate of Distribution shows the date the court sent your order to you."})
   # expect_after_motion is in what to expect step for filing motion for interim order w complaint, or answer/response, cannot use variable in docx template, must insert condition in what to expect step.
   expect_after_motion = ''
@@ -82,7 +84,7 @@ code: |
   if type_of_response['improper service']:
     proper_service
     # if not type_of_response['default']: 
-    #  add_unique_step((proper_service_step, "proper_service_idx"), step_list)
+    add_unique_step((proper_service_step, "proper_service_idx"), step_list)
       
   
   if type_of_response['wrong state']:
@@ -94,45 +96,47 @@ code: |
   
   if type_of_response['case in 2 states'] and stage_of_other_case == 'ended with order':
       dismiss
-      add_unique_step((answer_jurisdiction_step, "answer_jurisdiction_idx"), step_list)
+      # add_unique_step((answer_jurisdiction_step, "answer_jurisdiction_idx"), step_list)
       add_unique_step((dismiss_step, "dismiss_idx"), step_list)
       add_unique_step((cert_of_service_step, "cert_of_service_idx"), step_list)
       add_unique_step((file_answer_step, "file_answer_idx"), step_list)
       add_unique_step((serve_motion_step, "serve_motion_idx"), step_list)
+      motion_type = 'motion'
       add_unique_step((expect_after_motion_step, "expect_after_motion_idx"), step_list)
   
   if type_of_response['case in 2 states'] and stage_of_other_case in('still going','ended with no order'):
     add_unique_step((answer_jurisdiction_step, "answer_jurisdiction_idx"), step_list)
     if stage_of_other_case == 'still going':
       ongoing
-      add_unique_step((decide_court_step, "decide_court_idx"), step_list)   
-  
-    if stage_of_other_case == 'ended with no order':
-      other_case_over
-  
-    if stage_of_other_case =='still going':
+      add_unique_step((decide_court_step, "decide_court_idx"), step_list)
       add_unique_step((answer_step, "answer_idx"), step_list)
       add_unique_step((dismiss_step, "dismiss_idx"), step_list)
       add_unique_step((cert_of_service_step, "cert_of_service_idx"), step_list)
       add_unique_step((file_answer_step, "file_answer_idx"), step_list)
       add_unique_step((serve_motion_step, "serve_motion_idx"), step_list)
-      add_unique_step((expect_after_motion_step, "expect_after_motion_idx"), step_list)
+      add_unique_step((expect_after_answer_step, "expect_after_answer_idx"), step_list)   
+  
+    if stage_of_other_case == 'ended with no order':
+      other_case_over
+  
   
   if type_of_response['default']:
     proper_service
     military
     add_unique_step((proper_service_step, "proper_service_idx"), step_list)
-    if stage_of_default in('application filed','hearing scheduled','judgment entered'):
-      add_unique_step((default_options_step, "default_options_idx"), step_list)
-      if stage_of_default == 'judgment entered':
-        add_unique_step((learn_reconsider_step, "learn_reconsider_idx"), step_list)
-        add_unique_step((fill_reconsider_step, "fill_reconsider_idx"), step_list)
-        add_unique_step((learn_set_aside_step, "learn_set_aside_idx"), step_list)
-        add_unique_step((fill_set_aside_step, "fill_set_aside_idx"), step_list)
+    add_unique_step((default_options_step, "default_options_idx"), step_list)
+    if stage_of_default in('application filed','hearing scheduled'):
       add_unique_step((answer_step, "answer_idx"), step_list)
-      add_unique_step((cert_of_service_step, "cert_of_service_idx"), step_list)
-      add_unique_step((file_answer_step, "file_answer_idx"), step_list)
-      add_unique_step((serve_motion_step, "serve_motion_idx"), step_list)
+      add_unique_step((dismiss_step, "dismiss_idx"), step_list)
+    if stage_of_default == 'judgment entered':
+      add_unique_step((learn_reconsider_step, "learn_reconsider_idx"), step_list)
+      add_unique_step((fill_reconsider_step, "fill_reconsider_idx"), step_list)
+      add_unique_step((learn_set_aside_step, "learn_set_aside_idx"), step_list)
+      add_unique_step((fill_set_aside_step, "fill_set_aside_idx"), step_list)
+    add_unique_step((cert_of_service_step, "cert_of_service_idx"), step_list)
+    add_unique_step((file_answer_step, "file_answer_idx"), step_list)
+    add_unique_step((serve_motion_step, "serve_motion_idx"), step_list)
+    if stage_of_default == 'judgment entered':
       add_unique_step((expect_reconsider_step, "expect_reconsider_idx"), step_list)
       add_unique_step((expect_after_motion_step, "expect_after_motion_idx"), step_list)
   
@@ -152,8 +156,10 @@ code: |
     add_unique_step((file_answer_step, "file_answer_idx"), step_list)
     add_unique_step((serve_motion_step, "serve_motion_idx"), step_list)
     add_unique_step((read_drpo_step, "read_drpo_idx"), step_list)
-    add_unique_step((expect_after_motion_step, "expect_after_motion_idx"), step_list)
-    # add_unique_step((expect_after_motion_step, "expect_after_motion_idx"), step_list)
+  if type_of_response['ak custody case'] \
+    or (type_of_response['wrong state'] and not jurisdiction and continue_after_jurisdiction) \
+    or (type_of_response['case in 2 states'] and stage_of_other_case != 'ended with order'):
+    add_unique_step((expect_after_answer_step, "expect_after_answer_idx"), step_list)
     add_unique_step((learn_more_about_process_step, "learn_more_about_process_idx"), step_list)
 
 
@@ -230,7 +236,7 @@ content: |
   end your marriage. Or
   % endif  
     * You do not want to risk a **Default Judgment**.
-  
+
   % if type_of_response.any_true('ak custody case', 'ak divorce case'):
   See Step ${ answer_idx }: Fill out the forms to answer the complaint and respond within 20 days.
   % endif  
@@ -239,12 +245,13 @@ content: |
   If you do not want to do anything unless the other parent serves you properly: 
   <ul>
   <li>Wait for proper service and then file your <strong>Answer</strong>. 
-   % if type_of_response.any_true('ak custody case', 'ak divorce case'):
-   See Step ${ answer_idx }: Fill out the forms to answer the complaint and respond within 20 days. 
+  % if type_of_response.any_true('ak custody case', 'ak divorce case'):
+  See Step ${ answer_idx }: Fill out the forms to answer the complaint and respond within 20 days. 
   % endif
   Or</li>
   <li>Do nothing. If neither you nor ${ other_party_in_case }  files anything, the court will close your case.</li>
   </ul>
+  
   You can always look the case up on <a href="https://https://records.courts.alaska.gov/eaccess/home.page.2">CourtView</a> to see if anything has been filed or ordered.</li>  
 
   
@@ -352,10 +359,10 @@ content: |
   If you think your case may be an exception to these general rules, you can get help from the resources listed in Step ${ get_help_idx }.
   % endif
   % if type_of_response['wrong state'] and type_of_response.all_false('case in 2 states') and not jurisdiction:
-  If you think your ${ case_type } case should be in another state, tell the court you think Alaska is the wrong state:
+  If you think your ${ case_type } case should be in another state, tell the court you think Alaska is the wrong state and ask the Alaska court to dismiss your Alaska case. See:
   
-  * Use your Answer. See Step ${ answer_idx }: Fill out the forms you need to respond to the complaint within 20 days. And
-  * A motion to ask the Alaska court to dismiss your Alaska case. See Step ${ dismiss_idx }: File a motion to dismiss your Alaska case
+  * Step ${ answer_idx }: Fill out the forms to tell the court Alaska is the wrong state and respond within 20 days, and
+  * Step ${ dismiss_idx }: File a motion to dismiss your Alaska case.
   % endif
 
   
@@ -366,12 +373,7 @@ content: |
   % elif user_need == 'answer custody':
   If the case in another state is over and the other court issued a custody order,
   % endif 
-  you can file a "Motion to Dismiss" when you file your Answer in your Alaska case. 
-
-  See Steps:
-
-    * ${ answer_idx }: Fill out the forms to respond to the complaint within 20 days. And
-    * ${ dismiss_idx }: File a motion to dismiss your Alaska case.
+  you can file a "Motion to Dismiss." See Step ${ dismiss_idx }: File a motion to dismiss your Alaska case.
   % elif stage_of_other_case == 'ended with no order':
   % if user_need == 'answer divorce':
   If the case in the other state is over but did not end your marriage, you can move forward with the Alaska case.
@@ -480,9 +482,9 @@ template: decide_or_dismiss_step
 subject: |
   Step ${ decide_or_dismiss_idx }: 
   % if type_of_response['case in 2 states'] and stage_of_other_case == 'still going':
-  <Decide which court you want to hear your case(which court tf)
+  Decide which court you want to hear your case
   % else:
-  File a motion to dismiss your Alaska case (motion to dismiss tf decide or dismiss step)
+  File a motion to dismiss your Alaska case
   % endif 
 content: |
   % if type_of_response['case in 2 states'] and stage_of_other_case == 'still going':
@@ -856,10 +858,17 @@ subject: |
   Fill out a Motion to Dismiss
   % endif 
 content: |
-  % if user_need == 'answer divorce' and type_of_response['case in 2 states'] and stage_of_case == 'ended with order':
+  % if user_need == 'answer divorce' and type_of_response['case in 2 states'] and stage_of_other_case == 'ended with order':
   If the case in the other state is over and the other court ended your marriage, you can file a Motion to Dismiss your Alaska case.
-  % elif user_need == 'answer custody' and type_of_response['case in 2 states'] and stage_of_case == 'ended with order':
-  If the case in another state is over and the other court issued an order about custody, a parenting plan or a child support order, you can file a Motion to Dismiss your Alaska case.
+  % if minor_children:
+  File a copy of the custody order and your divorce decree from the other state, and any other documents that support your request.
+  % else:
+  File a copy of your divorce decree from the other state and any other documents that support your request.
+  % endif
+  % elif user_need == 'answer custody' and type_of_response['case in 2 states'] and stage_of_other_case == 'ended with order':
+  If the case in another state is over and the other court issued an order about custody, a parenting plan, or a child support order, you can file a Motion to Dismiss your Alaska case.
+  
+  File a copy of the custody order from the other state, and any other documents that support your request.
   % endif
   <ol>
   <li>Fill out a Motion to Dismiss</br>
@@ -1103,9 +1112,9 @@ subject: |
   Step ${ custody_domestic_violence_idx }:
   % if type_of_response.any_true():
   % if ((user_need == 'answer custody' and type_of_response['ak custody case']) or (user_need == 'answer divorce' and type_of_response['ak divorce case']) or (type_of_response['case in 2 states'] and stage_of_case == 'ended with no order')) and (response_to_complaint in('agree', 'some') or (response_to_complaint == 'none' and want_help_to_agree)):
-  Abuse or domestic violence resources and reaching an agreement(dv agree tf)
+  Abuse or domestic violence resources and reaching an agreement
   % else:
-  Abuse or domestic violence and parenting(dv contested tf)
+  Abuse or domestic violence and parenting
   % endif 
   % endif 
 content: |

@@ -434,10 +434,10 @@ review:
     button: |
       **Case type**:
       ${ case_type }
-  - Edit: stage_of_case
+  - Edit: stage_of_other_case
     button: |
       **Stage of case**:
-      ${ stage_of_case }
+      ${ stage_of_other_case }
   - Edit: more_than_one_step_of_a_kind
     button: |
       **More than one step of a kind**:
