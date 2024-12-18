@@ -129,16 +129,19 @@ code: |
       add_unique_step((answer_step, "answer_idx"), step_list)
       add_unique_step((dismiss_step, "dismiss_idx"), step_list)
     if stage_of_default == 'judgment entered':
-      add_unique_step((learn_reconsider_step, "learn_reconsider_idx"), step_list)
-      add_unique_step((fill_reconsider_step, "fill_reconsider_idx"), step_list)
-      add_unique_step((learn_set_aside_step, "learn_set_aside_idx"), step_list)
-      add_unique_step((fill_set_aside_step, "fill_set_aside_idx"), step_list)
-    add_unique_step((cert_of_service_step, "cert_of_service_idx"), step_list)
-    add_unique_step((file_answer_step, "file_answer_idx"), step_list)
-    add_unique_step((serve_motion_step, "serve_motion_idx"), step_list)
-    if stage_of_default == 'judgment entered':
-      add_unique_step((expect_reconsider_step, "expect_reconsider_idx"), step_list)
-      add_unique_step((expect_after_motion_step, "expect_after_motion_idx"), step_list)
+      if final_order_date_within_10_days or (defined('final_order_period') and guess_final_order_date == 'unknown'):
+        add_unique_step((learn_reconsider_step, "learn_reconsider_idx"), step_list)
+        add_unique_step((fill_reconsider_step, "fill_reconsider_idx"), step_list)
+      if final_order_date_more_than_10_days or (defined('final_order_period') and guess_final_order_date == 'unknown'):
+        add_unique_step((learn_set_aside_step, "learn_set_aside_idx"), step_list)
+        add_unique_step((fill_set_aside_step, "fill_set_aside_idx"), step_list)
+      add_unique_step((cert_of_service_step, "cert_of_service_idx"), step_list)
+      add_unique_step((file_answer_step, "file_answer_idx"), step_list)
+      add_unique_step((serve_motion_step, "serve_motion_idx"), step_list)
+      if final_order_date_within_10_days or (defined('final_order_period') and guess_final_order_date == 'unknown'):
+        add_unique_step((expect_reconsider_step, "expect_reconsider_idx"), step_list)
+      if final_order_date_more_than_10_days or (defined('final_order_period') and guess_final_order_date == 'unknown'):
+        add_unique_step((expect_after_motion_step, "expect_after_motion_idx"), step_list)
   
   if type_of_response['ak custody case'] or (type_of_response['case in 2 states'] and stage_of_other_case == 'ended with no order'): 
     if response_to_complaint in('agree', 'some') or (response_to_complaint == 'none' and want_help_to_agree):

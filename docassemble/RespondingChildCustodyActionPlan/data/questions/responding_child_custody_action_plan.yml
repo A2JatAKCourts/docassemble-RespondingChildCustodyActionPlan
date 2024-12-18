@@ -212,6 +212,52 @@ under: |
   
   You can search for your case on the Alaska Court System website, or ask your local court.
 ---
+id: date of default judgment
+question: |
+  What is the date on the default judgment?
+subquestion: |
+  Look at the last page of the order. The date is at the end.
+  
+  [FILE docassemble.AKA2JBranding:CertOfDistrib_divorce_custody.PNG, 100%, This is a screenshot of the bottom of the order with the date the court sent your order.]
+fields:
+  - "The date of your order.": final_order_date
+    datatype: date
+    max: ${ today() }
+    required: False
+    # disable if: final_order_period
+    help: |
+      This is the date in the box at the bottom of the last page.
+  - "I do not have the exact date": final_order_period
+    datatype: yesno
+    enable if: 
+      variable: final_order_date
+      is: null
+  - no label: guess_final_order_date
+    enable if: final_order_period 
+    datatype: radio
+    choices: 
+      - "It is in the last 10 days.": within 10 days
+      - "It is more than 10 days ago.": more than 10 days
+      - "I do not know": unknown
+
+continue button field: final_order_date_question
+---
+code: |
+  final_order_date_question
+
+  if (final_order_date != '' and date_difference(starting=final_order_date, ending=today()).days <= 10 ) or (defined('final_order_period') and guess_final_order_date == 'within 10 days'):
+    final_order_date_within_10_days = True    
+    final_order_date_more_than_10_days = False
+  
+  if (final_order_date != '' and date_difference(starting=final_order_date, ending=today()).days > 10 ) or (defined('final_order_period') and guess_final_order_date == 'more than 10 days'):
+    final_order_date_within_10_days = False   
+    final_order_date_more_than_10_days = True
+  
+  if (defined('final_order_period') and guess_final_order_date == 'unknown'):
+    final_order_date_within_10_days = False  
+    final_order_date_more_than_10_days = False
+    log('no number of days',"console")
+---
 id: Answer forms
 question: |
   Do you want more information?
