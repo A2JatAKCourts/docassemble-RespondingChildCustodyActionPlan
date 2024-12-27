@@ -256,7 +256,6 @@ code: |
   if (defined('final_order_period') and guess_final_order_date == 'unknown'):
     final_order_date_within_10_days = False  
     final_order_date_more_than_10_days = False
-    log('no number of days',"console")
 ---
 id: Answer forms
 question: |

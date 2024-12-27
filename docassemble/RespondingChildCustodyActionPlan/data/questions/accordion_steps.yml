@@ -447,7 +447,7 @@ content: |
   If you think Alaska is not the "home state," you can ask the court to dismiss your case.
 
   * 	State your objection in the "Affirmative Defense" section of your "Answer" 
-  * File a "motion" asking the court to dismiss your case.  You can learn about motions by answering more questions.  If you want to save this Action Plan, be sure to download, save, or print it.  Then return to the Guided Assist page and use the Guided Assist search box to find "Asking for an Order in a Divorce Case When the Issue Can't Wait for the Court's Final Decision (Filing a Motion) and Responding to a Motion."
+  * File a "motion" asking the court to dismiss your case.  You can learn about motions by answering more questions.  If you want to save this Action Plan, be sure to download, save, or print it.  Then return to the Guided Assist page and use the Guided Assist search box to find [Asking for an Order in a Divorce Case When the Issue Can't Wait for the Court's Final Decision (Filing a Motion)](https://docassemble.akcourts.gov/start/FilingAMotion) and Responding to a Motion."
   * Check the box at the beginning of the "Counterclaims" section that says, "I have stated above that the case should be dismissed because the Alaska court does not have jurisdiction over the child(ren)."
 
   If you have any questions about whether Alaska is the correct place for your case or you want to ask the court to dismiss your case, you may want to talk to a lawyer. 
@@ -532,106 +532,129 @@ subject: |
   Step ${ default_options_idx }: Options when the other parent asks for a default judgment
 content: |
   <div class="step-subheading">Default judgment</div>
-  If you do not file your Answer within 20 days, the other parent can ask for a **Default Judgment** which means the court will decide the case without hearing your side of the story. There are 3 steps to get a **Default Judgment**:
+  If you do not file your Answer within 20 days, the other parent can ask for a **Default Judgment**, which means the court will decide the case without hearing your side of the story. There are 3 steps to get a **Default Judgment**:
     
-    1. The other parent files a **Default Application** and gives you a copy by mailing it or by hand delivery.
-    2. The Clerk of Court enters an **Entry of Default** and sets a date and time for a “default hearing.”
-    3. The Judge holds the “default hearing” and may enter the **Default Judgment** order ending the case without hearing from you. 
+  1. The other parent files a **Default Application** and gives you a copy by mailing it or by hand delivery.
+  2. The Clerk of Court enters an **Entry of Default** and sets a date and time for a “default hearing.”
+  3. The Judge holds the “default hearing” and may enter the **Default Judgment** order ending the case without hearing from you. 
     
   % if military:
   <div class="step-subheading">Military Protections</div>
-  Under the Servicemembers Civil Relief Act, you may have some protections against default judgment if the case is filed while you were on active duty. You can learn more about the [Servicemembers Civil Relief Act](https://www.militaryonesource.mil/financial-legal/personal-finance/servicemembers-civil-relief-act/) on the federal website, [Military OneSource](https://www.militaryonesource.mil/).
+  Under the **Servicemembers Civil Relief Act**, you may have some protections against default judgment if the case is filed while you were on active duty. You can learn more about the [Servicemembers Civil Relief Act](https://www.militaryonesource.mil/financial-legal/personal-finance/servicemembers-civil-relief-act/) on the federal website, [Military OneSource](https://www.militaryonesource.mil/).
   
-  If the Servicemembers Civil Relief Act does not apply to your case to stop the default judgment, you have other options.  
-  % endif # military
+  If the **Servicemembers Civil Relief Act** does not apply to your case to stop the default judgment, you have other options.  
+  % endif 
   
-    If the court has a default hearing and enters a default judgment, the only way to undo it is a **Motion for Reconsideration**, if the default judgment was in the last 10 days, or a **Motion and Affidavit to Set Aside the Judgment or Order**. In both motions, you tell the court why it should undo the judgment even though you did not respond to the case.
- 
-  % if type_of_response['improper service'] or (type_of_response['default'] and stage_of_default in('application filed', 'hearing scheduled')):
-  % if military:
-  <div class="step-subheading">Other options if ${ other_party_in_case } files for default judgment</div>
-  % else:
-  <div class="step-subheading">Options if ${ other_party_in_case } files for default judgment</div>
+  % if stage_of_default == 'judgment entered': 
+  <div class="step-subheading">Ask the court to set aside the default judgment</div>
+  If the court has a default hearing and enters a default judgment, the only way to undo it is a **Motion for Reconsideration**, if the default judgment was in the last 10 days, or a **Motion and Affidavit to Set Aside the Judgment or Order**. In both motions, you tell the court why it should undo the judgment even though you did not respond to the case.
+
+  There are specific reasons that a judgment can be set aside, and it must be done within a “reasonable time.” In some cases, it must be within 1 year.
+
+  Read more about [Motions to Set Aside](http://www.courts.alaska.gov/shc/family/after-judgment.htm#set-aside).
+
+  Fill out and file:
+
+  * **Motion and Affidavit to Set Aside the Judgment or Order, SHC-1548** [Word](http://www.courts.alaska.gov/shc/family/docs/shc-1548.doc) | [PDF](http://www.courts.alaska.gov/shc/family/docs/shc-1548n.pdf)
+  * **Proposed Order on Motion, SHC-130** [Word](http://www.courts.alaska.gov/shc/family/docs/shc-1302.doc) | [PDF](http://www.courts.alaska.gov/shc/family/docs/shc-130n.pdf)
+  
+  % if final_order_date_within_10_days:
+  See Step ${ learn_reconsider_idx }: Learn about Motions to Reconsider
+  % elif final_order_more_than_10_days:
+  Step ${ learn_set_aside_idx }: Learn about the Motion to Set Aside Judgment or Order
+  % elif (defined('final_order_period') and guess_final_order_date == 'unknown'):
+  See:
+  
+    * Step ${ learn_reconsider_idx }: Learn about Motions to Reconsider and
+    * Step ${ learn_set_aside_idx }: Learn about the Motion to Set Aside Judgment or Order
   % endif
+  % endif
+
+  % if stage_of_default in('application filed', 'hearing scheduled'):
+  % if military:
+  <div class="step-subheading">Other options</div>
+  % else:
+  <div class="step-subheading">Options/div>
+  % endif
+  <div class="step-subheading"> if ${ other_party_in_case } files for default judgment</div>
+  
   % if proper_service == 'neither':
-  If the other parent filed for default judgment, it means the other parent told the court you **were** served the correct way.  If you think you were not, you have 2 options:
+  If ${ other_party_in_case } filed for default judgment, it means they told the court you **were** served the correct way. If you think you were not, you have 2 options:
   
   **1. Tell the court you were not served the correct way**
   
   If you think you were not served the correct way and you want the court to dismiss the case, you can fill out and file a “motion” that tells the court what you want to happen:
   
-  * Write the title, “Motion to Dismiss for Failure to Correctly Serve the Complaint”.
-  *  Explain that:
+    * Write the title, “Motion to Dismiss for Failure to Correctly Serve the Complaint.”
+    * Explain that:
+        * capitalize(other_party_in_case) did not serve you one of the correct ways. And 
+        * You want the case dismissed. 
 
-      * the other parent did not serve you one of the correct ways. and 
-      * You want the case dismissed.  
-  Give ${ other_party_in_case } a copy of every document you file with the court. You can use regular mail or deliver it by hand. 
-  
-  Then return to the Guided Assist page and use the Guided Assist search box to find "Asking for an Order in a Divorce Case When the Issue Can't Wait for the Court's Final Decision (Filing a Motion) and Responding to a Motion."
-  
   **2. Go forward with the case.** 
   
   You can ask the court to move ahead with the case, even if you were not served the correct way.
   
-  If you want to court to hear your side of the story, file an **Answer** and ask the court not to enter an **Entry of Default** or set a default hearing.
-  % endif # proper_service == 'neither'
-  % if proper_service != 'neither':
-  <div class="step-subheading">Tell the court your side of the story</div>
-  % endif # != 'neither'
-  
-    * Fill out and file an **Answer**. 
-  
-  % if type_of_response.any_true('default','ak custody case','ak divorce case'):
-  See Step { answer_idx }: Fill out an **Answer form** to respond to the complaint (answer form tf).
+  If you want the court to hear your side of the story, file an **Answer** and ask the court
+  % if stage_of_default == 'application filed':
+  not to enter an **Entry of Default** or set a default hearing
+  % elif stage_of_default == 'hearing scheduled':
+  to undo the **Entry of Default** and accept your Answer even though it is late
+  % endif
+  .
   % endif
   
-  Learn about filing an **Answer**. See the court's web page [Responding to a Complaint Served on You](https://courts.alaska.gov/shc/family/answer.htm).
-
-  % if type_of_response['default'] and stage_of_default == 'application filed':
+  % if proper_service in('server to me', 'server to responsible person', 'mail'):
+  **Tell the court your side of the story**
+  % endif
   
-    *	Fill out and file a “motion."
-      
-      *	Title it "Motion and Affidavit to Accept Late Filed Answer,"
-      *	Ask the court to accept your **Answer** even though it is late. And
-      *	Ask the court not to enter an **Entry of Default**.
+    * Fill out and file an Answer
+  % if type_of_response.all_false('ak custody', 'ak divorce'):
+  If you need information about filling out your Answer, you can start over and check the box, 
+  % if user_need == 'answer custody':
+  “The other parent started a custody case and I want to respond.”
+  % elif user_need == 'answer divorce':
+  “My spouse started a court case to end our marriage and I want to respond.”
+  % endif 
+  % elif type_of_response.any_true('ak custody case','ak divorce case'):
+      See Step ${ answer_idx }: Fill out an **Answer form** to respond to the complaint.
+  % endif
+  
+  Learn about filing an Answer. See [Responding to a Complaint Served on You](http://courts.alaska.gov/shc/family/answer.htm).
+  
+  
+  % if stage_of_default == 'application filed':
+    * Fill out and file a “motion."
+      * Title it "Motion and Affidavit to Accept Late Filed Answer,"
+      * Ask the court to accept your **Answer** even though it is late. And
+      * Ask the court not to enter an **Entry of Default**.
       
   See the [Court Guide: Asking for an Order in a Divorce Case When the Issue Can't Wait for the Court's Final Decision (Filing a Motion)](https://docassemble.akcourts.gov/start/FilingAMotion)
   
-  % elif type_of_response['default'] and stage_of_default == 'hearing scheduled':
-  
-    * Fill out and file **Motion and Affidavit to Set Aside Entry of Default and Accept Late Filed Answer, SHC-410** Word | PDF.  This motion asks the court to undo the **Entry of Default** and to accept your **Answer** even though it is late.
+  % elif stage_of_default == 'hearing scheduled':
+    * Fill out and file **Motion and Affidavit to Set Aside Entry of Default and Accept Late Filed Answer, SHC-410** [Word](http://courts.alaska.gov/shc/family/docs/shc-410.doc) | [PDF](http://courts.alaska.gov/shc/family/docs/shc-410n.pdf). This motion asks the court to undo the **Entry of Default** and to accept your **Answer** even though it is late.
     * Fill in your contact information at the top.
     * Fill in the rest of the top of the page to match the information and case number on the Complaint and Summons.
     * Explain why you did not file your **Answer** by the 20-day deadline.
     * Sign in front of a notary, who will need to see a picture ID. Court staff can notarize your signature for free.
-  % endif # (type_of_response['improper service'] or (type_of_response['default'] and stage_of_default == 'application filed')) elif type_of_response['default'] and stage_of_default == 'hearing scheduled'
-  % endif #type_of_response['improper service'] or (type_of_response['default'] and stage_of_default in('application filed', 'hearing scheduled'))
+  % endif  
+  % endif
+  Give ${ other_party_in_case } a copy of every document you file with the court. You can use regular mail or deliver it by hand. See Step ${ serve_motion_idx }: Serve ${ other_party_in_case }
   
-    *	Give the other parent a copy.  You have to give the other parent a copy of every document you file with the court.  You can use regular mail or deliver it by hand.
-    
-  % if type_of_response['improper service'] or (type_of_response['default'] and stage_of_default in('application filed', 'hearing scheduled')):
-  % if proper_service in('process server', 'return receipt mail'):
+  
+  % if stage_of_default in('application filed', 'hearing scheduled'):
+  % if proper_service in('server to me', 'server to responsible person', 'mail'):
   <div class="step-subheading">Go forward with the case without telling the court your side of the story</div>
-  % endif # proper_service == 'neither':
+  % endif
   
-    If you are okay with the judge deciding the case based on the other parent's Complaint without hearing from you, you do not need to do anything.  But once the judge decides, it is much harder to undo it.  If you file an **Answer**, the judge will consider what you want and there may be resources for you and ${ other_party_in_case } to work out any disagreements through mediation or a settlement conference.
-  % endif # type_of_response['improper service'] or (type_of_response['default'] and stage_of_default in('application filed', 'hearing scheduled'))
-    
-   % if type_of_response['improper service'] or (type_of_response['default'] and stage_of_default == 'judgment entered'):
-  If the court has a default hearing and enters a default judgment,
-  % if user_need == 'respond to custody':
-    See the Guided Assistant Interview [Changing your custody or Parenting Plan order](https://docassemble.akcourts.gov/start/ChangingChildCustody)  
-  % elif user_need == 'respond to divorce':
-    See the Guided Assistant Interview [Changing your divorce order](https://docassemble.akcourts.gov/start/ChangingDivorce)  
-  % endif # user_need
-  % endif # type_of_response['improper service'] or (type_of_response['default'] and stage_of_default == 'judgment entered)
+    If you are okay with the judge deciding the case based on the other parent's Complaint without hearing from you, you do not need to do anything. But once the judge decides, it is much harder to undo it. If you file an **Answer**, the judge will consider what you want, and there may be resources for you and ${ other_party_in_case } to work out any disagreements through mediation or a settlement conference.
+  % endif
 ---
-comment: |
-  1 replace Legal Navigator step heading "Fill out the forms you need to answer and respond to the complaint (answer form tf)". See convention for Answer
 template: answer_step
 subject: |
   % if type_of_response['wrong state'] and not jurisdiction:
   Step ${ answer_idx }: Fill out the forms to tell the court Alaska is the wrong state and respond within 20 days
+  % elif type_of_response['default']:
+  Step ${ answer_idx }: Fill out the forms to answer the complaint
   % else:
   Step ${ answer_idx }: Fill out the forms to answer the complaint and respond within 20 days
   % endif
