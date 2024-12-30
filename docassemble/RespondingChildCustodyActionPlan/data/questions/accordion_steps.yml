@@ -67,10 +67,15 @@ code: |
   distribution_certificate_list = []
   reply_certificate_list = []
   other_party_in_case  = 'the other parent'
-  case_type = 'custody'
+  case_type = 'custody'  
+  type_of_response['ak divorce case'] = False  
+  type_of_response['stay married'] = False
   distribution_certificate_list.append({'image': distrib_cert_custody_divorce_image, 'text': "Certificate of Distribution shows the date the court sent your order to you."})
   # expect_after_motion is in what to expect step for filing motion for interim order w complaint, or answer/response, cannot use variable in docx template, must insert condition in what to expect step.
   expect_after_motion = ''
+  file_motion_to_set_aside = ''
+  file_motion_to_enforce = ''
+  file_modify_filing_fee = ''
   reply_certificate_list.append({'image': service_cert_reply_image, 'text': "Certificate of Service at the bottom of the Reply form."})
   # motion_type used in expect_after_motion_step "What to expect after you file a ${ motion_type }"
   motion_type = 'motion or Answer'
@@ -80,90 +85,90 @@ code: |
   #   add_unique_step((pick_a_step_step, "pick_a_step_idx"), step_list)
   
   if type_of_response['improper service']:
-    if not type_of_response['default']: 
-      add_unique_step((improper_service_step, "improper_service_idx"), step_list)
-      # if proper_service == 'neither' and improper_service['answer']:
-      #   add_unique_step((answer_step, "answer_idx"), step_list)
-      # if proper_service == 'neither' and improper_service['default']:
-      #   add_unique_step((default_options_step, "default_options_idx"), step_list)
+    proper_service
+    # if not type_of_response['default']: 
+    add_unique_step((proper_service_step, "proper_service_idx"), step_list)
+      
+  
   if type_of_response['wrong state']:
     jurisdiction
     continue_after_jurisdiction = True
     add_unique_step((answer_jurisdiction_step, "answer_jurisdiction_idx"), step_list)
     # add_unique_step((ak_jurisdiction_step, "ak_jurisdiction_idx"), step_list)
     # add_unique_step((aka2j_jurisdiction_step, "aka2j_jurisdiction_idx"), step_list)
-  if type_of_response['case in 2 states']:
+  
+  if type_of_response['case in 2 states'] and stage_of_other_case == 'ended with order':
+      dismiss
+      # add_unique_step((answer_jurisdiction_step, "answer_jurisdiction_idx"), step_list)
+      add_unique_step((dismiss_step, "dismiss_idx"), step_list)
+      add_unique_step((cert_of_service_step, "cert_of_service_idx"), step_list)
+      add_unique_step((file_answer_step, "file_answer_idx"), step_list)
+      add_unique_step((serve_motion_step, "serve_motion_idx"), step_list)
+      motion_type = 'motion'
+      add_unique_step((expect_after_motion_step, "expect_after_motion_idx"), step_list)
+  
+  if type_of_response['case in 2 states'] and stage_of_other_case in('still going','ended with no order'):
+    add_unique_step((answer_jurisdiction_step, "answer_jurisdiction_idx"), step_list)
     if stage_of_other_case == 'still going':
       ongoing
-      # jurisdiction
-      add_unique_step((answer_jurisdiction_step, "answer_jurisdiction_idx"), step_list)
       add_unique_step((decide_court_step, "decide_court_idx"), step_list)
       add_unique_step((answer_step, "answer_idx"), step_list)
       add_unique_step((dismiss_step, "dismiss_idx"), step_list)
-    if stage_of_other_case == 'ended with order':
-      dismiss
-      add_unique_step((answer_jurisdiction_step, "answer_jurisdiction_idx"), step_list)
-      add_unique_step((answer_step, "answer_idx"), step_list)
-      add_unique_step((dismiss_step, "dismiss_idx"), step_list)
+      add_unique_step((cert_of_service_step, "cert_of_service_idx"), step_list)
+      add_unique_step((file_answer_step, "file_answer_idx"), step_list)
+      add_unique_step((serve_motion_step, "serve_motion_idx"), step_list)
+      add_unique_step((expect_after_answer_step, "expect_after_answer_idx"), step_list)   
+  
     if stage_of_other_case == 'ended with no order':
       other_case_over
-      add_unique_step((answer_jurisdiction_step, "answer_jurisdiction_idx"), step_list)
-      if response_to_complaint in('agree','some') or (response_to_complaint== 'none' and want_help_to_agree):
-        add_unique_step((want_help_to_agree_step, "want_help_to_agree_idx"), step_list)
-      add_unique_step((answer_step, "answer_idx"), step_list)
-    add_unique_image({'image': service_cert_image, 'text': "Certificate of Service"}, images_list)
-    add_unique_step((cert_of_service_step, "cert_of_service_idx"), step_list)
-    add_unique_step((aka2j_file_answer_step, "aka2j_file_answer_idx"), step_list)
-    add_unique_step((serve_motion_step, "serve_motion_idx"), step_list)
-    add_unique_step((aka2j_drpo_step, "aka2j_drpo_idx"), step_list)
-    add_unique_step((aka2j_expect_after_motion_step, "aka2j_expect_after_motion_idx"), step_list)
-    add_unique_step((aka2j_learn_process_step, "aka2j_learn_process_idx"), step_list)
+  
+  
   if type_of_response['default']:
     proper_service
     military
-    if stage_of_default in('application filed','hearing scheduled','judgment entered'):
-      add_unique_step((default_options_step, "default_options_idx"), step_list)
-      if stage_of_default == 'judgment entered':
-        add_unique_step((aka2j_learn_reconsider_step, "aka2j_learn_reconsider_idx"), step_list)
-        add_unique_step((aka2j_fill_reconsider_step, "aka2j_fill_reconsider_idx"), step_list)
-        add_unique_step((aka2j_learn_set_aside_step, "aka2j_learn_set_aside_idx"), step_list)
-        add_unique_step((aka2j_fill_set_aside_step, "aka2j_fill_set_aside_idx"), step_list)
-      add_unique_step((answer_step, "answer_idx"), step_list)
-      add_unique_step((aka2j_cert_of_service_step, "aka2j_cert_of_service_idx"), step_list)
-      add_unique_step((aka2j_file_step, "aka2j_file_idx"), step_list)
+    add_unique_step((proper_service_step, "proper_service_idx"), step_list)
+    add_unique_step((default_options_step, "default_options_idx"), step_list)
+    if stage_of_default == 'judgment entered':
+      if final_order_date_within_10_days or (defined('final_order_period') and guess_final_order_date == 'unknown'):
+        add_unique_step((learn_reconsider_step, "learn_reconsider_idx"), step_list)
+        add_unique_step((fill_reconsider_step, "fill_reconsider_idx"), step_list)
+      if final_order_date_more_than_10_days or (defined('final_order_period') and guess_final_order_date == 'unknown'):
+        add_unique_step((learn_set_aside_step, "learn_set_aside_idx"), step_list)
+        add_unique_step((fill_set_aside_step, "fill_set_aside_idx"), step_list)
+      add_unique_image({'image': service_cert_image, 'text': "Certificate of Service"}, images_list)
+      add_unique_step((cert_of_service_step, "cert_of_service_idx"), step_list)
+      add_unique_step((file_motion_step, "file_motion_idx"), step_list)
       add_unique_step((serve_motion_step, "serve_motion_idx"), step_list)
-      add_unique_step((aka2j_expect_reconsider_step, "aka2j_expect_reconsider_idx"), step_list)
-      add_unique_step((aka2j_expect_after_motion_step, "aka2j_expect_after_motion_idx"), step_list)
-  if type_of_response['ak custody case']:
-    if response_to_complaint == 'agree'or (response_to_complaint in('some', 'none') and want_help_to_agree):
+     
+  
+  if type_of_response['ak custody case'] or (type_of_response['case in 2 states'] and stage_of_other_case == 'ended with no order'): 
+    if response_to_complaint in('agree', 'some') or (response_to_complaint == 'none' and want_help_to_agree):
       add_unique_step((want_help_to_agree_step, "want_help_to_agree_idx"), step_list)
-    if response_to_complaint == 'agree':
-      agreement_documents = True
-      # add_unique_step((parent_agreements_step, "parent_agreements_idx"), step_list)
+  
   if type_of_response['ak custody case'] \
     or (type_of_response['wrong state'] and not jurisdiction and continue_after_jurisdiction) \
-    or type_of_response['case in 2 states'] \
-    or type_of_response['improper service']:
+    or (type_of_response['case in 2 states'] and stage_of_other_case != 'ended with order'):
     add_unique_step((answer_step, "answer_idx"), step_list)
-    if type_of_response['wrong state'] and not jurisdiction and continue_after_jurisdiction:
+    if (type_of_response['wrong state'] and not jurisdiction and continue_after_jurisdiction) or (type_of_response['default'] and stage_of_default in('application filed','hearing scheduled') and proper_service == 'neither'):
       add_unique_step((dismiss_step, "dismiss_idx"), step_list)
-    add_unique_step((answer_step, "answer_idx"), step_list)
     add_unique_image({'image': service_cert_image, 'text': "Certificate of Service"}, images_list)
     add_unique_step((cert_of_service_step, "cert_of_service_idx"), step_list)
-    add_unique_step((aka2j_file_answer_step, "aka2j_file_answer_idx"), step_list)
+    add_unique_step((file_answer_step, "file_answer_idx"), step_list)
     add_unique_step((serve_motion_step, "serve_motion_idx"), step_list)
-    add_unique_step((aka2j_drpo_step, "aka2j_drpo_idx"), step_list)
-    add_unique_step((aka2j_expect_after_motion_step, "aka2j_expect_after_motion_idx"), step_list)
-    add_unique_step((aka2j_learn_process_step, "aka2j_learn_process_idx"), step_list)
-  
-  if type_of_response['ak custody case']:
-    # if response_to_complaint in('agree','some'):
-    add_unique_step((want_help_to_agree_step, "want_help_to_agree_idx"), step_list)
-      # add_unique_step((parent_agreements_step, "parent_agreements_idx"), step_list)
+    add_unique_step((read_drpo_step, "read_drpo_idx"), step_list)
+  if type_of_response['ak custody case'] \
+    or (type_of_response['wrong state'] and not jurisdiction and continue_after_jurisdiction) \
+    or (type_of_response['case in 2 states'] and stage_of_other_case != 'ended with order'):
+    add_unique_step((expect_after_answer_step, "expect_after_answer_idx"), step_list)
+    add_unique_step((learn_more_about_process_step, "learn_more_about_process_idx"), step_list)
+
+
+  if type_of_response['ak custody case'] or (type_of_response['case in 2 states'] and stage_of_other_case == 'ended with no order'): 
     if domestic_violence:
        add_unique_step((custody_domestic_violence_step, "custody_domestic_violence_idx"), step_list)
     if paternity:
-       add_unique_step((custody_paternity_step, "custody_paternity_idx"), step_list)
+       add_unique_step((paternity_step, "paternity_idx"), step_list)
+  
   if type_of_response.all_false():
     add_unique_step((want_help_to_agree_step, "want_help_to_agree_idx"), step_list)  
     # add_unique_step((parent_agreements_step, "parent_agreements_idx"), step_list)
@@ -199,52 +204,68 @@ code: |
     if is_unique:
       image_list.append(new_image)
 ---
-template: improper_service_step
+template: proper_service_step
 subject: |
-  Step ${ improper_service_idx }: If you were not "served" correctly
+  Step ${ proper_service_idx }:
+  % if type_of_response['improper service']:
+  % if proper_service == 'neither':
+  Move forward with the case or wait
+  % else:
+  Watch out for a Default Judgment
+  % endif
+  % else:
+  Learn about 'proper service'
+  % endif
 content: |
-  If the other parent starts a custody case by filing documents in court, they are supposed to give you a copy of the documents they filed. They should: 
+  If the other parent starts a ${ case_type } case by filing documents in court, they are supposed to give you a copy of the documents they filed. They should: 
   
   *	Use a process server, someone who is licensed by the state of Alaska to deliver legal documents. Or 
   *	Send the documents by certified mail/restricted delivery/return receipt. This means you sign a green postcard receipt when you get the mail.
   
-  This is “proper service.”  After you are served, you have **20 days** to file an **Answer**.  
-  
-  If the other parent gave you the documents another way, you can move forward with the case or wait.    
+  This is “proper service.”  After you are served, you have **20 days** to file an **Answer**.
+
+  % if type_of_response['improper service'] and proper_service == 'neither':
+  If ${ other_party_in_case }  gave you the documents another way, you can move forward with the case, or wait.
   <div class="step-subheading">Move forward</div>
   Even if you were served a different way, you can file an **Answer** if:
     
-    * You agree with ${ other_party_in_case } that there should be a case to get a Parenting Plan and custody order. Or 
+    * You agree with ${ other_party_in_case } that there should be a case to 
+  % if user_need == 'answer custody':
+  get a custody, Parenting Plan and child support order. Or
+  % elif user_need == 'answer divorce':
+  end your marriage. Or
+  % endif  
     * You do not want to risk a **Default Judgment**.
+
+  % if type_of_response.any_true('ak custody case', 'ak divorce case'):
+  See Step ${ answer_idx }: Fill out the forms to answer the complaint and respond within 20 days.
+  % endif  
   
-  If you do not have a copy of the documents they filed, you can ask ${ other_party_in_case } or get a copy from your file at the courthouse.
-  
-  % if improper_service['answer']:
-  See Step ${ answer_idx }: Fill out an Answer form to respond to the complaint (answer form tf).
-  % endif
-    
   <div class="step-subheading">Wait</div>
   If you do not want to do anything unless the other parent serves you properly: 
-  
-    *	Wait for proper service and then file your **Answer**. Or
-    *	Do nothing. If neither you nor the other parent files anything the court will close your case.  You can always look the case up on [CourtView](https://records.courts.alaska.gov/eaccess/home.page.2) to see if anything has been filed or ordered.
-  
-  % if improper_service['answer']:
-  See Step ${ answer_idx }: Fill out an Answer form to respond to the complaint (answer form tf).
+  <ul>
+  <li>Wait for proper service and then file your <strong>Answer</strong>. 
+  % if type_of_response.any_true('ak custody case', 'ak divorce case'):
+  See Step ${ answer_idx }: Fill out the forms to answer the complaint and respond within 20 days. 
   % endif
+  Or</li>
+  <li>Do nothing. If neither you nor ${ other_party_in_case }  files anything, the court will close your case.</li>
+  </ul>
   
+  You can always look the case up on <a href="https://https://records.courts.alaska.gov/eaccess/home.page.2">CourtView</a> to see if anything has been filed or ordered.</li>  
+
+  
+  % elif type_of_response['improper service'] and proper_service != 'neither':  
   <div class="step-subheading">Watch out for a Default Judgment</div>
-  % if proper_service != 'neither':
-  If you were served by either a process server or certified mail, and you do not file an Answer in 20 days, the other parent may ask the court for a **Default Judgment**.
-  % endif
-  A **Default Judgment** is when the court decides your case without hearing from you.
-  
-  % if proper_service == 'neither':
-  Even if you did not get the documents from a proces server or by certified mail, ${ other_party_in_case } could ask for a **Default Judgment**. Then you will have to tell the court you think you were not served the correct way.
+  If you were served by either a process server or certified mail, and you do not file an Answer in 20 days, ${ other_party_in_case } may ask the court for a **Default Judgment**. 
   % endif
   
-  % if improper_service['default']:
-  See Step ${ default_options_idx }: Options when the other parent asks for a default judgment.
+  A **Default Judgment** is when the judge decides your case without hearing from you.
+  
+  If you do not have a copy of the documents ${ other_party_in_case } filed, you can ask them for a copy or get a copy from your file at the courthouse.
+  
+  % if type_of_response['default']:
+  See Step ${ default_options_idx }: Options when ${ other_party_in_case } asks for a default judgment.
   % endif
 ---
 template: answer_jurisdiction_step
@@ -267,10 +288,10 @@ subject: |
   Step ${ answer_jurisdiction_idx }: Check if there is residency & jurisdiction in Alaska
   % endif
   % endif
-  % if type_of_response['case in 2 states']and stage_of_other_case == 'ended with no order':
+  % if type_of_response['case in 2 states'] and stage_of_other_case == 'ended with no order':
   Step ${ answer_jurisdiction_idx }: You can move forward with your Alaska case
   % endif
-  % if type_of_response['case in 2 states']and stage_of_other_case == 'ended with order':
+  % if type_of_response['case in 2 states'] and stage_of_other_case == 'ended with order':
   Step ${ answer_jurisdiction_idx }: Tell the Alaska court the case in the other state is over and the court in the other state 
   % if user_need == 'answer custody':
   issued a custody order
@@ -338,10 +359,10 @@ content: |
   If you think your case may be an exception to these general rules, you can get help from the resources listed in Step ${ get_help_idx }.
   % endif
   % if type_of_response['wrong state'] and type_of_response.all_false('case in 2 states') and not jurisdiction:
-  If you think your ${ case_type } case should be in another state, tell the court you think Alaska is the wrong state:
+  If you think your ${ case_type } case should be in another state, tell the court you think Alaska is the wrong state and ask the Alaska court to dismiss your Alaska case. See:
   
-  * Use your Answer. See Step ${ answer_idx }: Fill out the forms you need to respond to the complaint within 20 days. And
-  * A motion to ask the Alaska court to dismiss your Alaska case. See Step ${ dismiss_idx }: File a motion to dismiss your Alaska case
+  * Step ${ answer_idx }: Fill out the forms to tell the court Alaska is the wrong state and respond within 20 days, and
+  * Step ${ dismiss_idx }: File a motion to dismiss your Alaska case.
   % endif
 
   
@@ -352,12 +373,7 @@ content: |
   % elif user_need == 'answer custody':
   If the case in another state is over and the other court issued a custody order,
   % endif 
-  you can file a "Motion to Dismiss" when you file your Answer in your Alaska case. 
-
-  See Steps:
-
-    * ${ answer_idx }: Fill out the forms to respond to the complaint within 20 days. And
-    * ${ dismiss_idx }: File a motion to dismiss your Alaska case.
+  you can file a "Motion to Dismiss." See Step ${ dismiss_idx }: File a motion to dismiss your Alaska case.
   % elif stage_of_other_case == 'ended with no order':
   % if user_need == 'answer divorce':
   If the case in the other state is over but did not end your marriage, you can move forward with the Alaska case.
@@ -428,7 +444,7 @@ content: |
   If you think Alaska is not the "home state," you can ask the court to dismiss your case.
 
   * 	State your objection in the "Affirmative Defense" section of your "Answer" 
-  * File a "motion" asking the court to dismiss your case.  You can learn about motions by answering more questions.  If you want to save this Action Plan, be sure to download, save, or print it.  Then return to the Guided Assist page and use the Guided Assist search box to find "Asking for an Order in a Divorce Case When the Issue Can't Wait for the Court's Final Decision (Filing a Motion) and Responding to a Motion."
+  * File a "motion" asking the court to dismiss your case.  You can learn about motions by answering more questions.  If you want to save this Action Plan, be sure to download, save, or print it.  Then return to the Guided Assist page and use the Guided Assist search box to find [Asking for an Order in a Divorce Case When the Issue Can't Wait for the Court's Final Decision (Filing a Motion)](https://docassemble.akcourts.gov/start/FilingAMotion) and Responding to a Motion."
   * Check the box at the beginning of the "Counterclaims" section that says, "I have stated above that the case should be dismissed because the Alaska court does not have jurisdiction over the child(ren)."
 
   If you have any questions about whether Alaska is the correct place for your case or you want to ask the court to dismiss your case, you may want to talk to a lawyer. 
@@ -439,8 +455,8 @@ subject: |
   Step ${ aka2j_jurisdiction_idx }: Make sure that the Alaska court has the authority to change the order (from changing a divorce/custody order interview)
 content: |
   * A court must have the authority called jurisdiction to issue an order about a custody or parenting plan or a child support order.
-  * Generally, only the court in the state where the child has lived for the last 6 months can make decisions, enter a parenting plan, or order child support.  This is called the child’s "home state."
-  * Jurisdiction can be very complicated.  For example, if a baby is less than 6 months old and has moved between states, there may not be a “home state.”  This is one example of an exception when the Alaska court may be able to decide issues about a child that hasn’t lived here for 6 months. [Talking to a lawyer](https://courts.alaska.gov/shc/shclawyer.htm) can help you decide which is the best state for your case.
+  * Generally, only the court in the state where the child has lived for the last 6 months can make decisions, enter a parenting plan, or order child support.  This is called the child's "home state."
+  * Jurisdiction can be very complicated.  For example, if a baby is less than 6 months old and has moved between states, there may not be a “home state.”  This is one example of an exception when the Alaska court may be able to decide issues about a child that hasn't lived here for 6 months. [Talking to a lawyer](https://courts.alaska.gov/shc/shclawyer.htm) can help you decide which is the best state for your case.
 ---
 template: decide_court_step
 subject: |
@@ -452,7 +468,7 @@ content: |
   Tell the court what you want to happen in your ${ case_type } case.</br>
   See Step ${ answer_idx }: Fill out the forms you need to answer the complaint and respond within 20 days. And</li>
   <li>Ask the other state court to close its case.</br>
-  Talk to a lawyer in the other state or search the internet to learn about that state’s self-help resources and forms.(Links to NCSC court websites, ABA find a laywer, lawhelp.org)</li>
+  Talk to a lawyer in the other state or search the internet to learn about that state's self-help resources and forms.(Links to NCSC court websites, ABA find a laywer, lawhelp.org)</li>
   </ol>
   <div class="step-subheading">If you want your case in the other state</div>
   <ol>
@@ -466,18 +482,18 @@ template: decide_or_dismiss_step
 subject: |
   Step ${ decide_or_dismiss_idx }: 
   % if type_of_response['case in 2 states'] and stage_of_other_case == 'still going':
-  <Decide which court you want to hear your case(which court tf)
+  Decide which court you want to hear your case
   % else:
-  File a motion to dismiss your Alaska case (motion to dismiss tf decide or dismiss step)
+  File a motion to dismiss your Alaska case
   % endif 
 content: |
   % if type_of_response['case in 2 states'] and stage_of_other_case == 'still going':
   div class="step-subheading">Check if the Alaska courts have Jurisdiction</div>
-  If you and the other parent have open custody cases in two states, one of the courts will close their case.  To decide the correct state for your case, the courts will look at which court has the authority, called “jurisdiction” to decide the case.  Generally, only the court in the state where the child has lived for the last 6 months has jurisdiction to make decisions, enter a parenting plan, or order child support.  This is called the child’s "home state."
+  If you and the other parent have open custody cases in two states, one of the courts will close their case.  To decide the correct state for your case, the courts will look at which court has the authority, called “jurisdiction” to decide the case.  Generally, only the court in the state where the child has lived for the last 6 months has jurisdiction to make decisions, enter a parenting plan, or order child support.  This is called the child's "home state."
 
-  Jurisdiction can be very complicated. For example, if a baby is less than 6 months old and has moved between states, there may not be a “home state.” This is one example of an exception when the Alaska court may be able to decide issues about a child that hasn’t lived here for 6 months.
+  Jurisdiction can be very complicated. For example, if a baby is less than 6 months old and has moved between states, there may not be a “home state.” This is one example of an exception when the Alaska court may be able to decide issues about a child that hasn't lived here for 6 months.
   
-  If you and the other parent disagree about which state, the courts will decide after hearing both side’s arguments.
+  If you and the other parent disagree about which state, the courts will decide after hearing both side's arguments.
 
   <div class="step-subheading">Take steps based on which court you want to continue with the case</div>
   **If you want to have your case in Alaska**
@@ -485,7 +501,7 @@ content: |
     1.	Fill out and file your Answer
       *	Fill out and file your Answer form and tell the court what you want to happen in the divorce
     2.	Ask the other state court to close its case
-      *	You will have to ask the other state court to close its case.  Talk to a lawyer in the other state or search the internet to learn about that state’s self-help resources and forms.
+      *	You will have to ask the other state court to close its case.  Talk to a lawyer in the other state or search the internet to learn about that state's self-help resources and forms.
   **If you want your case in the other state**
   % endif
   1.	Tell the Alaska court about the other case in your answer
@@ -512,118 +528,137 @@ template: default_options_step
 subject: |
   Step ${ default_options_idx }: Options when the other parent asks for a default judgment
 content: |
-  % if not type_of_response['improper service']:
-  <div class="step-subheading">Service</div>
-  If the other parent starts a custody case by filing documents in court, they are supposed to give you a copy of the documents they filed by: 
-  
-    * process server, or
-    * sending it by certified mail/restricted delivery/return receipt (this means you sign the green postcard when you get the mail).
-    
-    This is called “serving you.” After you are served, you have **20 days** to file an **Answer**.
-  % endif # not type_of_response['improper service']
   <div class="step-subheading">Default judgment</div>
+  If you do not file your Answer within 20 days, the other parent can ask for a **Default Judgment**, which means the court will decide the case without hearing your side of the story. There are 3 steps to get a **Default Judgment**:
     
-  If you do not file your Answer within 20 days, the other parent can ask for a **Default Judgment** which means the court will decide the case without hearing your side of the story. There are 3 steps to get a **Default Judgment**:
-    
-    1. The other parent files a **Default Application** and gives you a copy by mailing it or by hand delivery.
-    2. The Clerk of Court enters an **Entry of Default** and sets a date and time for a “default hearing.”
-    3. The Judge holds the “default hearing” and may enter the **Default Judgment** order ending the case without hearing from you. 
+  1. The other parent files a **Default Application** and gives you a copy by mailing it or by hand delivery.
+  2. The Clerk of Court enters an **Entry of Default** and sets a date and time for a “default hearing.”
+  3. The Judge holds the “default hearing” and may enter the **Default Judgment** order ending the case without hearing from you. 
     
   % if military:
   <div class="step-subheading">Military Protections</div>
-  Under the Servicemembers Civil Relief Act, you may have some protections against default judgment if the case is filed while you were on active duty. You can learn more about the [Servicemembers Civil Relief Act](https://www.militaryonesource.mil/financial-legal/personal-finance/servicemembers-civil-relief-act/) on the federal website, [Military OneSource](https://www.militaryonesource.mil/).
+  Under the **Servicemembers Civil Relief Act**, you may have some protections against default judgment if the case is filed while you were on active duty. You can learn more about the [Servicemembers Civil Relief Act](https://www.militaryonesource.mil/financial-legal/personal-finance/servicemembers-civil-relief-act/) on the federal website, [Military OneSource](https://www.militaryonesource.mil/).
   
-  If the Servicemembers Civil Relief Act does not apply to your case to stop the default judgment, you have other options.  
-  % endif # military
+  If the **Servicemembers Civil Relief Act** does not apply to your case to stop the default judgment, you have other options.  
+  % endif 
   
-    If the court has a default hearing and enters a default judgment, the only way to undo it is a **Motion for Reconsideration**, if the default judgment was in the last 10 days, or a **Motion and Affidavit to Set Aside the Judgment or Order**. In both motions, you tell the court why it should undo the judgment even though you did not respond to the case.
- 
-  % if type_of_response['improper service'] or (type_of_response['default'] and stage_of_default in('application filed', 'hearing scheduled')):
-  % if military:
-  <div class="step-subheading">Other options if ${ other_party_in_case } files for default judgment</div>
-  % else:
-  <div class="step-subheading">Options if ${ other_party_in_case } files for default judgment</div>
+  % if stage_of_default == 'judgment entered': 
+  <div class="step-subheading">Ask the court to set aside the default judgment</div>
+  If the court has a default hearing and enters a default judgment, the only way to undo it is a **Motion for Reconsideration**, if the default judgment was in the last 10 days, or a **Motion and Affidavit to Set Aside the Judgment or Order**. In both motions, you tell the court why it should undo the judgment even though you did not respond to the case.
+
+  There are specific reasons that a judgment can be set aside, and it must be done within a “reasonable time.” In some cases, it must be within 1 year.
+
+  Read more about [Motions to Set Aside](http://www.courts.alaska.gov/shc/family/after-judgment.htm#set-aside).
+
+  Fill out and file:
+
+  * **Motion and Affidavit to Set Aside the Judgment or Order, SHC-1548** [Word](http://www.courts.alaska.gov/shc/family/docs/shc-1548.doc) | [PDF](http://www.courts.alaska.gov/shc/family/docs/shc-1548n.pdf)
+  * **Proposed Order on Motion, SHC-130** [Word](http://www.courts.alaska.gov/shc/family/docs/shc-1302.doc) | [PDF](http://www.courts.alaska.gov/shc/family/docs/shc-130n.pdf)
+  
+  % if final_order_date_within_10_days:
+  See Step ${ learn_reconsider_idx }: Learn about Motions to Reconsider
+  % elif final_order_date_more_than_10_days:
+  Step ${ learn_set_aside_idx }: Learn about the Motion to Set Aside Judgment or Order
+  % elif (defined('final_order_period') and guess_final_order_date == 'unknown'):
+  See:
+  
+    * Step ${ learn_reconsider_idx }: Learn about Motions to Reconsider and
+    * Step ${ learn_set_aside_idx }: Learn about the Motion to Set Aside Judgment or Order
   % endif
+  % endif
+
+  % if stage_of_default in('application filed', 'hearing scheduled'):
+  % if military:
+  <div class="step-subheading">Other options</div>
+  % else:
+  <div class="step-subheading">Your options</div>
+  % endif
+  
   % if proper_service == 'neither':
-  If the other parent filed for default judgment, it means the other parent told the court you **were** served the correct way.  If you think you were not, you have 2 options:
+  If ${ other_party_in_case } filed for default judgment, it means they told the court you **were** served the correct way. If you think you were not, you have 2 options:
   
   **1. Tell the court you were not served the correct way**
   
   If you think you were not served the correct way and you want the court to dismiss the case, you can fill out and file a “motion” that tells the court what you want to happen:
   
-  * Write the title, “Motion to Dismiss for Failure to Correctly Serve the Complaint”.
-  *  Explain that:
+    * Write the title, “Motion to Dismiss for Failure to Correctly Serve the Complaint.”
+    * Explain that:
+        * capitalize(other_party_in_case) did not serve you one of the correct ways. And 
+        * You want the case dismissed. 
 
-      * the other parent did not serve you one of the correct ways. and 
-      * You want the case dismissed.  
-  Give ${ other_party_in_case } a copy of every document you file with the court. You can use regular mail or deliver it by hand. 
-  
-  Then return to the Guided Assist page and use the Guided Assist search box to find "Asking for an Order in a Divorce Case When the Issue Can’t Wait for the Court’s Final Decision (Filing a Motion) and Responding to a Motion."
-  
   **2. Go forward with the case.** 
   
   You can ask the court to move ahead with the case, even if you were not served the correct way.
   
-  If you want to court to hear your side of the story, file an **Answer** and ask the court not to enter an **Entry of Default** or set a default hearing.
-  % endif # proper_service == 'neither'
-  % if proper_service in('process server', 'return receipt mail'):
-  <div class="step-subheading">Tell the court your side of the story</div>
-  % endif # proper_service in('process server', 'return receipt mail')
-  
-    * Fill out and file an **Answer**. 
-  
-  % if type_of_response['default'] or (type_of_response['improper service'] and improper_service == 'answer'):
-  See Step { answer_idx }: Fill out an **Answer form** to respond to the complaint (answer form tf).
+  If you want the court to hear your side of the story, file an **Answer** and ask the court
+  % if stage_of_default == 'application filed':
+  not to enter an **Entry of Default** or set a default hearing
+  % elif stage_of_default == 'hearing scheduled':
+  to undo the **Entry of Default** and accept your Answer even though it is late
+  % endif
+  .
   % endif
   
-  Learn about filing an **Answer**. See the court's web page [Responding to a Complaint Served on You](https://courts.alaska.gov/shc/family/answer.htm).
-
-  % if type_of_response['improper service'] or (type_of_response['default'] and stage_of_default == 'application filed'):
+  % if proper_service in('server to me', 'server to responsible person', 'mail'):
+  **Tell the court your side of the story**
+  % endif
   
-    *	Fill out and file a “motion."
-      
-      *	Title it "Motion and Affidavit to Accept Late Filed Answer,"
-      *	Ask the court to accept your **Answer** even though it is late. And
-      *	Ask the court to not enter an **Entry of Default**.
-      
-  See Asking for an Order in a Divorce Case When the Issue Can’t Wait for the Court’s Final Decision (Filing a Motion)”
-  % elif type_of_response['default'] and stage_of_default == 'hearing scheduled':
+    * Fill out and file an **Answer**.
+  % if type_of_response.all_false('ak custody case', 'ak divorce case'):
+  <br>If you need information about filling out your Answer:
+      * Start over and check the box, 
+  % if user_need == 'answer custody':
+  “The other parent started a custody case and I want to respond.” And
+  % elif user_need == 'answer divorce':
+  “My spouse started a court case to end our marriage and I want to respond.” And
+  % endif 
+  % elif type_of_response.any_true('ak custody case','ak divorce case'):
+     * See Step ${ answer_idx }: Fill out an Answer form to respond to the complaint.
+  % endif
+      * Learn about filing an Answer. See [Responding to a Complaint Served on You](http://courts.alaska.gov/shc/family/answer.htm).
   
-    * Fill out and file **Motion and Affidavit to Set Aside Entry of Default and Accept Late Filed Answer, SHC-410** Word | PDF.  This motion asks the court to undo the **Entry of Default** and to accept your **Answer** even though it is late.
+  
+  % if stage_of_default == 'application filed':
+    * Fill out and file a “motion."
+      * Title it "Motion and Affidavit to Accept Late Filed Answer,"
+      * Ask the court to accept your Answer even though it is late. And
+      * Ask the court not to enter an **Entry of Default**.
+  
+    See the Court Guide: [Asking for an Order in a Divorce Case When the Issue Can't Wait for the Court's Final Decision (Filing a Motion)](https://docassemble.akcourts.gov/start/FilingAMotion)
+  
+  % elif stage_of_default == 'hearing scheduled':
+    * Fill out and file **Motion and Affidavit to Set Aside Entry of Default and Accept Late Filed Answer, SHC-410** [Word](http://courts.alaska.gov/shc/family/docs/shc-410.doc) | [PDF](http://courts.alaska.gov/shc/family/docs/shc-410n.pdf). This motion asks the court to undo the **Entry of Default** and to accept your **Answer** even though it is late.
     * Fill in your contact information at the top.
     * Fill in the rest of the top of the page to match the information and case number on the Complaint and Summons.
     * Explain why you did not file your **Answer** by the 20-day deadline.
     * Sign in front of a notary, who will need to see a picture ID. Court staff can notarize your signature for free.
-  % endif # (type_of_response['improper service'] or (type_of_response['default'] and stage_of_default == 'application filed')) elif type_of_response['default'] and stage_of_default == 'hearing scheduled'
-  % endif #type_of_response['improper service'] or (type_of_response['default'] and stage_of_default in('application filed', 'hearing scheduled'))
+  % endif  
+  % endif
+  Give ${ other_party_in_case } a copy of every document you file with the court. You can use regular mail or deliver it by hand.
+  % if type_of_response.any_true('ak custody case', 'ak divorce case'):
+   See Step ${ serve_motion_idx }: Serve ${ other_party_in_case }
+  % endif 
   
-    *	Give the other parent a copy.  You have to give the other parent a copy of every document you file with the court.  You can use regular mail or deliver it by hand.
-    
-  % if type_of_response['improper service'] or (type_of_response['default'] and stage_of_default in('application filed', 'hearing scheduled')):
-  % if proper_service in('process server', 'return receipt mail'):
-  <div class="step-subheading">Go forward with the case without telling the court your side of the story</div>
-  % endif # proper_service == 'neither':
+  % if stage_of_default in('application filed', 'hearing scheduled'):
+  % if proper_service in('server to me', 'server to responsible person', 'mail'):
+  **Go forward with the case without telling the court your side of the story**
+  % endif
   
-    If you are okay with the judge deciding the case based on the other parent’s Complaint without hearing from you, you do not need to do anything.  But once the judge decides, it is much harder to undo it.  If you file an **Answer**, the judge will consider what you want and there may be resources for you and ${ other_party_in_case } to work out any disagreements through mediation or a settlement conference.
-  % endif # type_of_response['improper service'] or (type_of_response['default'] and stage_of_default in('application filed', 'hearing scheduled'))
-    
-   % if type_of_response['improper service'] or (type_of_response['default'] and stage_of_default == 'judgment entered'):
-  If the court has a default hearing and enters a default judgment,
-  % if user_need == 'respond to custody':
-    See the Guided Assistant Interview [Changing your custody or Parenting Plan order](https://docassemble.akcourts.gov/start/ChangingChildCustody)  
-  % elif user_need == 'respond to divorce':
-    See the Guided Assistant Interview [Changing your divorce order](https://docassemble.akcourts.gov/start/ChangingDivorce)  
-  % endif # user_need
-  % endif # type_of_response['improper service'] or (type_of_response['default'] and stage_of_default == 'judgment entered)
+    If you are okay with the judge deciding the case based on the other parent's Complaint without hearing from you, you do not need to do anything. 
+  
+  But once the judge decides, it is much harder to undo it. 
+  
+  If you file an **Answer**, the judge will consider what you want, and there may be resources for you and ${ other_party_in_case } to work out any disagreements through mediation or a settlement conference.
+  % endif
 ---
-comment: |
-  1 replace Legal Navigator step heading "Fill out the forms you need to answer and respond to the complaint (answer form tf)". See convention for Answer
 template: answer_step
 subject: |
   % if type_of_response['wrong state'] and not jurisdiction:
-  Step ${ answer_idx }: Fill out the forms you need to tell the court Alaska is the wrong state and respond within 20 days
+  Step ${ answer_idx }: Fill out the forms to tell the court Alaska is the wrong state and respond within 20 days
+  % elif type_of_response['default']:
+  Step ${ answer_idx }: Fill out the forms to answer the complaint
   % else:
-  Step ${ answer_idx }: Fill out the forms you need to answer the complaint and respond within 20 days
+  Step ${ answer_idx }: Fill out the forms to answer the complaint and respond within 20 days
   % endif
 content: |
   You have 20 days from the date you get the complaint to:
@@ -691,7 +726,7 @@ content: |
   <ul>
   <li>Look at each paragraph in ${other_party_in_case}'s complaint and decide if you agree, disagree or, you are not sure.</li>
   
-  % if (user_need == 'custody' and type_of_response['ak custody case']) or (user_need == 'divorce' and type_of_response['ak divorce case']) or (type_of_response['case in 2 states'] and stage_of_other_case == 'ended with no order'):
+  % if (user_need == 'answer custody' and type_of_response['ak custody case']) or (user_need == 'answer divorce' and type_of_response['ak divorce case']) or (type_of_response['case in 2 states'] and stage_of_other_case == 'ended with no order'):
   % if (case_type == 'custody' or case_type == 'divorce' or (case_type == 'legal separation' and want_legal_separation == 'yes')) and response_to_complaint == 'agree':
   <li>If you agree with what ${other_party_in_case} asked for in their complaint, check the box in this section that says you “agree with all of the statements in the complaint.”</li>
   % elif (case_type == 'custody' or case_type == 'divorce' or (case_type == 'legal separation' and want_legal_separation == 'yes')) and response_to_complaint == 'some': 
@@ -712,7 +747,7 @@ content: |
   </br>If you think Alaska is not the "home state," you can ask the court to dismiss your case.
   <ul>
   <li>Check the box that describes the reason you think Alaska is the wrong state to decide custody of your children.</li>    
-  <li>Check the box that says you are attaching a Motion to Dismiss the Child Custody Claim.</li>
+  <li>Check the box that says you are attaching a <strong>Motion to Dismiss the Child Custody Claim</strong>.</li>
   </ul>
   % endif
   % if user_need == 'divorce' and type_of_response['wrong state'] and not residency:
@@ -765,11 +800,11 @@ content: |
   % if type_of_response['wrong state'] and (not jurisdiction or (user_need == 'answer divorce' and not residency)):
   <ul><li>Check the box at the beginning of this section that says, "I have stated above that the case should be dismissed because the Alaska court does not have jurisdiction over 
   % if user_need == 'answer custody':
-  the child(ren).
+  the child(ren)."
   % elif user_need == 'answer divorce' and minor_children:
-  the marital estate and/or child custody.
+  the marital estate and/or child custody."
   % elif user_need == 'answer divorce' and not minor_children:
-  the marital estate.
+  the marital estate."
   % endif
   </li>
   </ul>
@@ -806,15 +841,15 @@ content: |
   </ul>
   
   % if user_need == 'answer custody' or (user_need == 'divorce' and minor_children):
-  **Child Custody Jurisdiction Affidavit, DR-150** [[Fill-In PDF](<a href="https://public.courts.alaska.gov/web/forms/docs/dr-150.pdf)]</br>
-  Wait to sign this affidavit until you can sign in front of a notary or file the form at court.
+  <strong>Child Custody Jurisdiction Affidavit, DR-150</strong>* [[Fill-In PDF](<a href="https://public.courts.alaska.gov/web/forms/docs/dr-150.pdf)]</br>
+  <strong>Wait</strong> to sign this affidavit until you can sign in front of a notary or file the form at court.
   
-  **Child Support Guidelines Affidavit, DR-305** [[Fill-In PDF](https://public.courts.alaska.gov/web/forms/docs/dr-305.pdf)]
+  <strong>Child Support Guidelines Affidavit, DR-305</strong> [[Fill-In PDF](https://public.courts.alaska.gov/web/forms/docs/dr-305.pdf)]
   
     *	See [How to Fill out the Child Support Guidelines Affidavit](http://courts.alaska.gov/shc/family/docs/shc-dr305f-sample.pdf) 
     to help you fill in this form
-    *	Attach your most recent tax return and pay stubs to the Child Support Guidelines Affidavit.
-    *	Wait to sign this affidavit until you can sign in front of a notary or file the form at court.
+    *	Attach your most recent tax return and pay stubs to the **Child Support Guidelines Affidavit**.
+    * **Wait** to sign this affidavit until you can sign in front of a notary or file the form at court.
 
   % endif
   <div class="step-subheading">Wait</div>
@@ -826,7 +861,18 @@ content: |
   <li>If you cannot get to a notary or someone with the power to take oaths, you can "self-certify." Use:</br>
   <strong>Self-Certification (No Notary Available), TF-835</strong> [<a href="https://public.courts.alaska.gov/web/forms/docs/tf-835.pdf">Fill-In PDF</a>]</li>
   </ul>
+  % if (user_need == 'answer custody' and type_of_response['ak custody case']) or (user_need == 'answer divorce' and type_of_response['ak divorce case']) or (type_of_response['case in 2 states'] and stage_of_other_case == 'ended with no order'):
+  % if response_to_complaint in('agree','some') or (response_to_complaint == 'none' and want_help_to_agree):
+  <div class="step-subheading">Forms to use if you and ${ other_party_in_case } write out your agreement</div>
+  If you want to work with the other parent to write out the agreement and both sign it, use:
 
+  * **Parenting Plan Agreement & Order, SHC-1128** [Word](https://courts.alaska.gov/shc/family/docs/shc-110.doc) | [PDF](https://courts.alaska.gov/shc/family/docs/shc-1128n.pdf)<br>
+  Do **not** sign the Order section)
+  * **Joint Motion to Put Settlement on the Record, SHC-1063** [Word](https://courts.alaska.gov/shc/family/docs/shc-1063.doc) | [PDF](https://courts.alaska.gov/shc/family/docs/shc-1063n.pdf)
+  * **Custody Findings of Fact & Conclusions of Law, DR-460** [[Fill-In PDF](https://public.courts.alaska.gov/web/forms/docs/dr-460.pdf)]
+  * **Custody Judgment, DR-465** [[Fill-In PDF](https://public.courts.alaska.gov/web/forms/docs/dr-465.pdf)]
+  % endif
+  % endif
 
 
   
@@ -835,11 +881,23 @@ template: dismiss_step
 subject: |
   Step ${ dismiss_idx }: 
   % if type_of_response.any_true('wrong state','case in 2 states'):
-  File a motion to dismiss your Alaska case (motion to dismiss tf dismiss step)
+  File a motion to dismiss your Alaska case
   % else:
   Fill out a Motion to Dismiss
   % endif 
 content: |
+  % if user_need == 'answer divorce' and type_of_response['case in 2 states'] and stage_of_other_case == 'ended with order':
+  If the case in the other state is over and the other court ended your marriage, you can file a Motion to Dismiss your Alaska case.
+  % if minor_children:
+  File a copy of the custody order and your divorce decree from the other state, and any other documents that support your request.
+  % else:
+  File a copy of your divorce decree from the other state and any other documents that support your request.
+  % endif
+  % elif user_need == 'answer custody' and type_of_response['case in 2 states'] and stage_of_other_case == 'ended with order':
+  If the case in another state is over and the other court issued an order about custody, a parenting plan, or a child support order, you can file a Motion to Dismiss your Alaska case.
+  
+  File a copy of the custody order from the other state, and any other documents that support your request.
+  % endif
   <ol>
   <li>Fill out a Motion to Dismiss</br>
    Use: 
@@ -879,11 +937,11 @@ subject: |
 content: |
   % if type_of_response['case in 2 states'] and stage_of_other_case == 'still going':
   div class="step-subheading">Check if the Alaska courts have Jurisdiction</div>
-  If you and the other parent have open custody cases in two states, one of the courts will close their case.  To decide the correct state for your case, the courts will look at which court has the authority, called “jurisdiction” to decide the case.  Generally, only the court in the state where the child has lived for the last 6 months has jurisdiction to make decisions, enter a parenting plan, or order child support.  This is called the child’s "home state."
+  If you and the other parent have open custody cases in two states, one of the courts will close their case.  To decide the correct state for your case, the courts will look at which court has the authority, called “jurisdiction” to decide the case.  Generally, only the court in the state where the child has lived for the last 6 months has jurisdiction to make decisions, enter a parenting plan, or order child support.  This is called the child's "home state."
 
-  Jurisdiction can be very complicated. For example, if a baby is less than 6 months old and has moved between states, there may not be a “home state.” This is one example of an exception when the Alaska court may be able to decide issues about a child that hasn’t lived here for 6 months.
+  Jurisdiction can be very complicated. For example, if a baby is less than 6 months old and has moved between states, there may not be a “home state.” This is one example of an exception when the Alaska court may be able to decide issues about a child that hasn't lived here for 6 months.
   
-  If you and the other parent disagree about which state, the courts will decide after hearing both side’s arguments.
+  If you and the other parent disagree about which state, the courts will decide after hearing both side's arguments.
 
   <div class="step-subheading">Take steps based on which court you want to continue with the case</div>
   **If you want to have your case in Alaska**
@@ -891,7 +949,7 @@ content: |
     1.	Fill out and file your Answer
       *	Fill out and file your Answer form and tell the court what you want to happen in the divorce
     2.	Ask the other state court to close its case
-      *	You will have to ask the other state court to close its case.  Talk to a lawyer in the other state or search the internet to learn about that state’s self-help resources and forms.
+      *	You will have to ask the other state court to close its case.  Talk to a lawyer in the other state or search the internet to learn about that state's self-help resources and forms.
   **If you want your case in the other state**
   % endif
   1.	Tell the Alaska court about the other case in your answer
@@ -913,47 +971,6 @@ content: |
    * It is important to pay attention to what is happening in both cases until you know which state will decide the case.
    * Jurisdiction can be very complicated.  Talking to a lawyer can help you decide which is the best state for your case.
   % endif
----
-template: aka2j_file_answer_step
-subject: |
-  Step ${ aka2j_file_answer_idx }: File the originals (file tf)
-content: |
-  You have **20 days** to file and serve ${ other_party_in_case } your **Answer**, **Affidavits**, **Information Sheet**
-  % if (type_of_response['wrong state'] and not jurisdiction) or (type_of_response['case in 2 states'] and stage_of_other_case == 'still going') or (type_of_response['default'] and proper_service == 'neither'):
-  , **Motion to Dismiss**,
-  % endif
-  and other documents.
-  
-  1.	Make 2 copies of everything you are going to give the court.
-  2.	Give the original version of your documents to the court that is listed on the top of the complaint.</br>
-  Find the address on the court's [Court Directory](https://courts.alaska.gov/courtdir/index.htm#trial) web page and:
-    <ul><li>Give the documents to the clerk at the court yourself.</li>
-   <li>Mail the documents by first-class mail. or</li>
-   <li>Use the court’s <a href="https://courts.alaska.gov/efile">TrueFile eFiling system</a> to send the documents to the court electronically.</li></ul>
-  3.	Keep 1 copy for your own records.
-  4.	Give the 2nd copy to ${ other_party_in_case } on the date and way you wrote on your **Certificate of Service**. Read Step ${ serve_motion_idx }: Serve ${ other_party_in_case }.
----
-template: aka2j_drpo_step
-subject: |
-  Step ${ aka2j_drpo_idx }: Read the "domestic relations procedural order" or "standing order" if the clerk gives you one when you file your case (read drpo tf)
-content: |
-  This is the first order from your judge that sets out the basic rules for you and the other parent to follow during the case.  Violating this order can affect the outcome of your case.  The order usually state you cannot take your children out of Alaska unless the other parent agrees or the court gives permission.
----
-template: aka2j_learn_process_step
-subject: |
-  Step ${ aka2j_learn_process_idx }: Learn more about the process (learn more tf)
-content: |
-  <div class="step-subheading">Read</div>
-  
-    * Flow Chart for Case Process, SHC-185: Word | PDF
-    * The Life of a Case, SHC-180
-  
-  <div class="step-subheading">Watch a Video </div>
-  
-    *	Introduction to Divorce and Custody Cases in Alaska
-    *	Overview and Timeline of the Case
-    *	Find other Alaska Videos: English | Spanish | Tagalog
-    *	Find Alaska Family Law Hearing & Trial Preparation Videos
 ---
 template: want_help_to_agree_step
 subject: |
@@ -1068,7 +1085,9 @@ content: |
 
   You can hire your own private mediator to help resolve any issue in your case. If there was abuse or domestic violence in your relationship, be sure to hire someone with training and experience working with domestic violence. Tell your mediator if you want to bring a support person with you.
   
-  [Read about mediation](https://courts.alaska.gov/mediation)
+  [Read about mediation](https://courts.alaska.gov/mediation).
+  
+  [Find a private mediator](https://www.alaskamediators.org/directory) on the Professional Mediators of  Alaska website. 
   
   % if user_need == 'answer divorce' and (type_of_response['ak divorce case'] or (type_of_response['case in 2 states'] and stage_of_other_case == 'ended with no order')) : 
   <div class='step-subheading'>Settlement Conference</div>
@@ -1107,83 +1126,6 @@ subject: |
 content: |
   <div class="step-subheading">The benefits of reaching an agreement </div>
 ---
-template: aka2j_learn_reconsider_step
-subject: |
-  Step ${ aka2j_learn_reconsider_idx }: aka2j_Learn about Motions to Reconsider
-content: |
-  <p>To ask your judge to reconsider a decision, file a <strong>Motion to Reconsider</strong>. Add period in AKBranding package.</p>
----
-template:  aka2j_fill_reconsider_step
-subject: |
-  Step ${ aka2j_fill_reconsider_idx }:  aka2j_Fill out the Motion to Reconsider forms
-content: |
-  <div class='step-subheading'>Use</div>
----
-template: aka2j_learn_set_aside_step
-subject: |
-  Step ${ aka2j_learn_set_aside_idx }: aka2j_Learn about the Motion to Set Aside Judgment or Order
-content: |
-  <p>A <strong>Motion to Set Aside Judgment or Order</strong> asks the judge to</a></p>
----
-template: aka2j_fill_set_aside_step
-subject: |
-  Step ${ aka2j_fill_set_aside_idx }: aka2j_Fill out forms if you want to file a Motion to Set Aside
-content: |
-  If you decide to file a **Motion to Set Aside** because it fits your case:
----
-template: aka2j_cert_of_service_step
-subject: |
-  Step ${ aka2j_cert_of_service_idx }: aka2j_Fill out the Certificate of Service
-content: |
-  You must give ${ other_party_in_case } 1 copy of everything you file with the court. This is called “service.”
----
-template: aka2j_file_step
-subject: |
-  Step ${ aka2j_file_idx }: 
-  % if defined('file_step_heading'):
-  ${ file_step_heading }
-  % else:
-  aka2j_File your motion forms
-  % endif
-content: |
-  ${ file_motion_to_set_aside }
-  ${ file_motion_to_enforce }
-  Make 2 copies of everything you are going to give the court.
----
-template: aka2j_expect_reconsider_step
-subject: |
-  Step ${ aka2j_expect_reconsider_idx }: aka2j_What to expect after you file a Motion to Reconsider 
-content: |
-  <p>A <strong>Motion to Reconsider</strong> is different from other motions.</p>
----
-template: aka2j_expect_after_motion_step
-subject: |
-  Step ${ aka2j_expect_after_motion_idx }: aka2j_What to expect after you file a ${ motion_type }
-content: |
-  % if user_need in('answer custody', 'answer divorce') and type_of_response['case in 2 states']and stage_of_other_case == 'still going':
-  
-  Every case is different, but sometimes it is clear only one court has jurisdiction over the case. When this happens, one state court may close its case.
-  
-  If it is not clear, the Alaska court will often hold a hearing and call the other court to talk about which case will move forward.
-  
-  Pay attention to what is happening in both cases until you know which state will decide the case.
-  
-  Jurisdiction can be very complicated. Talking to a lawyer can help you decide which is the best state for your case.
-  % endif  
-  
-  See [GitHub Motion to Dismiss issue #30](https://github.com/A2JatAKCourts/docassemble-DivorceIssues/issues/30)
-  <div class='step-subheading'>${ capitalize(other_party_in_case) } may file a response or "opposition"</div>
-  
-  If ${ other_party_in_case } files a response to your Motion to Dismiss, you can file a reply:
-  
-  * Watch 2 videos:
-      * [Motions Part 3: Preparing a Reply](https://youtube.com/watch?v=egoBeRFB_Uw), and
-      * [Motions Part 4: Mailings and Deadlines](https://youtu.be/YQvG7GEGeoo)
-  * Read: [How do I reply to an opposition?](https://courts.alaska.gov/shc/family/motions.htm#reply) on the court's website
-  * Use **Reply to Opposition to Motion, SHC-1305** [Word](https://courts.alaska.gov/shc/family/docs/shc-1305.doc) | [PDF](https://courts.alaska.gov/shc/family/docs/shc-1305n.pdf).</br>
-  Remember to fill out the Certificate of Service that tells the court how and when you deliver your reply to ${ other_party_in_case }.
- 
----
 template: aka2j_uncontested_custody_forms_step
 subject: |
   Step ${ aka2j_uncontested_custody_forms_idx }: aka2j_Fill out the forms to start your uncontested custody case 
@@ -1197,20 +1139,153 @@ template: custody_domestic_violence_step
 subject: |
   Step ${ custody_domestic_violence_idx }:
   % if type_of_response.any_true():
-  % if user_need == 'answer custody' and type_of_response['ak custody case'] and (response_to_complaint in('agree', 'some') or (response_to_complaint == 'none' and agreement_documents)):
-  Abuse or domestic violence resources and reaching an agreement(dv agree tf)
+  % if ((user_need == 'answer custody' and type_of_response['ak custody case']) or (user_need == 'answer divorce' and type_of_response['ak divorce case']) or (type_of_response['case in 2 states'] and stage_of_case == 'ended with no order')) and (response_to_complaint in('agree', 'some') or (response_to_complaint == 'none' and want_help_to_agree)):
+  Abuse or domestic violence resources and reaching an agreement
   % else:
-  Abuse or domestic violence and parenting(dv contested tf)
+  Abuse or domestic violence and parenting
   % endif 
   % endif 
 content: |
   compare this step with AKA2J domestic_violence_step  headings and content.
+  [Comparing domestic violence in answering divorce google sheet](https://docs.google.com/spreadsheets/d/1AUnHuheq_VsuTufg75G9cM5TGnd3OAa7-jd-RzIwnA4/edit?usp=sharing), tab for asking cust div and 
   <div class="step-subheading">If you are in immediate danger, call 911</div>
+
+  % if user_need == 'custody':
+  People who have experienced domestic violence can be at greater risk when they start a court case.  
+  % elif user_need == 'divorce':
+  People who have experienced domestic violence can be at greater risk when they separate from their spouse or start a court case to end their marriage.  
+  % elif user_need in('answer custody', 'answer divorce'):
+  People who have experienced domestic violence can be at greater risk during a court case.  
+  % endif
+  During this time, safety is very important. The dynamics in a relationship with domestic violence may also cause people to feel pressured to agree to something they do not want. If this is your situation, these resources may help:
+  
+  * Find a domestic violence program in your area to learn about the services they offer (counseling, financial assistance, housing and safe shelter, resources for children, and help with court)
+  * You can get information about asking the court for a protective order by answering more questions. If you want to save this Action Plan, be sure to download, save, or print it. then return to the Guided Assist page and use the Guided Assist search box to find "Protective Orders.”
+  * See if you qualify for legal assistance through your local domestic violence program or a free lawyer if you are a victim of domestic violence from Alaska Legal Services Corporation"
+
+  
+  % if ((user_need == 'answer custody' and type_of_response['ak custody case']) or (user_need == 'answer divorce' and type_of_response['ak divorce case']) or (type_of_response['case in 2 states'] and stage_of_case == 'ended with no order')) and (response_to_complaint in('agree', 'some') or (response_to_complaint == 'none' and want_help_to_agree)):
+    % if user_need == 'answer divorce':
+      However, some people in a marriage with domestic violence are comfortable reaching an agreement about 
+      % if minor_children:
+        a parenting plan and 
+      % endif 
+        dividing marital property and debt for a variety of reasons.
+  
+        Sometimes domestic violence does not make either spouse uncomfortable or afraid to ask for what they want in the 
+      % if minor_children:
+        parenting plan or 
+        property & debt division, 
+      % endif
+      If the domestic violence does make a spouse uncomfortable or afraid, provisions are used to make the process of trying to reach an agreement feel safer (having a support person present, having a mediator or a trusted third person help with discussions, not meeting in-person, meeting in different rooms, or talking about an agreement through email, text or telephone).
+
+      Sometimes, one spouse's main goal is to finish the case and be done in a safe manner so they are willing to give up some things in the agreement that they may be entitled to under the law.
+    % endif 
+  
+    % if user_need == 'answer custody':
+    However, some parents in a relationship that includes domestic violence are comfortable reaching an agreement about a parenting plan for a variety of reasons.
+    
+    Sometimes domestic violence does not make either parent uncomfortable or afraid to ask for what they want in the parenting plan.
+    If the domestic violence does make a parent uncomfortable or afraid, provisions are used to make the process of trying to reach an agreement feel safer (having a support person present, having a mediator or a trusted third person help with discussions, not meeting in-person, meeting in different rooms, or talking about an agreement through email, text or telephone).
+    
+    Sometimes, one parent's main goal is to finish the case and be done in a safe manner so they are willing to give up some things in the agreement that they may be entitled to under the law.
+    % endif 
+  
+  You can decide if you are comfortable trying to reach an agreement with ${ other_party_in_case } based on the facts and circumstances of your case.
+    % if user_need in('custody', 'answer custody') or (user_need in('divorce', 'answer divorce') and minor_children):
+    As explained below, if you want to try to reach an agreement about the parenting plan, your options may be limited if there has been domestic violence.
+    % endif
+  <div class='step-subheading'>Your Parenting Plan agreement may be limited if there is domestic violence</div>
+  % else:
+    % if user_need in('custody', 'answer custody') or (user_need in('divorce', 'answer divorce') and minor_children):
+    <div class='step-subheading'>How domestic violence affects custody</div>
+    % endif
+  % endif
+
+  % if user_need in('custody', 'answer custody') or (user_need in('divorce', 'answer divorce') and minor_children):  
+  The law presumes that a parent with a "history of domestic violence" not get custody or unsupervised visitation unless he or she meets certain requirements. These may include completing a batterer's intervention or substance abuse treatment program.
+
+
+  A "history of domestic violence" is defined by the law as either one incident of domestic violence that caused serious physical injury, or more than one incident. The parent's domestic violence behavior needs to fit under one of the domestic violence crimes in the law. There does not have to be a protective order or criminal case for the court to find a parent has a history of domestic violence. The court can find domestic violence based on one parent's testimony.
+  % endif
+  
+  % if ((user_need == 'answer custody' and type_of_response['ak custody case']) or (user_need == 'answer divorce' and type_of_response['ak divorce case']) or (type_of_response['case in 2 states'] and stage_of_case == 'ended with no order')) and (response_to_complaint in('agree', 'some') or (response_to_complaint == 'none' and want_help_to_agree)):
+    % if user_need in('custody', 'answer custody') or (user_need in('divorce', 'answer divorce') and minor_children):
+    <div class='step-subheading'>Considerations if you and ${ other_party_in_case } cannot agree</div>
+    % endif
+  % else:
+    % if user_need in('custody', 'answer custody') or (user_need in('divorce', 'answer divorce') and minor_children):  
+    <div class='step-subheading'>Contact between parent and children</div>
+    % endif 
+  % endif 
+  
+  % if user_need in('custody', 'answer custody') or (user_need in('divorce', 'answer divorce') and minor_children):
+  If you think the other parent should not have any contact with your children you will need to convince the judge that it is in the children's best interest. Generally, it is unusual for a judge in a divorce or custody case to decide that a parent cannot see his or her children. There is research that shows it is important for children to have a relationship with both parents if it can happen in a safe manner. If the judge finds the domestic violence presumption applies, the judge will usually permit supervised contact between the parent and the children while the parent is completing a batterer's intervention or substance abuse treatment program. After the parent finishes the program and any other requirements the judge ordered, the judge may lift the supervision restriction and allow a different parenting schedule.
+  
+  % if ((user_need == 'answer custody' and type_of_response['ak custody case']) or (user_need == 'answer divorce' and type_of_response['ak divorce case']) or (type_of_response['case in 2 states'] and stage_of_case == 'ended with no order')) and (response_to_complaint == 'none' and not want_help_to_agree):
+  div class="step-subheading">Tell the judge your concerns</div>
+  % endif 
+
+  The judge will only know about your domestic violence concerns if you state them in the documents you file and when you talk in court. If you have concerns for the children's safety when in the care of the other parent, or for yourself when interacting with the other parent, describe them to the judge. If the judge is going to allow the other parent to have parenting time (visitation) with the children, you can suggest ways to address your concerns. Some options include:
+  
+    * no drugs or alcohol prior to or during the visits,
+    * drug or alcohol testing and/or treatment,
+    * no overnight visitation,
+    * no excessive discipline or spanking,
+    * no emotional abuse such as cursing at or name calling,
+    * no saying anything bad about you to or in front the children or letting anyone else do it,
+    * no inappropriate exposure to adult activities such as pornography,
+    * exchanges only at public or specified places,
+    * supervised exchanges by a willing and available third party who you trust,
+    * parenting time only occur in a public or specified place,
+    * supervised parenting time with a willing and available third party who you trust, or
+    * no contact between the children and specific individuals you are concerned about.
+  
+  If you think you or your children's health, safety, or liberty would be harmed by providing the information on the **Child Custody Jurisdiction Affidavit, DR-150** to the other parent:
+  
+    * Do not give the other parent a copy of the completed **Child Custody Jurisdiction Affidavit** after you file it with the court. and
+    * File  **Direction to Seal Child Custody Jurisdiction Affidavit**, [DR-151](https://public.courts.alaska.gov/web/forms/docs/dr-151.pdf).
+  % endif
+
 ---
-template: custody_paternity_step
+comment: |
+  compare this step with Starting Custody case paternity_step.
+  Can we combine into AKA2J branding for starting custody, answering custody, answering divorce? Starting divorce case paternity_step is paternity_testing_step and different enough it doesn't make sense to combine.
+template: paternity_step
 subject: |
-  Step ${ custody_paternity_idx }: Learn about paternity
+  Step ${ paternity_idx }: Learn about paternity
 content: |
-  compare this step with AKA2J paternity_step  can we combine?
-  <div class="step-subheading">General paternity information</div>
+  <div class='step-subheading'>General Paternity Information</div>
+  <p>Establishing paternity means legally determining the biological  father of a child, and can make a big difference in a child's health, financial  outlook and sense of identity in knowing who both parents are. Once established, the father's name can be  placed on the child's birth certificate and he has legal and financial  responsibility for the child.  Disestablishing paternity is legally un-naming a man as the child's  biological father.</p>
+  % if user_need in('custody', 'divorce'):
+  <p>When you file your complaint, state that paternity is an issue in section 3D of the complaint.
+  % endif
+  % if user_need == 'answer custody':
+  <div class='step-subheading'>Establishing or disestablishing paternity in your custody case</div>
+  When you file your Answer, state that paternity is an issue in section 4 of the Counterclaims section of the Answer.
+ 
+  You can prove or disprove paternity several ways:</p>
+  <ul>
+    <li> Each  parent signs an affidavit stating the biological father.  Fill out:</li>
+    <ul>
+      <li><strong>Three-Way  Affidavit to Disestablish and Establish Paternity, SHC-151</strong> <a href="http://courts.alaska.gov/shc/family/docs/shc-151.doc">Word</a> | <a href="https://courts.alaska.gov/shc/family/docs/shc-151n.pdf">Fill-in PDF</a>,</li>
+    </ul>
+    <li> The  mother, child, and person who may be the father take a DNA test using a  painless swab inside the cheek. The whole process takes about 15 minutes and  the result is ready within about 3 weeks.  If someone is not cooperating or you want Child Support Services  Division to do the testing, fill out and attach these forms to your Answer:</li>
+    <ul>
+      <li><strong>Motion  &amp; Affidavit for Genetic (DNA) Testing, SHC-1370 </strong><a href="http://www.courts.alaska.gov/shc/family/docs/shc-1370.doc">Word</a> | <a href="http://www.courts.alaska.gov/shc/family/docs/shc-1370n.pdf">PDF</a><strong></strong></li>
+      <li><strong>Order for Genetic (DNA) Testing, SHC-1375</strong> <a href="http://www.courts.alaska.gov/shc/family/docs/shc-1375.doc">Word</a> | <a href="http://www.courts.alaska.gov/shc/family/docs/shc-1375n.pdf">PDF</a></li>
+    </ul>
+    % if user_need in('custody', 'divorce'):
+    <li>You can attach any DNA test results that have already been done to your complaint.</li>
+    % endif
+    % if user_need == 'respond to custody case':
+    <li>The person filing the Complaint attaches any DNA test results that have already been done.</li>
+    % endif
+  </ul>
+  % endif
+
+  <div class='step-subheading'>Change the Birth Certificate</div>
+  If the court decides that the biological father is someone not listed on the birth certificate, you must send a copy of the court order to the  Health Analytics &amp; Vital Records to change the birth certificate. 
+  
+  After the birth certificate is changed, the child is considered &quot;legitimated&quot; and the heir of that father. This means that if the child should be eligible for any medical or financial benefits connected to the father such as health insurance, or benefits based on  military service or being Alaska Native or American Indian. Also, if the father dies, the child will be able to inherit and collect financial or medical benefits that the child may be eligible for such as Social Security Children's  Insurance Benefits or military benefits. If you do not notify Health Analytics &amp; Vital Records to change the birth certificate, the child may miss out on these benefits.
 ---
