@@ -73,6 +73,9 @@ code: |
   distribution_certificate_list.append({'image': distrib_cert_custody_divorce_image, 'text': "Certificate of Distribution shows the date the court sent your order to you."})
   # expect_after_motion is in what to expect step for filing motion for interim order w complaint, or answer/response, cannot use variable in docx template, must insert condition in what to expect step.
   expect_after_motion = ''
+  file_motion_to_set_aside = ''
+  file_motion_to_enforce = ''
+  file_modify_filing_fee = ''
   reply_certificate_list.append({'image': service_cert_reply_image, 'text': "Certificate of Service at the bottom of the Reply form."})
   # motion_type used in expect_after_motion_step "What to expect after you file a ${ motion_type }"
   motion_type = 'motion or Answer'
@@ -125,9 +128,6 @@ code: |
     military
     add_unique_step((proper_service_step, "proper_service_idx"), step_list)
     add_unique_step((default_options_step, "default_options_idx"), step_list)
-    if stage_of_default in('application filed','hearing scheduled'):
-      add_unique_step((answer_step, "answer_idx"), step_list)
-      add_unique_step((dismiss_step, "dismiss_idx"), step_list)
     if stage_of_default == 'judgment entered':
       if final_order_date_within_10_days or (defined('final_order_period') and guess_final_order_date == 'unknown'):
         add_unique_step((learn_reconsider_step, "learn_reconsider_idx"), step_list)
@@ -135,13 +135,11 @@ code: |
       if final_order_date_more_than_10_days or (defined('final_order_period') and guess_final_order_date == 'unknown'):
         add_unique_step((learn_set_aside_step, "learn_set_aside_idx"), step_list)
         add_unique_step((fill_set_aside_step, "fill_set_aside_idx"), step_list)
+      add_unique_image({'image': service_cert_image, 'text': "Certificate of Service"}, images_list)
       add_unique_step((cert_of_service_step, "cert_of_service_idx"), step_list)
-      add_unique_step((file_answer_step, "file_answer_idx"), step_list)
+      add_unique_step((file_motion_step, "file_motion_idx"), step_list)
       add_unique_step((serve_motion_step, "serve_motion_idx"), step_list)
-      if final_order_date_within_10_days or (defined('final_order_period') and guess_final_order_date == 'unknown'):
-        add_unique_step((expect_reconsider_step, "expect_reconsider_idx"), step_list)
-      if final_order_date_more_than_10_days or (defined('final_order_period') and guess_final_order_date == 'unknown'):
-        add_unique_step((expect_after_motion_step, "expect_after_motion_idx"), step_list)
+     
   
   if type_of_response['ak custody case'] or (type_of_response['case in 2 states'] and stage_of_other_case == 'ended with no order'): 
     if response_to_complaint in('agree', 'some') or (response_to_complaint == 'none' and want_help_to_agree):
@@ -151,9 +149,8 @@ code: |
     or (type_of_response['wrong state'] and not jurisdiction and continue_after_jurisdiction) \
     or (type_of_response['case in 2 states'] and stage_of_other_case != 'ended with order'):
     add_unique_step((answer_step, "answer_idx"), step_list)
-    if type_of_response['wrong state'] and not jurisdiction and continue_after_jurisdiction:
+    if (type_of_response['wrong state'] and not jurisdiction and continue_after_jurisdiction) or (type_of_response['default'] and stage_of_default in('application filed','hearing scheduled') and proper_service == 'neither'):
       add_unique_step((dismiss_step, "dismiss_idx"), step_list)
-    add_unique_step((answer_step, "answer_idx"), step_list)
     add_unique_image({'image': service_cert_image, 'text': "Certificate of Service"}, images_list)
     add_unique_step((cert_of_service_step, "cert_of_service_idx"), step_list)
     add_unique_step((file_answer_step, "file_answer_idx"), step_list)
@@ -560,7 +557,7 @@ content: |
   
   % if final_order_date_within_10_days:
   See Step ${ learn_reconsider_idx }: Learn about Motions to Reconsider
-  % elif final_order_more_than_10_days:
+  % elif final_order_date_more_than_10_days:
   Step ${ learn_set_aside_idx }: Learn about the Motion to Set Aside Judgment or Order
   % elif (defined('final_order_period') and guess_final_order_date == 'unknown'):
   See:
@@ -574,9 +571,8 @@ content: |
   % if military:
   <div class="step-subheading">Other options</div>
   % else:
-  <div class="step-subheading">Options/div>
+  <div class="step-subheading">Your options</div>
   % endif
-  <div class="step-subheading"> if ${ other_party_in_case } files for default judgment</div>
   
   % if proper_service == 'neither':
   If ${ other_party_in_case } filed for default judgment, it means they told the court you **were** served the correct way. If you think you were not, you have 2 options:
@@ -607,28 +603,28 @@ content: |
   **Tell the court your side of the story**
   % endif
   
-    * Fill out and file an Answer
-  % if type_of_response.all_false('ak custody', 'ak divorce'):
-  If you need information about filling out your Answer, you can start over and check the box, 
+    * Fill out and file an **Answer**.
+  % if type_of_response.all_false('ak custody case', 'ak divorce case'):
+  <br>If you need information about filling out your Answer:
+      * Start over and check the box, 
   % if user_need == 'answer custody':
-  “The other parent started a custody case and I want to respond.”
+  “The other parent started a custody case and I want to respond.” And
   % elif user_need == 'answer divorce':
-  “My spouse started a court case to end our marriage and I want to respond.”
+  “My spouse started a court case to end our marriage and I want to respond.” And
   % endif 
   % elif type_of_response.any_true('ak custody case','ak divorce case'):
-      See Step ${ answer_idx }: Fill out an **Answer form** to respond to the complaint.
+     * See Step ${ answer_idx }: Fill out an Answer form to respond to the complaint.
   % endif
-  
-  Learn about filing an Answer. See [Responding to a Complaint Served on You](http://courts.alaska.gov/shc/family/answer.htm).
+      * Learn about filing an Answer. See [Responding to a Complaint Served on You](http://courts.alaska.gov/shc/family/answer.htm).
   
   
   % if stage_of_default == 'application filed':
     * Fill out and file a “motion."
       * Title it "Motion and Affidavit to Accept Late Filed Answer,"
-      * Ask the court to accept your **Answer** even though it is late. And
+      * Ask the court to accept your Answer even though it is late. And
       * Ask the court not to enter an **Entry of Default**.
-      
-  See the [Court Guide: Asking for an Order in a Divorce Case When the Issue Can't Wait for the Court's Final Decision (Filing a Motion)](https://docassemble.akcourts.gov/start/FilingAMotion)
+  
+    See the Court Guide: [Asking for an Order in a Divorce Case When the Issue Can't Wait for the Court's Final Decision (Filing a Motion)](https://docassemble.akcourts.gov/start/FilingAMotion)
   
   % elif stage_of_default == 'hearing scheduled':
     * Fill out and file **Motion and Affidavit to Set Aside Entry of Default and Accept Late Filed Answer, SHC-410** [Word](http://courts.alaska.gov/shc/family/docs/shc-410.doc) | [PDF](http://courts.alaska.gov/shc/family/docs/shc-410n.pdf). This motion asks the court to undo the **Entry of Default** and to accept your **Answer** even though it is late.
@@ -638,15 +634,21 @@ content: |
     * Sign in front of a notary, who will need to see a picture ID. Court staff can notarize your signature for free.
   % endif  
   % endif
-  Give ${ other_party_in_case } a copy of every document you file with the court. You can use regular mail or deliver it by hand. See Step ${ serve_motion_idx }: Serve ${ other_party_in_case }
-  
+  Give ${ other_party_in_case } a copy of every document you file with the court. You can use regular mail or deliver it by hand.
+  % if type_of_response.any_true('ak custody case', 'ak divorce case'):
+   See Step ${ serve_motion_idx }: Serve ${ other_party_in_case }
+  % endif 
   
   % if stage_of_default in('application filed', 'hearing scheduled'):
   % if proper_service in('server to me', 'server to responsible person', 'mail'):
-  <div class="step-subheading">Go forward with the case without telling the court your side of the story</div>
+  **Go forward with the case without telling the court your side of the story**
   % endif
   
-    If you are okay with the judge deciding the case based on the other parent's Complaint without hearing from you, you do not need to do anything. But once the judge decides, it is much harder to undo it. If you file an **Answer**, the judge will consider what you want, and there may be resources for you and ${ other_party_in_case } to work out any disagreements through mediation or a settlement conference.
+    If you are okay with the judge deciding the case based on the other parent's Complaint without hearing from you, you do not need to do anything. 
+  
+  But once the judge decides, it is much harder to undo it. 
+  
+  If you file an **Answer**, the judge will consider what you want, and there may be resources for you and ${ other_party_in_case } to work out any disagreements through mediation or a settlement conference.
   % endif
 ---
 template: answer_step
