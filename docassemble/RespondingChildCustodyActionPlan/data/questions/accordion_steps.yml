@@ -165,17 +165,24 @@ code: |
 
   if type_of_response['ak custody case'] or (type_of_response['case in 2 states'] and stage_of_other_case == 'ended with no order'): 
     if domestic_violence:
-       add_unique_step((custody_domestic_violence_step, "custody_domestic_violence_idx"), step_list)
+       add_unique_step((answer_domestic_violence_step, "answer_domestic_violence_idx"), step_list)
     if paternity:
        add_unique_step((paternity_step, "paternity_idx"), step_list)
   
   if type_of_response.all_false():
+    want_help_to_agree = True
+    default_info = False
     add_unique_step((want_help_to_agree_step, "want_help_to_agree_idx"), step_list)  
     # add_unique_step((parent_agreements_step, "parent_agreements_idx"), step_list)
-    if want_help_to_agree:
-      add_unique_step((aka2j_uncontested_custody_forms_step, "aka2j_uncontested_custody_forms_idx"), step_list)
+    if parents_agree_info:
+      add_unique_step((uncontested_custody_forms_step, "uncontested_custody_forms_idx"), step_list)
+      add_unique_step((file_complaint_step, "file_complaint_idx"), step_list)
+      add_unique_step((read_drpo_step, "read_drpo_idx"), step_list)
+      add_unique_step((expect_after_answer_step, "expect_after_answer_idx"), step_list)
+  
+      
     if domestic_violence:
-      add_unique_step((custody_domestic_violence_step, "custody_domestic_violence_idx"), step_list)
+      add_unique_step((answer_domestic_violence_step, "answer_domestic_violence_idx"), step_list)
 
   add_unique_step((get_help, "get_help_idx"), step_list)
     
@@ -980,6 +987,168 @@ subject: |
   % elif user_need == 'answer divorce' and type_of_response.all_false():
   Options if ${other_party_in_case} wants to talk about ending a marriage
   % endif
+  % if user_need == 'answer custody' and type_of_response.all_false():
+  Options if ${other_party_in_case} wants to talk about a Parenting Plan and starting a custody case
+  % endif
+
+  % if (user_need == 'answer custody' and type_of_response['ak custody case']) or (type_of_response['case in 2 states'] and stage_of_other_case == 'ended with no order'):
+      % if response_to_complaint == 'agree':
+      Review your options when you agree with what ${other_party_in_case} is asking
+      % elif response_to_complaint == 'some':
+      Review your options when you agree with some of what ${other_party_in_case} is asking
+      % elif response_to_complaint == 'none' and want_help_to_agree:
+      Resources to help you reach an agreement with ${other_party_in_case}  
+      % endif
+  % endif
+  
+  % if user_need == 'answer divorce' and type_of_response['ak divorce case']:
+    % if case_type == 'divorce' or (case_type == 'legal separation' and want_legal_separation == 'yes') and response_to_complaint == 'agree':
+    Review your options when you agree with what ${other_party_in_case} is asking
+    % elif case_type == 'divorce' or (case_type == 'legal separation' and want_legal_separation == 'yes') and response_to_complaint == 'some':
+    Review your options when you agree with some of what ${other_party_in_case} is asking
+    % elif case_type == 'divorce' and response_to_complaint == 'none' and want_help_to_agree:
+    Resources to help you reach an agreement with ${other_party_in_case}
+    % elif case_type == 'legal separation' and ((want_legal_separation == 'yes' and response_to_complaint == 'none') or want_legal_separation in ('no', 'unsure')) and want_help_to_agree:
+    Decide if you want to try to reach an agreement with ${other_party_in_case}
+    % endif
+  % endif
+content: |
+  % if user_need == 'answer custody' and type_of_response.all_false():
+  One parent cannot stop {{ other_party_in_case }} from starting a {{ case_type }} case to get a court order about the parenting plan. 
+  
+  If either parent asks, the court will issue a parenting plan, custody, and child support order. 
+  
+  If there is going to be a {{ case_type }} case, there are benefits to reaching an agreement.
+  % endif
+  % if user_need == 'answer divorce' and (type_of_response.all_false() or type_of_response['stay married']):
+  One spouse cannot stop the other spouse from starting a case to end your marriage. 
+  
+  If either spouse tells the court the marriage has broken down and cannot be saved, the court will grant the divorce.
+  % if minor_children:
+  The court will also issue a parenting plan, custody, and child support order.
+
+  If you do not want the marriage to end, counseling can be helpful. The following resources may be helpful to find a therapist for yourself or marriage counselors for both of you:
+
+  * You can ask friends, family, or community and religious leaders in your area for referrals to trusted therapists for yourself or marriage counselors for both of you.
+  * You can call Alaska 2-1-1 and ask about counseling and mental health services by dialing 2-1-1 or 1-800-478-2221.
+  * You can search for mental health services on [Alaska 2-1-1](https://alaska211.org/).  
+
+  If the marriage is going to end, there are benefits to reaching an agreement.
+  % endif
+  % endif
+   
+  
+  % if (user_need == 'answer custody' and type_of_response['ak custody case']) or (user_need == 'answer divorce' and type_of_response['ak divorce case']) or (user_need in('answer custody','answer divorce') and type_of_response['case in 2 states'] and stage_of_other_case == 'ended with no order'):
+    % if case_type in('custody', 'divorce') or (case_type == 'legal separation' and want_legal_separation == 'yes'):
+      % if response_to_complaint in ('agree', 'some'):
+        % if response_to_complaint == 'agree':
+          If you agree with everything ${other_party_in_case} asked for in the Complaint:
+          <ul>
+          <li>State that you agree in your Answer.</li>
+          <li>Decide if you want to write out an agreement with ${other_party_in_case}.</li>
+        % elif response_to_complaint == 'some':
+          If you agree with some of what ${other_party_in_case} asked for in the Complaint:
+          <ul>
+          <li>State what you agree with in your Answer.</li>
+          <li>Decide if you want to try to work with ${other_party_in_case} to write out your agreement.</li>
+        % endif
+        </ul>
+        You must file your Answer within 20 days of getting the Complaint, even if you are trying to work out an agreement with ${other_party_in_case}. 
+        If you miss the 20-day deadline, the court may enter a default judgment against you.
+        <div class = "step-subheading">Review the benefits of reaching an agreement</div>
+      % endif
+    % endif
+  % endif
+
+  
+  % if type_of_response.all_false() or (user_need == 'answer custody' and type_of_response['ak custody case']) or (user_need == 'answer divorce' and type_of_response['ak divorce case']) or (type_of_response['case in 2 states'] and stage_of_other_case == 'ended with no order'):
+  % if type_of_response.all_false() or (type_of_response.any_true() and ((case_type in ('custody', 'divorce') and response_to_complaint == 'none') or  (case_type == 'legal separation' and want_legal_separation == 'yes' and response_to_complaint == 'none') or (case_type == 'legal separation' and want_legal_separation in ('no', 'unsure') and want_help_to_agree))) :
+    <div class = "step-subheading">The benefits of reaching an agreement</div>
+    If you and ${other_party_in_case} reach an agreement about the issues in the case, you can avoid a trial.
+  % elif type_of_response.any_true() and (case_type in ('custody','divorce') or (case_type == 'legal separation' and want_legal_separation == 'yes') and response_to_complaint in ('agree', 'some')):
+    If you and ${other_party_in_case} agree about the issues in the case, you can avoid a trial.
+  % endif
+  % endif
+
+  **Some benefits are:**
+  % if (user_need == 'answer custody' and type_of_response['ak custody case']) or (user_need == 'answer divorce' and type_of_response['ak divorce case'] and minor_children) or (type_of_response.all_false() and want_help_to_agree) or (type_of_response['case in 2 states'] and stage_of_other_case == 'ended with no order'):
+    
+    * Working out the parenting plan instead of fighting is better for the children.
+  % endif
+    * You decide the outcome rather than a judge. You know more about the issues in your case than the judge ever will.
+  % if type_of_response.all_false() and not want_help_to_agree:
+    * If you have children together, working out the parenting plan instead of fighting is better for the children.
+  % endif
+    * Reaching an agreement may be more cooperative than dealing with the issues in a trial, where each spouse presents evidence and makes arguments about what they want the judge to decide.
+    * Reaching an agreement outside of court can save time and money, and provide more privacy and confidentiality.
+
+  <div class = "step-subheading">Watch a video about reaching an agreement</div>
+    Watch a short [video that discusses resolving your case](https://www.youtube.com/watch?v=4EuW9HET3nM&list=PLRS0LlEIQsuTsfO0wSTsSTIvVE5RO8sLc&index=7&t=3s) by reaching agreement with ${ other_party_in_case }.
+
+
+   % if (user_need == 'answer custody' and type_of_response['ak custody case'] and case_type == 'custody') or (user_need == 'answer divorce' and type_of_response['ak divorce case'] and case_type == 'divorce') or (type_of_response['case in 2 states'] and stage_of_other_case == 'ended with no order'): 
+    % if response_to_complaint == 'agree':
+      <div class='step-subheading'>Options for working with ${ other_party_in_case } to write out your agreement</div>
+    % else:
+      <div class='step-subheading'>Options for working with ${ other_party_in_case } to reach an agreement</div>
+    % endif
+    * Talk to ${ other_party_in_case } about settling the case without a trial
+    * Mediation
+    % if user_need == 'answer divorce' and (type_of_response['ak divorce case'] or (type_of_response['case in 2 states'] and stage_of_other_case == 'ended with no order')):
+      * Settlement Conference
+    % endif
+    * Collaborative Law
+  % endif 
+ 
+  
+  <div class='step-subheading'>Talk to ${other_party_in_case} about settling the case without a trial</div>
+  % if user_need == 'answer custody':
+  Some parents want to work out the issues by agreement without a trial and can talk to each other in person, on-line, or with the help of a friend or family member.
+  % elif user_need == 'answer divorce':
+  Some spouses want to work out the issues by agreement without a trial and can talk to each other in person, on-line, or with the help of a friend or family member.
+  % endif
+  <div class='step-subheading'>Mediation</div>
+  Mediation is a voluntary and confidential way to resolve disagreements. No one else, like a judge or the mediator, decides for you. A neutral person, called the mediator, helps people outside the court process:
+  
+  * Figure out the important issues in the disagreement.
+  * Explain and understand each other's needs.
+  * Clear up misunderstandings.
+  * Explore creative solutions.
+  * Reach acceptable agreements.
+
+  You can hire your own private mediator to help resolve any issue in your case. If there was abuse or domestic violence in your relationship, be sure to hire someone with training and experience working with domestic violence. Tell your mediator if you want to bring a support person with you.
+  
+  [Read about mediation](https://courts.alaska.gov/mediation).
+  
+  [Find a private mediator](https://www.alaskamediators.org/directory) on the Professional Mediators of  Alaska website. 
+  
+  % if user_need == 'answer divorce' and (type_of_response['ak divorce case'] or (type_of_response['case in 2 states'] and stage_of_other_case == 'ended with no order')) : 
+  <div class='step-subheading'>Settlement Conference</div>
+  A settlement conference is a meeting with a judge before trial to explore ways to settle your issues.
+  
+  * The meeting includes you, ${other_party_in_case}, your lawyers if you have them, and a judge.
+  * The judge may or may not be the same judge you will have if you go to trial.
+  * The judge's role is to try to help you to reach an agreement, not to be a decision-maker.
+  * Each side makes offers about what they want, and the judge comments on whether it meets the legal requirements and is reasonable.
+  * The judge has no official power to make the parties settle at this stage but usually strongly encourages settlement by critiquing the parties' trial positions.
+  * The judge also indicates how a judge would likely rule on disputed issues during the trial.
+  If both parties want a judge to help settle the issues, file a Joint Motion for a Settlement Conference.
+  % endif
+  
+  <div class='step-subheading'>Collaborative Law</div>
+  The Alaska Association of Collaborative Professionals helps people resolve divorce and parenting issues themselves. The judge does not get involved in making the decisions. Learn more about the Association on [their website](https://www.alaskacollaborative.org).
+---
+template: want_help_to_agree_step_not_indented
+subject: |
+  Step ${ want_help_to_agree_not_indented_idx }:
+  % if user_need == 'answer divorce' and type_of_response.all_true('stay married', exclusive=True):
+  What you can do when ${other_party_in_case} wants to end the marriage and you do not
+  % elif user_need == 'answer divorce' and type_of_response.all_false():
+  Options if ${other_party_in_case} wants to talk about ending a marriage
+  % endif
+  % if user_need == 'answer custody' and type_of_response.all_false():
+  Options if ${other_party_in_case} wants to talk about a Parenting Plan and starting a custody case
+  % endif
 
   % if (user_need == 'answer custody' and type_of_response['ak custody case']) or (type_of_response['case in 2 states'] and stage_of_other_case == 'ended with no order'):
   % if response_to_complaint == 'agree':
@@ -1135,15 +1304,17 @@ content: |
   You will not know your case number until you file your documents with the court.  You can write the case number on all your forms then.
   <div class="step-subheading">Required forms – 1 copy that both parents sign if signatures are needed</div>
 ---
-template: custody_domestic_violence_step
+template: answer_domestic_violence_step
 subject: |
-  Step ${ custody_domestic_violence_idx }:
+  Step ${ answer_domestic_violence_idx }:
   % if type_of_response.any_true():
   % if ((user_need == 'answer custody' and type_of_response['ak custody case']) or (user_need == 'answer divorce' and type_of_response['ak divorce case']) or (type_of_response['case in 2 states'] and stage_of_case == 'ended with no order')) and (response_to_complaint in('agree', 'some') or (response_to_complaint == 'none' and want_help_to_agree)):
   Abuse or domestic violence resources and reaching an agreement
   % else:
   Abuse or domestic violence and parenting
   % endif 
+  % else:
+  Abuse or domestic violence resources and reaching an agreement
   % endif 
 content: |
   compare this step with AKA2J domestic_violence_step  headings and content.
