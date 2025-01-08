@@ -385,7 +385,7 @@ question: |
 subquestion: |
   Information about talking to the other parent about agreeing on a parenting plan and custody order has been added to your Action Plan.
 fields:
-  - Do you want information about the documents to use if you agree?: parents_agree_info
+  - Do you want information about the documents to use if you agree?: agreement_documents
     datatype: yesnoradio
 ---
 id: preview Responding_child_custody_action_plan
