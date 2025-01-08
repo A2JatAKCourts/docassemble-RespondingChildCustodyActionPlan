@@ -719,7 +719,6 @@ content: |
   **Answer & Counterclaim to Legal Separation Without Children** [SHC-095](https://courts.alaska.gov/shc/family/docs/shc-095.doc)
   % endif
   % endif
-  % elif user_need == 'answer custody':
   % endif
   <ol>
   <li>At the top of the <strong>Answer & Counterclaim</strong> form, put your name, mailing address, contact phone number, and email address.
@@ -791,7 +790,7 @@ content: |
   % endif
   <p>An affirmative defense is the facts and arguments that attack the plaintiff's legal right to bring the court case.</p>
   <p>The affirmative defense might win for the defendant even if everything in the plaintiff's complaint is true.</p>
-  <p>If you are unsure if an affirmative defense might apply to you, you are strongly encouraged to consult with a lawyer because this is a very complicated and important area.</p>
+  If you are unsure if an affirmative defense might apply to you, you are strongly encouraged to consult with a lawyer because this is a very complicated and important area.
 
   % if (type_of_response['case in 2 states'] and stage_of_other_case == 'ended with no order') or (type_of_response.all_false('wrong state') and type_of_response.all_false('case in 2 states')): 
   </br>If you have no affirmative defenses,
@@ -872,12 +871,13 @@ content: |
   % if response_to_complaint in('agree','some') or (response_to_complaint == 'none' and want_help_to_agree):
   <div class="step-subheading">Forms to use if you and ${ other_party_in_case } write out your agreement</div>
   If you want to work with the other parent to write out the agreement and both sign it, use:
-
-  * **Parenting Plan Agreement & Order, SHC-1128** [Word](https://courts.alaska.gov/shc/family/docs/shc-110.doc) | [PDF](https://courts.alaska.gov/shc/family/docs/shc-1128n.pdf)<br>
-  Do **not** sign the Order section)
-  * **Joint Motion to Put Settlement on the Record, SHC-1063** [Word](https://courts.alaska.gov/shc/family/docs/shc-1063.doc) | [PDF](https://courts.alaska.gov/shc/family/docs/shc-1063n.pdf)
-  * **Custody Findings of Fact & Conclusions of Law, DR-460** [[Fill-In PDF](https://public.courts.alaska.gov/web/forms/docs/dr-460.pdf)]
-  * **Custody Judgment, DR-465** [[Fill-In PDF](https://public.courts.alaska.gov/web/forms/docs/dr-465.pdf)]
+  <ul>
+  <li><strong>Parenting Plan Agreement & Order, SHC-1128</strong> <a href="https://courts.alaska.gov/shc/family/docs/shc-110.doc">Word</a> | <a href="https://courts.alaska.gov/shc/family/docs/shc-1128n.pdf">PDF</a></br>
+      Do <stong>not</strong> sign the Order section</li>
+  <li><strong>Joint Motion to Put Settlement on the Record, SHC-1063</strong> <a href="https://courts.alaska.gov/shc/family/docs/shc-1063.doc">Word</a> | <a href="https://courts.alaska.gov/shc/family/docs/shc-1063n.pdf">PDF</a></li>
+      <li><strong>Custody Findings of Fact & Conclusions of Law, DR-460</strong> [<a href="https://public.courts.alaska.gov/web/forms/docs/dr-460.pdf">Fill-In PDF</a>]</li>
+      <li><strong>Custody Judgment, DR-465</strong> [<a href="https://public.courts.alaska.gov/web/forms/docs/dr-465.pdf">Fill-In PDF</a>]</li>
+  </ul>
   % endif
   % endif
 
