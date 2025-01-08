@@ -174,7 +174,7 @@ code: |
     default_info = False
     add_unique_step((want_help_to_agree_step, "want_help_to_agree_idx"), step_list)  
     # add_unique_step((parent_agreements_step, "parent_agreements_idx"), step_list)
-    if parents_agree_info:
+    if agreement_documents:
       add_unique_step((uncontested_custody_forms_step, "uncontested_custody_forms_idx"), step_list)
       add_unique_step((file_complaint_step, "file_complaint_idx"), step_list)
       add_unique_step((read_drpo_step, "read_drpo_idx"), step_list)
@@ -992,13 +992,13 @@ subject: |
   % endif
 
   % if (user_need == 'answer custody' and type_of_response['ak custody case']) or (type_of_response['case in 2 states'] and stage_of_other_case == 'ended with no order'):
-      % if response_to_complaint == 'agree':
-      Review your options when you agree with what ${other_party_in_case} is asking
-      % elif response_to_complaint == 'some':
-      Review your options when you agree with some of what ${other_party_in_case} is asking
-      % elif response_to_complaint == 'none' and want_help_to_agree:
-      Resources to help you reach an agreement with ${other_party_in_case}  
-      % endif
+  % if response_to_complaint == 'agree':
+  Review your options when you agree with what ${other_party_in_case} is asking
+  % elif response_to_complaint == 'some':
+  Review your options when you agree with some of what ${other_party_in_case} is asking
+  % elif response_to_complaint == 'none' and want_help_to_agree:
+  Resources to help you reach an agreement with ${other_party_in_case}  
+  % endif
   % endif
   
   % if user_need == 'answer divorce' and type_of_response['ak divorce case']:
@@ -1014,11 +1014,11 @@ subject: |
   % endif
 content: |
   % if user_need == 'answer custody' and type_of_response.all_false():
-  One parent cannot stop {{ other_party_in_case }} from starting a {{ case_type }} case to get a court order about the parenting plan. 
+  One parent cannot stop ${ other_party_in_case } from starting a ${ case_type } case to get a court order about the parenting plan. 
   
   If either parent asks, the court will issue a parenting plan, custody, and child support order. 
   
-  If there is going to be a {{ case_type }} case, there are benefits to reaching an agreement.
+  If there is going to be a ${ case_type } case, there are benefits to reaching an agreement.
   % endif
   % if user_need == 'answer divorce' and (type_of_response.all_false() or type_of_response['stay married']):
   One spouse cannot stop the other spouse from starting a case to end your marriage. 

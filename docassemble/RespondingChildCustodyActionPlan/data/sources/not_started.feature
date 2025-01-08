@@ -11,7 +11,7 @@ Scenario: Row #69
     | var                      | value          | trigger | 
     | user_need                | answer custody |         | 
     | type_of_response['None'] | True           |         | 
-    | parents_agree_info       | True           |         | 
+    | agreement_documents      | True           |         | 
     | domestic_violence        | True           |         | 
     And I should see the phrase "Your Personal Action Plan for responding in your child custody case in 7 steps"
     And I should see the phrase "Options if the other parent wants to talk about a Parenting Plan and starting a custody case"
@@ -34,7 +34,7 @@ Scenario: Row #70
     | var                      | value          | trigger | 
     | user_need                | answer custody |         | 
     | type_of_response['None'] | True           |         | 
-    | parents_agree_info       | True           |         | 
+    | agreement_documents      | True           |         | 
     | domestic_violence        | False          |         | 
     And I should see the phrase "Your Personal Action Plan for responding in your child custody case in 6 steps"
     And I should see the phrase "Options if the other parent wants to talk about a Parenting Plan and starting a custody case"
@@ -56,7 +56,7 @@ Scenario: Row #71
     | var                      | value          | trigger | 
     | user_need                | answer custody |         | 
     | type_of_response['None'] | True           |         | 
-    | parents_agree_info       | False          |         | 
+    | agreement_documents      | False          |         | 
     | domestic_violence        | True           |         | 
     And I should see the phrase "Your Personal Action Plan for responding in your child custody case in 3 steps"
     And I should see the phrase "Options if the other parent wants to talk about a Parenting Plan and starting a custody case"
@@ -75,7 +75,7 @@ Scenario: Row #72
     | var                      | value          | trigger | 
     | user_need                | answer custody |         | 
     | type_of_response['None'] | True           |         | 
-    | parents_agree_info       | False          |         | 
+    | agreement_documents      | False          |         | 
     | domestic_violence        | False          |         | 
     And I should see the phrase "Your Personal Action Plan for responding in your child custody case in 2 steps"
     And I should see the phrase "Options if the other parent wants to talk about a Parenting Plan and starting a custody case"
