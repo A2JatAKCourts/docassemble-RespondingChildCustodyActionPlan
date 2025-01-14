@@ -98,6 +98,7 @@ code: |
     # add_unique_step((aka2j_jurisdiction_step, "aka2j_jurisdiction_idx"), step_list)
   
   if type_of_response['case in 2 states'] and stage_of_other_case == 'ended with order':
+      # motion_type = 'Motion to Dismiss'
       dismiss
       # add_unique_step((answer_jurisdiction_step, "answer_jurisdiction_idx"), step_list)
       add_unique_step((dismiss_step, "dismiss_idx"), step_list)
@@ -292,7 +293,7 @@ subject: |
   % if user_need == 'answer custody':
   Step ${ answer_jurisdiction_idx }: Check if the Alaska courts have jurisdiction
   % elif user_need == 'answer divorce':
-  Step ${ answer_jurisdiction_idx }: Check if there is residency & jurisdiction in Alaska
+  Step ${ answer_jurisdiction_idx }: Decide if Alaska is the right state for your case
   % endif
   % endif
   % if type_of_response['case in 2 states'] and stage_of_other_case == 'ended with no order':
