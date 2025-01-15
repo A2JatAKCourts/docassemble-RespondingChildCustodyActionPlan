@@ -362,7 +362,7 @@ id: Dismiss
 question: |
   You can file a “Motion to Dismiss” in your Alaska case
 subquestion: |
-  If the case in the other state is over and the other court issued a custody order, you can file a “Motion to Dismiss”  with your Answer when you respond in your Alaska case.
+  If the case in the other state is over and the other court issued a custody order, you can file a “Motion to Dismiss”  when you respond in your Alaska case.
 continue button field: dismiss
 ---
 id: Other over

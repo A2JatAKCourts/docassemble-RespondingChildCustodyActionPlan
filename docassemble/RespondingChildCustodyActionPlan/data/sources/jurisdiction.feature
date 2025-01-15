@@ -56,7 +56,7 @@ Scenario: Row #23
 # And I should see the phrase "Tell the Alaska court the case in the other state is over and the court in the other state issued a custody order"
     And I should see the phrase "File a motion to dismiss your Alaska case"
     And I should see the phrase "Fill out the Certificate of Service"
-    And I should see the phrase "File your original with the court"
+    And I should see the phrase "File your motion forms"
     And I should see the phrase "Serve the other parent"
 # And I should see the phrase "Read the “Domestic Relations Procedural Order” or Standing Order"
     And I should see the phrase "What to expect after you file a motion"

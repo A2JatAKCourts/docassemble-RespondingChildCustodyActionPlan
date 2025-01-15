@@ -103,7 +103,7 @@ code: |
       # add_unique_step((answer_jurisdiction_step, "answer_jurisdiction_idx"), step_list)
       add_unique_step((dismiss_step, "dismiss_idx"), step_list)
       add_unique_step((cert_of_service_step, "cert_of_service_idx"), step_list)
-      add_unique_step((file_answer_step, "file_answer_idx"), step_list)
+      add_unique_step((file_motion_step, "file_motion_idx"), step_list)
       add_unique_step((serve_motion_step, "serve_motion_idx"), step_list)
       motion_type = 'motion'
       add_unique_step((expect_after_motion_step, "expect_after_motion_idx"), step_list)
@@ -907,30 +907,32 @@ content: |
   File a copy of the custody order from the other state, and any other documents that support your request.
   % endif
   <ol>
-  <li>Fill out a Motion to Dismiss</br>
+  <li>Fill out a <strong>Motion to Dismiss</strong></br>
    Use: 
-  <ul><li><strong>Motion, SHC-1300</strong> <a href="http://courts.alaska.gov/shc/family/docs/shc-1300.doc">Word</a> | <a href = "http://courts.alaska.gov/shc/family/docs/shc-1300n.pdf">PDF</a>,
-  % if (type_of_response['case in 2 states'] and stage_of_other_case == 'still going')  or (type_of_response['wrong state'] and not jurisdiction):
-  <ul><li>Title it “Motion to Dismiss.”</li>
+  <ul><li><strong>Motion, SHC-1300</strong> <a href="http://courts.alaska.gov/shc/family/docs/shc-1300.doc">Word</a> | <a href = "http://courts.alaska.gov/shc/family/docs/shc-1300n.pdf">PDF</a>
+  % if type_of_response['case in 2 states'] or (type_of_response['wrong state'] and not jurisdiction):
+  </br>Title it “Motion to Dismiss.”
   % if type_of_response['wrong state'] and not jurisdiction:
-   <li>Explain that the Alaska court does not have jurisdiction over the children.</li>
+   </br>Explain that the Alaska court does not have jurisdiction over the children.
   % elif type_of_response['case in 2 states'] and stage_of_other_case == 'still going':
-  <li>Explain why you think the judge should dismiss the Alaska case.</li>
+  </br>Explain why you think the judge should dismiss the Alaska case.
   % endif
   % endif
   % if type_of_response['default']:
-  <ul><li>and title it "Motion to Dismiss for Failure to Correctly Serve the Complaint”.</li>
-   <li>Explain that the other parent did not serve you one of the correct ways and you want the case dismissed.</li> 
+  </br>and title it "Motion to Dismiss for Failure to Correctly Serve the Complaint”.
+   </br>Explain that the other parent did not serve you one of the correct ways and you want the case dismissed.
   % endif
-  </ul>
+  
   <li><strong>Affidavit & Memorandum, SHC-1301</strong> <a href =="https://courts.alaska.gov/shc/family/docs/shc-1301.doc">Word</a> | <a href="https://courts.alaska.gov/shc/family/docs/shc-1301n.pdf">PDF</a></br>
   Wait to sign this affidavit until you can sign in front of a notary or file the form at court.</li>
   <li><strong>Order on Motion, SHC-1302</strong> <a href =="https://courts.alaska.gov/shc/family/docs/shc-1302.doc">Word</a> | <a href="https://courts.alaska.gov/shc/family/docs/shc-1302n.pdf">PDF</a></li>
-  </ul>    
+  </ul>
+   % if (type_of_response['case in 2 states'] and stage_of_other_case == 'still going') or (type_of_response['wrong state'] and not jurisdiction) or type_of_response['default']:
   <li><strong>File</strong> your motion to dismiss forms with your Answer.</li>
-  <li><strong>Watch</strong>: <a href="https://www.youtube.com/watch?v=2irmxT0_0EA">Motions Part 1: How to Ask the Court For Something</a>.</li>
-  <li><strong>Read</strong>: Getting Your Message to the Judge, SHC-1380 <a href="https://courts.alaska.gov/shc/family/docs/shc-1380.doc">Word</a> | <a href="https://courts.alaska.gov/shc/family/docs/shc-1380n.pdf">PDF</a></li>
-  <li><strong>Learn about motions</strong>: <a href="https://docassemble.akcourts.gov/start/FilingAMotion">Asking for an Order in a Divorce Case When the Issue Can't Wait for the Court's Final Decision (Filing a Motion) GA</a></li> 
+  % endif
+  <li>Watch: <a href="https://www.youtube.com/watch?v=2irmxT0_0EA">Motions Part 1: How to Ask the Court For Something</a>.</li>
+  <li>Read: Getting Your Message to the Judge, SHC-1380 <a href="https://courts.alaska.gov/shc/family/docs/shc-1380.doc">Word</a> | <a href="https://courts.alaska.gov/shc/family/docs/shc-1380n.pdf">PDF</a></li>
+  <li>Learn about motions: <a href="https://docassemble.akcourts.gov/start/FilingAMotion">Asking for an Order in a Divorce Case When the Issue Can't Wait for the Court's Final Decision (Filing a Motion) GA</a></li> 
     </ol>
     
 ---
