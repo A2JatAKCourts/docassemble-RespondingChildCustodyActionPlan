@@ -152,7 +152,7 @@ code: |
     or (type_of_response['wrong state'] and not jurisdiction and continue_after_jurisdiction) \
     or (type_of_response['case in 2 states'] and stage_of_other_case != 'ended with order'):
     add_unique_step((answer_step, "answer_idx"), step_list)
-    if type_of_response['wrong state'] and not jurisdiction and continue_after_jurisdiction and proper_service == 'neither':
+    if type_of_response['wrong state'] and not jurisdiction and continue_after_jurisdiction:
       add_unique_step((dismiss_step, "dismiss_idx"), step_list)
     add_unique_image({'image': service_cert_image, 'text': "Certificate of Service"}, images_list)
     add_unique_step((cert_of_service_step, "cert_of_service_idx"), step_list)
@@ -953,10 +953,10 @@ content: |
   <li><strong>Order on Motion, SHC-1302</strong> <a href =="https://courts.alaska.gov/shc/family/docs/shc-1302.doc">Word</a> | <a href="https://courts.alaska.gov/shc/family/docs/shc-1302n.pdf">PDF</a></li>
   </ul>
    % if (type_of_response['case in 2 states'] and stage_of_other_case == 'still going') or (type_of_response['wrong state'] and not jurisdiction) or type_of_response['default']:
-  <li><strong>File</strong> your motion to dismiss forms with your Answer.</li>
+  <li>File your motion to dismiss forms with your <strong>Answer</strong> and serve ${ other_party_in_case }. See Step ${ serve_motion_idx }.</li>
   % endif
   <li>Watch: <a href="https://www.youtube.com/watch?v=2irmxT0_0EA">Motions Part 1: How to Ask the Court For Something</a>.</li>
-  <li>Read: Getting Your Message to the Judge, SHC-1380 <a href="https://courts.alaska.gov/shc/family/docs/shc-1380.doc">Word</a> | <a href="https://courts.alaska.gov/shc/family/docs/shc-1380n.pdf">PDF</a></li>
+  <li>Read: <strong>Getting Your Message to the Judge, SHC-1380</strong> <a href="https://courts.alaska.gov/shc/family/docs/shc-1380.doc">Word</a> | <a href="https://courts.alaska.gov/shc/family/docs/shc-1380n.pdf">PDF</a></li>
   <li>Learn about motions: <a href="https://docassemble.akcourts.gov/start/FilingAMotion">Asking for an Order in a Divorce Case When the Issue Can't Wait for the Court's Final Decision (Filing a Motion) GA</a></li> 
     </ol>
     
