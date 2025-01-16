@@ -138,10 +138,10 @@ code: |
       if final_order_date_more_than_10_days or (defined('final_order_period') and guess_final_order_date == 'unknown'):
         add_unique_step((learn_set_aside_step, "learn_set_aside_idx"), step_list)
         add_unique_step((fill_set_aside_step, "fill_set_aside_idx"), step_list)
-      add_unique_image({'image': service_cert_image, 'text': "Certificate of Service"}, images_list)
-      add_unique_step((cert_of_service_step, "cert_of_service_idx"), step_list)
-      add_unique_step((file_motion_step, "file_motion_idx"), step_list)
-      add_unique_step((serve_motion_step, "serve_motion_idx"), step_list)
+    add_unique_image({'image': service_cert_image, 'text': "Certificate of Service"}, images_list)
+    add_unique_step((cert_of_service_step, "cert_of_service_idx"), step_list)
+    add_unique_step((file_motion_step, "file_motion_idx"), step_list)
+    add_unique_step((serve_motion_step, "serve_motion_idx"), step_list)
      
   
   if type_of_response['ak custody case'] or (type_of_response['case in 2 states'] and stage_of_other_case == 'ended with no order'): 
@@ -612,12 +612,10 @@ content: |
   
   **Option 1. Tell the court you were not served the correct way**
   
-  If you think you were not served the correct way and you want the court to dismiss the case, you can fill out and file a “motion” that tells the court what you want to happen:
+  If you think you were not served the correct way and you want the court to dismiss the case, you can fill out and file a “motion” that tells the court what you want to happen: See:
   
-    * Write the title, “Motion to Dismiss for Failure to Correctly Serve the Complaint.”
-    * Explain that:
-        * capitalize(other_party_in_case) did not serve you one of the correct ways. And 
-        * You want the case dismissed. 
+    * Step ${ dismiss_idx }: Fill out a Motion to Dismiss. And
+    * The Court Guide Action Plan: [Asking for an Order in a Divorce Case When the Issue Cannot Wait for the Court’s Final Decision (Filing a Motion)](https://docassemble.akcourts.gov/start/FilingAMotion/).
 
   **Option 2. Go forward with the case.** 
   
@@ -657,14 +655,15 @@ content: |
       * Ask the court to accept your **Answer** even though it is late. And
       * Ask the court to not enter an **Entry of Default**.
   
-    See the Court Guide: [Asking for an Order in a Divorce Case When the Issue Can't Wait for the Court's Final Decision (Filing a Motion)](https://docassemble.akcourts.gov/start/FilingAMotion)
+    See the Court Guide Action Plan: [Asking for an Order in a Divorce Case When the Issue Can't Wait for the Court's Final Decision (Filing a Motion)](https://docassemble.akcourts.gov/start/FilingAMotion)
   
   % elif stage_of_default == 'hearing scheduled':
-    * Fill out and file **Motion and Affidavit to Set Aside Entry of Default and Accept Late Filed Answer, SHC-410** [Word](http://courts.alaska.gov/shc/family/docs/shc-410.doc) | [PDF](http://courts.alaska.gov/shc/family/docs/shc-410n.pdf). This motion asks the court to undo the **Entry of Default** and to accept your **Answer** even though it is late.
-    * Fill in your contact information at the top.
-    * Fill in the rest of the top of the page to match the information and case number on the Complaint and Summons.
-    * Explain why you did not file your **Answer** by the 20-day deadline.
-    * Sign in front of a notary, who will need to see a picture ID. Court staff can notarize your signature for free.
+    * Fill out and file **Motion and Affidavit to Set Aside Entry of Default and Accept Late Filed Answer, SHC-410** [Word](http://courts.alaska.gov/shc/family/docs/shc-410.doc) | [PDF](http://courts.alaska.gov/shc/family/docs/shc-410n.pdf).</br>
+  This motion asks the court to undo the **Entry of Default** and to accept your **Answer**, even though it is late.
+      * Fill in your contact information at the top.
+      * Fill in the rest of the top of the page to match the information and case number on the Complaint and Summons.
+      * Explain why you did not file your **Answer** by the 20-day deadline.
+      * Sign in front of a notary, who will need to see a picture ID. Court staff can notarize your signature for free.
   % endif  
   % endif
   Give ${ other_party_in_case } a copy of every document you file with the court. You can use regular mail or deliver it by hand.
