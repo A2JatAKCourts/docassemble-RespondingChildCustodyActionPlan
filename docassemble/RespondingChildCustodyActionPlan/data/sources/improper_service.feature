@@ -15,6 +15,7 @@ Scenario: Row #17
 
     And I should see the phrase "Your Personal Action Plan for responding in your child custody case in 2 steps"
     And I should see the phrase "Watch out for a Default Judgment"
+    And I tap the "#cHJvcGVyX3NlcnZpY2Vfc3RlcA .al_toggle" element and stay on the same page
     And I should see the phrase "Get more information or help"
     And I take a screenshot
     And I download "responding_child_custody_action_plan.pdf"
@@ -31,6 +32,7 @@ Scenario: Row #18
 
     And I should see the phrase "Your Personal Action Plan for responding in your child custody case in 2 steps"
     And I should see the phrase "Watch out for a Default Judgment"
+    And I tap the "#cHJvcGVyX3NlcnZpY2Vfc3RlcA .al_toggle" element and stay on the same page
     And I should see the phrase "Get more information or help"
     And I take a screenshot
     And I download "responding_child_custody_action_plan.pdf"
@@ -47,6 +49,7 @@ Scenario: Row #19
 
     And I should see the phrase "Your Personal Action Plan for responding in your child custody case in 2 steps"
     And I should see the phrase "Watch out for a Default Judgment"
+    And I tap the "#cHJvcGVyX3NlcnZpY2Vfc3RlcA .al_toggle" element and stay on the same page
     And I should see the phrase "Get more information or help"
     And I take a screenshot
     And I download "responding_child_custody_action_plan.pdf"
@@ -63,6 +66,7 @@ Scenario: Row #20
 
     And I should see the phrase "Your Personal Action Plan for responding in your child custody case in 2 steps"
     And I should see the phrase "Move forward with the case or wait"
+    And I tap the "#cHJvcGVyX3NlcnZpY2Vfc3RlcA .al_toggle" element and stay on the same page
     And I should see the phrase "Get more information or help"
     And I take a screenshot
     And I download "responding_child_custody_action_plan.pdf"

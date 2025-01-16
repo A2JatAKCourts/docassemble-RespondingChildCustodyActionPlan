@@ -16,6 +16,7 @@ Scenario: Row #41
     | stage_of_default            | application filed |         | 
     And I should see the phrase "Your Personal Action Plan for responding in your child custody case in 3 steps"
     And I should see the phrase "Learn about ‘proper service’"
+    And I tap the "#cHJvcGVyX3NlcnZpY2Vfc3RlcA .al_toggle" element and stay on the same page
     And I should see the phrase "Options when the other parent asks for a default judgment"
     And I tap the "#ZGVmYXVsdF9vcHRpb25zX3N0ZXA .al_toggle" element and stay on the same page
     And I should see the phrase "Get more information or help"
@@ -35,6 +36,7 @@ Scenario: Row #42
     | stage_of_default            | hearing scheduled            |         | 
     And I should see the phrase "Your Personal Action Plan for responding in your child custody case in 3 steps"
     And I should see the phrase "Learn about ‘proper service’"
+    And I tap the "#cHJvcGVyX3NlcnZpY2Vfc3RlcA .al_toggle" element and stay on the same page
     And I should see the phrase "Options when the other parent asks for a default judgment"
     And I tap the "#ZGVmYXVsdF9vcHRpb25zX3N0ZXA .al_toggle" element and stay on the same page
     And I should see the phrase "Get more information or help"
@@ -55,6 +57,7 @@ Scenario: Row #43
     | final_order_date            | today - 6        |         | 
     And I should see the phrase "Your Personal Action Plan for responding in your child custody case in 8 steps"
     And I should see the phrase "Learn about ‘proper service’"
+    And I tap the "#cHJvcGVyX3NlcnZpY2Vfc3RlcA .al_toggle" element and stay on the same page
     And I should see the phrase "Options when the other parent asks for a default judgment"
     And I tap the "#ZGVmYXVsdF9vcHRpb25zX3N0ZXA .al_toggle" element and stay on the same page
     And I should see the phrase "Learn about Motions to Reconsider"
@@ -81,6 +84,7 @@ Scenario: Row #46
     | guess_final_order_date      | more than 10 days |         | 
     And I should see the phrase "Your Personal Action Plan for responding in your child custody case in 8 steps"
     And I should see the phrase "Learn about ‘proper service’"
+    And I tap the "#cHJvcGVyX3NlcnZpY2Vfc3RlcA .al_toggle" element and stay on the same page
     And I should see the phrase "Options when the other parent asks for a default judgment"
     And I tap the "#ZGVmYXVsdF9vcHRpb25zX3N0ZXA .al_toggle" element and stay on the same page
     And I should see the phrase "Learn about the Motion to Set Aside Judgment or Order"
@@ -107,6 +111,7 @@ Scenario: Row #47
     | guess_final_order_date      | unknown          |         | 
     And I should see the phrase "Your Personal Action Plan for responding in your child custody case in 10 steps"
     And I should see the phrase "Learn about ‘proper service’"
+    And I tap the "#cHJvcGVyX3NlcnZpY2Vfc3RlcA .al_toggle" element and stay on the same page
     And I should see the phrase "Options when the other parent asks for a default judgment"
     And I tap the "#ZGVmYXVsdF9vcHRpb25zX3N0ZXA .al_toggle" element and stay on the same page
     And I should see the phrase "Learn about Motions to Reconsider"
@@ -131,9 +136,11 @@ Scenario: Row #56
     | proper_service              | neither           |         | 
     | military                    | False             |         | 
     | stage_of_default            | hearing scheduled |         | 
-    And I should see the phrase "Your Personal Action Plan for responding in your child custody case in 3 steps"
+    And I should see the phrase "Your Personal Action Plan for responding in your child custody case in 4 steps"
     And I should see the phrase "Learn about ‘proper service’"
+    And I tap the "#cHJvcGVyX3NlcnZpY2Vfc3RlcA .al_toggle" element and stay on the same page
     And I should see the phrase "Options when the other parent asks for a default judgment"
+    And I should see the phrase "Fill out a Motion to Dismiss"
     And I should see the phrase "Get more information or help"
     And I take a screenshot
     And I download "responding_child_custody_action_plan.pdf"
@@ -152,6 +159,7 @@ Scenario: Row #64
     | final_order_date            | today - 6        |         | 
     And I should see the phrase "Your Personal Action Plan for responding in your child custody case in 8 steps"
     And I should see the phrase "Learn about ‘proper service’"
+    And I tap the "#cHJvcGVyX3NlcnZpY2Vfc3RlcA .al_toggle" element and stay on the same page
     And I should see the phrase "Options when the other parent asks for a default judgment"
     And I tap the "#ZGVmYXVsdF9vcHRpb25zX3N0ZXA .al_toggle" element and stay on the same page
     And I should see the phrase "Learn about Motions to Reconsider"
@@ -178,6 +186,7 @@ Scenario: Row #65
     | guess_final_order_date      | within 10 days   |         | 
     And I should see the phrase "Your Personal Action Plan for responding in your child custody case in 8 steps"
     And I should see the phrase "Learn about ‘proper service’"
+    And I tap the "#cHJvcGVyX3NlcnZpY2Vfc3RlcA .al_toggle" element and stay on the same page
     And I should see the phrase "Options when the other parent asks for a default judgment"
     And I tap the "#ZGVmYXVsdF9vcHRpb25zX3N0ZXA .al_toggle" element and stay on the same page
     And I should see the phrase "Learn about Motions to Reconsider"
@@ -204,6 +213,7 @@ Scenario: Row #68
     | guess_final_order_date      | unknown          |         | 
     And I should see the phrase "Your Personal Action Plan for responding in your child custody case in 10 steps"
     And I should see the phrase "Learn about ‘proper service’"
+    And I tap the "#cHJvcGVyX3NlcnZpY2Vfc3RlcA .al_toggle" element and stay on the same page
     And I should see the phrase "Options when the other parent asks for a default judgment"
     And I tap the "#ZGVmYXVsdF9vcHRpb25zX3N0ZXA .al_toggle" element and stay on the same page
     And I should see the phrase "Learn about Motions to Reconsider"
