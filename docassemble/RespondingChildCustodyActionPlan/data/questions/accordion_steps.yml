@@ -333,7 +333,14 @@ subject: |
   % endif
   % endif
 content: |
+  % if user_need == 'answer divorce' and type_of_response['case in 2 states'] and stage_of_other_case == 'ended with no order':
+  If the case in the other state is over, but did not end your marriage, you can move forward with the Alaska case.
+  % elif  user_need == 'answer custody' and  type_of_response['case in 2 states'] and stage_of_other_case == 'ended with no order':
+  If the case in the other state is over, but the court did not issue any orders, you can move forward with the Alaska case.
+  % endif
+    
   % if type_of_response['case in 2 states'] and stage_of_other_case == 'still going':
+  <span style="color:blue;">blue 1</span>
   % if user_need == 'answer divorce':
   Only one state court can end a marriage. If you and your spouse have open cases in two states, one of the courts will close their case.
   
@@ -346,52 +353,64 @@ content: |
   If you and the other parent have open custody cases in two states, one of the courts will close their case.
   
   To decide the correct state for your case, the courts will look at which court has the authority, called "jurisdiction," to decide the case.
-  
   % endif
   % endif
+
   % if user_need == 'answer divorce' and type_of_response['wrong state'] and type_of_response.all_false('case in 2 states'):
+  <span style="color:green;">Divorce green 1</span>
   % if jurisdiction:
   <div class="step-subheading">Residency & jurisdiction</div>
   % endif
-  There is a residency requirement in Alaska. Generally, you meet the residency requirement to end your marriage if ${ 'either you or your spouse are serving in the military and are continuously stationed at a military base in Alaska for at least 30 days, or' if military else '' }you or your spouse are in Alaska and intend to stay as a resident.
+  There is a residency requirement in Alaska. Generally, you meet the residency requirement to end your marriage if 
+  % if military:
+  either you or your spouse are serving in the military and are continuously stationed at a military base in Alaska for at least 30 days, or
   % endif
+  you or your spouse are in Alaska and intend to stay as a resident.
+  % endif
+
   % if (type_of_response['wrong state'] and type_of_response.all_false('case in 2 states')) or (type_of_response['case in 2 states'] and stage_of_other_case == 'still going'):
   % if user_need == 'answer custody' or (user_need == 'answer divorce' and minor_children):
+  <ul><li>
   % if user_need == 'answer divorce':
     Children: 
   % endif
-  A court must have the authority, called "jurisdiction," to issue an order about a custody or parenting plan or a child support order.
-  
+  A court must have the authority, called "jurisdiction," to issue an order about a custody or parenting plan or a child support order.</li>
   % if user_need == 'answer divorce':
-    Spouses: Generally, the court has jurisdiction if a married couple lived in Alaska for at least 6 months in a row within the 6 years before filing for divorce.
-  
+  <li>Spouses: Generally, the court has jurisdiction if a married couple lived in Alaska for at least 6 months in a row within the 6 years before filing for divorce.</li>
   % endif
-  Generally, only the court in the state where the children have lived for the last 6 months can make decisions, enter a parenting plan, or order child support. This is called the children's "home state."
-  
+  <li>Generally, only the court in the state where the children have lived for the last 6 months can make decisions, enter a parenting plan, or order child support. This is called the children's "home state."</li>
+  <li>  
   % if user_need == ' answer custody':
   Jurisdiction can be very complicated. 
   % elif user_need == ' answer divorce':
-    * Jurisdiction and residency can be very complicated. 
+  Jurisdiction and residency can be very complicated. 
   % endif
-   For example, if a baby is less than 6 months old and has moved between states, there may not be a "home state." The Alaska court may be able to decide issues about a child, even though the child hasn't lived here for 6 months.
-  
-  If you and ${ other_party_in_case } disagree about which state, the courts will decide after hearing both sides' arguments.
+   For example, if a baby is less than 6 months old and has moved between states, there may not be a "home state." The Alaska court may be able to decide issues about a child, even though the child hasn't lived here for 6 months. <a href="https://courts.alaska.gov/shc/shclawyer.htm">Talking to a lawyer</a> can help you decide the best state for your case.</li>
+   </ul>
  
   % if user_need == 'answer divorce':
     Similarly, if you have property such as a home outside Alaska, the court may not have the authority to enforce any orders about that property if problems arise after the final order.
   % endif
   % elif user_need == 'answer divorce' and not minor_children:
-  To divide marital property and debt, the court also needs authority called "jurisdiction." Generally, the court has jurisdiction if a married couple lived in Alaska for at least 6 months in a row within the 6 years before filing for divorce
+  To divide marital property and debt, the court also needs authority called "jurisdiction." Generally, the court has jurisdiction if a married couple lived in Alaska for at least 6 months in a row within the 6 years before filing for divorce.
+
   Jurisdiction and residency can be very complicated. For example, if you have property such as a home outside Alaska, the court may not have the authority to enforce any orders about that property if problems arise after the final order.
   % endif
   % endif
   % if user_need == 'answer divorce' and type_of_response['case in 2 states'] and stage_of_other_case == 'still going':
+  <span style="color:blue;">blue 2</span>
+  
   Your case can only happen in one state. If you and your spouse disagree about which state, the courts will decide after hearing both side's arguments. The decision generally depends on each state's residency and jurisdiction laws
   % endif
   % if type_of_response['wrong state'] and type_of_response.all_false('case in 2 states') and jurisdiction:
-  If you think your case may be an exception to these general rules, you can get help from the resources listed in Step ${ get_help_idx }.
+  <span style="color:green;">Custody green 1, Divorce green 2</span>
+
+  If you think your case may be an exception to these general rules, you can get help from the resources listed in Step ${ get_help_idx }: Get more information or help.
   % endif
+
   % if type_of_response['wrong state'] and type_of_response.all_false('case in 2 states') and not jurisdiction:
+  <span style="color:green;">Custody green 2, Divorce green 3</span>
+
   If you think your ${ case_type } case should be in another state, tell the court you think Alaska is the wrong state and ask the Alaska court to dismiss your Alaska case. See:
   
   * Step ${ answer_idx }: Fill out the forms to tell the court Alaska is the wrong state and respond within 20 days, and
@@ -407,12 +426,6 @@ content: |
   If the case in another state is over and the other court issued a custody order,
   % endif 
   you can file a "Motion to Dismiss." See Step ${ dismiss_idx }: File a motion to dismiss your Alaska case.
-  % elif stage_of_other_case == 'ended with no order':
-  % if user_need == 'answer divorce':
-  If the case in the other state is over but did not end your marriage, you can move forward with the Alaska case.
-  % elif user_need == 'answer custody':
-  If the case in the other state is over but the court did not issue a custody order, you can move forward with the Alaska case.
-  % endif
   % endif
   % endif
 

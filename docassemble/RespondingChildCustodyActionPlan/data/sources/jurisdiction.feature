@@ -14,6 +14,8 @@ Scenario: Row #21
     | jurisdiction                    | True           |         | 
     And I should see the phrase "Your Personal Action Plan for responding in your child custody case in 2 steps"
     And I should see the phrase "Resources to learn more about jurisdiction"
+    And I tap the "#YW5zd2VyX2p1cmlzZGljdGlvbl9zdGVw .al_toggle" element and stay on the same page
+    And I should see the phrase "Custody green 1"
     And I should see the phrase "Get more information or help"
     And I take a screenshot
     And I download "responding_child_custody_action_plan.pdf"
@@ -29,6 +31,8 @@ Scenario: Row #22
     | jurisdiction                    | False          |         | 
     And I should see the phrase "Your Personal Action Plan for responding in your child custody case in 10 steps"
     And I should see the phrase "Decide if Alaska is the right state for your case"
+    And I tap the "#YW5zd2VyX2p1cmlzZGljdGlvbl9zdGVw .al_toggle" element and stay on the same page
+    And I should see the phrase "Custody green 2"
     And I should see the phrase "Fill out the forms to tell the court Alaska is the wrong state and respond within 20 days"
     And I should see the phrase "File a motion to dismiss your Alaska case"
     And I should see the phrase "Fill out the Certificate of Service"
@@ -54,6 +58,7 @@ Scenario: Row #23
     | dismiss                              | True             |         | 
     And I should see the phrase "Your Personal Action Plan for responding in your child custody case in 6 steps"
 # And I should see the phrase "Tell the Alaska court the case in the other state is over and the court in the other state issued a custody order"
+    And I tap the "#YW5zd2VyX2p1cmlzZGljdGlvbl9zdGVw .al_toggle" element and stay on the same page
     And I should see the phrase "File a motion to dismiss your Alaska case"
     And I should see the phrase "Fill out the Certificate of Service"
     And I should see the phrase "File your motion forms"
@@ -78,6 +83,8 @@ Scenario: Row #24
 # | jurisdiction                         | True           |         | 
     And I should see the phrase "Your Personal Action Plan for responding in your child custody case in 11 steps"
     And I should see the phrase "Check if the Alaska courts have jurisdiction"
+    And I tap the "#YW5zd2VyX2p1cmlzZGljdGlvbl9zdGVw .al_toggle" element and stay on the same page
+    And I should see the phrase "blue 1"
     And I should see the phrase "Decide which court you want to hear your case"
     And I should see the phrase "Fill out the forms to answer the complaint and respond within 20 days"
     And I should see the phrase "File a motion to dismiss your Alaska case"
@@ -108,6 +115,7 @@ Scenario: Row #28
 
     And I should see the phrase "Your Personal Action Plan for responding in your child custody case in 10 steps"
     And I should see the phrase "You can move forward with your Alaska case"
+    And I tap the "#YW5zd2VyX2p1cmlzZGljdGlvbl9zdGVw .al_toggle" element and stay on the same page
     And I should see the phrase "Review your options when you agree with what the other parent is asking"
     And I should see the phrase "Fill out the forms to answer the complaint and respond within 20 days"
     And I should see the phrase "Fill out the Certificate of Service"
@@ -137,6 +145,7 @@ Scenario: Row #32
 
     And I should see the phrase "Your Personal Action Plan for responding in your child custody case in 10 steps"
     And I should see the phrase "You can move forward with your Alaska case"
+    And I tap the "#YW5zd2VyX2p1cmlzZGljdGlvbl9zdGVw .al_toggle" element and stay on the same page
     And I should see the phrase "Review your options when you agree with some of what the other parent is asking"
     And I should see the phrase "Fill out the forms to answer the complaint and respond within 20 days"
     And I should see the phrase "Fill out the Certificate of Service"
@@ -166,6 +175,7 @@ Scenario: Row #36
 
     And I should see the phrase "Your Personal Action Plan for responding in your child custody case in 10 steps"
     And I should see the phrase "You can move forward with your Alaska case"
+    And I tap the "#YW5zd2VyX2p1cmlzZGljdGlvbl9zdGVw .al_toggle" element and stay on the same page
     And I should see the phrase "Resources to help you reach an agreement with the other parent"
     And I should see the phrase "Fill out the forms to answer the complaint and respond within 20 days"
     And I should see the phrase "Fill out the Certificate of Service"
@@ -195,6 +205,7 @@ Scenario: Row #40
 
     And I should see the phrase "Your Personal Action Plan for responding in your child custody case in 9 steps"
     And I should see the phrase "You can move forward with your Alaska case"
+    And I tap the "#YW5zd2VyX2p1cmlzZGljdGlvbl9zdGVw .al_toggle" element and stay on the same page
     And I should see the phrase "Fill out the forms to answer the complaint and respond within 20 days"
     And I should see the phrase "Fill out the Certificate of Service"
     And I should see the phrase "File your original with the court"
