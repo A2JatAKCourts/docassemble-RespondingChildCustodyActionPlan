@@ -140,6 +140,7 @@ Scenario: Row #56
     And I should see the phrase "Learn about ‘proper service’"
     And I tap the "#cHJvcGVyX3NlcnZpY2Vfc3RlcA .al_toggle" element and stay on the same page
     And I should see the phrase "Options when the other parent asks for a default judgment"
+    And I tap the "#ZGVmYXVsdF9vcHRpb25zX3N0ZXA .al_toggle" element and stay on the same page
     And I should see the phrase "Fill out a Motion to Dismiss"
     And I should see the phrase "Get more information or help"
     And I take a screenshot

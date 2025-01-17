@@ -138,10 +138,10 @@ code: |
       if final_order_date_more_than_10_days or (defined('final_order_period') and guess_final_order_date == 'unknown'):
         add_unique_step((learn_set_aside_step, "learn_set_aside_idx"), step_list)
         add_unique_step((fill_set_aside_step, "fill_set_aside_idx"), step_list)
-    add_unique_image({'image': service_cert_image, 'text': "Certificate of Service"}, images_list)
-    add_unique_step((cert_of_service_step, "cert_of_service_idx"), step_list)
-    add_unique_step((file_motion_step, "file_motion_idx"), step_list)
-    add_unique_step((serve_motion_step, "serve_motion_idx"), step_list)
+      add_unique_image({'image': service_cert_image, 'text': "Certificate of Service"}, images_list)
+      add_unique_step((cert_of_service_step, "cert_of_service_idx"), step_list)
+      add_unique_step((file_motion_step, "file_motion_idx"), step_list)
+      add_unique_step((serve_motion_step, "serve_motion_idx"), step_list)
      
   
   if type_of_response['ak custody case'] or (type_of_response['case in 2 states'] and stage_of_other_case == 'ended with no order'): 
@@ -576,27 +576,17 @@ content: |
   % endif 
   
   % if stage_of_default == 'judgment entered': 
-  <div class="step-subheading">Ask the court to set aside the default judgment</div>
-  If the court has a default hearing and enters a default judgment, the only way to undo it is a **Motion to Reconsider**, if the default judgment was in the last 10 days, or a **Motion and Affidavit to Set Aside the Judgment or Order**. In both motions, you tell the court why it should undo the judgment even though you did not respond to the case.
-
-  There are specific reasons that a judgment can be set aside, and it must be done within a “reasonable time.” In some cases, it must be within 1 year.
-
-  Read more about [Motions to Set Aside](http://www.courts.alaska.gov/shc/family/after-judgment.htm#set-aside).
-
-  Fill out and file:
-
-  * **Motion and Affidavit to Set Aside the Judgment or Order, SHC-1548** [Word](http://www.courts.alaska.gov/shc/family/docs/shc-1548.doc) | [PDF](http://www.courts.alaska.gov/shc/family/docs/shc-1548n.pdf)
-  * **Proposed Order on Motion, SHC-130** [Word](http://www.courts.alaska.gov/shc/family/docs/shc-1302.doc) | [PDF](http://www.courts.alaska.gov/shc/family/docs/shc-130n.pdf)
-  
   % if final_order_date_within_10_days:
-  See Step ${ learn_reconsider_idx }: Learn about Motions to Reconsider
-  % elif final_order_date_more_than_10_days:
-  Step ${ learn_set_aside_idx }: Learn about the Motion to Set Aside Judgment or Order
-  % elif (defined('final_order_period') and guess_final_order_date == 'unknown'):
-  See:
-  
-    * Step ${ learn_reconsider_idx }: Learn about Motions to Reconsider and
-    * Step ${ learn_set_aside_idx }: Learn about the Motion to Set Aside Judgment or Order
+  <div class="step-subheading">Ask the court to reconsider the default judgment</div>
+  % elif final_order_date_more_than_10_days or (not final_order_date_within_10_days and not final_order_date_more_than_10_days):
+  <div class="step-subheading">Ask the court to set aside the default judgment</div>
+  % endif
+  If the court has a default hearing and enters a default judgment, the only way to undo it is a **Motion to Reconsider**, if the default judgment was in the last 10 days, or a **Motion and Affidavit to Set Aside the Judgment or Order**. In both motions, you tell the court why it should undo the judgment even though you did not respond to the case.
+    
+  % if final_order_date_within_10_days:
+  You can ask a judge to reconsider their decision for 4 reasons. 
+  % elif final_order_date_more_than_10_days or (not final_order_date_within_10_days and not final_order_date_more_than_10_days):
+  There are specific reasons that a judgment can be set aside, and it must be done within a “reasonable time.” In some cases, it must be within 1 year.
   % endif
   % endif
 
@@ -664,11 +654,11 @@ content: |
       * Fill in the rest of the top of the page to match the information and case number on the Complaint and Summons.
       * Explain why you did not file your **Answer** by the 20-day deadline.
       * Sign in front of a notary, who will need to see a picture ID. Court staff can notarize your signature for free.
-  % endif  
-  % endif
+  % endif 
   Give ${ other_party_in_case } a copy of every document you file with the court. You can use regular mail or deliver it by hand.
   % if type_of_response.any_true('ak custody case', 'ak divorce case'):
    See Step ${ serve_motion_idx }: Serve ${ other_party_in_case }
+  % endif
   % endif 
   
   % if stage_of_default in('application filed', 'hearing scheduled'):
@@ -951,8 +941,11 @@ content: |
   Wait to sign this affidavit until you can sign in front of a notary or file the form at court.</li>
   <li><strong>Order on Motion, SHC-1302</strong> <a href =="https://courts.alaska.gov/shc/family/docs/shc-1302.doc">Word</a> | <a href="https://courts.alaska.gov/shc/family/docs/shc-1302n.pdf">PDF</a></li>
   </ul>
-   % if (type_of_response['case in 2 states'] and stage_of_other_case == 'still going') or (type_of_response['wrong state'] and not jurisdiction) or type_of_response['default']:
+   % if (type_of_response['case in 2 states'] and stage_of_other_case == 'still going') or (type_of_response['wrong state'] and not jurisdiction):
   <li>File your motion to dismiss forms with your <strong>Answer</strong> and serve ${ other_party_in_case }. See Step ${ serve_motion_idx }.</li>
+  % elif type_of_response['default']:
+  <li>File your motion to dismiss forms with your <strong>Answer</strong>.
+  <li>Give a copy of every document you file with the court to ${ other_party_in_case }. You can use regular mail or deliver it by hand.</li>
   % endif
   <li>Watch: <a href="https://www.youtube.com/watch?v=2irmxT0_0EA">Motions Part 1: How to Ask the Court For Something</a>.</li>
   <li>Read: <strong>Getting Your Message to the Judge, SHC-1380</strong> <a href="https://courts.alaska.gov/shc/family/docs/shc-1380.doc">Word</a> | <a href="https://courts.alaska.gov/shc/family/docs/shc-1380n.pdf">PDF</a></li>
