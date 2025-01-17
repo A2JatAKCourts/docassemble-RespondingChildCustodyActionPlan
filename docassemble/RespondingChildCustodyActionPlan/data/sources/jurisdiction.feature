@@ -58,7 +58,7 @@ Scenario: Row #23
     | dismiss                              | True             |         | 
     And I should see the phrase "Your Personal Action Plan for responding in your child custody case in 6 steps"
 # And I should see the phrase "Tell the Alaska court the case in the other state is over and the court in the other state issued a custody order"
-    And I tap the "#YW5zd2VyX2p1cmlzZGljdGlvbl9zdGVw .al_toggle" element and stay on the same page
+# And I tap the "#YW5zd2VyX2p1cmlzZGljdGlvbl9zdGVw .al_toggle" element and stay on the same page
     And I should see the phrase "File a motion to dismiss your Alaska case"
     And I should see the phrase "Fill out the Certificate of Service"
     And I should see the phrase "File your motion forms"

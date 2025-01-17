@@ -1035,15 +1035,15 @@ subject: |
   % endif
   
   % if user_need == 'answer divorce' and type_of_response['ak divorce case']:
-    % if case_type == 'divorce' or (case_type == 'legal separation' and want_legal_separation == 'yes') and response_to_complaint == 'agree':
-    Review your options when you agree with what ${other_party_in_case} is asking
-    % elif case_type == 'divorce' or (case_type == 'legal separation' and want_legal_separation == 'yes') and response_to_complaint == 'some':
-    Review your options when you agree with some of what ${other_party_in_case} is asking
-    % elif case_type == 'divorce' and response_to_complaint == 'none' and want_help_to_agree:
-    Resources to help you reach an agreement with ${other_party_in_case}
-    % elif case_type == 'legal separation' and ((want_legal_separation == 'yes' and response_to_complaint == 'none') or want_legal_separation in ('no', 'unsure')) and want_help_to_agree:
-    Decide if you want to try to reach an agreement with ${other_party_in_case}
-    % endif
+  % if case_type == 'divorce' or (case_type == 'legal separation' and want_legal_separation == 'yes') and response_to_complaint == 'agree':
+  Review your options when you agree with what ${other_party_in_case} is asking
+  % elif case_type == 'divorce' or (case_type == 'legal separation' and want_legal_separation == 'yes') and response_to_complaint == 'some':
+  Review your options when you agree with some of what ${other_party_in_case} is asking
+  % elif case_type == 'divorce' and response_to_complaint == 'none' and want_help_to_agree:
+  Resources to help you reach an agreement with ${other_party_in_case}
+  % elif case_type == 'legal separation' and ((want_legal_separation == 'yes' and response_to_complaint == 'none') or want_legal_separation in ('no', 'unsure')) and want_help_to_agree:
+  Decide if you want to try to reach an agreement with ${other_party_in_case}
+  % endif
   % endif
 content: |
   % if user_need == 'answer custody' and type_of_response.all_false():
@@ -1072,34 +1072,34 @@ content: |
    
   
   % if (user_need == 'answer custody' and type_of_response['ak custody case']) or (user_need == 'answer divorce' and type_of_response['ak divorce case']) or (user_need in('answer custody','answer divorce') and type_of_response['case in 2 states'] and stage_of_other_case == 'ended with no order'):
-    % if case_type in('custody', 'divorce') or (case_type == 'legal separation' and want_legal_separation == 'yes'):
-      % if response_to_complaint in ('agree', 'some'):
-        % if response_to_complaint == 'agree':
-          If you agree with everything ${other_party_in_case} asked for in the Complaint:
-          <ul>
-          <li>State that you agree in your Answer.</li>
-          <li>Decide if you want to write out an agreement with ${other_party_in_case}.</li>
-        % elif response_to_complaint == 'some':
-          If you agree with some of what ${other_party_in_case} asked for in the Complaint:
-          <ul>
-          <li>State what you agree with in your Answer.</li>
-          <li>Decide if you want to try to work with ${other_party_in_case} to write out your agreement.</li>
-        % endif
-        </ul>
-        You must file your Answer within 20 days of getting the Complaint, even if you are trying to work out an agreement with ${other_party_in_case}. 
-        If you miss the 20-day deadline, the court may enter a default judgment against you.
-        <div class = "step-subheading">Review the benefits of reaching an agreement</div>
-      % endif
-    % endif
+  % if case_type in('custody', 'divorce') or (case_type == 'legal separation' and want_legal_separation == 'yes'):
+  % if response_to_complaint in ('agree', 'some'):
+  % if response_to_complaint == 'agree':
+    If you agree with everything ${other_party_in_case} asked for in the Complaint:
+    <ul>
+    <li>State that you agree in your Answer.</li>
+    <li>Decide if you want to write out an agreement with ${other_party_in_case}.</li>
+  % elif response_to_complaint == 'some':
+    If you agree with some of what ${other_party_in_case} asked for in the Complaint:
+    <ul>
+    <li>State what you agree with in your Answer.</li>
+    <li>Decide if you want to try to work with ${other_party_in_case} to write out your agreement.</li>
+  % endif
+  </ul>
+  You must file your Answer within 20 days of getting the Complaint, even if you are trying to work out an agreement with ${other_party_in_case}. 
+  If you miss the 20-day deadline, the court may enter a default judgment against you.
+  <div class = "step-subheading">Review the benefits of reaching an agreement</div>
+  % endif
+  % endif
   % endif
 
   
   % if type_of_response.all_false() or (user_need == 'answer custody' and type_of_response['ak custody case']) or (user_need == 'answer divorce' and type_of_response['ak divorce case']) or (type_of_response['case in 2 states'] and stage_of_other_case == 'ended with no order'):
   % if type_of_response.all_false() or (type_of_response.any_true() and ((case_type in ('custody', 'divorce') and response_to_complaint == 'none') or  (case_type == 'legal separation' and want_legal_separation == 'yes' and response_to_complaint == 'none') or (case_type == 'legal separation' and want_legal_separation in ('no', 'unsure') and want_help_to_agree))) :
-    <div class = "step-subheading">The benefits of reaching an agreement</div>
-    If you and ${other_party_in_case} reach an agreement about the issues in the case, you can avoid a trial.
+  <div class = "step-subheading">The benefits of reaching an agreement</div>
+  If you and ${other_party_in_case} reach an agreement about the issues in the case, you can avoid a trial.
   % elif type_of_response.any_true() and (case_type in ('custody','divorce') or (case_type == 'legal separation' and want_legal_separation == 'yes') and response_to_complaint in ('agree', 'some')):
-    If you and ${other_party_in_case} agree about the issues in the case, you can avoid a trial.
+  If you and ${other_party_in_case} agree about the issues in the case, you can avoid a trial.
   % endif
   % endif
 
@@ -1120,17 +1120,17 @@ content: |
 
 
    % if (user_need == 'answer custody' and type_of_response['ak custody case'] and case_type == 'custody') or (user_need == 'answer divorce' and type_of_response['ak divorce case'] and case_type == 'divorce') or (type_of_response['case in 2 states'] and stage_of_other_case == 'ended with no order'): 
-    % if response_to_complaint == 'agree':
-      <div class='step-subheading'>Options for working with ${ other_party_in_case } to write out your agreement</div>
-    % else:
-      <div class='step-subheading'>Options for working with ${ other_party_in_case } to reach an agreement</div>
-    % endif
-    * Talk to ${ other_party_in_case } about settling the case without a trial
-    * Mediation
-    % if user_need == 'answer divorce' and (type_of_response['ak divorce case'] or (type_of_response['case in 2 states'] and stage_of_other_case == 'ended with no order')):
-      * Settlement Conference
-    % endif
-    * Collaborative Law
+  % if response_to_complaint == 'agree':
+  <div class='step-subheading'>Options for working with ${ other_party_in_case } to write out your agreement</div>
+  % else:
+  <div class='step-subheading'>Options for working with ${ other_party_in_case } to reach an agreement</div>
+  % endif
+  * Talk to ${ other_party_in_case } about settling the case without a trial
+  * Mediation
+  % if user_need == 'answer divorce' and (type_of_response['ak divorce case'] or (type_of_response['case in 2 states'] and stage_of_other_case == 'ended with no order')):
+  * Settlement Conference
+  % endif
+  * Collaborative Law
   % endif 
  
   
