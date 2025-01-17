@@ -241,14 +241,14 @@ content: |
   
   This is “proper service.”  
   
-  After you are served, you have **20 days** to file an **Answer**.
+  After you are served, you have **20 days** to file an Answer.
   
-  If you do not file an Answer in 20 days, ${ other_party_in_case } may ask the court for a **Default Judgment**.
+  If you do not file an Answer in 20 days, ${ other_party_in_case } may ask the court for a default judgment.
 
   % if type_of_response['improper service'] and type_of_response.all_false('default') and proper_service == 'neither':
   If ${ other_party_in_case }  gave you the documents another way, you can move forward with the case, or wait.
   <div class="step-subheading">Move forward</div>
-  Even if you were served a different way, you can file an **Answer** if:
+  Even if you were served a different way, you can file an Answer if:
     
     * You agree with ${ other_party_in_case } that there should be a case to 
   % if user_need == 'answer custody':
@@ -256,7 +256,7 @@ content: |
   % elif user_need == 'answer divorce':
   end your marriage. Or
   % endif  
-    * You do not want to risk a **Default Judgment**.
+    * You do not want to risk a default judgment.
 
   % if type_of_response.any_true('ak custody case', 'ak divorce case'):
   See Step ${ answer_idx }: Fill out the forms to answer the complaint and respond within 20 days.
@@ -265,7 +265,7 @@ content: |
   <div class="step-subheading">Wait</div>
   If you do not want to do anything unless ${ other_party_in_case } serves you properly: 
   <ul>
-  <li>Wait for proper service and then file your <strong>Answer</strong>. 
+  <li>Wait for proper service and then file your Answer. 
   % if type_of_response.any_true('ak custody case', 'ak divorce case'):
   See Step ${ answer_idx }: Fill out the forms to answer the complaint and respond within 20 days. 
   % endif
@@ -278,14 +278,14 @@ content: |
   % if type_of_response.all_false('default') and proper_service == 'neither':  
   <div class="step-subheading">Watch out for a Default Judgment</div>
   % endif
-  A **Default Judgment** is when the judge decides your case without hearing from you.
+  A default judgment is when the judge decides your case without hearing from you.
 
   % if type_of_response.all_false('default') and proper_service == 'neither':
-  If you were served a different way, ${ other_party_in_case } could ask for a **default judgment**. Then you will have to tell the court you think you were not served the correct way. To do this you have to file a “motion” that tells the court your side of the story. You have to send the other parent a copy. Learn about motions by using the Court Guide Action Plan: [Asking for an Order in a Divorce Case When the Issue Can’t Wait for the Court’s Final Decision (Filing a Motion) and Responding to a Motion](https://docassemble.akcourts.gov/start/FilingAMotion). 
+  If you were served a different way, ${ other_party_in_case } could ask for a default judgment. Then you will have to tell the court you think you were not served the correct way. To do this you have to file a “motion” that tells the court your side of the story. You have to send the other parent a copy. Learn about motions by using the Court Guide Action Plan: [Asking for an Order in a Divorce Case When the Issue Can’t Wait for the Court’s Final Decision (Filing a Motion) and Responding to a Motion](https://docassemble.akcourts.gov/start/FilingAMotion). 
   % endif
   
   % if type_of_response.all_true('improper service', exclusive=True): 
-  If you need information about filling out your **Answer**:
+  If you need information about filling out your Answer:
   
     * Start this Court Guide Action Plan over and check the box
   % if user_need == 'answer custody':
@@ -562,11 +562,11 @@ subject: |
   Step ${ default_options_idx }: Options when the other parent asks for a default judgment
 content: |
   <div class="step-subheading">Default judgment</div>
-  If you do not file your Answer within 20 days, the other parent can ask for a **Default Judgment**, which means the court will decide the case without hearing your side of the story. There are 3 steps to get a **Default Judgment**:
+  If you do not file your Answer within 20 days, the other parent can ask for a default judgment, which means the court will decide the case without hearing your side of the story. There are 3 steps to get a default judgment:
     
   1. The other parent files a **Default Application** and gives you a copy by mailing it or by hand delivery.
   2. The Clerk of Court enters an **Entry of Default** and sets a date and time for a “default hearing.”
-  3. The Judge holds the “default hearing” and may enter the **Default Judgment** order ending the case without hearing from you. 
+  3. The Judge holds the “default hearing” and may enter the default judgment order ending the case without hearing from you. 
     
   % if military:
   <div class="step-subheading">Military Protections</div>
@@ -611,7 +611,7 @@ content: |
   
   You can ask the court to move ahead with the case, even if you were not served the correct way.
   
-  If you want the court to hear your side of the story, file an **Answer** and ask the court
+  If you want the court to hear your side of the story, file an Answer and ask the court
   % if stage_of_default == 'application filed':
   not to enter an **Entry of Default** or set a default hearing
   % elif stage_of_default == 'hearing scheduled':
@@ -624,7 +624,7 @@ content: |
   **Tell the court your side of the story**
   % endif
   
-    * Fill out and file an **Answer**.
+    * Fill out and file an Answer.
   % if type_of_response.all_false('ak custody case', 'ak divorce case'):
   <br>If you need information about filling out your Answer:
       * Start over and check the box, 
@@ -636,23 +636,23 @@ content: |
   % elif type_of_response.any_true('ak custody case','ak divorce case'):
      * See Step ${ answer_idx }: Fill out an Answer form to respond to the complaint.
   % endif
-      * Learn about filing an **Answer**. See [Responding to a Complaint Served on You](http://courts.alaska.gov/shc/family/answer.htm).
+      * Learn about filing an Answer. See [Responding to a Complaint Served on You](http://courts.alaska.gov/shc/family/answer.htm).
   
   
   % if stage_of_default == 'application filed':
     * Fill out and file a “motion."
       * Title it "Motion and Affidavit to Accept Late Filed Answer,"
-      * Ask the court to accept your **Answer** even though it is late. And
+      * Ask the court to accept your Answer even though it is late. And
       * Ask the court to not enter an **Entry of Default**.
   
     See the Court Guide Action Plan: [Asking for an Order in a Divorce Case When the Issue Can't Wait for the Court's Final Decision (Filing a Motion)](https://docassemble.akcourts.gov/start/FilingAMotion)
   
   % elif stage_of_default == 'hearing scheduled':
     * Fill out and file **Motion and Affidavit to Set Aside Entry of Default and Accept Late Filed Answer, SHC-410** [Word](http://courts.alaska.gov/shc/family/docs/shc-410.doc) | [PDF](http://courts.alaska.gov/shc/family/docs/shc-410n.pdf).</br>
-  This motion asks the court to undo the **Entry of Default** and to accept your **Answer**, even though it is late.
+  This motion asks the court to undo the **Entry of Default** and to accept your Answer, even though it is late.
       * Fill in your contact information at the top.
       * Fill in the rest of the top of the page to match the information and case number on the Complaint and Summons.
-      * Explain why you did not file your **Answer** by the 20-day deadline.
+      * Explain why you did not file your Answer by the 20-day deadline.
       * Sign in front of a notary, who will need to see a picture ID. Court staff can notarize your signature for free.
   % endif 
   Give ${ other_party_in_case } a copy of every document you file with the court. You can use regular mail or deliver it by hand.
@@ -670,7 +670,7 @@ content: |
   
   But once the judge decides, it is much harder to undo it. 
   
-  If you file an **Answer**, the judge will consider what you want, and there may be resources for you and ${ other_party_in_case } to work out any disagreements through mediation or a settlement conference.
+  If you file an Answer, the judge will consider what you want, and there may be resources for you and ${ other_party_in_case } to work out any disagreements through mediation or a settlement conference.
   % endif
 ---
 template: answer_step
@@ -691,7 +691,7 @@ content: |
   % if type_of_response['case in 2 states'] and stage_of_other_case == 'still going':
   <div class="step-subheading">If you want to have your case in Alaska</div>
   % endif
-  Fill out your **Answer** and tell the court what you want to happen in your ${case_type} case.
+  Fill out your Answer and tell the court what you want to happen in your ${case_type} case.
   % if (user_need == 'answer divorce' and type_of_response['ak divorce case']) or (user_need == 'answer custody' and type_of_response['ak custody case'])  or (type_of_response['case in 2 states'] and stage_of_other_case in('still going', 'ended with no order')):
   Answer each question completely.
   % endif
@@ -708,7 +708,7 @@ content: |
   % if type_of_response['case in 2 states'] and stage_of_other_case == 'still going':
   <div class="step-subheading">If you want your case in the other state</div>
   % endif
-    * Fill out your **Answer** and tell the Alaska court about the case in the other state. **And**
+    * Fill out your Answer and tell the Alaska court about the case in the other state. **And**
     * Fill out the Motion to Dismiss forms that ask the court to dismiss your case. See Step ${ dismiss_idx }: File a motion to dismiss your Alaska case.</br>
   File the motion forms with your Answer.
   % endif
@@ -942,9 +942,9 @@ content: |
   <li><strong>Order on Motion, SHC-1302</strong> <a href =="https://courts.alaska.gov/shc/family/docs/shc-1302.doc">Word</a> | <a href="https://courts.alaska.gov/shc/family/docs/shc-1302n.pdf">PDF</a></li>
   </ul>
    % if (type_of_response['case in 2 states'] and stage_of_other_case == 'still going') or (type_of_response['wrong state'] and not jurisdiction):
-  <li>File your motion to dismiss forms with your <strong>Answer</strong> and serve ${ other_party_in_case }. See Step ${ serve_motion_idx }.</li>
+  <li>File your motion to dismiss forms with your Answer and serve ${ other_party_in_case }. See Step ${ serve_motion_idx }.</li>
   % elif type_of_response['default']:
-  <li>File your motion to dismiss forms with your <strong>Answer</strong>.
+  <li>File your motion to dismiss forms with your Answer.
   <li>Give a copy of every document you file with the court to ${ other_party_in_case }. You can use regular mail or deliver it by hand.</li>
   % endif
   <li>Watch: <a href="https://www.youtube.com/watch?v=2irmxT0_0EA">Motions Part 1: How to Ask the Court For Something</a>.</li>
