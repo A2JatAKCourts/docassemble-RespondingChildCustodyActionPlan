@@ -17,7 +17,9 @@ Scenario: Row #1
 
     And I should see the phrase "Your Personal Action Plan for responding in your child custody case in 11 steps"
     And I should see the phrase "Review your options when you agree with what the other parent is asking"
+    And I tap the "#d2FudF9oZWxwX3RvX2FncmVlX3N0ZXA .al_toggle" element and stay on the same page
     And I should see the phrase "Fill out the forms to answer the complaint and respond within 20 days"
+    And I tap the "#YW5zd2VyX3N0ZXA .al_toggle" element and stay on the same page
     And I should see the phrase "Fill out the Certificate of Service"
     And I should see the phrase "File your original with the court"
     And I should see the phrase "Serve the other parent"
@@ -44,7 +46,9 @@ Scenario: Row #3
 
     And I should see the phrase "Your Personal Action Plan for responding in your child custody case in 10 steps"
     And I should see the phrase "Review your options when you agree with what the other parent is asking"
+    And I tap the "#d2FudF9oZWxwX3RvX2FncmVlX3N0ZXA .al_toggle" element and stay on the same page
     And I should see the phrase "Fill out the forms to answer the complaint and respond within 20 days"
+    And I tap the "#YW5zd2VyX3N0ZXA .al_toggle" element and stay on the same page
     And I should see the phrase "Fill out the Certificate of Service"
     And I should see the phrase "File your original with the court"
     And I should see the phrase "Serve the other parent"
@@ -69,7 +73,9 @@ Scenario: Row #5
     | paternity                           | False          |         | 
     And I should see the phrase "Your Personal Action Plan for responding in your child custody case in 10 steps"
     And I should see the phrase "Review your options when you agree with some of what the other parent is asking"
+    And I tap the "#d2FudF9oZWxwX3RvX2FncmVlX3N0ZXA .al_toggle" element and stay on the same page
     And I should see the phrase "Fill out the forms to answer the complaint and respond within 20 days"
+    And I tap the "#YW5zd2VyX3N0ZXA .al_toggle" element and stay on the same page
     And I should see the phrase "Fill out the Certificate of Service"
     And I should see the phrase "File your original with the court"
     And I should see the phrase "Serve the other parent"
@@ -94,7 +100,9 @@ Scenario: Row #8
     | paternity                           | False          |         | 
     And I should see the phrase "Your Personal Action Plan for responding in your child custody case in 9 steps"
     And I should see the phrase "Review your options when you agree with some of what the other parent is asking"
+    And I tap the "#d2FudF9oZWxwX3RvX2FncmVlX3N0ZXA .al_toggle" element and stay on the same page
     And I should see the phrase "Fill out the forms to answer the complaint and respond within 20 days"
+    And I tap the "#YW5zd2VyX3N0ZXA .al_toggle" element and stay on the same page
     And I should see the phrase "Fill out the Certificate of Service"
     And I should see the phrase "File your original with the court"
     And I should see the phrase "Serve the other parent"
@@ -119,7 +127,9 @@ Scenario: Row #9
     | paternity                           | True           |         | 
     And I should see the phrase "Your Personal Action Plan for responding in your child custody case in 11 steps"
     And I should see the phrase "Resources to help you reach an agreement with the other parent"
+    And I tap the "#d2FudF9oZWxwX3RvX2FncmVlX3N0ZXA .al_toggle" element and stay on the same page
     And I should see the phrase "Fill out the forms to answer the complaint and respond within 20 days"
+    And I tap the "#YW5zd2VyX3N0ZXA .al_toggle" element and stay on the same page
     And I should see the phrase "Fill out the Certificate of Service"
     And I should see the phrase "File your original with the court"
     And I should see the phrase "Serve the other parent"
@@ -146,6 +156,7 @@ Scenario: Row #14
     | paternity                           | False          |         | 
     And I should see the phrase "Your Personal Action Plan for responding in your child custody case in 9 steps"
     And I should see the phrase "Fill out the forms to answer the complaint and respond within 20 days"
+    And I tap the "#YW5zd2VyX3N0ZXA .al_toggle" element and stay on the same page
     And I should see the phrase "Fill out the Certificate of Service"
     And I should see the phrase "File your original with the court"
     And I should see the phrase "Serve the other parent"
