@@ -1133,7 +1133,7 @@ content: |
   % endif
   * Talk to ${ other_party_in_case } about settling the case without a trial
   * Mediation
-  % if user_need in('answer custody', 'answer divorce') and type_of_response.any_true:
+  % if user_need in('answer custody', 'answer divorce') and type_of_response.any_true():
   * Settlement Conference
   % endif
   * Collaborative Law
@@ -1172,7 +1172,7 @@ content: |
   <div class='step-subheading'>Settlement Conference</div>
   A settlement conference is a meeting with a judge before trial to explore ways to settle your issues.
   
-  * The meeting includes you, ${other_party_in_case}, your lawyers if you have them, and a judge.
+  * The meeting includes you, ${other_party_in_case}, your lawyers, if you have them, and a judge.
   * The judge may or may not be the same judge you will have if you go to trial.
   * The judge's role is to try to help you reach an agreement, not to be a decision-maker.
   * Each side makes offers about what they want and the judge comments on whether it meets the legal requirements and is reasonable.
