@@ -706,6 +706,7 @@ content: |
   % endif
   Fill out your Answer and tell the court what you want to happen in your ${case_type} case.
   % if (user_need == 'answer divorce' and type_of_response['ak divorce case']) or (user_need == 'answer custody' and type_of_response['ak custody case'])  or (type_of_response['case in 2 states'] and stage_of_other_case in('still going', 'ended with no order')):
+  
   Answer each question completely.
   % endif
 
@@ -823,8 +824,8 @@ content: |
   % if (type_of_response['case in 2 states'] and stage_of_other_case == 'ended with no order') or (type_of_response.all_false('wrong state') and type_of_response.all_false('case in 2 states')): 
   </br>If you have no affirmative defenses:
   <ul>
-  <li>check the box at the beginning of the section that states "I have no affirmative defenses." and</li> 
-  <li>go to the Counterclaims section.</li>
+  <li>Check the box at the beginning of the section that states "I have no affirmative defenses." And</li> 
+  <li>Go to the Counterclaims section.</li>
   </ul>
   % endif
   </li> 
@@ -868,14 +869,14 @@ content: |
   If you have any questions about whether Alaska is the correct place for your case, or you want to ask the court to dismiss your case, you may want to talk to a lawyer
   % endif
   </li></ol>
-  **Information Sheet**, [DR-314](https://public.courts.alaska.gov/web/forms/docs/dr-314.pdf)</br>
-  <ul><li>If ${other_party_in_case} filed an Information Sheet, check the first box.</li>
+  **Information Sheet, DR-314** [[Fill in PDF](https://public.courts.alaska.gov/web/forms/docs/dr-314.pdf)]</br>
+  <ul><li>If ${other_party_in_case} filed an **Information Sheet**, check the first box.</li>
   <li>If they did not file this form, Answer 1 through 3.</li>
   <li>Sign, and date the form.</li>
   </ul>
   
   % if user_need == 'answer custody' or (user_need == 'divorce' and minor_children):
-  <strong>Child Custody Jurisdiction Affidavit, DR-150</strong>* [[Fill-In PDF](<a href="https://public.courts.alaska.gov/web/forms/docs/dr-150.pdf)]</br>
+  <strong>Child Custody Jurisdiction Affidavit, DR-150</strong> [[Fill-In PDF](<a href="https://public.courts.alaska.gov/web/forms/docs/dr-150.pdf)]</br>
   <strong>Wait</strong> to sign this affidavit until you can sign in front of a notary or file the form at court.
   
   <strong>Child Support Guidelines Affidavit, DR-305</strong> [[Fill-In PDF](https://public.courts.alaska.gov/web/forms/docs/dr-305.pdf)]
@@ -900,7 +901,7 @@ content: |
   <div class="step-subheading">Forms to use if you and ${ other_party_in_case } write out your agreement</div>
   If you want to work with the other parent to write out the agreement and both sign it, use:
   <ul>
-  <li><strong>Parenting Plan Agreement & Order, SHC-1128</strong> <a href="https://courts.alaska.gov/shc/family/docs/shc-110.doc">Word</a> | <a href="https://courts.alaska.gov/shc/family/docs/shc-1128n.pdf">PDF</a></br>
+  <li><strong>Parenting Plan Agreement & Order, SHC-1128</strong> <a href="https://courts.alaska.gov/shc/family/docs/shc-1128.docx">Word</a> | <a href="https://courts.alaska.gov/shc/family/docs/shc-1128n.pdf">PDF</a></br>
       Do <strong>not</strong> sign the Order section.</li>
   <li><strong>Joint Motion to Put Settlement on the Record, SHC-1063</strong> <a href="https://courts.alaska.gov/shc/family/docs/shc-1063.doc">Word</a> | <a href="https://courts.alaska.gov/shc/family/docs/shc-1063n.pdf">PDF</a></li>
       <li><strong>Custody Findings of Fact & Conclusions of Law, DR-460</strong> [<a href="https://public.courts.alaska.gov/web/forms/docs/dr-460.pdf">Fill-In PDF</a>]</li>
