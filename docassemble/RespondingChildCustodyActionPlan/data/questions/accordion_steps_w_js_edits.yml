@@ -247,6 +247,23 @@ content: |
 
   % if type_of_response['improper service'] and type_of_response.all_false('default') and proper_service == 'neither':
   If ${ other_party_in_case }  gave you the documents another way, you can move forward with the case, or wait.
+  % endif
+  
+  % if type_of_response.all_false('default') and proper_service == 'neither':  
+  <div class="step-subheading">Watch out for a Default Judgment</div>
+  % endif
+  
+  A default judgment is when the judge decides your case without hearing from you.
+
+  % if type_of_response.all_false('default') and proper_service == 'neither':
+  If you were served a different way, ${ other_party_in_case } could ask for a default judgment. Then you will have to tell the court you think you were not served the correct way. To do this you have to file a “motion” that tells the court your side of the story. You have to send the other parent a copy. Learn about motions by using the Court Guide Action Plan: [Asking for an Order in a Divorce Case When the Issue Can’t Wait for the Court’s Final Decision (Filing a Motion) and Responding to a Motion](https://docassemble.akcourts.gov/start/FilingAMotion). 
+  % endif  
+  
+  % if type_of_response['default']:
+  See Step ${ default_options_idx }: Options when ${ other_party_in_case } asks for a default judgment.
+  % endif
+
+  % if type_of_response['improper service'] and type_of_response.all_false('default') and proper_service == 'neither':
   <div class="step-subheading">Move forward</div>
   Even if you were served a different way, you can file an Answer if:
     
@@ -274,15 +291,6 @@ content: |
   <li>Do nothing. If neither you nor ${ other_party_in_case } files anything, the court will close your case.</li>
   </ul>
   You can always look the case up on [CourtView](https://records.courts.alaska.gov/eaccess/home.page.2) to see if anything has been filed or ordered.
-  % endif
-
-  % if type_of_response.all_false('default') and proper_service == 'neither':  
-  <div class="step-subheading">Watch out for a Default Judgment</div>
-  % endif
-  A default judgment is when the judge decides your case without hearing from you.
-
-  % if type_of_response.all_false('default') and proper_service == 'neither':
-  If you were served a different way, ${ other_party_in_case } could ask for a default judgment. Then you will have to tell the court you think you were not served the correct way. To do this you have to file a “motion” that tells the court your side of the story. You have to send the other parent a copy. Learn about motions by using the Court Guide Action Plan: [Asking for an Order in a Divorce Case When the Issue Can’t Wait for the Court’s Final Decision (Filing a Motion) and Responding to a Motion](https://docassemble.akcourts.gov/start/FilingAMotion). 
   % endif
   
   % if type_of_response.all_true('improper service', exclusive=True): 

@@ -5,7 +5,8 @@ include:
   - docassemble.AKA2JBranding:aka2j_templates.yml    
   - docassemble.AKA2JBranding:aka2j_motion_response_templates.yml    
   - docassemble.AKA2JBranding:aka2j_mod_cust_div_templates.yml
-  - accordion_steps.yml
+  # - accordion_steps.yml
+  - accordion_steps_w_js_edits.yml
 ---
 metadata:
   title: >-
@@ -534,9 +535,9 @@ attachment:
   update references: True
   variable name: responding_child_custody_action_plan_attachment[i]
   skip undefined: True
-  # docx template file: testing_step8.docx
+  docx template file: responding_child_custody_action_plan_w__js_edits.docx
   # docx template file: dummy2.docx
-  docx template file: responding_child_custody_action_plan.docx
+  # docx template file: responding_child_custody_action_plan.docx
   tagged pdf: True
 ---
 attachment:
@@ -545,7 +546,7 @@ attachment:
   update references: True
   variable name: docx_responding_child_custody_action_plan_attachment
   skip undefined: True
-  # docx template file: testing_step8.docx
+  docx template file: responding_child_custody_action_plan_w__js_edits.docx
   # docx template file: dummy2.docx
-  docx template file: responding_child_custody_action_plan.docx
+  # docx template file: responding_child_custody_action_plan.docx
   tagged pdf: True
