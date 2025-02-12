@@ -27,6 +27,7 @@ Scenario: Row #1
     And I should see the phrase "What to expect after you file your Answer"
     And I should see the phrase "Learn more about the process"
     And I should see the phrase "Abuse or domestic violence resources and reaching an agreement"
+    And I tap the "#YW5zd2VyX2RvbWVzdGljX3Zpb2xlbmNlX3N0ZXA .al_toggle" element and stay on the same page
     And I should see the phrase "Learn about paternity"
     And I should see the phrase "Get more information or help"
     And I take a screenshot
@@ -83,6 +84,7 @@ Scenario: Row #5
     And I should see the phrase "What to expect after you file your Answer"
     And I should see the phrase "Learn more about the process"
     And I should see the phrase "Abuse or domestic violence resources and reaching an agreement"
+    And I tap the "#YW5zd2VyX2RvbWVzdGljX3Zpb2xlbmNlX3N0ZXA .al_toggle" element and stay on the same page
     And I should see the phrase "Get more information or help"
     And I take a screenshot
     And I download "responding_child_custody_action_plan.pdf"
@@ -137,6 +139,7 @@ Scenario: Row #9
     And I should see the phrase "What to expect after you file your Answer"
     And I should see the phrase "Learn more about the process"
     And I should see the phrase "Abuse or domestic violence resources and reaching an agreement"
+    And I tap the "#YW5zd2VyX2RvbWVzdGljX3Zpb2xlbmNlX3N0ZXA .al_toggle" element and stay on the same page
     And I should see the phrase "Learn about paternity"
     And I should see the phrase "Get more information or help"
     And I take a screenshot
@@ -164,6 +167,7 @@ Scenario: Row #14
     And I should see the phrase "What to expect after you file your Answer"
     And I should see the phrase "Learn more about the process"
     And I should see the phrase "Abuse or domestic violence and parenting"
+    And I tap the "#YW5zd2VyX2RvbWVzdGljX3Zpb2xlbmNlX3N0ZXA .al_toggle" element and stay on the same page
     And I should see the phrase "Get more information or help"
     And I take a screenshot
     And I download "responding_child_custody_action_plan.pdf"

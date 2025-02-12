@@ -296,7 +296,7 @@ content: |
   % if type_of_response.all_true('improper service', exclusive=True): 
   If you need information about filling out your Answer:
   
-    * Start this Court Guide Action Plan over and check the box
+    * [Start over](${ url_of('restart') }) and check the box, 
   % if user_need == 'answer custody':
   “The other parent started a custody case and I want to respond.”
   % elif user_need == 'answer divorce':
@@ -1065,9 +1065,7 @@ subject: |
   % endif
 content: |
   % if user_need == 'answer custody' and type_of_response.all_false():
-  One parent cannot stop ${ other_party_in_case } from starting a ${ case_type } case to get a court order about the parenting plan. 
-  
-  If either parent asks, the court will issue a parenting plan, custody, and child support order. 
+  One parent cannot stop ${ other_party_in_case } from starting a ${ case_type } case to get a court order about the parenting plan. If either parent asks, the court will issue a parenting plan, custody, and child support order. 
   
   If there is going to be a ${ case_type } case, there are benefits to reaching an agreement.
   % endif
@@ -1143,8 +1141,8 @@ content: |
     Watch a [short video that discusses resolving your case](https://www.youtube.com/watch?v=4EuW9HET3nM&list=PLRS0LlEIQsuTsfO0wSTsSTIvVE5RO8sLc&index=7&t=3s) by reaching agreement with ${ other_party_in_case }.
 
 
-   % if (user_need == 'answer custody' and type_of_response['ak custody case'] and case_type == 'custody') or (user_need == 'answer divorce' and type_of_response['ak divorce case'] and case_type == 'divorce') or (type_of_response['case in 2 states'] and stage_of_other_case == 'ended with no order'): 
-  % if response_to_complaint == 'agree':
+   % if (user_need == 'answer custody' and type_of_response['ak custody case'] and case_type == 'custody') or (user_need == 'answer divorce' and type_of_response['ak divorce case'] and case_type == 'divorce') or (type_of_response['case in 2 states'] and stage_of_other_case == 'ended with no order') or type_of_response.all_false(): 
+  % if (type_of_response.any_true() and response_to_complaint == 'agree') or type_of_response.all_false():
   <div class='step-subheading'>Options for working with ${ other_party_in_case } to write out your agreement</div>
   % else:
   <div class='step-subheading'>Options for working with ${ other_party_in_case } to reach an agreement</div>
@@ -1351,7 +1349,7 @@ content: |
   If the judge finds the domestic violence presumption applies, the judge will usually permit supervised contact between the parent and the children while the parent is completing a batterer's intervention or substance abuse treatment program. After the parent finishes the program and any other requirements the judge ordered, the judge may lift the supervision restriction and allow a different parenting schedule.
   
   % if ((user_need == 'answer custody' and type_of_response['ak custody case']) or (user_need == 'answer divorce' and type_of_response['ak divorce case']) or (type_of_response['case in 2 states'] and stage_of_case == 'ended with no order')) and (response_to_complaint == 'none' and not want_help_to_agree):
-  div class="step-subheading">Tell the judge your concerns</div>
+  <div class="step-subheading">Tell the judge your concerns</div>
   % endif 
 
   The judge will only know about your domestic violence concerns if you state them in the documents you file and when you talk in court. If you have concerns for the children's safety when in the care of the other parent, or for yourself when interacting with the other parent, describe them to the judge. If the judge is going to allow the other parent to have parenting time (visitation) with the children, you can suggest ways to address your concerns. Some options include:

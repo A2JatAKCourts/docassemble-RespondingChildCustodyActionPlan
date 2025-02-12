@@ -1134,9 +1134,9 @@ content: |
   <div class = "step-subheading">Watch a video about reaching an agreement</div>
     Watch a [short video that discusses resolving your case](https://www.youtube.com/watch?v=4EuW9HET3nM&list=PLRS0LlEIQsuTsfO0wSTsSTIvVE5RO8sLc&index=7&t=3s) by reaching agreement with ${ other_party_in_case }.
 
-
-   % if (user_need == 'answer custody' and type_of_response['ak custody case'] and case_type == 'custody') or (user_need == 'answer divorce' and type_of_response['ak divorce case'] and case_type == 'divorce') or (type_of_response['case in 2 states'] and stage_of_other_case == 'ended with no order'): 
-  % if response_to_complaint == 'agree':
+  
+   % if (user_need == 'answer custody' and type_of_response['ak custody case'] and case_type == 'custody') or (user_need == 'answer divorce' and type_of_response['ak divorce case'] and case_type == 'divorce') or (type_of_response['case in 2 states'] and stage_of_other_case == 'ended with no order') or type_of_response.all_false(): 
+  % if (type_of_response.any_true() and response_to_complaint == 'agree') or type_of_response.all_false():
   <div class='step-subheading'>Options for working with ${ other_party_in_case } to write out your agreement</div>
   % else:
   <div class='step-subheading'>Options for working with ${ other_party_in_case } to reach an agreement</div>
