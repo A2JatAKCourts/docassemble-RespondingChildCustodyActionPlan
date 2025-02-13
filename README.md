@@ -4,5 +4,4 @@ Responding in your child custody case  - action plan
 
 ## Author
 
-Caroline Robinson
-
+Alaska Court System
