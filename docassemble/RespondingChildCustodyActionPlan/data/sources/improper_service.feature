@@ -14,7 +14,9 @@ Scenario: Row #17
     | proper_service                       | server to me   |         | 
 
     And I should see the phrase "Your Personal Action Plan for responding in your child custody case in 2 steps"
+#   And I should see the phrase "Options if you were not served the correct way"
     And I should see the phrase "Watch out for a Default Judgment"
+    And I tap the "#cHJvcGVyX3NlcnZpY2Vfc3RlcA .al_toggle" element and stay on the same page
     And I should see the phrase "Get more information or help"
     And I take a screenshot
     And I download "responding_child_custody_action_plan.pdf"
@@ -30,7 +32,9 @@ Scenario: Row #18
     | proper_service                       | server to responsible person |         | 
 
     And I should see the phrase "Your Personal Action Plan for responding in your child custody case in 2 steps"
+#   And I should see the phrase "Options if you were not served the correct way"
     And I should see the phrase "Watch out for a Default Judgment"
+    And I tap the "#cHJvcGVyX3NlcnZpY2Vfc3RlcA .al_toggle" element and stay on the same page
     And I should see the phrase "Get more information or help"
     And I take a screenshot
     And I download "responding_child_custody_action_plan.pdf"
@@ -46,7 +50,9 @@ Scenario: Row #19
     | proper_service                       | mail           |         | 
 
     And I should see the phrase "Your Personal Action Plan for responding in your child custody case in 2 steps"
+# And I should see the phrase "Options if you were not served the correct way"
     And I should see the phrase "Watch out for a Default Judgment"
+    And I tap the "#cHJvcGVyX3NlcnZpY2Vfc3RlcA .al_toggle" element and stay on the same page
     And I should see the phrase "Get more information or help"
     And I take a screenshot
     And I download "responding_child_custody_action_plan.pdf"
@@ -62,10 +68,10 @@ Scenario: Row #20
     | proper_service                       | neither        |         | 
 
     And I should see the phrase "Your Personal Action Plan for responding in your child custody case in 2 steps"
+#   And I should see the phrase "Options if you were not served the correct way"
     And I should see the phrase "Move forward with the case or wait"
+    And I tap the "#cHJvcGVyX3NlcnZpY2Vfc3RlcA .al_toggle" element and stay on the same page
     And I should see the phrase "Get more information or help"
     And I take a screenshot
     And I download "responding_child_custody_action_plan.pdf"
     And I download "responding_child_custody_action_plan.docx"
-
-
