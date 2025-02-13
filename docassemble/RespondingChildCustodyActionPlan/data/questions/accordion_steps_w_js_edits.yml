@@ -85,7 +85,7 @@ code: |
   #   add_unique_step((pick_a_step_step, "pick_a_step_idx"), step_list)
   
   if type_of_response['improper service']:
-    proper_service
+    improper_service
     # if not type_of_response['default']: 
     add_unique_step((proper_service_step, "proper_service_idx"), step_list)
       
@@ -215,20 +215,24 @@ code: |
     if is_unique:
       image_list.append(new_image)
 ---
-template: proper_service_step
-subject: |
-  Step ${ proper_service_idx }:
+comment: |
+  deleted as per JS 2025-02-11
   % if type_of_response['improper service']:
   % if proper_service == 'neither':
   Move forward with the case or wait
   % else:
   Watch out for a Default Judgment
   % endif
+template: proper_service_step
+subject: |
+  Step ${ proper_service_idx }:
+  % if type_of_response['improper service']:
+  Options if you were not served the correct way 
   % else:
   Learn about 'proper service'
   % endif
 content: |
-  If the other parent starts a 
+  If ${ other_party_in_case} starts a 
   % if user_need == 'answer custody':
   custody case
   % elif user_need == 'answer divorce':
@@ -245,17 +249,17 @@ content: |
   
   If you do not file an Answer in 20 days, ${ other_party_in_case } may ask the court for a default judgment.
 
-  % if type_of_response['improper service'] and type_of_response.all_false('default') and proper_service == 'neither':
-  If ${ other_party_in_case }  gave you the documents another way, you can move forward with the case, or wait.
+  % if type_of_response['improper service'] and type_of_response.all_false('default'):
+  If ${ other_party_in_case } gave you the documents another way, you can move forward with the case, or wait.
   % endif
   
-  % if type_of_response.all_false('default') and proper_service == 'neither':  
+  % if type_of_response.all_false('default'):  
   <div class="step-subheading">Watch out for a Default Judgment</div>
   % endif
   
   A default judgment is when the judge decides your case without hearing from you.
 
-  % if type_of_response.all_false('default') and proper_service == 'neither':
+  % if type_of_response.all_false('default'):
   If you were served a different way, ${ other_party_in_case } could ask for a default judgment. Then you will have to tell the court you think you were not served the correct way. To do this you have to file a “motion” that tells the court your side of the story. You have to send the other parent a copy. Learn about motions by using the Court Guide Action Plan: [Asking for an Order in a Divorce Case When the Issue Can’t Wait for the Court’s Final Decision (Filing a Motion) and Responding to a Motion](https://docassemble.akcourts.gov/start/FilingAMotion). 
   % endif  
   
@@ -263,7 +267,7 @@ content: |
   See Step ${ default_options_idx }: Options when ${ other_party_in_case } asks for a default judgment.
   % endif
 
-  % if type_of_response['improper service'] and type_of_response.all_false('default') and proper_service == 'neither':
+  % if type_of_response['improper service'] and type_of_response.all_false('default'):
   <div class="step-subheading">Move forward</div>
   Even if you were served a different way, you can file an Answer if:
     

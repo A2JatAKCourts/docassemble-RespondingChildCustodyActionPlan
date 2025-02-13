@@ -148,7 +148,12 @@ subquestion: |
   % endif
 continue button field: continue_after_jurisdiction
 ---
-
+id: Improper service choice
+question: |
+    Options
+subquestion: |
+  ${ capitalize(other_party_in_case)} is supposed to give you a copy of the paperwork filed in court by (1) process server, or (2) sending it by certified mail/restricted delivery/return receipt.  This is called “serving you.”  Information about “serving” has been added to your Action Plan.
+continue button field: improper_service
 ---
 id: Proper service
 question: |
