@@ -6,8 +6,7 @@ include:
   - docassemble.AKA2JBranding:aka2j_motion_response_templates.yml    
   - docassemble.AKA2JBranding:aka2j_mod_cust_div_templates.yml
   # - accordion_steps.yml
-  # - accordion_steps_w_js_edits.yml
-  - accordion_steps_w_js_edits_new_order.yml
+  - accordion_steps_w_js_edits.yml
 ---
 metadata:
   title: >-
@@ -49,6 +48,7 @@ code: |
 ---
 objects:
   - users: ALPeopleList
+  - type_of_response: DADict.using(auto_gather=False)
 ---
 # sections:
 #   - review_Responding_child_custody_action_plan: Review your answers
@@ -95,8 +95,9 @@ code: |
   confirmation_and_download
 ---
 comment: |
-  This question is used to introduce your interview. Please customize
-id: Responding_in_your_child_custody_case_action_plan - intro validation code
+  This question is used to introduce your interview. Please customize-in this yml, toggling between 'wrong state' and 'case in 2 states'
+id: Responding_in_your_child_custody_case_action_plan - intro
+sets: type_of_response
 continue button field: responding_child_custody_action_plan_intro
 question: |
   Responding in your child custody case
@@ -105,24 +106,40 @@ subquestion: |
   
   What information do you need?
 fields: 
-  - no label: type_of_response
-    datatype: checkboxes
-    choices:
-      - "The other parent started a custody case and I want to respond.": ak custody case
-      - "The other parent started a custody case, but did not give me the filed documents in the correct way.": improper service
-        help: |
-          The other parent is supposed to give you a copy by process server, or send it by certified mail/restricted delivery/return receipt. 
-      - "The other parent started a custody case in Alaska, but I think the case should be in a different state.": wrong state
-      - "2 custody cases were filed – Alaska and another state.": case in 2 states
-      - "The other parent started a custody case against me, I did not respond, and I got papers about a 'default judgment.'": default
-    none of the above: |
-      The other parent has not started a custody case yet, but wants to see if we can agree on a parenting plan and custody order.
+  - label: type_of_response
+    field: type_of_response['akcustody case']
+    datatype: yesnowide
+  - label: The other parent started a custody case, but did not give me the filed documents in the correct way.
+    field: type_of_response['improper service']
+    datatype: yesnowide
+  - label: The other parent started a custody case in Alaska, but I think the case should be in a different state.
+    field: type_of_response['wrong state']
+    datatype: yesnowide
+    disable if: type_of_response['case in 2 states']
+  - label: 2 custody cases were filed – Alaska and another state.
+    field: type_of_response['case in 2 states']
+    datatype: yesnowide
+    disable if: type_of_response['wrong state']
+  - label: The other parent started a custody case against me, I did not respond, and I got papers about a "default judgment."
+    field: default
+    datatype: yesnowide
+  - label: The other parent has not started a custody case yet, but wants to see if we can agree on a parenting plan and custody order.
+    field: type_of_response.nocase
+    datatype: yesnowide
+    uncheck others: True
+validation code: |
+  type_of_response.gathered = True
 under: |
   #### <i class="fa-regular fa-lightbulb"></i> Learn more ####
   We provide information about the process in Alaska only. Look for information in other states on their [court](https://www.ncsc.org/information-and-resources/state-court-websites) and [legal aid programs'](https://lawhelp.org) websites.
-validation code: | 
-  if type_of_response['wrong state'] and type_of_response['case in 2 states']:
-    validation_error("Pick only 1 of these 2 choices, 'I think the other parent filed in the wrong state', <strong>or</strong> '2 custody cases were filed.' You cannot pick both.")
+---
+mandatory: True
+question: |
+  Selections
+subquestion: |
+  % for item in type_of_response.true_values():
+  * `${ item}`
+  % endfor  
 ---
 id: Have children lived in AK long enough
 question: |
@@ -171,7 +188,7 @@ fields:
     input type: radio
     choices:
       - "A process server gave the documents to me.": server to me
-      # - "A process server gave the documents to a responsible person at my home.": server to responsible person
+      - "A process server gave the documents to a responsible person at my home.": server to responsible person
       - "${ capitalize(other_party_in_case) } used certified mail, restricted delivery, with a green postcard return receipt I had to sign.": mail
       - "I did not get the documents in any of these ways.": neither
   - note: |

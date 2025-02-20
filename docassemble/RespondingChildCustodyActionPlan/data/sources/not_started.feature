@@ -27,7 +27,6 @@ Scenario: Row #69
     And I download "responding_child_custody_action_plan.pdf"
     And I download "responding_child_custody_action_plan.docx"
 
-
 @row70
 Scenario: Row #70
   Given I start the interview at "responding_child_custody_action_plan.yml"
@@ -49,7 +48,6 @@ Scenario: Row #70
     And I download "responding_child_custody_action_plan.pdf"
     And I download "responding_child_custody_action_plan.docx"
 
-
 @row71
 Scenario: Row #71
   Given I start the interview at "responding_child_custody_action_plan.yml"
@@ -69,7 +67,6 @@ Scenario: Row #71
     And I download "responding_child_custody_action_plan.pdf"
     And I download "responding_child_custody_action_plan.docx"
 
-
 @row72
 Scenario: Row #72
   Given I start the interview at "responding_child_custody_action_plan.yml"
@@ -86,6 +83,3 @@ Scenario: Row #72
     And I take a screenshot
     And I download "responding_child_custody_action_plan.pdf"
     And I download "responding_child_custody_action_plan.docx"
-
-
-

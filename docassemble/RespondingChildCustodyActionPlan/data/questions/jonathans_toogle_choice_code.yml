@@ -1,0 +1,44 @@
+objects:
+  - type_of_response: DADict.using(auto_gather=False)
+---
+sets: type_of_response.gathered
+question: |
+  Select all that apply
+fields:
+  - label: The other parent started a custody case and I want to respond.
+    field: type_of_response['ak custody case']
+    datatype: yesnowide
+  - label: The other parent started a custody case, but did not give me the filed documents in the correct way.
+    field: type_of_response['improper service']
+    datatype: yesnowide
+  - note: Why does this matter?
+    show if: type_of_response['case in 2 states']
+  - label: The other parent started a custody case in Alaska, but I think the case should be in a different state.
+    field: type_of_response['wrong state']
+    datatype: yesnowide
+    disable if: type_of_response['case in 2 states']
+  - label: 2 custody cases were filed – Alaska and another state.
+    field: type_of_response['case in 2 states']
+    datatype: yesnowide
+    disable if: type_of_response['wrong state']
+  
+  #- note: |
+  #      You cannot check both, "2 custody cases were filed" and "the case should be in a different state." You can only pick one of these choices.
+  #  show if: type_of_response['case in 2 states']
+  - label: The other parent started a custody case against me, I did not respond, and I got papers about a "default judgment."
+    field: default
+    datatype: yesnowide
+  - label: The other parent has not started a custody case yet, but wants to see if we can agree on a parenting plan and custody order.
+    field: type_of_response.nocase
+    datatype: yesnowide
+    uncheck others: True
+validation code: |
+  type_of_response.gathered = True
+---
+mandatory: True
+question: |
+  Selections
+subquestion: |
+  % for item in type_of_response.true_values():
+  * `${ item}`
+  % endfor
