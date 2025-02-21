@@ -108,12 +108,12 @@ code: |
       improper_service = True
       add_unique_step((proper_service_step, "proper_service_idx"), step_list)
       # add_unique_step((answer_jurisdiction_step, "answer_jurisdiction_idx"), step_list)
-      add_unique_step((dismiss_step, "dismiss_idx"), step_list)
-      add_unique_step((cert_of_service_step, "cert_of_service_idx"), step_list)
-      add_unique_step((file_motion_step, "file_motion_idx"), step_list)
-      add_unique_step((serve_motion_step, "serve_motion_idx"), step_list)
-      motion_type = 'motion'
-      add_unique_step((expect_after_motion_step, "expect_after_motion_idx"), step_list)
+    add_unique_step((dismiss_step, "dismiss_idx"), step_list)
+    add_unique_step((cert_of_service_step, "cert_of_service_idx"), step_list)
+    add_unique_step((file_motion_step, "file_motion_idx"), step_list)
+    add_unique_step((serve_motion_step, "serve_motion_idx"), step_list)
+    motion_type = 'motion'
+    add_unique_step((expect_after_motion_step, "expect_after_motion_idx"), step_list)
   
   if type_of_response['case in 2 states'] and stage_of_other_case in('still going','ended with no order'):
     add_unique_step((answer_jurisdiction_step, "answer_jurisdiction_idx"), step_list)
@@ -655,13 +655,13 @@ content: |
   % endif
   
   % if proper_service in('server to me', 'server to responsible person', 'mail'):
-  **Tell the court your side of the story**
+  **Option 1. Tell the court your side of the story**
   % endif
   
     * Fill out and file an Answer.
   % if type_of_response.all_false('ak custody case', 'ak divorce case'):
   <br>If you need information about filling out your Answer:
-      * Start over and check the box, 
+      * [Start over](${ url_of('restart') }) and check the box, 
   % if user_need == 'answer custody':
   “The other parent started a custody case and I want to respond.” And
   % elif user_need == 'answer divorce':
@@ -697,7 +697,7 @@ content: |
   
   % if stage_of_default in('application filed', 'hearing scheduled'):
   % if proper_service in('server to me', 'server to responsible person', 'mail'):
-  **Go forward with the case without telling the court your side of the story**
+  **Option 2. Go forward with the case without telling the court your side of the story**
   % endif
   
     If you are okay with the judge deciding the case based on the other parent's Complaint without hearing from you, you do not need to do anything. 

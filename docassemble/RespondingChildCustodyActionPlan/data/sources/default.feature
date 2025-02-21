@@ -31,7 +31,7 @@ Scenario: Row #42
     | var                         | value                        | trigger | 
     | user_need                   | answer custody               |         | 
     | type_of_response['default'] | True                         |         | 
-    | proper_service              | server to responsible person |         | 
+    | proper_service              | mail                         |         | 
     | military                    | True                         |         | 
     | stage_of_default            | hearing scheduled            |         | 
     And I should see the phrase "Your Personal Action Plan for responding in your child custody case in 3 steps"
