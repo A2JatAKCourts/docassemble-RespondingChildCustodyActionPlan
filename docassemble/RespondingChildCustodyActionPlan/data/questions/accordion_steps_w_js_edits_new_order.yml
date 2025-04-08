@@ -9,9 +9,13 @@ template: x.send_email_template
 subject: |
   Your Personal Action Plan for responding in your child custody case
 content: |
-  Thank you for using Alaska Court System Access to Justice Guided Assistant
+  Thank you for using the Alaska Court System's Court Guide Action Plan.
 
-  Your Action Plan is attached.
+  Your Personal Action Plan is attached.
+
+  Get [more information and a list of all the Court Guide Action Plans](https://ak-courts.info/ActionPlan).  
+  
+  [ak-courts.info/ActionPlan](https://ak-courts.info/ActionPlan).
 ---
 id: final screen
 decoration: pen-to-square
@@ -136,8 +140,10 @@ code: |
     military
     add_unique_step((proper_service_step, "proper_service_idx"), step_list)
     add_unique_step((default_options_step, "default_options_idx"), step_list)
-    if type_of_response['default'] and stage_of_default in('application filed','hearing scheduled')and proper_service == 'neither':
-      add_unique_step((dismiss_step, "dismiss_idx"), step_list)
+    if stage_of_default in('application filed','hearing scheduled'):
+      add_unique_step((answer_step, "answer_idx"), step_list)
+      if proper_service == 'neither':
+        add_unique_step((dismiss_step, "dismiss_idx"), step_list)
     if stage_of_default == 'judgment entered':
       if final_order_date_within_10_days or (defined('final_order_period') and guess_final_order_date == 'unknown'):
         add_unique_step((learn_reconsider_step, "learn_reconsider_idx"), step_list)
@@ -145,19 +151,19 @@ code: |
       if final_order_date_more_than_10_days or (defined('final_order_period') and guess_final_order_date == 'unknown'):
         add_unique_step((learn_set_aside_step, "learn_set_aside_idx"), step_list)
         add_unique_step((fill_set_aside_step, "fill_set_aside_idx"), step_list)
-      add_unique_image({'image': service_cert_image, 'text': "Certificate of Service"}, images_list)
-      add_unique_step((cert_of_service_step, "cert_of_service_idx"), step_list)
-      add_unique_step((file_motion_step, "file_motion_idx"), step_list)
-      add_unique_step((serve_motion_step, "serve_motion_idx"), step_list)
+    add_unique_image({'image': service_cert_image, 'text': "Certificate of Service"}, images_list)
+    add_unique_step((cert_of_service_step, "cert_of_service_idx"), step_list)
+    add_unique_step((file_motion_step, "file_motion_idx"), step_list)
+    add_unique_step((serve_motion_step, "serve_motion_idx"), step_list)
 
   if type_of_response.all_false('default') or (type_of_response['default'] and stage_of_default != 'judgment entered'):
   
-    if type_of_response['ak custody case'] or (type_of_response['case in 2 states'] and stage_of_other_case == 'ended with no order'): 
-      if response_to_complaint in('agree', 'some') or (response_to_complaint == 'none' and want_help_to_agree):
-        add_unique_step((want_help_to_agree_step, "want_help_to_agree_idx"), step_list)
+    if type_of_response['ak custody case'] and (response_to_complaint in('agree', 'some') or (response_to_complaint == 'none' and want_help_to_agree)):
+      add_unique_step((want_help_to_agree_step, "want_help_to_agree_idx"), step_list)
     
     if type_of_response['ak custody case'] \
-      or (type_of_response['wrong state'] and not jurisdiction and continue_after_jurisdiction) \
+      or type_of_response['improper service'] \
+      or (type_of_response['wrong state'] and continue_after_jurisdiction) \
       or (type_of_response['case in 2 states'] and stage_of_other_case != 'ended with order'):
       add_unique_step((answer_step, "answer_idx"), step_list)
       if type_of_response['wrong state'] and not jurisdiction and continue_after_jurisdiction:
@@ -175,7 +181,7 @@ code: |
       add_unique_step((learn_more_about_process_step, "learn_more_about_process_idx"), step_list)
   
   
-    if type_of_response['ak custody case'] or (type_of_response['case in 2 states'] and stage_of_other_case == 'ended with no order'): 
+    if type_of_response.any_true('ak custody case', 'improper service') or (type_of_response['default'] and stage_of_default in('application filed', 'hearing scheduled')): 
       if domestic_violence:
          add_unique_step((answer_domestic_violence_step, "answer_domestic_violence_idx"), step_list)
       if paternity:
@@ -308,12 +314,7 @@ content: |
   % if type_of_response.all_true('improper service', exclusive=True): 
   If you need information about filling out your Answer:
   
-    * [Start over](${ url_of('restart') }) and check the box, 
-  % if user_need == 'answer custody':
-  “The other parent started a custody case and I want to respond.”
-  % elif user_need == 'answer divorce':
-  “My spouse started a court case to end our marriage and I want to respond.”
-  % endif
+    * See Step ${ answer_idx }: Fill out the forms to answer the complaint and respond within 20 days
   Or 
     * Learn about filing an answer. See: [Responding to a Complaint Served on You](http://courts.alaska.gov/shc/family/answer.htm)
   % endif
@@ -651,26 +652,19 @@ content: |
   % elif stage_of_default == 'hearing scheduled':
   to undo the **Entry of Default** and accept your Answer even though it is late
   % endif
-  .
   % endif
   
   % if proper_service in('server to me', 'server to responsible person', 'mail'):
   **Option 1. Tell the court your side of the story**
   % endif
+   
+  If you need information about filling out your Answer:
   
-    * Fill out and file an Answer.
-  % if type_of_response.all_false('ak custody case', 'ak divorce case'):
-  <br>If you need information about filling out your Answer:
-      * [Start over](${ url_of('restart') }) and check the box, 
-  % if user_need == 'answer custody':
-  “The other parent started a custody case and I want to respond.” And
-  % elif user_need == 'answer divorce':
-  “My spouse started a court case to end our marriage and I want to respond.” And
-  % endif 
-  % elif type_of_response.any_true('ak custody case','ak divorce case'):
-     * See Step ${ answer_idx }: Fill out an Answer form to respond to the complaint.
-  % endif
-      * Learn about filing an Answer. See [Responding to a Complaint Served on You](http://courts.alaska.gov/shc/family/answer.htm).
+    * See Step ${ answer_idx }: Fill out the forms to answer the complaint and respond within 20 days
+  Or 
+    * Learn about filing an answer. See: [Responding to a Complaint Served on You](http://courts.alaska.gov/shc/family/answer.htm)
+ 
+  
   
   
   % if stage_of_default == 'application filed':
@@ -786,10 +780,10 @@ content: |
   <ul>
   <li>Look at each paragraph in ${other_party_in_case}'s complaint and decide if you agree, disagree, or you are not sure.</li>
   
-  % if (user_need == 'answer custody' and type_of_response['ak custody case']) or (user_need == 'answer divorce' and type_of_response['ak divorce case']) or (type_of_response['case in 2 states'] and stage_of_other_case == 'ended with no order'):
-  % if (case_type == 'custody' or case_type == 'divorce' or (case_type == 'legal separation' and want_legal_separation == 'yes')) and response_to_complaint == 'agree':
+  % if (user_need == 'answer custody' and type_of_response['ak custody case']) or (user_need == 'answer divorce' and type_of_response['ak divorce case']) or (type_of_response['case in 2 states'] and stage_of_other_case in('still going','ended with no order')) or type_of_response['wrong state']:
+  % if (case_type == 'custody' or case_type == 'divorce' or (case_type == 'legal separation' and want_legal_separation == 'yes')) and (type_of_response.all_false('wrong state', 'case in 2 states'))and response_to_complaint == 'agree':
   <li>If you agree with what ${other_party_in_case} asked for in their complaint, check the box in this section that says you “agree with all of the statements in the complaint.”</li>
-  % elif (case_type == 'custody' or case_type == 'divorce' or (case_type == 'legal separation' and want_legal_separation == 'yes')) and response_to_complaint == 'some': 
+  % elif (case_type == 'custody' or case_type == 'divorce' or (case_type == 'legal separation' and want_legal_separation == 'yes')) and (type_of_response.all_false('wrong state', 'case in 2 states')) and response_to_complaint == 'some': 
   <li>If you disagree with any of the paragraphs in the complaint, list the paragraph numbers you disagree with.</li>
   % else:
   <li>Check the appropriate box in your Answer.</li>
@@ -920,7 +914,7 @@ content: |
   * If you cannot get to a notary or someone with the power to take oaths, you can "self-certify." Use:</br>
   <strong>Self-Certification (No Notary Available), TF-835</strong> [<a href="https://public.courts.alaska.gov/web/forms/docs/tf-835.pdf">Fill-In PDF</a>]
   
-  % if (user_need == 'answer custody' and type_of_response['ak custody case']) or (user_need == 'answer divorce' and type_of_response['ak divorce case']) or (type_of_response['case in 2 states'] and stage_of_other_case == 'ended with no order'):
+  % if ((user_need == 'answer custody' and type_of_response['ak custody case']) or (user_need == 'answer divorce' and type_of_response['ak divorce case'])) and (type_of_response.all_false('wrong state', 'case in 2 states')):
   % if response_to_complaint in('agree','some') or (response_to_complaint == 'none' and want_help_to_agree):
   % if response_to_complaint in('agree','some'):
   <div class="step-subheading">Forms to use if you and ${ other_party_in_case } write out your agreement</div>
