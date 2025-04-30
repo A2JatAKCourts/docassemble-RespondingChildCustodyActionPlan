@@ -44,9 +44,9 @@ def find_package_data(where='.', package='', exclude=standard_exclude, exclude_d
     return out
 
 setup(name='docassemble.RespondingChildCustodyActionPlan',
-      version='2025.01.14',
+      version='2025.04.29',
       description=('Responding in your child custody case  - action plan'),
-      long_description='# docassemble.RespondingChildCustodyActionPlan\r\n\r\nResponding in your child custody case  - action plan\r\n\r\n## Author\r\n\r\nCaroline Robinson\r\n\r\n',
+      long_description='# docassemble.RespondingChildCustodyActionPlan\r\n\r\nResponding in your child custody case  - action plan\r\n\r\n## Author\r\n\r\nAlaska Court System\r\n',
       long_description_content_type='text/markdown',
       author='Caroline Robinson',
       author_email='CRobinson@akcourts.gov',
@@ -54,7 +54,7 @@ setup(name='docassemble.RespondingChildCustodyActionPlan',
       url='https://courtformsonline.org',
       packages=find_packages(),
       namespace_packages=['docassemble'],
-      install_requires=['docassemble.AssemblyLine>=3.2.0', 'docassemble-AKA2JBranding @ https://github.com/A2JatAKCourts/docassemble-AKA2JBranding/archive/main.zip'],
+      install_requires=['docassemble.AKA2JBranding>=25.3.31', 'docassemble.AssemblyLine>=3.2.0'],
       zip_safe=False,
       package_data=find_package_data(where='docassemble/RespondingChildCustodyActionPlan/', package='docassemble.RespondingChildCustodyActionPlan'),
      )

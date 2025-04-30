@@ -94,7 +94,7 @@ code: |
 ---
 comment: |
   This question is used to introduce your interview. Please customize
-id: Responding_in_your_child_custody_case_action_plan - intro
+id: Responding_in_your_child_custody_case_action_plan - intro validation code
 continue button field: responding_child_custody_action_plan_intro
 question: |
   Responding in your child custody case
@@ -113,14 +113,14 @@ fields:
       - "The other parent started a custody case in Alaska, but I think the case should be in a different state.": wrong state
       - "2 custody cases were filed – Alaska and another state.": case in 2 states
       - "The other parent started a custody case against me, I did not respond, and I got papers about a 'default judgment.'": default
-#      - "The other parent has not started a custody case yet, but wants to see if we can agree on a parenting plan and custody order.": parent agreement options
-    
     none of the above: |
       The other parent has not started a custody case yet, but wants to see if we can agree on a parenting plan and custody order.
-#    none of the above: False
 under: |
   #### <i class="fa-regular fa-lightbulb"></i> Learn more ####
-  We provide information about the process in Alaska only. Look for information in other states on their [court](https://www.ncsc.org/information-and-resources/state-court-websites) and [legal aid programs'](https://lawhelp.org) websites.   
+  We provide information about the process in Alaska only. Look for information in other states on their [court](https://www.ncsc.org/information-and-resources/state-court-websites) and [legal aid programs'](https://lawhelp.org) websites.
+validation code: | 
+  if type_of_response['wrong state'] and type_of_response['case in 2 states']:
+    validation_error("Pick only 1 of these 2 choices, 'I think the other parent filed in the wrong state', <strong>or</strong> '2 custody cases were filed.' You cannot pick both.")
 ---
 id: Have children lived in AK long enough
 question: |
@@ -147,35 +147,26 @@ subquestion: |
   % endif
 continue button field: continue_after_jurisdiction
 ---
-
+id: Improper service choice
+question: |
+    Options
+subquestion: |
+  ${ capitalize(other_party_in_case)} is supposed to give you a copy of the paperwork filed in court by (1) process server, or (2) sending it by certified mail/restricted delivery/return receipt.  This is called “serving you.”  Information about “serving” has been added to your Action Plan.
+continue button field: improper_service
 ---
 id: Proper service
 question: |
-  How did you first find out about the case?
+  Did ${ other_party_in_case } send you the documents to start the case one of these ways?
 subquestion: |
-  ${ capitalize(other_party_in_case) } is supposed to give you a copy of the paperwork filed in court by:
-  
-  1. a process server, a person licensed by the State of Alaska to serve legal documents, or
-  1. sending it by certified mail/restricted delivery/return receipt.
-  
-  This is called “serving you.”   
-fields:
-  - How did ${ other_party_in_case } tell you they started this case?: proper_service
-    input type: radio
-    choices:
-      - "A process server gave the documents to me.": server to me
-      - "A process server gave the documents to a responsible person at my home.": server to responsible person
-      - "${ capitalize(other_party_in_case) } used certified mail, restricted delivery, with a green postcard return receipt I had to sign.": mail
-      - "I did not get the documents in any of these ways.": neither
-  - note: |
-      #### <i class="fa-regular fa-lightbulb"></i> Learn more ####
-      Why does this matter?
-    
-      Before the court can default you, ${ other_party_in_case } is supposed to "serve" you with copies of the complaint and the attached documents by process server or certified mail.  If they  did not, you may be able to challenge a default judgment.     
-    show if:
-      variable: type_of_response
-      is: default
-    
+  (1) A process server delivered the court papers to you or a responsible person at your home or work. Or 
+  (2) You got the court papers by certified mail, restricted delivery, return receipt and you had to sign your name to get the papers. 
+
+yesno: proper_service
+under: |
+  % if type_of_response['default']:
+  #### <i class="fa-regular fa-lightbulb"></i> Learn more
+  Before the court can enter a default judgment, ${ other_party_in_case } is supposed to give you copies of the court papers by process server or certified mail, restricted delivery, return receipt.  If ${ other_party_in_case } did not, you may be able to challenge the default.
+  % endif
 ---
 code: |
   servicetypes = [
@@ -362,7 +353,7 @@ id: Dismiss
 question: |
   You can file a “Motion to Dismiss” in your Alaska case
 subquestion: |
-  If the case in the other state is over and the other court issued a custody order, you can file a “Motion to Dismiss”  with your Answer when you respond in your Alaska case.
+  If the case in the other state is over and the other court issued a custody order, you can file a “Motion to Dismiss”  when you respond in your Alaska case.
 continue button field: dismiss
 ---
 id: Other over
@@ -534,9 +525,10 @@ attachment:
   update references: True
   variable name: responding_child_custody_action_plan_attachment[i]
   skip undefined: True
-  # docx template file: test_step6.docx
+  docx template file: default_options_step.docx
+  # docx template file: responding_child_custody_action_plan_w__js_edits_for_combination_situations.docx
   # docx template file: dummy2.docx
-  docx template file: responding_child_custody_action_plan.docx
+  # docx template file: responding_child_custody_action_plan.docx
   tagged pdf: True
 ---
 attachment:
@@ -545,7 +537,8 @@ attachment:
   update references: True
   variable name: docx_responding_child_custody_action_plan_attachment
   skip undefined: True
-  # docx template file: test_step6.docx
+  docx template file: default_options_step.docx
+  # docx template file: responding_child_custody_action_plan_w__js_edits_for_combination_situations.docx
   # docx template file: dummy2.docx
-  docx template file: responding_child_custody_action_plan.docx
+  # docx template file: responding_child_custody_action_plan.docx
   tagged pdf: True
