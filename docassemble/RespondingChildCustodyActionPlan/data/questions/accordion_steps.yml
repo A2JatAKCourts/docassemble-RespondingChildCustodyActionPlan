@@ -88,31 +88,32 @@ code: |
   # if len(type_of_response.true_values()) > 1:
   #   add_unique_step((pick_a_step_step, "pick_a_step_idx"), step_list)
   
-  if type_of_response.all_true('improper service', exclusive = True) or (type_of_response['improper service'] and type_of_response['ak custody case']):
-    improper_service = True
+  if type_of_response.all_true('improper service', exclusive = True):
+    # improper_service = True
     proper_service = False
-    # if not type_of_response['default']: 
     add_unique_step((proper_service_step, "proper_service_idx"), step_list)
+    add_unique_step((decide_after_improper_service_step, "decide_after_improper_service_idx"), step_list)
       
   
-  if type_of_response['wrong state']:
+  if type_of_response['wrong state'] and not type_of_response['default']:
     jurisdiction
-    continue_after_jurisdiction = True
-    if type_of_response['improper service']:
-      improper_service = True
-      proper_service = False
-      add_unique_step((proper_service_step, "proper_service_idx"), step_list)
+    continue_after_jurisdiction = True    
     add_unique_step((answer_jurisdiction_step, "answer_jurisdiction_idx"), step_list)
+    if type_of_response['improper service']:
+      # improper_service = True
+      proper_service
+      add_unique_step((proper_service_step, "proper_service_idx"), step_list)
+      add_unique_step((decide_after_improper_service_step, "decide_after_improper_service_idx"), step_list)
     # add_unique_step((ak_jurisdiction_step, "ak_jurisdiction_idx"), step_list)
     # add_unique_step((aka2j_jurisdiction_step, "aka2j_jurisdiction_idx"), step_list)
 
 
-  if type_of_response['case in 2 states'] and stage_of_other_case == 'ended with order':
+  if type_of_response['case in 2 states'] and not type_of_response['default'] and stage_of_other_case == 'ended with order':
     # motion_type = 'Motion to Dismiss'
     dismiss = True
     if type_of_response['improper service']:
-      improper_service = True
-      proper_service = False
+      # improper_service = True
+      proper_service
       add_unique_step((proper_service_step, "proper_service_idx"), step_list)
       # add_unique_step((answer_jurisdiction_step, "answer_jurisdiction_idx"), step_list)
     add_unique_step((dismiss_step, "dismiss_idx"), step_list)
@@ -122,7 +123,7 @@ code: |
     motion_type = 'motion'
     add_unique_step((expect_after_motion_step, "expect_after_motion_idx"), step_list)
   
-  if type_of_response['case in 2 states'] and stage_of_other_case == 'still going':    
+  if type_of_response['case in 2 states'] and not type_of_response['default'] and stage_of_other_case == 'still going':    
     ongoing = True
     jurisdiction
     add_unique_step((answer_jurisdiction_step, "answer_jurisdiction_idx"), step_list)
@@ -134,7 +135,7 @@ code: |
     add_unique_step((serve_motion_step, "serve_motion_idx"), step_list)
     add_unique_step((expect_after_answer_step, "expect_after_answer_idx"), step_list)
   
-  if type_of_response['case in 2 states'] and stage_of_other_case =='ended with no order': 
+  if type_of_response['case in 2 states'] and not type_of_response['default'] and stage_of_other_case =='ended with no order': 
     other_case_over = True
     add_unique_step((answer_jurisdiction_step, "answer_jurisdiction_idx"), step_list)
       
@@ -235,20 +236,17 @@ code: |
       image_list.append(new_image)
 ---
 comment: |
-  deleted as per JS 2025-02-11
-  % if type_of_response['improper service']:
-  % if proper_service == 'neither':
-  Move forward with the case or wait
-  % else:
-  Watch out for a Default Judgment
-  % endif
+  2025-04-30 version
 template: proper_service_step
 subject: |
   Step ${ proper_service_idx }:
   Learn about 
   % if type_of_response['improper service'] or (type_of_response['default'] and not proper_service) :
-  proper service and 
-   % endif
+  proper service
+  % if type_of_response['default']:
+  and 
+  % endif
+  % endif
   default judgment
  
 content: |
@@ -292,7 +290,7 @@ content: |
   % endif
   % endif
   . 
-  % elif stage_of_default == 'judgment entered':
+  % elif type_of_response['default'] and stage_of_default == 'judgment entered':
   When a judge enters a default judgment, they usually also enter a 
   % if user_need == 'answer custody':
   custody decree, parenting plan, and child support order
@@ -308,10 +306,19 @@ content: |
 
   If you want to ask the Alaska judge to undo the orders in your Alaska case you can file a **Motion to Set Aside** the Alaska orders.
   % endif
+
+  % if military:
+  <div class = "step-subheading">Military Protections</div>
+  Under the **Servicemembers Civil Relief Act**, you may have some protections against default judgment if the case is filed while you were on active duty. You can learn more about the [Servicemembers Civil Relief Act](https://www.militaryonesource.mil/financial-legal/personal-finance/servicemembers-civil-relief-act) on the federal website, [Military OneSource](https://www.militaryonesource.mil).
+  % if type_of_response.all_true('default', exclusive = True) or (type_of_response['default'] and type_of_response['wrong state'] and jurisdiction) or (type_of_response['default'] and type_of_response['case in 2 states'] and stage_of_other_case == 'still going' and jurisdiction and stage_of_default in('application filed', 'hearing scheduled')) or (type_of_response['default'] and type_of_response['case in 2 states'] and stage_of_other_case == 'ended with no order'):
+  If the **Servicemembers Civil Relief Act** does not apply to your case to stop the default judgment, you have other options.
+  % endif
+  % endif
+
 ---
-template: decide_after_proper_service_step
+template: decide_after_improper_service_step
 subject: |
-  Step ${ decide_after_proper_service_idx }:
+  Step ${ decide_after_improper_service_idx }:
   Decide if you want to move forward or wait
 content: |
   If ${ other_party_in_case } properly served you, you should file an Answer within 20 days or you risk default judgment. 
@@ -331,7 +338,7 @@ content: |
   If you do not have a copy of the filed documents, you can ask the other parent or get a copy from your file at the courthouse. Read about [getting copies of your court file](https://courts.alaska.gov/trialcourts/index.htm#recs) on the court’s website.
     
   <div class="step-subheading">Wait</div>
-  If you do not want to do anything unless ${ other_party_in_case } serves you properly, awit for proper service and then file your Answer. You can look up your case on [the court's CourtView webpage](https://records.courts.alaska.gov/eaccess/home.page.2) to see if ${ other_party_in_case } files anything new.
+  If you do not want to do anything unless ${ other_party_in_case } serves you properly, wait for proper service and then file your Answer. You can look up your case on [the court's CourtView webpage](https://records.courts.alaska.gov/eaccess/home.page.2) to see if ${ other_party_in_case } files anything new.
   
   If neither you nor ${ other_party_in_case } files anything, the court will close your case.
 ---
