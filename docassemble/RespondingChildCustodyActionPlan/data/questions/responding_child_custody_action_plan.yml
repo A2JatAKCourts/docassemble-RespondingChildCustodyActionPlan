@@ -48,6 +48,9 @@ code: |
 objects:
   - users: ALPeopleList
 ---
+features:
+  css: 
+    - NoRedAsterisk.css
 # sections:
 #   - review_Responding_child_custody_action_plan: Review your answers
 ---
@@ -123,11 +126,13 @@ validation code: |
     validation_error("Pick only 1 of these 2 choices, 'I think the other parent filed in the wrong state', <strong>or</strong> '2 custody cases were filed.' You cannot pick both.")
 ---
 id: Have children lived in AK long enough
+css class: after
 question: |
   Have your children lived in Alaska for at least the last 6 months?
 fields: 
   - no label: jurisdiction
     datatype: yesnoradio
+    css class: no-required-asterisk
 under: |
   #### <i class="fa-regular fa-lightbulb"></i> Learn more ####
   Why does it matter where our children live?
@@ -525,10 +530,8 @@ attachment:
   update references: True
   variable name: responding_child_custody_action_plan_attachment[i]
   skip undefined: True
-  docx template file: default_options_step.docx
-  # docx template file: responding_child_custody_action_plan_w__js_edits_for_combination_situations.docx
-  # docx template file: dummy2.docx
-  # docx template file: responding_child_custody_action_plan.docx
+  # docx template file: dummy.docx
+  docx template file: responding_child_custody_action_plan.docx
   tagged pdf: True
 ---
 attachment:
@@ -537,8 +540,6 @@ attachment:
   update references: True
   variable name: docx_responding_child_custody_action_plan_attachment
   skip undefined: True
-  docx template file: default_options_step.docx
-  # docx template file: responding_child_custody_action_plan_w__js_edits_for_combination_situations.docx
-  # docx template file: dummy2.docx
-  # docx template file: responding_child_custody_action_plan.docx
+  # docx template file: dummy.docx
+  docx template file: responding_child_custody_action_plan.docx
   tagged pdf: True
