@@ -98,59 +98,56 @@ code: |
     add_unique_step((answer_step, "answer_idx"), step_list)
     add_unique_step((cert_of_service_step, "cert_of_service_idx"), step_list)
     add_unique_step((file_answer_step, "file_answer_idx"), step_list)
-    add_unique_step((serve_motion_step, "serve_motion_idx"), step_list)
-      
+    add_unique_step((serve_motion_step, "serve_motion_idx"), step_list)      
   
-  if type_of_response['wrong state'] and not type_of_response['default']:
-    jurisdiction    
+  if type_of_response['wrong state']:
     add_unique_step((answer_jurisdiction_step, "answer_jurisdiction_idx"), step_list)
-    if type_of_response['improper service']:
+    if type_of_response.any_true('improper service', 'default'):
       add_unique_step((proper_service_step, "proper_service_idx"), step_list)
       if not proper_service:
         add_unique_step((decide_after_improper_service_step, "decide_after_improper_service_idx"), step_list)
-    else:
-      proper_service = True
-    add_unique_step((answer_step, "answer_idx"), step_list)
-    if not jurisdiction:
-      add_unique_step((dismiss_step, "dismiss_idx"), step_list)
-    # add_unique_step((cert_of_service_step, "cert_of_service_idx"), step_list)
-    # add_unique_step((file_answer_step, "file_answer_idx"), step_list)
-    add_unique_step((serve_motion_step, "serve_motion_idx"), step_list)
-    
+    if type_of_response['default'] and stage_of_default in('application filed', 'hearing scheduled'):
+      if jurisdiction:
+        add_unique_step((default_options_step, "default_options_idx"), step_list)
+    elif type_of_response['default'] and stage_of_default == 'judgment entered':
+      add_unique_step((default_options_step, "default_options_idx"), step_list)
+      add_unique_step((learn_set_aside_step, "learn_set_aside_idx"), step_list)
+      add_unique_step((fill_set_aside_step, "fill_set_aside_idx"), step_list)
+    if not type_of_response['default'] or (type_of_response['default'] and stage_of_default in('application filed', 'hearing scheduled')):
+      if jurisdiction:
+        add_unique_step((answer_step, "answer_idx"), step_list)  
+      if not jurisdiction:
+        add_unique_step((dismiss_step, "dismiss_idx"), step_list)
 
-  if type_of_response['case in 2 states'] and not type_of_response['default']:
-    if stage_of_other_case == 'ended with order':
-      motion_type = 'Motion to Dismiss'
-    if stage_of_other_case == 'still going':
-      jurisdiction
-    if stage_of_other_case in('still going', 'ended with no order'):
-      add_unique_step((answer_jurisdiction_step, "answer_jurisdiction_idx"), step_list)
-    if type_of_response['improper service']:
-      proper_service
-      add_unique_step((proper_service_step, "proper_service_idx"), step_list)
-    if stage_of_other_case == 'still going':
-      add_unique_step((case_in_2_states_step, "case_in_2_states_idx"), step_list)
-    if stage_of_other_case in('still going', 'ended with no order'):
+  if type_of_response.all_true('default', exclusive = True):
+    proper_service
+    add_unique_step((proper_service_step, "proper_service_idx"), step_list)
+    military
+    add_unique_step((default_options_step, "default_options_idx"), step_list)
+    if stage_of_default in('application filed','hearing scheduled'):
       add_unique_step((answer_step, "answer_idx"), step_list)
-    if stage_of_other_case in('still going', 'ended with order'):
-      add_unique_step((dismiss_step, "dismiss_idx"), step_list)
+      if not proper_service:
+        add_unique_step((dismiss_step, "dismiss_idx"), step_list)
+    if stage_of_default == 'judgment entered':
+      add_unique_step((learn_set_aside_step, "learn_set_aside_idx"), step_list)
+      add_unique_step((fill_set_aside_step, "fill_set_aside_idx"), step_list)
+    add_unique_image({'image': service_cert_image, 'text': "Certificate of Service"}, images_list)
     add_unique_step((cert_of_service_step, "cert_of_service_idx"), step_list)
-    add_unique_step((file_answer_step, "file_answer_idx"), step_list)
+    add_unique_step((file_motion_step, "file_motion_idx"), step_list)
     add_unique_step((serve_motion_step, "serve_motion_idx"), step_list)
-    add_unique_step((read_drpo_step, "read_drpo_idx"), step_list)
-    # motion_type = 'motion'
-    add_unique_step((expect_after_answer_step, "expect_after_answer_idx"), step_list)
+  
+  if type_of_response.all_true('ak custody case', exclusive = True):
+    proper_service = True
+    add_unique_step((answer_step, "answer_idx"), step_list)
+    if (response_to_complaint in('agree', 'some') or (response_to_complaint == 'none' and want_help_to_agree)):
+      add_unique_step((want_help_to_agree_step, "want_help_to_agree_idx"), step_list)
 
-    if type_of_response['ak custody case']:
-      # improper_service = True
-      # proper_service = False
-      # add_unique_step((proper_service_step, "proper_service_idx"), step_list)
-      add_unique_step((answer_step, "answer_idx"), step_list)
-      add_unique_step((cert_of_service_step, "cert_of_service_idx"), step_list)
-      add_unique_step((file_answer_step, "file_answer_idx"), step_list)
-      add_unique_step((serve_motion_step, "serve_motion_idx"), step_list)  
-
-
+  
+  add_unique_step((cert_of_service_step, "cert_of_service_idx"), step_list)
+  add_unique_step((file_answer_step, "file_answer_idx"), step_list)
+  add_unique_step((serve_motion_step, "serve_motion_idx"), step_list)  
+  
+  
   add_unique_step((get_help, "get_help_idx"), step_list)
     
   for iter_idx, step_tuple in enumerate( step_list ):
@@ -607,7 +604,8 @@ content: |
   % endif
 ---
 comment: |
-  2025-07-22
+  2025-07-27
+  added 'and not jurisdiction' for intro when type_of_response['wrong state'] so we won't be including dismiss-step in this scenario
 template: answer_step
 subject: |
   Step ${ answer_idx }:
@@ -642,7 +640,7 @@ content: |
   1.	File an **Answer** and other required forms with the court to tell the judge what you want to happen in your case.
   2.	Give a copy of the forms to the other parent. Read Step ${ serve_motion_idx }: Serve .
   
-  % if type_of_response['wrong state']:
+  % if type_of_response['wrong state'] and not jurisdiction:
   If you think Alaska is not the "home state," you can ask the court to dismiss your case:
   
     * Fill out your **Answer** and tell the Alaska court why you think the case should be in another state.
@@ -652,7 +650,7 @@ content: |
  
   <div class="step-subheading">Use</div>
   % if user_need == 'answer custody':
-   **ANSWER AND COUNTERCLAIM TO COMPLAINT FOR CUSTODY OF MINOR CHILDREN, DR-450 ** [[Fill-in PDF](https://public.courts.alaska.gov/web/forms/docs/dr-450.pdf)]
+   **ANSWER AND COUNTERCLAIM TO COMPLAINT FOR CUSTODY OF MINOR CHILDREN, DR-450** [[Fill-in PDF](https://public.courts.alaska.gov/web/forms/docs/dr-450.pdf)]
  
   % endif
   % if user_need == 'answer divorce':
