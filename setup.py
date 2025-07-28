@@ -1,6 +1,6 @@
 import os
 import sys
-from setuptools import setup, find_packages
+from setuptools import setup, find_namespace_packages
 from fnmatch import fnmatchcase
 from distutils.util import convert_path
 
@@ -44,7 +44,7 @@ def find_package_data(where='.', package='', exclude=standard_exclude, exclude_d
     return out
 
 setup(name='docassemble.RespondingChildCustodyActionPlan',
-      version='2025.04.29',
+      version='2025.07.271',
       description=('Responding in your child custody case  - action plan'),
       long_description='# docassemble.RespondingChildCustodyActionPlan\r\n\r\nResponding in your child custody case  - action plan\r\n\r\n## Author\r\n\r\nAlaska Court System\r\n',
       long_description_content_type='text/markdown',
@@ -52,9 +52,8 @@ setup(name='docassemble.RespondingChildCustodyActionPlan',
       author_email='CRobinson@akcourts.gov',
       license='The MIT License',
       url='https://courtformsonline.org',
-      packages=find_packages(),
-      namespace_packages=['docassemble'],
-      install_requires=['docassemble.AKA2JBranding>=25.3.31', 'docassemble.AssemblyLine>=3.2.0'],
+      packages=find_namespace_packages(),
+      install_requires=['docassemble.AKA2JBranding @ git+https://github.com/A2JatAKCourts/docassemble-AKA2JBranding.git@main', 'docassemble.AssemblyLine @ git+https://github.com/SuffolkLITLab/docassemble-AssemblyLine.git@main'],
       zip_safe=False,
       package_data=find_package_data(where='docassemble/RespondingChildCustodyActionPlan/', package='docassemble.RespondingChildCustodyActionPlan'),
      )
