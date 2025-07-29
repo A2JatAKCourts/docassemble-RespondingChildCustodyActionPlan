@@ -14,7 +14,7 @@ Scenario: Row #30
     | user_need                       | answer custody |         | 
     | type_of_response['wrong state'] | True           |         | 
     | jurisdiction                    | True           |         | 
-    And I should see the phrase "Your Personal Action Plan for responding in your child custody case in 8 steps"
+    And I should see the phrase "Your Action Plan for responding in your child custody case in 8 steps"
     And I should see the phrase "Step 1: Learn if Alaska is the right state for your custody case"
     And I should see the phrase "Step 2: If you decide to move forward, fill out the forms to answer the complaint and respond within 20 days"
     And I should see the phrase "Step 3: If you decide to move forward, fill out the Certificate of Service"
@@ -36,7 +36,7 @@ Scenario: Row #31
     | user_need                       | answer custody |         | 
     | type_of_response['wrong state'] | True           |         | 
     | jurisdiction                    | False          |         | 
-    And I should see the phrase "Your Personal Action Plan for responding in your child custody case in 9 steps"
+    And I should see the phrase "Your Action Plan for responding in your child custody case in 9 steps"
     And I should see the phrase "Step 1: Learn if Alaska is the right state for your custody case"
     And I should see the phrase "Step 2: Fill out the forms to respond and ask to dismiss if you think Alaska is the wrong state"
     And I should see the phrase "Step 3: File a motion to dismiss your Alaska case"
@@ -61,7 +61,7 @@ Scenario: Row #18
     | type_of_response['improper service'] | True           |         | 
     | jurisdiction                         | True           |         | 
     | proper_service                       | True           |         | 
-    And I should see the phrase "Your Personal Action Plan for responding in your child custody case in 9 steps"
+    And I should see the phrase "Your Action Plan for responding in your child custody case in 9 steps"
     And I should see the phrase "Step 1: Learn if Alaska is the right state for your custody case"
 # Proper service step should mention only proper service (no default judgment) when proper_service is True
     And I should see the phrase "Step 2: Learn about proper service"
@@ -89,7 +89,7 @@ Scenario: Row #19
     | type_of_response['improper service'] | True           |         | 
     | jurisdiction                         | True           |         | 
     | proper_service                       | False          |         | 
-    And I should see the phrase "Your Personal Action Plan for responding in your child custody case in 10 steps"
+    And I should see the phrase "Your Action Plan for responding in your child custody case in 10 steps"
     And I should see the phrase "Step 1: Learn if Alaska is the right state for your custody case"
 # The proper service step should mention both proper service and default judgment when proper_service is False
     And I should see the phrase "Step 2: Learn about proper service and default judgment"
@@ -118,7 +118,7 @@ Scenario: Row #20
     | type_of_response['improper service'] | True           |         | 
     | jurisdiction                         | False          |         | 
     | proper_service                       | True           |         | 
-    And I should see the phrase "Your Personal Action Plan for responding in your child custody case in 10 steps"
+    And I should see the phrase "Your Action Plan for responding in your child custody case in 10 steps"
     And I should see the phrase "Step 1: Learn if Alaska is the right state for your custody case"
 # Proper service step should mention only proper service when proper_service is True
     And I should see the phrase "Step 2: Learn about proper service"
@@ -147,7 +147,7 @@ Scenario: Row #21
     | type_of_response['improper service'] | True           |         | 
     | jurisdiction                         | False          |         | 
     | proper_service                       | False          |         | 
-    And I should see the phrase "Your Personal Action Plan for responding in your child custody case in 11 steps"
+    And I should see the phrase "Your Action Plan for responding in your child custody case in 11 steps"
     And I should see the phrase "Step 1: Learn if Alaska is the right state for your custody case"
 # The proper service step should mention both proper service and default judgment when proper_service is False
     And I should see the phrase "Step 2: Learn about proper service and default judgment"
@@ -178,7 +178,7 @@ Scenario: Row #52
     | proper_service                  | True              |         | 
     | stage_of_default                | application filed |         | 
     | jurisdiction                    | True              |         | 
-    And I should see the phrase "Your Personal Action Plan for responding in your child custody case in 10 steps"
+    And I should see the phrase "Your Action Plan for responding in your child custody case in 10 steps"
     And I should see the phrase "Step 1: Learn if Alaska is the right state for your custody case"
     And I should see the phrase "Step 2: Learn about default judgment"
     And I should see the phrase "Step 3: Options if the other parent asked for default judgment"
@@ -205,7 +205,7 @@ Scenario: Row #53
     | proper_service                  | True              |         | 
     | stage_of_default                | application filed |         | 
     | jurisdiction                    | False             |         | 
-    And I should see the phrase "Your Personal Action Plan for responding in your child custody case in 10 steps"
+    And I should see the phrase "Your Action Plan for responding in your child custody case in 10 steps"
     And I should see the phrase "Step 1: Learn if Alaska is the right state for your custody case"
     And I should see the phrase "Step 2: Learn about default judgment"
     And I should see the phrase "Step 3: Options if the other parent asked for default judgment"
@@ -232,7 +232,7 @@ Scenario: Row #54
     | proper_service                  | True              |         | 
     | stage_of_default                | hearing scheduled |         | 
     | jurisdiction                    | True              |         | 
-    And I should see the phrase "Your Personal Action Plan for responding in your child custody case in 10 steps"
+    And I should see the phrase "Your Action Plan for responding in your child custody case in 10 steps"
     And I should see the phrase "Step 1: Learn if Alaska is the right state for your custody case"
     And I should see the phrase "Step 2: Learn about default judgment"
     And I should see the phrase "Step 3: Options if the other parent asked for default judgment"
@@ -271,7 +271,7 @@ Scenario: Row #56
     | type_of_response['default']     | True             |         | 
     | proper_service                  | True             |         | 
     | stage_of_default                | judgment entered |         | 
-    And I should see the phrase "Your Personal Action Plan for responding in your child custody case in 13 steps"
+    And I should see the phrase "Your Action Plan for responding in your child custody case in 13 steps"
     And I should see the phrase "Step 1: Learn if Alaska is the right state for your custody case"
     And I should see the phrase "Step 2: Learn about default judgment"
     And I should see the phrase "Step 3: Options when the judge entered a default judgment"
@@ -300,7 +300,7 @@ Scenario: Row #58
     | proper_service                  | False             |         | 
     | stage_of_default                | application filed |         | 
     | jurisdiction                    | False             |         | 
-    And I should see the phrase "Your Personal Action Plan for responding in your child custody case in 12 steps"
+    And I should see the phrase "Your Action Plan for responding in your child custody case in 12 steps"
     And I should see the phrase "Step 1: Learn if Alaska is the right state for your custody case"
     And I should see the phrase "Step 2: Learn about proper service and default judgment"
     And I should see the phrase "Step 3: Decide if you want to move forward or wait"
@@ -328,7 +328,7 @@ Scenario: Row #61
     | type_of_response['default']     | True             |         | 
     | proper_service                  | False            |         | 
     | stage_of_default                | judgment entered |         | 
-    And I should see the phrase "Your Personal Action Plan for responding in your child custody case in 12 steps"
+    And I should see the phrase "Your Action Plan for responding in your child custody case in 12 steps"
     And I should see the phrase "Step 1: Learn about proper service and default judgment"
     And I should see the phrase "Step 2: Decide if you want to move forward or wait"
     And I should see the phrase "Step 3: Options when the judge entered a default judgment"
