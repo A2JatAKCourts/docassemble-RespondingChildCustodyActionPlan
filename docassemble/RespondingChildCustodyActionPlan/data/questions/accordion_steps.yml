@@ -92,7 +92,6 @@ code: |
   #   add_unique_step((pick_a_step_step, "pick_a_step_idx"), step_list)
   
   if type_of_response.all_true('improper service', exclusive = True):
-    # improper_service = True
     proper_service = False
     add_unique_step((proper_service_step, "proper_service_idx"), step_list)
     add_unique_step((decide_after_improper_service_step, "decide_after_improper_service_idx"), step_list)
@@ -118,9 +117,9 @@ code: |
       if not jurisdiction:
         add_unique_step((dismiss_step, "dismiss_idx"), step_list)
 
-    if type_of_response['case in 2 states']:
-      if stage_of_other_case in('still going', 'ended with no order'):
-        add_unique_step((answer_jurisdiction_step, "answer_jurisdiction_idx"), step_list)
+  if type_of_response['case in 2 states']:
+    if stage_of_other_case in('still going', 'ended with no order'):
+      add_unique_step((answer_jurisdiction_step, "answer_jurisdiction_idx"), step_list)
     if type_of_response['improper service'] or type_of_response['default']:
       # proper_service asked by proper_service_step
       # military service asked by proper_service_step
@@ -281,11 +280,11 @@ subject: |
   Learn about 
   % if (type_of_response['improper service'] and not type_of_response['default']) or (type_of_response['default'] and not proper_service):
   proper service
-  % if type_of_response.all_true('improper service', exclusive = True) or (type_of_response.any_true('improper_service', 'default') and not proper_service):
+  % if type_of_response.all_true('improper service', exclusive = True) or (type_of_response.any_true('improper service', 'default') and not proper_service):
   and 
   % endif
   % endif
-  % if type_of_response.all_true('improper service', exclusive = True) or (type_of_response.any_true('improper_service', 'default') and not proper_service) or type_of_response['default']:
+  % if type_of_response.all_true('improper service', exclusive = True) or (type_of_response.any_true('improper service', 'default') and not proper_service) or type_of_response['default']:
   default judgment
   % endif
  
@@ -296,7 +295,7 @@ content: |
     * A process server delivered the court documents to you or a responsible person at your home or work, or
     * You got the court documents by certified mail, restricted delivery, return receipt, and you had to sign your name to get the papers.
 
-  Giving you the court documents is called “serving you.” 
+  Giving you the court documents is called "serving you." 
 
   After you are served, you have **20** days to file an Answer.
 
@@ -311,20 +310,20 @@ content: |
   % endif
   
   % if type_of_response.all_true('improper service', exclusive = True) or (type_of_response.any_true('wrong state', 'cases in 2 states') and not proper_service) and not type_of_response['default']:
-  If ${ other_party_in_case } thinks they served you correctly, they may ask the court for a default judgment if you do not file an Answer in 20 days. They are supposed to give you a copy of the **Default Application** if they file one with the court. If you want to make sure ${ other_party_in_case } has not filed for default, you can look up your case on [the court’s CourtView webpage](https://records.courts.alaska.gov/eaccess/home.page.2).
+  If ${ other_party_in_case } thinks they served you correctly, they may ask the court for a default judgment if you do not file an Answer in 20 days. They are supposed to give you a copy of the **Default Application** if they file one with the court. If you want to make sure ${ other_party_in_case } has not filed for default, you can look up your case on [the court's CourtView webpage](https://records.courts.alaska.gov/eaccess/home.page.2).
   % endif
 
   % if type_of_response['default']:
   % if stage_of_default in('application filed', 'hearing scheduled'):
   If you do not file an Answer within 20 days of receiving the Complaint, ${ other_party_in_case } may ask the court for a default judgment.
   % if not proper_service:
-  If you want to see what ${ other_party_in_case } filed for default, or if the judge entered any orders, you can look up your case on [the court’s CourtView webpage](https://records.courts.alaska.gov/eaccess/home.page.2).
+  If you want to see what ${ other_party_in_case } filed for default, or if the judge entered any orders, you can look up your case on [the court's CourtView webpage](https://records.courts.alaska.gov/eaccess/home.page.2).
   % endif
 
   There are 3 steps to get a default judgment:
     
   1. ${ other_party_in_case } files a **Default Application** and gives you a copy by mailing it or by hand delivery.
-  2. The Clerk of Court enters an **Entry of Default** and sets a date and time for a “default hearing.”
+  2. The Clerk of Court enters an **Entry of Default** and sets a date and time for a "default hearing."
   3. The Judge holds the **Default Hearing**. The judge may end your case without hearing from you and enter a default judgment order and other orders like a 
   % if user_need == 'answer custody':
   custody decree, parenting plan, and child support order
@@ -392,7 +391,7 @@ content: |
   % endif
     * You do not want to risk a default judgment.
     
-  If you do not have a copy of the filed documents, you can ask ${ other_party_in_case } or get a copy from your file at the courthouse. Read about [getting copies of your court file](https://courts.alaska.gov/trialcourts/index.htm#recs) on the court’s website.
+  If you do not have a copy of the filed documents, you can ask ${ other_party_in_case } or get a copy from your file at the courthouse. Read about [getting copies of your court file](https://courts.alaska.gov/trialcourts/index.htm#recs) on the court's website.
     
   <div class="step-subheading">Wait</div>
   If you do not want to do anything unless ${ other_party_in_case } serves you properly, wait for proper service and then file your **Answer**. You can look up your case on [the court's CourtView webpage](https://records.courts.alaska.gov/eaccess/home.page.2) to see if ${ other_party_in_case } files anything new.
@@ -434,7 +433,7 @@ content: |
     % if type_of_response.any_true('improper service', 'default') and not proper_service:
       You can also tell the Alaska judge you were not served correctly.
     % endif
-    The judges will then decide which court has jurisdiction. See Step ${ expect_after_motion_idx }: What to expect after you file your documents.  
+    The judges will then decide which court has jurisdiction. See Step ${ expect_after_answer_idx }: What to expect after you file your documents.  
   % endif
 
   % if not type_of_response['default']:
@@ -462,7 +461,7 @@ content: |
   % endif
 
   
-  % if (type_of_response['improper service']and not proper_service) or type_of_response['default']:
+  % if (type_of_response['improper service'] and not proper_service) or type_of_response['default']:
   If you do not have a copy of the filed documents, you can ask ${ other_party_in_case } or get a copy from your file at the courthouse. Read about [getting copies of your court file](https://courts.alaska.gov/trialcourts/index.htm#recs) on the court's website.
   % endif
 
@@ -499,7 +498,7 @@ content: |
   % if jurisdiction:
   Explain why you think the other court should hear the case, even though your children have lived in Alaska for the last 6 months.
   % else:
-  Include where your children have lived for the last 6 months. 
+  Include where your children have lived for the last 6 months.
   % endif 
 
   % if type_of_response.any_true('improper service', 'default') and not proper_service:
@@ -630,15 +629,12 @@ subject: |
   Step ${ answer_idx }:
   % if type_of_response['wrong state'] and not jurisdiction: 
   Fill out the forms to respond
-  % if not(type_of_response.any_true('improper_service', 'default') and not proper_service):
+  % if not(type_of_response.any_true('improper service', 'default') and not proper_service):
     in 20 days
   % endif
    and ask to dismiss if you think Alaska is the wrong state
   % else:  
-  % if type_of_response.all_true('improper service', exclusive = True) \
-    or (type_of_response['wrong state'] and jurisdiction) \
-    or (type_of_response['case in 2 states'] and stage_of_other_case == 'still going') \
-    or (type_of_response.all_true('default', exclusive = True) and stage_of_default in('application filed', 'hearing scheduled')):
+  % if type_of_response.all_true('improper service', exclusive = True) or (type_of_response['wrong state'] and jurisdiction) or (type_of_response['case in 2 states'] and stage_of_other_case == 'still going') or (type_of_response.all_true('default', exclusive = True) and stage_of_default in('application filed', 'hearing scheduled')):
       If you decide to move forward
   % if type_of_response['case in 2 states'] and stage_of_other_case == 'still going':
    in Alaska
@@ -799,7 +795,7 @@ content: |
     % if type_of_response['default'] and stage_of_default in('application filed', 'hearing scheduled'):
       % if stage_of_default == 'application filed' and proper_service:
         Because you did not file an **Answer** within 20 days of getting the Complaint, ask the judge to accept your **Answer** even though it is late.
-        Fill out a **TF-706 Motion (Request) and Affidavit** [Fill-In PDF](https://public.courts.alaska.gov/web/forms/docs/tf-706.pdf).
+        Fill out a **TF-706 Motion (Request) and Affidavit** [Fill-in PDF](https://public.courts.alaska.gov/web/forms/docs/tf-706.pdf).
           * Fill in the title  "accepting a late Answer". And
           * File it with your Answer.
       % endif
@@ -912,7 +908,7 @@ content: |
 
   
   % if (type_of_response['improper service'] and not proper_service) or type_of_response['default']:
-  If you do not have a copy of the filed documents, you can ask ${ other_party_in_case } or get a copy from your file at the courthouse. Read about [getting copies of your court file](https://courts.alaska.gov/trialcourts/index.htm#recs) on the court’s website. 
+  If you do not have a copy of the filed documents, you can ask ${ other_party_in_case } or get a copy from your file at the courthouse. Read about [getting copies of your court file](https://courts.alaska.gov/trialcourts/index.htm#recs) on the court's website. 
   % endif
 
   % if type_of_response['default']:
@@ -1175,11 +1171,11 @@ content: |
   1.	Make 2 copies of all your documents.
   2.	Mail or hand deliver the original to the court where the complaint was filed.
   3.	Save a copy for yourself.
-  4.	Send a copy to ${ other_party_in_case }. This is called “serving” ${ other_party_in_case }. The bottom of your motion form has instructions about serving.
+  4.	Send a copy to ${ other_party_in_case }. This is called "serving" ${ other_party_in_case }. The bottom of your motion form has instructions about serving.
   % else:
   You have 20 days after you receive the Complaint to:
   1.	File all your documents with the court. And
-  2.	Send a copy to ${ other_party_in_case }. This is called “serving” ${ other_party_in_case }.
+  2.	Send a copy to ${ other_party_in_case }. This is called "serving" ${ other_party_in_case }.
   The bottom of your Answer form has instructions about filing and serving.
   % endif
 ---
@@ -1237,7 +1233,7 @@ content: |
       * [Motions Part 3: Preparing a Reply](https://youtube.com/watch?v=egoBeRFB_Uw), and
       *	[Motions Part 4: Mailings and Deadlines](https://www.youtube.com/watch?v=YQvG7GEGeoo).
   * Read:
-      * [How do I reply to an opposition?](https://courts.alaska.gov/shc/family/motions.htm#reply) on the court’s website.
+      * [How do I reply to an opposition?](https://courts.alaska.gov/shc/family/motions.htm#reply) on the court's website.
 
   The court may decide without a hearing or set a hearing about the motion.
     
@@ -1489,14 +1485,14 @@ subject: |
   out the Certificate of Service 
   % endif
 content: |
-  You must give ${ other_party_in_case } 1 copy of everything you file with the court. This is called “service.”
+  You must give ${ other_party_in_case } 1 copy of everything you file with the court. This is called "service."
   <ol>
   <li>Decide on the way you will serve ${ other_party_in_case }, or their lawyer if they have one.
   <ul>
   <li>You can send the copy you made for them by regular, 1st class mail.</li>
   <li>You can deliver it yourself, or through a messenger service.</li>
   <li>If they file anything in court that says they agree to service by email, you can email the copy you made for them.
-  <li>If you use the court’s TrueFiling eFiling system, TrueFiling serves ${ other_party_in_case } for you.</li>
+  <li>If you use the court's TrueFiling eFiling system, TrueFiling serves ${ other_party_in_case } for you.</li>
   </ul></li>
   <li>Decide the date you will serve ${ other_party_in_case }. Serve them the same day you file your documents with the court.</li>
   <li><p>Fill out the <strong>Certificate of Service</strong> at the end of your court forms. The "certificate" tells the court how you are giving a copy of all the documents you file with the court to ${ other_party_in_case }. If you use TrueFiling, it serves the other parent for you and you do not need to fill out the Certificate of Service.</p>
