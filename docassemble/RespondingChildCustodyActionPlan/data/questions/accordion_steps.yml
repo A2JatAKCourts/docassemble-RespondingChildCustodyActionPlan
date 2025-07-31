@@ -1,5 +1,5 @@
 comment: |
-    last updated: 2025-07-27
+    last updated: 2025-07-30
     2025-06-04 until we get the docassemble interview Learn about motions: <a href="https://docassemble.akcourts.gov/start/FilingAMotion">Asking for an Order in a Divorce Case When the Issue Can't Wait for the Court's Final Decision (Filing a Motion) GA</a> live, use the link to the court webpage in the list under "Read." See Github branding issue https://github.com/A2JatAKCourts/docassemble-AKA2JBrandingIssues/issues/64
 ---
 generic object: ALDocumentBundle
@@ -112,8 +112,7 @@ code: |
       add_unique_step((learn_set_aside_step, "learn_set_aside_idx"), step_list)
       add_unique_step((fill_set_aside_step, "fill_set_aside_idx"), step_list)
     if not type_of_response['default'] or (type_of_response['default'] and stage_of_default in('application filed', 'hearing scheduled')):
-      if jurisdiction:
-        add_unique_step((answer_step, "answer_idx"), step_list)  
+      add_unique_step((answer_step, "answer_idx"), step_list)  
       if not jurisdiction:
         add_unique_step((dismiss_step, "dismiss_idx"), step_list)
 
@@ -124,7 +123,7 @@ code: |
       # proper_service asked by proper_service_step
       # military service asked by proper_service_step
       add_unique_step((proper_service_step, "proper_service_idx"), step_list)
-    if stage_of_other_case == 'still going' or (stage_of_other_case == 'ended with order' and type_of_response['improper service']) and (not (type_of_response['default'] and stage_of_default == 'judgment entered')):
+    if (stage_of_other_case == 'still going' or (stage_of_other_case == 'ended with order' and type_of_response['improper service'])) and (not (type_of_response['default'] and stage_of_default == 'judgment entered')):
       add_unique_step((case_in_2_states_step, "case_in_2_states_idx"), step_list)
     if type_of_response['default'] and (stage_of_other_case == 'ended with no order' or (stage_of_other_case == 'ended with order' and stage_of_default == 'judgment entered')):
       add_unique_step((default_options_step, "default_options_idx"), step_list)
@@ -157,13 +156,17 @@ code: |
       add_unique_step((want_help_to_agree_step, "want_help_to_agree_idx"), step_list)
 
   
-  
-  add_unique_image({'image': service_cert_image, 'text': "Certificate of Service"}, images_list)
-  add_unique_step((cert_of_service_step, "cert_of_service_idx"), step_list)
+  if type_of_response.any_true():
+    add_unique_image({'image': service_cert_image, 'text': "Certificate of Service"}, images_list)
+    add_unique_step((cert_of_service_step, "cert_of_service_idx"), step_list)
   add_unique_step((answer_file_and_serve_step, "answer_file_and_serve_idx"), step_list)
-  add_unique_step((read_drpo_step, "read_drpo_idx"), step_list)
+
+  if not (type_of_response['default'] and stage_of_default == 'judgment entered'):
+    add_unique_step((read_drpo_step, "read_drpo_idx"), step_list)
   add_unique_step((expect_after_answer_step, "expect_after_answer_idx"), step_list)
-  add_unique_step((learn_more_about_process_step, "learn_more_about_process_idx"), step_list)
+
+  if not ((type_of_response['case in 2 states'] and stage_of_other_case == 'ended with order') or (type_of_response['default'] and stage_of_default == 'judgment entered') or type_of_response.all_false()):
+    add_unique_step((learn_more_about_process_step, "learn_more_about_process_idx"), step_list)
   
   
   add_unique_step((get_help, "get_help_idx"), step_list)
@@ -346,7 +349,7 @@ content: |
   % endif
   . These are final orders in the case.
 
-  % if type_of_response['case in 2 states'] and stage_of_case == 'still going':
+  % if type_of_response['case in 2 states'] and stage_of_other_case == 'still going':
   If you have final orders in your Alaska case and an open case in another state, your situation is complicated. You should [talk to a lawyer](https://courts.alaska.gov/shc/shclawyer.htm) and let both courts know there are 2 cases going on.
 
   If you want to ask the Alaska judge to undo the orders in your Alaska case you can file a **Motion to Set Aside** the Alaska orders.
@@ -535,7 +538,7 @@ content: |
 
   <div class="step-subheading"></div>Option 1. Ask to Set Aside the Default Judgment</div>
 
-  % if type_of_response['case in 2 states'] and stage_of_case == 'ended with order':
+  % if type_of_response['case in 2 states'] and stage_of_other_case == 'ended with order':
   It can be complicated to have custody orders from 2 different state courts. 
   % if proper_service:
   You may want to ask the judge to set aside the default judgment. 
@@ -554,7 +557,7 @@ content: |
   % endif
    to ask the judge to set aside the default judgment, fill out
   % endif
-  % if type_of_response['case in 2 states'] and stage_of_case == 'ended with order':
+  % if type_of_response['case in 2 states'] and stage_of_other_case == 'ended with order':
   Fill out 
   % endif
   and file the paperwork as soon as you can.
@@ -562,15 +565,15 @@ content: |
   Read about asking the judge to set aside the default judgment in steps ${learn_set_aside_idx} and ${fill_set_aside_idx}.
   <div class="step-subheading">Option 2. Do nothing</div>
 
-  % if not (type_of_response['case in 2 states'] and stage_of_case == 'ended with order'):
+  % if not (type_of_response['case in 2 states'] and stage_of_other_case == 'ended with order'):
   If you are okay with the judge's orders you do not need to do anything. 
   % endif
   (https://courts.alaska.gov/trialcourts/index.htm#recs) on the court's website. 
-  % if type_of_response['case in 2 states'] and stage_of_case == 'ended with order':
+  % if type_of_response['case in 2 states'] and stage_of_other_case == 'ended with order':
   If the Alaska order is different from the custody order in the other state, it can be very complicated. It may be best to tell the judge about the other order and try to set aside the Alaska order 
   % endif
   You should decide quickly. The longer you wait, the harder it is to set aside the court's order.
-  % if type_of_response['case in 2 states'] and stage_of_case == 'ended with order':
+  % if type_of_response['case in 2 states'] and stage_of_other_case == 'ended with order':
    You may want to [talk to a lawyer](https://courts.alaska.gov/shc/shclawyer.htm). 
   % else:
   If something substantially changes and you want to ask to change the judge's custody parenting plan or child support order, read [Modifying Child Custody or Child Support Order](https://courts.alaska.gov/shc/family/shcmodify.htm) on the court's website.
@@ -839,7 +842,7 @@ content: |
     **Self-Certification (No Notary Available), TF-835** [Fill in PDF](https://public.courts.alaska.gov/web/forms/docs/tf-835.pdf)
   % endif
 
-    % if (user_need == 'answer custody' and type_of_response['ak custody case']) or (user_need == 'answer divorce' and type_of_response['ak divorce case']) or (type_of_response['case in 2 states'] and stage_of_other_case == 'ended with no order'):
+    % if (user_need == 'answer custody' and type_of_response.all_true('ak custody case', exclusive = True)) or (user_need == 'answer divorce' and type_of_response.all_true('ak divorce case', exclusive = True)):
       % if response_to_complaint in('agree','some') or (response_to_complaint == 'none' and want_help_to_agree):
         % if response_to_complaint in('agree', 'some'):
           <div class="step-subheading">Forms to use if you and the other parent write out your agreement</div>
@@ -868,7 +871,7 @@ Comment: |
 template: dismiss_step
 subject: |
   Step ${ dismiss_idx }: 
-  % if type_of_response.all_false['default']:
+  % if type_of_response.all_false('default'):
     % if type_of_response['wrong state']:
     If you think Alaska is the wrong state, file a motion to dismiss your Alaska case
     % endif
@@ -879,7 +882,7 @@ subject: |
   File a motion to dismiss your Alaska case
     % endif
   % else:
-    % if (type_of_response['wrong state'] or (type_of_response['case in 2 states'] and stage_of_case == 'still going')) and not jurisdiction:
+    % if (type_of_response['wrong state'] or (type_of_response['case in 2 states'] and stage_of_other_case == 'still going')) and not jurisdiction:
     Fill out the forms to respond and tell the court Alaska is the wrong state
     % endif
     % if stage_of_other_case == 'still going':
