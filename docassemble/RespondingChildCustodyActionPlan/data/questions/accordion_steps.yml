@@ -1,6 +1,6 @@
 comment: |
-    last updated: 2025-07-31
-    2025-06-04 until we get the docassemble interview Learn about motions: <a href="https://docassemble.akcourts.gov/start/FilingAMotion">Asking for an Order in a Divorce Case When the Issue Can't Wait for the Court's Final Decision (Filing a Motion) GA</a> live, use the link to the court webpage in the list under "Read." See Github branding issue https://github.com/A2JatAKCourts/docassemble-AKA2JBrandingIssues/issues/64
+    last updated: 2025-09-01
+    2025-06-04 until we get the doc1assemble interview Learn about motions: <a href="https://docassemble.akcourts.gov/start/FilingAMotion">Asking for an Order in a Divorce Case When the Issue Can't Wait for the Court's Final Decision (Filing a Motion) GA</a> live, use the link to the court webpage in the list under "Read." See Github branding issue https://github.com/A2JatAKCourts/docassemble-AKA2JBrandingIssues/issues/64
 ---
 generic object: ALDocumentBundle
 template: x.get_email_copy
@@ -99,6 +99,7 @@ code: |
          
   
   if type_of_response['wrong state']:
+    jurisdiction
     add_unique_step((answer_jurisdiction_step, "answer_jurisdiction_idx"), step_list)
     if type_of_response.any_true('improper service', 'default'):
       add_unique_step((proper_service_step, "proper_service_idx"), step_list)
@@ -631,24 +632,24 @@ subject: |
   Step ${ answer_idx }:
   % if type_of_response['wrong state'] and not jurisdiction: 
   Fill out the forms to respond
-  % if not(type_of_response.any_true('improper service', 'default') and not proper_service):
-    in 20 days
-  % endif
+    % if not(type_of_response.any_true('improper service', 'default') and not proper_service):
+      in 20 days
+    % endif
    and ask to dismiss if you think Alaska is the wrong state
   % else:  
-  % if type_of_response.all_true('improper service', exclusive = True) or (type_of_response['case in 2 states'] and stage_of_other_case == 'still going') or (type_of_response.all_true('default', exclusive = True) and stage_of_default in('application filed', 'hearing scheduled')):
-      If you decide to move forward
-  % if type_of_response['case in 2 states'] and stage_of_other_case == 'still going':
-   in Alaska
-  % endif
-  , fill
-  % else:
-  Fill
-  % endif
+    % if type_of_response.all_true('improper service', exclusive = True) or (type_of_response.all_true('improper service', 'wrong state') and jurisdiction and not proper_service) or (type_of_response['case in 2 states'] and stage_of_other_case == 'still going') or (type_of_response.all_true('default', exclusive = True) and stage_of_default in('application filed', 'hearing scheduled')):
+        If you decide to move forward
+      % if type_of_response['case in 2 states'] and stage_of_other_case == 'still going':
+      in Alaska
+      % endif
+    , fill
+    % else:
+    Fill
+    % endif
     out the forms to answer the complaint
-  % if (type_of_response.all_true('ak custody case', exclusive = True) or  type_of_response.all_true('improper service', exclusive = True) or type_of_response.all_true('wrong state', exclusive = True) or type_of_response.all_true('case in 2 states', exclusive = True)) or (type_of_response.any_true('ak custody case','improper service', 'wrong state', 'case in 2 states') and type_of_response.any_true('improper service', 'default') and proper_service):
-  and respond within 20 days
-  % endif
+    % if (type_of_response.all_true('ak custody case', exclusive = True) or  type_of_response.all_true('improper service', exclusive = True) or type_of_response.all_true('wrong state', exclusive = True) or type_of_response.all_true('case in 2 states', exclusive = True)) or (type_of_response.any_true('ak custody case','improper service', 'wrong state', 'case in 2 states') and type_of_response.any_true('improper service', 'default') and proper_service):
+    and respond within 20 days
+    % endif
   % endif
 content: |
   % if not(type_of_response.any_true('improper service', 'default') and not proper_service):
@@ -1155,7 +1156,7 @@ subject: |
   % if defined('file_step_heading'):
   ${ file_step_heading }
   % else:
-  % if type_of_response.all_true('improper service', exclusive = True) or (type_of_response['case in 2 states'] and stage_of_other_case == 'still going') or (type_of_response.all_true('default', exclusive=True) and stage_of_default in ('application filed', 'hearing scheduled')):
+  % if type_of_response.all_true('improper service', exclusive = True) or (type_of_response.all_true('improper service', 'wrong state') and jurisdiction and not proper_service) or (type_of_response['case in 2 states'] and stage_of_other_case == 'still going') or (type_of_response.all_true('default', exclusive=True) and stage_of_default in ('application filed', 'hearing scheduled')):
   If you decide to move forward, file
   % else:
   File
@@ -1470,7 +1471,7 @@ content: |
   If you and ${ other_party_in_case } agree on everything (a parenting plan including decision-making and schedule, paternity, and child support), you can fill out forms to start the case together.  This is called an uncontested case.
   
   You will not know your case number until you file your documents with the court.  You can write the case number on all your forms then.
-  <div class="step-subheading">Required forms – 1 copy that both parents sign if signatures are needed</div>
+  <div class="step-subheading">Required forms - 1 copy that both parents sign if signatures are needed</div>
 ---
 comment: |
   Need to update this step in branding package aka2j_templates.yml after this interview passes all tests
@@ -1481,7 +1482,7 @@ subject: |
   % if user_need in('respond to motion in custody', 'respond to motion in divorce') and type_of_response == 'reconsider':
   If the judge asks you to respond to the Motion to Reconsider, fill out the Certificate of Service
   % else:
-  % if type_of_response.all_true('improper service', exclusive = True) or (type_of_response['case in 2 states'] and stage_of_other_case == 'still going') or (type_of_response.all_true('default', exclusive=True) and stage_of_default in ('application filed', 'hearing scheduled')):
+  % if type_of_response.all_true('improper service', exclusive = True) or (type_of_response.all_true('improper service', 'wrong state') and jurisdiction and not proper_service) or (type_of_response['case in 2 states'] and stage_of_other_case == 'still going') or (type_of_response.all_true('default', exclusive=True) and stage_of_default in ('application filed', 'hearing scheduled')):
   If you decide to move forward, fill
   % else:
   Fill
@@ -1527,7 +1528,7 @@ comment: |
 template: read_drpo_step
 subject: |
   Step ${ read_drpo_idx }:
-  % if type_of_response.all_true('improper service', exclusive = True) or (type_of_response['case in 2 states'] and stage_of_other_case == 'still going') or (type_of_response.all_true('default', exclusive=True) and stage_of_default in ('application filed', 'hearing scheduled')):
+  % if type_of_response.all_true('improper service', exclusive = True) or (type_of_response.all_true('improper service', 'wrong state') and jurisdiction and not proper_service) or (type_of_response['case in 2 states'] and stage_of_other_case == 'still going') or (type_of_response.all_true('default', exclusive=True) and stage_of_default in ('application filed', 'hearing scheduled')):
   If you decide to move forward, read
   % else:
   Read
@@ -1565,7 +1566,7 @@ comment: |
 template: learn_more_about_process_step
 subject: |
   Step ${ learn_more_about_process_idx }: 
-  % if type_of_response.all_true('improper service', exclusive = True) or type_of_response['wrong state'] and not jurisdiction or (type_of_response['case in 2 states'] and stage_of_other_case == 'still going') or (type_of_response.all_true('default', exclusive=True) and stage_of_default in ('application filed', 'hearing scheduled')):
+  % if type_of_response.all_true('improper service', exclusive = True) or type_of_response['wrong state'] or (type_of_response['case in 2 states'] and stage_of_other_case == 'still going') or (type_of_response.all_true('default', exclusive=True) and stage_of_default in ('application filed', 'hearing scheduled')):
   If your case is moving forward in Alaska, learn
   % else:
   Learn
