@@ -1,70 +1,68 @@
 @case_in_2_states
 Feature: User paths
+# 2025-08-03
 
-Background: 
-  Given the maximum seconds for each Step is 90
+  Background:
+    Given the maximum seconds for each Step is 90
 
 
 
-@row22
-Scenario: row22
-  Given I start the interview at "responding_child_custody_action_plan.yml"
+  @row22
+  Scenario: row22
+    Given I start the interview at "responding_child_custody_action_plan.yml"
     And I get to the question id "final screen" with this data:
-    | var                                  | value            | trigger | 
-    | user_need                            | answer custody   |         | 
-    | type_of_response['case in 2 states'] | True             |         | 
-    | type_of_response['improper service'] | True             |         | 
-    | stage_of_other_case                  | ended with order |         | 
-    | proper_service                       | True             |         | 
-    And I should see the phrase "Your Action Plan for responding in your child custody case in 8 steps"
+      | var                                  | value            | trigger |
+      | user_need                            | answer custody   |         |
+      | type_of_response['case in 2 states'] | True             |         |
+      | type_of_response['improper service'] | True             |         |
+      | stage_of_other_case                  | ended with order |         |
+      | proper_service                       | True             |         |
+    And I should see the phrase "Your Action Plan for responding in your child custody case in 7 steps"
     And I should see the phrase "Step 1: Learn about proper service"
-    And I should see the phrase "Step 2: Options when you have a court order from another state"
-    And I should see the phrase "Step 3: File a motion to dismiss your Alaska case"
-    And I should see the phrase "Step 4: Fill out the Certificate of Service"
-    And I should see the phrase "Step 5: File your documents with the court and serve the other parent"
-    And I should see the phrase "Step 6: Read the “Domestic Relations Procedural Order” or Standing Order that was with the Complaint"
-    And I should see the phrase "Step 7: What to expect after you file your documents"
-    And I should see the phrase "Step 8: Get more information or help"
+    And I should see the phrase "Step 2: File a motion to dismiss your Alaska case"
+    And I should see the phrase "Step 3: Fill out the Certificate of Service"
+    And I should see the phrase "Step 4: File your documents with the court and serve the other parent"
+    And I should see the phrase "Step 5: Read the "Domestic Relations Procedural Order" or Standing Order that was with the Complaint"
+    And I should see the phrase "Step 6: What to expect after you file your documents"
+    And I should see the phrase "Step 7: Get more information or help"
     And I take a screenshot
     And I download "responding_child_custody_action_plan.pdf"
     And I download "responding_child_custody_action_plan.docx"
 
-@row23
-Scenario: row23
-  Given I start the interview at "responding_child_custody_action_plan.yml"
+  @row23
+  Scenario: row23
+    Given I start the interview at "responding_child_custody_action_plan.yml"
     And I get to the question id "final screen" with this data:
-    | var                                  | value            | trigger | 
-    | user_need                            | answer custody   |         | 
-    | type_of_response['case in 2 states'] | True             |         | 
-    | type_of_response['improper service'] | True             |         | 
-    | stage_of_other_case                  | ended with order |         | 
-    | proper_service                       | False            |         | 
-    And I should see the phrase "Your Action Plan for responding in your child custody case in 8 steps"
-    And I should see the phrase "Step 1: Learn about proper service and default judgment"
-    And I should see the phrase "Step 2: Options when you have a court order from another state"
-    And I should see the phrase "Step 3: File a motion to dismiss your Alaska case"
-    And I should see the phrase "Step 4: Fill out the Certificate of Service"
-    And I should see the phrase "Step 5: File your documents with the court and serve the other parent"
-    And I should see the phrase "Step 6: Read the “Domestic Relations Procedural Order” or Standing Order that was with the Complaint"
-    And I should see the phrase "Step 7: What to expect after you file your documents"
-    And I should see the phrase "Step 8: Get more information or help"
+      | var                                  | value            | trigger |
+      | user_need                            | answer custody   |         |
+      | type_of_response['case in 2 states'] | True             |         |
+      | type_of_response['improper service'] | True             |         |
+      | stage_of_other_case                  | ended with order |         |
+      | proper_service                       | False            |         |
+    And I should see the phrase "Your Action Plan for responding in your child custody case in 7 steps"
+    And I should see the phrase "Step 2: File a motion to dismiss your Alaska case"
+    And I should see the phrase "Step 3: Fill out the Certificate of Service"
+    And I should see the phrase "Step 4: File your documents with the court and serve the other parent"
+    And I should see the phrase "Step 5: Read the "Domestic Relations Procedural Order" or Standing Order that was with the Complaint"
+    And I should see the phrase "Step 6: What to expect after you file your documents"
+    And I should see the phrase "Step 7: Get more information or help"
     And I take a screenshot
     And I download "responding_child_custody_action_plan.pdf"
     And I download "responding_child_custody_action_plan.docx"
 
 
 
-@row24
-Scenario: row24
-  Given I start the interview at "responding_child_custody_action_plan.yml"
+  @row24
+  Scenario: row24
+    Given I start the interview at "responding_child_custody_action_plan.yml"
     And I get to the question id "final screen" with this data:
-    | var                                  | value          | trigger | 
-    | user_need                            | answer custody |         | 
-    | type_of_response['case in 2 states'] | True           |         | 
-    | type_of_response['improper service'] | True           |         | 
-    | stage_of_other_case                  | still going    |         | 
-    | jurisdiction                         | True           |         | 
-    | proper_service                       | True           |         | 
+      | var                                  | value          | trigger |
+      | user_need                            | answer custody |         |
+      | type_of_response['case in 2 states'] | True           |         |
+      | type_of_response['improper service'] | True           |         |
+      | stage_of_other_case                  | still going    |         |
+      | jurisdiction                         | True           |         |
+      | proper_service                       | True           |         |
     And I should see the phrase "Your Action Plan for responding in your child custody case in 11 steps"
     And I should see the phrase "Step 1: Learn if Alaska is the right state for your custody case"
     And I should see the phrase "Step 2: Learn about proper service"
@@ -82,17 +80,17 @@ Scenario: row24
     And I download "responding_child_custody_action_plan.docx"
 
 
-@row25
-Scenario: row25
-  Given I start the interview at "responding_child_custody_action_plan.yml"
+  @row25
+  Scenario: row25
+    Given I start the interview at "responding_child_custody_action_plan.yml"
     And I get to the question id "final screen" with this data:
-    | var                                  | value          | trigger | 
-    | user_need                            | answer custody |         | 
-    | type_of_response['case in 2 states'] | True           |         | 
-    | type_of_response['improper service'] | True           |         | 
-    | stage_of_other_case                  | still going    |         | 
-    | jurisdiction                         | True           |         | 
-    | proper_service                       | False          |         | 
+      | var                                  | value          | trigger |
+      | user_need                            | answer custody |         |
+      | type_of_response['case in 2 states'] | True           |         |
+      | type_of_response['improper service'] | True           |         |
+      | stage_of_other_case                  | still going    |         |
+      | jurisdiction                         | True           |         |
+      | proper_service                       | False          |         |
     And I should see the phrase "Your Action Plan for responding in your child custody case in 11 steps"
     And I should see the phrase "Step 1: Learn if Alaska is the right state for your custody case"
     And I should see the phrase "Step 2: Learn about proper service and default judgment"
@@ -109,17 +107,17 @@ Scenario: row25
     And I download "responding_child_custody_action_plan.pdf"
     And I download "responding_child_custody_action_plan.docx"
 
-@row26
-Scenario: row26
-  Given I start the interview at "responding_child_custody_action_plan.yml"
+  @row26
+  Scenario: row26
+    Given I start the interview at "responding_child_custody_action_plan.yml"
     And I get to the question id "final screen" with this data:
-    | var                                  | value          | trigger | 
-    | user_need                            | answer custody |         | 
-    | type_of_response['case in 2 states'] | True           |         | 
-    | type_of_response['improper service'] | True           |         | 
-    | stage_of_other_case                  | still going    |         | 
-    | jurisdiction                         | False          |         | 
-    | proper_service                       | True           |         | 
+      | var                                  | value          | trigger |
+      | user_need                            | answer custody |         |
+      | type_of_response['case in 2 states'] | True           |         |
+      | type_of_response['improper service'] | True           |         |
+      | stage_of_other_case                  | still going    |         |
+      | jurisdiction                         | False          |         |
+      | proper_service                       | True           |         |
     And I should see the phrase "Your Action Plan for responding in your child custody case in 11 steps"
     And I should see the phrase "Step 1: Learn if Alaska is the right state for your custody case"
     And I should see the phrase "Step 2: Learn about proper service"
@@ -136,17 +134,17 @@ Scenario: row26
     And I download "responding_child_custody_action_plan.pdf"
     And I download "responding_child_custody_action_plan.docx"
 
-@row27
-Scenario: row27
-  Given I start the interview at "responding_child_custody_action_plan.yml"
+  @row27
+  Scenario: row27
+    Given I start the interview at "responding_child_custody_action_plan.yml"
     And I get to the question id "final screen" with this data:
-    | var                                  | value          | trigger | 
-    | user_need                            | answer custody |         | 
-    | type_of_response['case in 2 states'] | True           |         | 
-    | type_of_response['improper service'] | True           |         | 
-    | stage_of_other_case                  | still going    |         | 
-    | jurisdiction                         | False          |         | 
-    | proper_service                       | False          |         | 
+      | var                                  | value          | trigger |
+      | user_need                            | answer custody |         |
+      | type_of_response['case in 2 states'] | True           |         |
+      | type_of_response['improper service'] | True           |         |
+      | stage_of_other_case                  | still going    |         |
+      | jurisdiction                         | False          |         |
+      | proper_service                       | False          |         |
     And I should see the phrase "Your Action Plan for responding in your child custody case in 11 steps"
     And I should see the phrase "Step 1: Learn if Alaska is the right state for your custody case"
     And I should see the phrase "Step 2: Learn about proper service and default judgment"
@@ -163,16 +161,16 @@ Scenario: row27
     And I download "responding_child_custody_action_plan.pdf"
     And I download "responding_child_custody_action_plan.docx"
 
-@row28
-Scenario: row28
-  Given I start the interview at "responding_child_custody_action_plan.yml"
+  @row28
+  Scenario: row28
+    Given I start the interview at "responding_child_custody_action_plan.yml"
     And I get to the question id "final screen" with this data:
-    | var                                  | value               | trigger | 
-    | user_need                            | answer custody      |         | 
-    | type_of_response['case in 2 states'] | True                |         | 
-    | type_of_response['improper service'] | True                |         | 
-    | stage_of_other_case                  | ended with no order |         | 
-    | proper_service                       | True               |         | 
+      | var                                  | value               | trigger |
+      | user_need                            | answer custody      |         |
+      | type_of_response['case in 2 states'] | True                |         |
+      | type_of_response['improper service'] | True                |         |
+      | stage_of_other_case                  | ended with no order |         |
+      | proper_service                       | True                |         |
     And I should see the phrase "Your Action Plan for responding in your child custody case in 9 steps"
     And I should see the phrase "Step 1: You can move forward with your Alaska case"
     And I should see the phrase "Step 2: Learn about proper service and default judgment"
@@ -187,16 +185,16 @@ Scenario: row28
     And I download "responding_child_custody_action_plan.pdf"
     And I download "responding_child_custody_action_plan.docx"
 
-@row29
-Scenario: row29
-  Given I start the interview at "responding_child_custody_action_plan.yml"
+  @row29
+  Scenario: row29
+    Given I start the interview at "responding_child_custody_action_plan.yml"
     And I get to the question id "final screen" with this data:
-    | var                                  | value               | trigger | 
-    | user_need                            | answer custody      |         | 
-    | type_of_response['case in 2 states'] | True                |         | 
-    | type_of_response['improper service'] | True                |         | 
-    | stage_of_other_case                  | ended with no order |         | 
-    | proper_service                       | False               |         | 
+      | var                                  | value               | trigger |
+      | user_need                            | answer custody      |         |
+      | type_of_response['case in 2 states'] | True                |         |
+      | type_of_response['improper service'] | True                |         |
+      | stage_of_other_case                  | ended with no order |         |
+      | proper_service                       | False               |         |
     And I should see the phrase "Your Action Plan for responding in your child custody case in 9 steps"
     And I should see the phrase "Step 1: You can move forward with your Alaska case"
     And I should see the phrase "Step 2: Learn about proper service and default judgment"
@@ -212,14 +210,14 @@ Scenario: row29
     And I download "responding_child_custody_action_plan.docx"
 
 
-@row32
-Scenario: row32
-  Given I start the interview at "responding_child_custody_action_plan.yml"
+  @row32
+  Scenario: row32
+    Given I start the interview at "responding_child_custody_action_plan.yml"
     And I get to the question id "final screen" with this data:
-    | var                                  | value            | trigger | 
-    | user_need                            | answer custody   |         | 
-    | type_of_response['case in 2 states'] | True             |         | 
-    | stage_of_other_case                  | ended with order |         | 
+      | var                                  | value            | trigger |
+      | user_need                            | answer custody   |         |
+      | type_of_response['case in 2 states'] | True             |         |
+      | stage_of_other_case                  | ended with order |         |
     And I should see the phrase "Your Action Plan for responding in your child custody case in 6 steps"
     And I should see the phrase "Step 1: File a motion to dismiss your Alaska case"
     And I should see the phrase "Step 2: Fill out the Certificate of Service"
@@ -231,15 +229,15 @@ Scenario: row32
     And I download "responding_child_custody_action_plan.pdf"
     And I download "responding_child_custody_action_plan.docx"
 
-@row33
-Scenario: row33
-  Given I start the interview at "responding_child_custody_action_plan.yml"
+  @row33
+  Scenario: row33
+    Given I start the interview at "responding_child_custody_action_plan.yml"
     And I get to the question id "final screen" with this data:
-    | var                                  | value          | trigger | 
-    | user_need                            | answer custody |         | 
-    | type_of_response['case in 2 states'] | True           |         | 
-    | stage_of_other_case                  | still going    |         | 
-    | jurisdiction                         | True           |         | 
+      | var                                  | value          | trigger |
+      | user_need                            | answer custody |         |
+      | type_of_response['case in 2 states'] | True           |         |
+      | stage_of_other_case                  | still going    |         |
+      | jurisdiction                         | True           |         |
     And I should see the phrase "Your Action Plan for responding in your child custody case in 10 steps"
     And I should see the phrase "Step 1: Learn if Alaska is the right state for your custody case"
     And I should see the phrase "Step 2: Options when you have cases in 2 states"
@@ -255,15 +253,15 @@ Scenario: row33
     And I download "responding_child_custody_action_plan.pdf"
     And I download "responding_child_custody_action_plan.docx"
 
-@row34
-Scenario: row34
-  Given I start the interview at "responding_child_custody_action_plan.yml"
+  @row34
+  Scenario: row34
+    Given I start the interview at "responding_child_custody_action_plan.yml"
     And I get to the question id "final screen" with this data:
-    | var                                  | value          | trigger | 
-    | user_need                            | answer custody |         | 
-    | type_of_response['case in 2 states'] | True           |         | 
-    | stage_of_other_case                  | still going    |         | 
-    | jurisdiction                         | False          |         | 
+      | var                                  | value          | trigger |
+      | user_need                            | answer custody |         |
+      | type_of_response['case in 2 states'] | True           |         |
+      | stage_of_other_case                  | still going    |         |
+      | jurisdiction                         | False          |         |
     And I should see the phrase "Your Action Plan for responding in your child custody case in 10 steps"
     And I should see the phrase "Step 1: Learn if Alaska is the right state for your custody case"
     And I should see the phrase "Step 2: Options when you have cases in 2 states"
@@ -279,14 +277,14 @@ Scenario: row34
     And I download "responding_child_custody_action_plan.pdf"
     And I download "responding_child_custody_action_plan.docx"
 
-@row35
-Scenario: row35
-  Given I start the interview at "responding_child_custody_action_plan.yml"
+  @row35
+  Scenario: row35
+    Given I start the interview at "responding_child_custody_action_plan.yml"
     And I get to the question id "final screen" with this data:
-    | var                                  | value               | trigger | 
-    | user_need                            | answer custody      |         | 
-    | type_of_response['case in 2 states'] | True                |         | 
-    | stage_of_other_case                  | ended with no order |         | 
+      | var                                  | value               | trigger |
+      | user_need                            | answer custody      |         |
+      | type_of_response['case in 2 states'] | True                |         |
+      | stage_of_other_case                  | ended with no order |         |
     And I should see the phrase "Your Action Plan for responding in your child custody case in 8 steps"
     And I should see the phrase "Step 1: You can move forward with your Alaska case"
     And I should see the phrase "Step 2: Fill out the forms to answer the complaint and respond within 20 days"
@@ -300,18 +298,18 @@ Scenario: row35
     And I download "responding_child_custody_action_plan.pdf"
     And I download "responding_child_custody_action_plan.docx"
 
-# these tests phrases need fixing 2025-07-31
-@row62
-Scenario: row62
-  Given I start the interview at "responding_child_custody_action_plan.yml"
+  # these tests phrases need fixing 2025-07-31
+  @row62
+  Scenario: row62
+    Given I start the interview at "responding_child_custody_action_plan.yml"
     And I get to the question id "final screen" with this data:
-    | var                                  | value            | trigger | 
-    | user_need                            | answer custody   |         | 
-    | type_of_response['case in 2 states'] | True             |         | 
-    | type_of_response['default']          | True             |         | 
-    | stage_of_other_case                  | ended with order |         | 
-    | stage_of_default                     | application filed |         | 
-    | proper_service                       | True             |         | 
+      | var                                  | value             | trigger |
+      | user_need                            | answer custody    |         |
+      | type_of_response['case in 2 states'] | True              |         |
+      | type_of_response['default']          | True              |         |
+      | stage_of_other_case                  | ended with order  |         |
+      | stage_of_default                     | application filed |         |
+      | proper_service                       | True              |         |
     And I should see the phrase "Your Action Plan for responding in your child custody case in 8 steps"
     And I should see the phrase "Step 1: Learn about proper service and default judgment"
     And I should see the phrase "Step 2: Options if the other parent asked for default judgment"
@@ -325,17 +323,17 @@ Scenario: row62
     And I download "responding_child_custody_action_plan.pdf"
     And I download "responding_child_custody_action_plan.docx"
 
-@row63
-Scenario: row63
-  Given I start the interview at "responding_child_custody_action_plan.yml"
+  @row63
+  Scenario: row63
+    Given I start the interview at "responding_child_custody_action_plan.yml"
     And I get to the question id "final screen" with this data:
-    | var                                  | value            | trigger | 
-    | user_need                            | answer custody   |         | 
-    | type_of_response['case in 2 states'] | True             |         | 
-    | type_of_response['default']          | True             |         | 
-    | stage_of_other_case                  | ended with order |         | 
-    | stage_of_default                     | application filed |         | 
-    | proper_service                       | False            |         | 
+      | var                                  | value             | trigger |
+      | user_need                            | answer custody    |         |
+      | type_of_response['case in 2 states'] | True              |         |
+      | type_of_response['default']          | True              |         |
+      | stage_of_other_case                  | ended with order  |         |
+      | stage_of_default                     | application filed |         |
+      | proper_service                       | False             |         |
     And I should see the phrase "Your Action Plan for responding in your child custody case in 9 steps"
     And I should see the phrase "Step 1: Learn about proper service and default judgment"
     And I should see the phrase "Step 2: Options if the other parent asked for default judgment and did not properly serve you"
@@ -350,17 +348,17 @@ Scenario: row63
     And I download "responding_child_custody_action_plan.pdf"
     And I download "responding_child_custody_action_plan.docx"
 
-@row64
-Scenario: row64
-  Given I start the interview at "responding_child_custody_action_plan.yml"
+  @row64
+  Scenario: row64
+    Given I start the interview at "responding_child_custody_action_plan.yml"
     And I get to the question id "final screen" with this data:
-    | var                                  | value            | trigger | 
-    | user_need                            | answer custody   |         | 
-    | type_of_response['case in 2 states'] | True             |         | 
-    | type_of_response['default']          | True             |         | 
-    | stage_of_other_case                  | ended with order |         | 
-    | stage_of_default                     | hearing scheduled |         | 
-    | proper_service                       | True             |         | 
+      | var                                  | value             | trigger |
+      | user_need                            | answer custody    |         |
+      | type_of_response['case in 2 states'] | True              |         |
+      | type_of_response['default']          | True              |         |
+      | stage_of_other_case                  | ended with order  |         |
+      | stage_of_default                     | hearing scheduled |         |
+      | proper_service                       | True              |         |
     And I should see the phrase "Your Action Plan for responding in your child custody case in 10 steps"
     And I should see the phrase "Step 1: Learn about proper service and default judgment"
     And I should see the phrase "Step 2: Options if the other parent asked for default judgment"
@@ -375,17 +373,17 @@ Scenario: row64
     And I download "responding_child_custody_action_plan.pdf"
     And I download "responding_child_custody_action_plan.docx"
 
-@row65
-Scenario: row65
-  Given I start the interview at "responding_child_custody_action_plan.yml"
+  @row65
+  Scenario: row65
+    Given I start the interview at "responding_child_custody_action_plan.yml"
     And I get to the question id "final screen" with this data:
-    | var                                  | value            | trigger | 
-    | user_need                            | answer custody   |         | 
-    | type_of_response['case in 2 states'] | True             |         | 
-    | type_of_response['default']          | True             |         | 
-    | stage_of_other_case                  | ended with order |         | 
-    | stage_of_default                     | hearing scheduled |         | 
-    | proper_service                       | False            |         | 
+      | var                                  | value             | trigger |
+      | user_need                            | answer custody    |         |
+      | type_of_response['case in 2 states'] | True              |         |
+      | type_of_response['default']          | True              |         |
+      | stage_of_other_case                  | ended with order  |         |
+      | stage_of_default                     | hearing scheduled |         |
+      | proper_service                       | False             |         |
     And I should see the phrase "Your Action Plan for responding in your child custody case in 11 steps"
     And I should see the phrase "Step 1: Learn about proper service and default judgment"
     And I should see the phrase "Step 2: Options if the other parent asked for default judgment and did not properly serve you"
@@ -401,17 +399,17 @@ Scenario: row65
     And I download "responding_child_custody_action_plan.pdf"
     And I download "responding_child_custody_action_plan.docx"
 
-@row66
-Scenario: row66
-  Given I start the interview at "responding_child_custody_action_plan.yml"
+  @row66
+  Scenario: row66
+    Given I start the interview at "responding_child_custody_action_plan.yml"
     And I get to the question id "final screen" with this data:
-    | var                                  | value            | trigger | 
-    | user_need                            | answer custody   |         | 
-    | type_of_response['case in 2 states'] | True             |         | 
-    | type_of_response['default']          | True             |         | 
-    | stage_of_other_case                  | ended with order |         | 
-    | stage_of_default                     | judgment entered |         | 
-    | proper_service                       | True             |         | 
+      | var                                  | value            | trigger |
+      | user_need                            | answer custody   |         |
+      | type_of_response['case in 2 states'] | True             |         |
+      | type_of_response['default']          | True             |         |
+      | stage_of_other_case                  | ended with order |         |
+      | stage_of_default                     | judgment entered |         |
+      | proper_service                       | True             |         |
     And I should see the phrase "Your Action Plan for responding in your child custody case in 8 steps"
     And I should see the phrase "Step 1: Learn about proper service and default judgment"
     And I should see the phrase "Step 2: Options when the judge entered a default judgment"
@@ -439,17 +437,17 @@ Scenario: row66
 
 
 
-@row67
-Scenario: row67
-  Given I start the interview at "responding_child_custody_action_plan.yml"
+  @row67
+  Scenario: row67
+    Given I start the interview at "responding_child_custody_action_plan.yml"
     And I get to the question id "final screen" with this data:
-    | var                                  | value            | trigger | 
-    | user_need                            | answer custody   |         | 
-    | type_of_response['case in 2 states'] | True             |         | 
-    | type_of_response['default']          | True             |         | 
-    | stage_of_other_case                  | ended with order |         | 
-    | stage_of_default                     | judgment entered |         | 
-    | proper_service                       | False            |         | 
+      | var                                  | value            | trigger |
+      | user_need                            | answer custody   |         |
+      | type_of_response['case in 2 states'] | True             |         |
+      | type_of_response['default']          | True             |         |
+      | stage_of_other_case                  | ended with order |         |
+      | stage_of_default                     | judgment entered |         |
+      | proper_service                       | False            |         |
     And I should see the phrase "Your Action Plan for responding in your child custody case in 8 steps"
     And I should see the phrase "Step 1: You can move forward with your Alaska case"
     And I should see the phrase "Step 2: If you decide to move forward in Alaska, fill out the forms to answer the complaint and respond within 20 days"
@@ -463,17 +461,17 @@ Scenario: row67
     And I download "responding_child_custody_action_plan.pdf"
     And I download "responding_child_custody_action_plan.docx"
 
-@row73
-Scenario: row73
-  Given I start the interview at "responding_child_custody_action_plan.yml"
+  @row73
+  Scenario: row73
+    Given I start the interview at "responding_child_custody_action_plan.yml"
     And I get to the question id "final screen" with this data:
-    | var                                  | value               | trigger | 
-    | user_need                            | answer custody      |         | 
-    | type_of_response['case in 2 states'] | True                |         | 
-    | type_of_response['default']          | True                |         | 
-    | stage_of_other_case                  | ended with no order |         | 
-    | stage_of_default                     | judgment entered    |         | 
-    | proper_service                       | False               |         | 
+      | var                                  | value               | trigger |
+      | user_need                            | answer custody      |         |
+      | type_of_response['case in 2 states'] | True                |         |
+      | type_of_response['default']          | True                |         |
+      | stage_of_other_case                  | ended with no order |         |
+      | stage_of_default                     | judgment entered    |         |
+      | proper_service                       | False               |         |
     And I should see the phrase "Your Action Plan for responding in your child custody case in 12 steps"
     And I should see the phrase "Step 1: Learn about proper service and default judgment"
     And I should see the phrase "Step 2: Options when you have a court order from another state"
@@ -491,17 +489,17 @@ Scenario: row73
     And I download "responding_child_custody_action_plan.pdf"
     And I download "responding_child_custody_action_plan.docx"
 
-@row73
-Scenario: row73
-  Given I start the interview at "responding_child_custody_action_plan.yml"
+  @row73
+  Scenario: row73
+    Given I start the interview at "responding_child_custody_action_plan.yml"
     And I get to the question id "final screen" with this data:
-    | var                                  | value               | trigger | 
-    | user_need                            | answer custody      |         | 
-    | type_of_response['case in 2 states'] | True                |         | 
-    | type_of_response['default']          | True                |         | 
-    | stage_of_other_case                  | ended with no order |         | 
-    | stage_of_default                     | judgment entered    |         | 
-    | proper_service                       | False               |         | 
+      | var                                  | value               | trigger |
+      | user_need                            | answer custody      |         |
+      | type_of_response['case in 2 states'] | True                |         |
+      | type_of_response['default']          | True                |         |
+      | stage_of_other_case                  | ended with no order |         |
+      | stage_of_default                     | judgment entered    |         |
+      | proper_service                       | False               |         |
     And I should see the phrase "Your Action Plan for responding in your child custody case in 11 steps"
     And I should see the phrase "Step 1: You can move forward with your Alaska case"
     And I should see the phrase "Step 2: Learn about proper service and default judgment"
