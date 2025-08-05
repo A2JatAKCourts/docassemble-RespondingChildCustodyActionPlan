@@ -207,7 +207,7 @@ Feature: user paths
       | military                        | False             |         |
       | stage_of_default                | application filed |         |
       | jurisdiction                    | False             |         |
-    And I should see the phrase "Your Action Plan for responding in your child custody case in 10 steps"
+    And I should see the phrase "Your Action Plan for responding in your child custody case in 9 steps"
     And I should see the phrase "Step 1: Learn if Alaska is the right state for your custody case"
     And I should see the phrase "Step 2: Learn about default judgment"
     And I should see the phrase "Step 3: Fill out the forms to respond in 20 days and tell the court Alaska is the wrong state"
