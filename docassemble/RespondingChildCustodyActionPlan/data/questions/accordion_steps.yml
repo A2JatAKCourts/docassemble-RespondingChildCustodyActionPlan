@@ -1,5 +1,5 @@
 comment: |
-    last updated: 2025-09-01
+    last updated: 2025-08-04
     2025-06-04 until we get the doc1assemble interview Learn about motions: <a href="https://docassemble.akcourts.gov/start/FilingAMotion">Asking for an Order in a Divorce Case When the Issue Can't Wait for the Court's Final Decision (Filing a Motion) GA</a> live, use the link to the court webpage in the list under "Read." See Github branding issue https://github.com/A2JatAKCourts/docassemble-AKA2JBrandingIssues/issues/64
 ---
 generic object: ALDocumentBundle
@@ -637,15 +637,13 @@ subject: |
     % endif
    and ask to dismiss if you think Alaska is the wrong state
   % else:  
-    % if type_of_response.all_true('improper service', exclusive = True) or (type_of_response.all_true('improper service', 'wrong state') and jurisdiction and not proper_service) or (type_of_response['case in 2 states'] and stage_of_other_case == 'still going') or (type_of_response.all_true('default', exclusive = True) and stage_of_default in('application filed', 'hearing scheduled')):
-        If you decide to move forward
-      % if type_of_response['case in 2 states'] and stage_of_other_case == 'still going':
-      in Alaska
-      % endif
-    , fill
-    % else:
+    % if type_of_response.all_true('improper service', exclusive = True) or (type_of_response.all_true('improper service', 'wrong state') and jurisdiction and not proper_service)  or (type_of_response.all_true('default', 'wrong state') and jurisdiction and stage_of_default in('application filed', 'hearing scheduled')) or (type_of_response.all_true('default', exclusive = True) and stage_of_default in('application filed', 'hearing scheduled')):
+    If you decide to move forward, fill
+  % elif type_of_response['case in 2 states'] and stage_of_other_case == 'still going':
+    If you decide to move forward in Alaska, fill 
+  % else:
     Fill
-    % endif
+  % endif
     out the forms to answer the complaint
     % if (type_of_response.all_true('ak custody case', exclusive = True) or  type_of_response.all_true('improper service', exclusive = True) or type_of_response.all_true('wrong state', exclusive = True) or type_of_response.all_true('case in 2 states', exclusive = True)) or (type_of_response.any_true('ak custody case','improper service', 'wrong state', 'case in 2 states') and type_of_response.any_true('improper service', 'default') and proper_service):
     and respond within 20 days
@@ -885,7 +883,7 @@ subject: |
       % if (type_of_response['wrong state'] or (type_of_response['case in 2 states'] and stage_of_other_case == 'still going')) and not jurisdiction:
       Fill out the forms to respond and tell the court Alaska is the wrong state
       % endif
-      % if stage_of_other_case == 'still going':
+      % if type_of_response['case in 2 states'] and stage_of_other_case == 'still going':
       If you decide to move forward in the other state, file a motion to dismiss your Alaska case
       % endif
       % if not proper_service:
@@ -1156,7 +1154,7 @@ subject: |
   % if defined('file_step_heading'):
   ${ file_step_heading }
   % else:
-  % if type_of_response.all_true('improper service', exclusive = True) or (type_of_response.all_true('improper service', 'wrong state') and jurisdiction and not proper_service) or (type_of_response['case in 2 states'] and stage_of_other_case == 'still going') or (type_of_response.all_true('default', exclusive=True) and stage_of_default in ('application filed', 'hearing scheduled')):
+  % if type_of_response.all_true('improper service', exclusive = True) or (type_of_response.all_true('improper service', 'wrong state') and jurisdiction and not proper_service)  or (type_of_response.all_true('default', 'wrong state') and jurisdiction and stage_of_default in('application filed', 'hearing scheduled')) or (type_of_response['case in 2 states'] and stage_of_other_case == 'still going') or (type_of_response.all_true('default', exclusive=True) and stage_of_default in ('application filed', 'hearing scheduled')):
   If you decide to move forward, file
   % else:
   File
@@ -1473,6 +1471,40 @@ content: |
   You will not know your case number until you file your documents with the court.  You can write the case number on all your forms then.
   <div class="step-subheading">Required forms - 1 copy that both parents sign if signatures are needed</div>
 ---
+
+---
+comment: |
+  August 4 2025
+template: fill_set_aside_step
+subject: |
+  Step ${ fill_set_aside_idx }: 
+  % if user_need in('answer custody', 'answer divorce'):
+  If you want to ask to set aside the default, fill out the forms
+  % else:
+  Fill out forms if you want to file a Motion to Set Aside
+  % endif
+content: |
+  If you decide to file a **Motion to Set Aside** because it fits your case:
+  <div class='step-subheading'>Use</div>
+  <ul>
+  <li><strong>•	Motion (Request) and Affidavit to Set Aside Judgment or Order, CIV-807</strong> [<a href="https://public.courts.alaska.gov/web/forms/docs/civ-807.pdf">Fill-in PDF</a>]</li>
+    <ul>
+    <li>Put everything you want the judge to know and think about in your motion. You may not be able to tell the judge in person because they may not hold a hearing.</li>
+    <li><strong>Wait</strong> to sign the form until you are in front of someone who has the power to take oaths, like a notary public.
+    <ul>
+    <li>The court clerk can do this for free.</li>
+    <li>Bring a valid photo ID with you.</li>
+    </ul></li>
+    <li>If you cannot get to a notary public or someone  who has the power to take oaths, you can &quot;self-certify.&quot; Use</li>
+      <ul>
+      <li><strong>Self-Certification  (No Notary Available), TF-835</strong> [<a href="https://public.courts.alaska.gov/web/forms/docs/tf-835.pdf">Fill-In PDF</a>]</li>
+      </ul>
+    </li>
+    </ul>
+  </ul>
+  <div class="step-subheading">Watch</div>
+  <p><a href ="https://https://youtu.be/2irmxT0_0EA">Motions Part 1: How to Ask the Court for Something</a></p>
+---
 comment: |
   Need to update this step in branding package aka2j_templates.yml after this interview passes all tests
   2025-07-28
@@ -1482,7 +1514,7 @@ subject: |
   % if user_need in('respond to motion in custody', 'respond to motion in divorce') and type_of_response == 'reconsider':
   If the judge asks you to respond to the Motion to Reconsider, fill out the Certificate of Service
   % else:
-  % if type_of_response.all_true('improper service', exclusive = True) or (type_of_response.all_true('improper service', 'wrong state') and jurisdiction and not proper_service) or (type_of_response['case in 2 states'] and stage_of_other_case == 'still going') or (type_of_response.all_true('default', exclusive=True) and stage_of_default in ('application filed', 'hearing scheduled')):
+  % if type_of_response.all_true('improper service', exclusive = True) or (type_of_response.all_true('improper service', 'wrong state') and jurisdiction and not proper_service)  or (type_of_response.all_true('default', 'wrong state') and jurisdiction and stage_of_default in('application filed', 'hearing scheduled')) or (type_of_response['case in 2 states'] and stage_of_other_case == 'still going') or (type_of_response.all_true('default', exclusive=True) and stage_of_default in ('application filed', 'hearing scheduled')):
   If you decide to move forward, fill
   % else:
   Fill
@@ -1562,7 +1594,7 @@ content: |
 ---
 comment: |
   Need to update this step in branding package aka2j_templates.yml after this interview passes all tests
-  2025-08-01
+  2025-08-04
 template: learn_more_about_process_step
 subject: |
   Step ${ learn_more_about_process_idx }: 
