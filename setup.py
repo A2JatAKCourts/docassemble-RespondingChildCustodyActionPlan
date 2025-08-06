@@ -44,7 +44,7 @@ def find_package_data(where='.', package='', exclude=standard_exclude, exclude_d
     return out
 
 setup(name='docassemble.RespondingChildCustodyActionPlan',
-      version='2025.08.01',
+      version='2025.08.05',
       description=('Responding in your child custody case  - action plan'),
       long_description='# docassemble.RespondingChildCustodyActionPlan\r\n\r\nResponding in your child custody case  - action plan\r\n\r\n## Author\r\n\r\nAlaska Court System\r\n',
       long_description_content_type='text/markdown',

@@ -1,5 +1,5 @@
 comment: |
-    last updated: 2025-08-05
+    last updated: 2025-08-06
     2025-06-04 until we get the doc1assemble interview Learn about motions: <a href="https://docassemble.akcourts.gov/start/FilingAMotion">Asking for an Order in a Divorce Case When the Issue Can't Wait for the Court's Final Decision (Filing a Motion) GA</a> live, use the link to the court webpage in the list under "Read." See Github branding issue https://github.com/A2JatAKCourts/docassemble-AKA2JBrandingIssues/issues/64
 ---
 generic object: ALDocumentBundle
@@ -102,14 +102,19 @@ code: |
     add_unique_step((answer_jurisdiction_step, "answer_jurisdiction_idx"), step_list)
     if type_of_response.any_true('improper service', 'default'):
       add_unique_step((proper_service_step, "proper_service_idx"), step_list)
-      if not proper_service:
-        add_unique_step((decide_after_improper_service_step, "decide_after_improper_service_idx"), step_list) 
+    if type_of_response['improper service'] and jurisdiction and not proper_service:
+      add_unique_step((decide_after_improper_service_step, "decide_after_improper_service_idx"), step_list) 
     if type_of_response['default'] and stage_of_default in('application filed', 'hearing scheduled'):
       if jurisdiction:
         add_unique_step((default_options_step, "default_options_idx"), step_list)
         add_unique_step((answer_step, "answer_idx"), step_list)  
       else:
-        add_unique_step((dismiss_step, "dismiss_idx"), step_list) 
+        add_unique_step((dismiss_step, "dismiss_idx"), step_list)
+    if type_of_response['default'] and stage_of_default == 'judgment entered':
+      if jurisdiction:
+        add_unique_step((default_options_step, "default_options_idx"), step_list)
+      add_unique_step((learn_set_aside_step, "learn_set_aside_idx"), step_list)
+      add_unique_step((fill_set_aside_step, "fill_set_aside_idx"), step_list)
 
 
 
@@ -120,22 +125,13 @@ code: |
     add_unique_step((answer_jurisdiction_step, "answer_jurisdiction_idx"), step_list)
     if type_of_response.any_true('improper service', 'default'):
       add_unique_step((proper_service_step, "proper_service_idx"), step_list)
-      if not proper_service:
+    if type_of_response['improper service'] and jurisdiction and not proper_service:
         add_unique_step((decide_after_improper_service_step, "decide_after_improper_service_idx"), step_list)
     if not type_of_response['default']:
       add_unique_step((answer_step, "answer_idx"), step_list)  
       if not jurisdiction:
         add_unique_step((dismiss_step, "dismiss_idx"), step_list)
-   #if type_of_response['default'] and stage_of_default in('application filed', 'hearing scheduled'):
-   #  if jurisdiction:
-   #    add_unique_step((default_options_step, "default_options_idx"), step_list)
-   #    add_unique_step((answer_step, "answer_idx"), step_list)  
-   #  else:
-   #    add_unique_step((dismiss_step, "dismiss_idx"), step_list) 
-    if type_of_response['default'] and stage_of_default == 'judgment entered':
-      add_unique_step((default_options_step, "default_options_idx"), step_list)
-      add_unique_step((learn_set_aside_step, "learn_set_aside_idx"), step_list)
-      add_unique_step((fill_set_aside_step, "fill_set_aside_idx"), step_list)
+
 
   if type_of_response['case in 2 states']:
     if stage_of_other_case in('still going', 'ended with no order'):
@@ -182,11 +178,11 @@ code: |
     add_unique_step((cert_of_service_step, "cert_of_service_idx"), step_list)
   add_unique_step((answer_file_and_serve_step, "answer_file_and_serve_idx"), step_list)
 
-  if not (type_of_response['default'] and stage_of_default == 'judgment entered'):
+  if not ((type_of_response['default'] and stage_of_default == 'judgment entered') or (type_of_response.all_true('wrong state', 'default') and not jurisdiction)):
     add_unique_step((read_drpo_step, "read_drpo_idx"), step_list)
   add_unique_step((expect_after_answer_step, "expect_after_answer_idx"), step_list)
 
-  if not ((type_of_response['case in 2 states'] and stage_of_other_case == 'ended with order') or (type_of_response['default'] and stage_of_default == 'judgment entered') or type_of_response.all_false()):
+  if not ((type_of_response.all_true('wrong state', 'default') and not jurisdiction) or (type_of_response['case in 2 states'] and stage_of_other_case == 'ended with order') or (type_of_response['default'] and stage_of_default == 'judgment entered') or type_of_response.all_false()):
     add_unique_step((learn_more_about_process_step, "learn_more_about_process_idx"), step_list)
   
   
@@ -995,7 +991,7 @@ content: |
     % endif
 ---
 Comment: |
-    last updated: 2025-07-31
+    last updated: 2025-08-06
     note 2025-06-04 - until we get this docassemble interview 
     Learn about motions: <a href="https://docassemble.akcourts.gov/start/FilingAMotion">Asking for an Order in a Divorce Case When the Issue Can't Wait for the Court's Final Decision (Filing a Motion) GA</a> live,     
     use the link to the court webpage in the list under "Read." See Github branding issue https://github.com/A2JatAKCourts/docassemble-AKA2JBrandingIssues/issues/64
@@ -1013,14 +1009,14 @@ subject: |
       If you decide to move forward in the other state, file a motion to dismiss your Alaska case
       % endif
     % else:
+      % if (type_of_response.all_true('default', exclusive = True) and stage_of_default in('application filed', 'hearing scheduled') or (type_of_response.all_true('improper service', 'wrong state') and jurisdiction) or (type_of_response.all_true('wrong state', 'default') and jurisdiction and stage_of_default in('application filed', 'hearing scheduled'))) and not proper_service:
+      Tell the judge you were not served the correct way and ask to dismiss the case
+      % endif
       % if (type_of_response['wrong state'] or (type_of_response['case in 2 states'] and stage_of_other_case == 'still going')) and not jurisdiction:
       Fill out the forms to respond and tell the court Alaska is the wrong state
       % endif
       % if type_of_response['case in 2 states'] and stage_of_other_case == 'still going':
       If you decide to move forward in the other state, file a motion to dismiss your Alaska case
-      % endif
-      % if not proper_service:
-      Tell the judge you were not served the correct way and ask to dismiss the case
       % endif
     % endif
   % endif
@@ -1047,12 +1043,12 @@ content: |
   % endif
 
   % if type_of_response['default']:
-    % if type_of_response['wrong state'] and not jurisdiction:
-      If the Alaska Court does not have jurisdiction and you want the court to dismiss the case, you can fill out and file a **Motion to Dismiss** that tells the court why you want to dismiss the case.
-    % endif 
-    % if type_of_response['case in 2 states'] and stage_of_other_case == 'still going' and not jurisdiction:
-      If the other parent asked for a default judgment, the judge may decide without hearing from you if you do not respond. You could end up with 2 different custody orders from 2 different states. To prevent this, file a **Motion to Dismiss** to tell the Alaska judge (1) about the other case and (2) that your children have not lived in Alaska for the last 6 months. Tell the judge in the other state about the Alaska case.
-    % endif
+  % if type_of_response['wrong state'] and not jurisdiction:
+    If the Alaska Court does not have jurisdiction and you want the court to dismiss the case, you can fill out and file a **Motion to Dismiss** that tells the court why you want to dismiss the case.
+  % endif 
+  % if type_of_response['case in 2 states'] and stage_of_other_case == 'still going' and not jurisdiction:
+    If the other parent asked for a default judgment, the judge may decide without hearing from you if you do not respond. You could end up with 2 different custody orders from 2 different states. To prevent this, file a **Motion to Dismiss** to tell the Alaska judge (1) about the other case and (2) that your children have not lived in Alaska for the last 6 months. Tell the judge in the other state about the Alaska case.
+  % endif
 
   Because the other parent asked for a default judgment, it is important to file your motion as soon as possible to prevent the judge from entering a default judgment order.
   % endif
@@ -1079,11 +1075,9 @@ content: |
   Learn about motions: See [Motions: Requesting an Order from the Court; Opposing a Motion](https://courts.alaska.gov/shc/family/motions.htm).
 
 
-  % if type_of_response.all_true('improper service', exclusive = True) or (type_of_response.any_true('improper service', 'default') and not proper_service):
+  % if (type_of_response.all_true('default', exclusive = True) and stage_of_default in('application filed', 'hearing scheduled') or (type_of_response.all_true('improper service', 'wrong state') and jurisdiction) or (type_of_response.all_true('wrong state', 'default') and jurisdiction and stage_of_default in('application filed', 'hearing scheduled'))) and not proper_service:
   If ${ other_party_in_case } serves you properly in the future, the court may decide not to dismiss your case.   
-  % if (type_of_response['case in 2 states'] and stage_of_other_case == 'still going')  or (type_of_response['default'] and stage_of_default in('application filed', 'hearing scheduled')):
-  Read "Step ${ answer_idx }: If you decide to move forward, fill out the forms you need to answer the complaint and respond" to learn about filing an Answer.
-  % endif
+  Read Step ${ answer_idx }: If you decide to move forward, fill out the forms you need to answer the complaint and respond" to learn about filing an Answer.
   % endif
 ---
 comment: |
