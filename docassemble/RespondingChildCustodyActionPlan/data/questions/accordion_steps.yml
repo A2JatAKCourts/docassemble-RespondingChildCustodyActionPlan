@@ -1009,7 +1009,7 @@ subject: |
       If you decide to move forward in the other state, file a motion to dismiss your Alaska case
       % endif
     % else:
-      % if (type_of_response.all_true('default', exclusive = True) and stage_of_default in('application filed', 'hearing scheduled') or (type_of_response.all_true('improper service', 'wrong state') and jurisdiction) or (type_of_response.all_true('wrong state', 'default') and jurisdiction and stage_of_default in('application filed', 'hearing scheduled'))) and not proper_service:
+      % if ((type_of_response.all_true('default', exclusive = True) and stage_of_default in('application filed', 'hearing scheduled')) or (type_of_response.all_true('improper service', 'wrong state') and jurisdiction) or (type_of_response.all_true('wrong state', 'default') and jurisdiction and stage_of_default in('application filed', 'hearing scheduled'))) and not proper_service:
       Tell the judge you were not served the correct way and ask to dismiss the case
       % endif
       % if (type_of_response['wrong state'] or (type_of_response['case in 2 states'] and stage_of_other_case == 'still going')) and not jurisdiction:
@@ -1377,7 +1377,7 @@ content: |
 comment: |
 template: learn_more_about_process_step
 subject: |
-  % if user_need == 'answer custody' and (type_of_response['improper service'] or type_of_response['wrong state'] and not jurisdiction):
+  % if user_need == 'answer custody' and (type_of_response.all_true('improper service', exclusive = True) or type_of_response['wrong state'] or (type_of_response['case in 2 states'] and stage_of_other_case == 'still going') or (type_of_response.all_true('default', exclusive=True) and stage_of_default in ('application filed', 'hearing scheduled'))):
   Step ${ learn_more_about_process_idx }: If your case is moving forward in Alaska, learn more about the process
   % else:
   Step ${ learn_more_about_process_idx }: Learn more about the process
