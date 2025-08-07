@@ -140,6 +140,8 @@ code: |
       # proper_service asked by proper_service_step
       # military service asked by proper_service_step
       add_unique_step((proper_service_step, "proper_service_idx"), step_list)
+    if stage_of_other_case == 'ended with no order'and type_of_response['improper service'] and not proper_service:
+        add_unique_step((decide_after_improper_service_step, "decide_after_improper_service_idx"), step_list)
     if stage_of_other_case == 'still going' and not (type_of_response['default'] and stage_of_default == 'judgment entered'):
       add_unique_step((case_in_2_states_step, "case_in_2_states_idx"), step_list)
     if type_of_response['default'] and (stage_of_other_case == 'ended with no order' or (stage_of_other_case == 'ended with order' and stage_of_default == 'judgment entered')):
@@ -1274,14 +1276,14 @@ content: |
 ---
 comment: |
   hoping to use as a generic
-  2025-08-01
+  2025-08-06
 template: answer_file_and_serve_step
 subject: |
   Step ${ answer_file_and_serve_idx }:
   % if defined('file_step_heading'):
   ${ file_step_heading }
   % else:
-  % if type_of_response.all_true('improper service', exclusive = True) or (type_of_response.all_true('improper service', 'wrong state') and jurisdiction and not proper_service)  or (type_of_response.all_true('default', 'wrong state') and jurisdiction and stage_of_default in('application filed', 'hearing scheduled')) or (type_of_response['case in 2 states'] and stage_of_other_case == 'still going') or (type_of_response.all_true('default', exclusive=True) and stage_of_default in ('application filed', 'hearing scheduled')):
+  % if type_of_response.all_true('improper service', exclusive = True) or (type_of_response.all_true('improper service', 'wrong state') and jurisdiction and not proper_service) or (type_of_response.all_true('default', 'wrong state') and jurisdiction and stage_of_default in('application filed', 'hearing scheduled')) or (type_of_response.all_true('default', exclusive=True) and stage_of_default in ('application filed', 'hearing scheduled')):
   If you decide to move forward, file
   % elif type_of_response['default'] and stage_of_default == 'judgment entered':
   If you are asking to set aside the default, file
@@ -1636,13 +1638,13 @@ content: |
 ---
 comment: |
   Need to update this step in branding package aka2j_templates.yml after this interview passes all tests
-  2025-08-05
+  2025-08-06
 template: cert_of_service_step
 subject: |
   Step ${ cert_of_service_idx }:
   % if user_need in('respond to motion in custody', 'respond to motion in divorce') and type_of_response == 'reconsider':
   If the judge asks you to respond to the Motion to Reconsider, fill out the Certificate of Service
-  % elif type_of_response.all_true('improper service', exclusive = True) or (type_of_response.all_true('improper service', 'wrong state') and jurisdiction and not proper_service)  or (type_of_response.all_true('default', 'wrong state') and jurisdiction and stage_of_default in('application filed', 'hearing scheduled')) or (type_of_response['case in 2 states'] and stage_of_other_case == 'still going') or (type_of_response.all_true('default', exclusive=True) and stage_of_default in ('application filed', 'hearing scheduled')):
+  % elif type_of_response.all_true('improper service', exclusive = True) or (type_of_response.all_true('improper service', 'wrong state') and jurisdiction and not proper_service)  or (type_of_response.all_true('default', 'wrong state') and jurisdiction and stage_of_default in('application filed', 'hearing scheduled')) or (type_of_response.all_true('default', exclusive=True) and stage_of_default in ('application filed', 'hearing scheduled')):
   If you decide to move forward, fill
   % elif type_of_response['default'] and stage_of_default == 'judgment entered':
   If you are asking to set aside the default, fill
@@ -1685,11 +1687,11 @@ content: |
 ---
 comment: |
   Need to update this step in branding package aka2j_templates.yml after this interview passes all tests
-  2025-08-01
+  2025-08-06
 template: read_drpo_step
 subject: |
   Step ${ read_drpo_idx }:
-  % if type_of_response.all_true('improper service', exclusive = True) or (type_of_response.all_true('improper service', 'wrong state') and jurisdiction and not proper_service) or (type_of_response['case in 2 states'] and stage_of_other_case == 'still going') or (type_of_response.all_true('default', exclusive=True) and stage_of_default in ('application filed', 'hearing scheduled')):
+  % if type_of_response.all_true('improper service', exclusive = True) or (type_of_response.all_true('improper service', 'wrong state') and jurisdiction and not proper_service) or (type_of_response.all_true('default', exclusive=True) and stage_of_default in ('application filed', 'hearing scheduled')):
   If you decide to move forward, read
   % else:
   Read

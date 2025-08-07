@@ -24,7 +24,7 @@
     And I should see the phrase "Step 3: Fill out the Certificate of Service"
     And I should see the phrase "Step 4: File your documents with the court and serve the other parent"
     And I should see the phrase "Step 5: Read the “Domestic Relations Procedural Order” or Standing Order that was with the Complaint"
-    And I should see the phrase "Step 6: What to expect after you file your documents"
+    And I should see the phrase "Step 6: What to expect after you file your Answer"
     And I should see the phrase "Step 7: Learn more about the process"
     And I should see the phrase "Step 8: Abuse or domestic violence resources and reaching an agreement"
     And I tap the "#YW5zd2VyX2RvbWVzdGljX3Zpb2xlbmNlX3N0ZXA .al_toggle" element and stay on the same page
