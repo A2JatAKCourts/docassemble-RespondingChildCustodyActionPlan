@@ -1,6 +1,6 @@
 @case_in_2_states
 Feature: User paths
-# 2025-08-07
+# 2025-08-10
 
 Background: 
   Given the maximum seconds for each Step is 90
@@ -302,7 +302,7 @@ Scenario: row62
     | type_of_response['default']          | True              |         | 
     | stage_of_other_case                  | ended with order  |         | 
     | stage_of_default                     | application filed |         | 
-    | military_service                     | True              |         | 
+    | military                             | True              |         | 
     | proper_service                       | True              |         | 
     And I should see the phrase "Your Action Plan for responding in your child custody case in 7 steps"
     And I should see the phrase "Step 1: Learn about proper service and default judgment"
@@ -326,7 +326,7 @@ Scenario: row63
     | type_of_response['default']          | True              |         | 
     | stage_of_other_case                  | ended with order  |         | 
     | stage_of_default                     | application filed |         | 
-    | military_service                     | False             |         | 
+    | military                             | False             |         | 
     | proper_service                       | False             |         | 
     And I should see the phrase "Your Action Plan for responding in your child custody case in 8 steps"
     And I should see the phrase "Step 1: Learn about proper service and default judgment"
@@ -351,7 +351,7 @@ Scenario: row64
     | type_of_response['default']          | True              |         | 
     | stage_of_other_case                  | ended with order  |         | 
     | stage_of_default                     | hearing scheduled |         | 
-    | military_service                     | False             |         | 
+    | military                             | False             |         | 
     | proper_service                       | True              |         | 
     And I should see the phrase "Your Action Plan for responding in your child custody case in 7 steps"
     And I should see the phrase "Step 1: Learn about proper service and default judgment"
@@ -375,7 +375,7 @@ Scenario: row65
     | type_of_response['default']          | True              |         | 
     | stage_of_other_case                  | ended with order  |         | 
     | stage_of_default                     | hearing scheduled |         | 
-    | military_service                     | True              |         | 
+    | military                             | True              |         | 
     | proper_service                       | False             |         | 
     And I should see the phrase "Your Action Plan for responding in your child custody case in 8 steps"
     And I should see the phrase "Step 1: Learn about proper service and default judgment"
@@ -400,7 +400,7 @@ Scenario: row66
     | type_of_response['default']          | True             |         | 
     | stage_of_other_case                  | ended with order |         | 
     | stage_of_default                     | judgment entered |         | 
-    | military_service                     | False            |         | 
+    | military                             | False            |         | 
     | proper_service                       | True             |         | 
     And I should see the phrase "Your Action Plan for responding in your child custody case in 8 steps"
     And I should see the phrase "Step 1: Learn about proper service and default judgment"
@@ -425,7 +425,7 @@ Scenario: row67
     | type_of_response['default']          | True             |         | 
     | stage_of_other_case                  | ended with order |         | 
     | stage_of_default                     | judgment entered |         | 
-    | military_service                     | True             |         | 
+    | military                             | True             |         | 
     | proper_service                       | False            |         | 
     And I should see the phrase "Your Action Plan for responding in your child custody case in 6 steps"
     And I should see the phrase "Step 1: You can move forward with your Alaska case"
@@ -448,7 +448,7 @@ Scenario: row73
     | type_of_response['default']          | True                |         | 
     | stage_of_other_case                  | ended with no order |         | 
     | stage_of_default                     | judgment entered    |         | 
-    | military_service                     | False               |         | 
+    | military                             | False               |         | 
     | proper_service                       | False               |         | 
     And I should see the phrase "Your Action Plan for responding in your child custody case in 12 steps"
     And I should see the phrase "Step 1: Learn about proper service and default judgment"
@@ -477,7 +477,7 @@ Scenario: row73
     | type_of_response['default']          | True                |         | 
     | stage_of_other_case                  | ended with no order |         | 
     | stage_of_default                     | judgment entered    |         | 
-    | military_service                     | True                |         | 
+    | military                             | True                |         | 
     | proper_service                       | False               |         | 
     And I should see the phrase "Your Action Plan for responding in your child custody case in 11 steps"
     And I should see the phrase "Step 1: You can move forward with your Alaska case"
