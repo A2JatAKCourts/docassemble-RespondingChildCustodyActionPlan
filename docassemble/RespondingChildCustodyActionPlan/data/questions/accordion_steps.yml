@@ -1,5 +1,5 @@
 comment: |
-    last updated: 2025-08-07
+    last updated: 2025-08-12
     2025-06-04 until we get the doc1assemble interview Learn about motions: <a href="https://docassemble.akcourts.gov/start/FilingAMotion">Asking for an Order in a Divorce Case When the Issue Can't Wait for the Court's Final Decision (Filing a Motion) GA</a> live, use the link to the court webpage in the list under "Read." See Github branding issue https://github.com/A2JatAKCourts/docassemble-AKA2JBrandingIssues/issues/64
 ---
 generic object: ALDocumentBundle
@@ -145,7 +145,7 @@ code: |
     if type_of_response['default'] and stage_of_default == 'judgment entered':
       add_unique_step((learn_set_aside_step, "learn_set_aside_idx"), step_list)
       add_unique_step((fill_set_aside_step, "fill_set_aside_idx"), step_list)
-    if stage_of_other_case in('still going', 'ended with no order'):
+    if stage_of_other_case in('still going', 'ended with no order') and not (type_of_response['default'] and stage_of_default == 'judgment entered'):
       add_unique_step((answer_step, "answer_idx"), step_list)
     if stage_of_other_case in('still going', 'ended with order') or (type_of_response['default'] and stage_of_default in('application filed', 'hearing scheduled')):
       add_unique_step((dismiss_step, "dismiss_idx"), step_list)  
@@ -545,98 +545,98 @@ subject: |
   % endif
 content: | 
   % if type_of_response['default'] and stage_of_default == 'judgment entered':
-    % if not proper_service:
-      If ${ other_party_in_case } asked for a default judgment, it means they told the court they served you correctly. You can (1) tell the judge you were not served the correct way and ask to set aside the default judgment or (2) do nothing.
-    % else:
-      You can (1) ask the judge to set aside the default judgment or (2) do nothing.
-    % endif
+  % if not proper_service:
+    If ${ other_party_in_case } asked for a default judgment, it means they told the court they served you correctly. You can (1) tell the judge you were not served the correct way and ask to set aside the default judgment or (2) do nothing.
+  % else:
+    You can (1) ask the judge to set aside the default judgment or (2) do nothing.
+  % endif
 
-    <div class="step-subheading">Option 1. Ask to Set Aside the Default Judgment</div>
+  <div class="step-subheading">Option 1. Ask to Set Aside the Default Judgment</div>
 
-    % if type_of_response['case in 2 states'] and stage_of_other_case == 'ended with order':
-      It can be complicated to have custody orders from 2 different state courts. 
-      % if proper_service:
-        You may want to ask the judge to set aside the default judgment. 
-      % else:
-        You may want to tell the judge you were not served properly and ask to set aside the default judgment. 
-      % endif
-    % else:
-      % if not proper_service:
-        If you were not served the correct way, you can tell the judge and ask the judge to set aside the judgment.
-      % endif
-      If you 
-      % if proper_service:
-        decide
-      % else:
-        want
-      % endif
-       to ask the judge to set aside the default judgment, fill out
-    % endif
-    % if type_of_response['case in 2 states'] and stage_of_other_case == 'ended with order':
-      Fill out 
-    % endif
-    and file the paperwork as soon as you can.
-    The longer you wait, the harder it is to set the judgment aside.
-    Read about asking the judge to set aside the default judgment in steps ${learn_set_aside_idx} and ${fill_set_aside_idx}.
-    <div class="step-subheading">Option 2. Do nothing</div>
+  % if type_of_response['case in 2 states'] and stage_of_other_case == 'ended with order':
+  It can be complicated to have custody orders from 2 different state courts. 
+  % if proper_service:
+    You may want to ask the judge to set aside the default judgment. 
+  % else:
+    You may want to tell the judge you were not served properly and ask to set aside the default judgment. 
+  % endif
+  % else:
+  % if not proper_service:
+    If you were not served the correct way, you can tell the judge and ask the judge to set aside the judgment.
+  % endif
+  If you 
+  % if proper_service:
+    decide
+  % else:
+    want
+  % endif
+    to ask the judge to set aside the default judgment, fill out
+  % endif
+  % if type_of_response['case in 2 states'] and stage_of_other_case == 'ended with order':
+    Fill out 
+  % endif
+  and file the paperwork as soon as you can.
+  The longer you wait, the harder it is to set the judgment aside.
+  Read about asking the judge to set aside the default judgment in steps ${learn_set_aside_idx} and ${fill_set_aside_idx}.
+  <div class="step-subheading">Option 2. Do nothing</div>
 
-    % if not (type_of_response['case in 2 states'] and stage_of_other_case == 'ended with order'):
-      If you are okay with the judge's orders you do not need to do anything. 
-    % endif
-    (https://courts.alaska.gov/trialcourts/index.htm#recs) on the court's website. 
-    % if type_of_response['case in 2 states'] and stage_of_other_case == 'ended with order':
-      If the Alaska order is different from the custody order in the other state, it can be very complicated. It may be best to tell the judge about the other order and try to set aside the Alaska order 
-    % endif
-    You should decide quickly. The longer you wait, the harder it is to set aside the court's order.
-    % if type_of_response['case in 2 states'] and stage_of_other_case == 'ended with order':
-       You may want to [talk to a lawyer](https://courts.alaska.gov/shc/shclawyer.htm). 
-    % else:
-      If something substantially changes and you want to ask to change the judge's custody parenting plan or child support order, read [Modifying Child Custody or Child Support Order](https://courts.alaska.gov/shc/family/shcmodify.htm) on the court's website.
-    % endif
+  % if not (type_of_response['case in 2 states'] and stage_of_other_case == 'ended with order'):
+    If you are okay with the judge's orders you do not need to do anything. 
+  % endif
+  (https://courts.alaska.gov/trialcourts/index.htm#recs) on the court's website. 
+  % if type_of_response['case in 2 states'] and stage_of_other_case == 'ended with order':
+    If the Alaska order is different from the custody order in the other state, it can be very complicated. It may be best to tell the judge about the other order and try to set aside the Alaska order 
+  % endif
+  You should decide quickly. The longer you wait, the harder it is to set aside the court's order.
+  % if type_of_response['case in 2 states'] and stage_of_other_case == 'ended with order':
+      You may want to [talk to a lawyer](https://courts.alaska.gov/shc/shclawyer.htm). 
+  % else:
+    If something substantially changes and you want to ask to change the judge's custody parenting plan or child support order, read [Modifying Child Custody or Child Support Order](https://courts.alaska.gov/shc/family/shcmodify.htm) on the court's website.
+  % endif
   % elif type_of_response['default'] and stage_of_default in('application filed', 'hearing scheduled'):
-    % if not proper_service:
-      If ${ other_party_in_case } asked for a default judgment, it means they told the court they served you correctly. The judge may decide without hearing from you if you do not respond.
-    % else:
-      If ${ other_party_in_case } asked for a default judgment, the judge may decide without hearing from you if you do not respond.
-    % endif
-    You can (1) move forward with the case, or 
-    % if not proper_service:
-      (2) tell the judge you were not served the correct way and ask to dismiss the case, or (3)
-    % else:
-      (2) 
-    % endif
-    do nothing
-    <div class="step-subheading">Option 1. Move forward with the case</div> 
-    % if not proper_service:
-      Even if you were not properly served, you
-    % else:
-      You
-    % endif
-    can file an Answer if:
-      * you agree with ${ other_party_in_case } that there should be a case to get a custody, Parenting Plan, and child support order, or
-      * you do not want to risk a default judgment.
+  % if not proper_service:
+    If ${ other_party_in_case } asked for a default judgment, it means they told the court they served you correctly. The judge may decide without hearing from you if you do not respond.
+  % else:
+    If ${ other_party_in_case } asked for a default judgment, the judge may decide without hearing from you if you do not respond.
+  % endif
+  You can (1) move forward with the case, or 
+  % if not proper_service:
+    (2) tell the judge you were not served the correct way and ask to dismiss the case, or (3)
+  % else:
+    (2) 
+  % endif
+  do nothing
+  <div class="step-subheading">Option 1. Move forward with the case</div> 
+  % if not proper_service:
+    Even if you were not properly served, you
+  % else:
+    You
+  % endif
+  can file an Answer if:
+    * you agree with ${ other_party_in_case } that there should be a case to get a custody, Parenting Plan, and child support order, or
+    * you do not want to risk a default judgment.
 
-    If you do not have a copy of the filed documents, you can ask ${ other_party_in_case } or get a copy from your file at the courthouse. Read about [getting copies of your court file](https://courts.alaska.gov/trialcourts/index.htm#recs) on the court's website.
-    % if stage_of_default == 'application filed' and proper_service:
-      And because you did not file an Answer within 20 days of getting the Complaint, ask the judge to accept your Answer even though it is late. See Step ${ answer_idx }: Fill out the forms to respond.
-    % endif
-    % if stage_of_default == 'hearing scheduled':
-      Because the clerk signed the entry of default, you will have to ask the judge to accept your Answer even though it is late.  See Step ${ answer_idx }: Fill out the forms to respond.
-    % endif
-    % if not proper_service:
-      <div class="step-subheading">Option 2. Tell the judge you were not served the correct way and ask to dismiss the case</div>
-      If you think you were not served the correct way and you want the court to dismiss the case, you can fill out and file a **Motion to Dismiss** that tells the court why you think you were not served properly. See Step ${ dismiss_idx }
+  If you do not have a copy of the filed documents, you can ask ${ other_party_in_case } or get a copy from your file at the courthouse. Read about [getting copies of your court file](https://courts.alaska.gov/trialcourts/index.htm#recs) on the court's website.
+  % if stage_of_default == 'application filed' and proper_service:
+    And because you did not file an Answer within 20 days of getting the Complaint, ask the judge to accept your Answer even though it is late. See Step ${ answer_idx }: Fill out the forms to respond.
+  % endif
+  % if stage_of_default == 'hearing scheduled':
+    Because the clerk signed the entry of default, you will have to ask the judge to accept your Answer even though it is late.  See Step ${ answer_idx }: Fill out the forms to respond.
+  % endif
+  % if not proper_service:
+    <div class="step-subheading">Option 2. Tell the judge you were not served the correct way and ask to dismiss the case</div>
+    If you think you were not served the correct way and you want the court to dismiss the case, you can fill out and file a **Motion to Dismiss** that tells the court why you think you were not served properly. See Step ${ dismiss_idx }
 
-      If ${ other_party_in_case } serves you properly in the future, the court may decide not to dismiss your case. Read Step ${ answer_idx } to learn about filing an Answer.
-      <div class="step-subheading">Option 3. Do nothing</div>
-    % else:
-      <div class="step-subheading">Option 2. Do nothing</div>
-    % endif
-    If you are okay with the judge deciding the case based on ${ other_party_in_case }'s Complaint, without hearing from you, you do not need to do anything.
+    If ${ other_party_in_case } serves you properly in the future, the court may decide not to dismiss your case. Read Step ${ answer_idx } to learn about filing an Answer.
+    <div class="step-subheading">Option 3. Do nothing</div>
+  % else:
+    <div class="step-subheading">Option 2. Do nothing</div>
+  % endif
+  If you are okay with the judge deciding the case based on ${ other_party_in_case }'s Complaint, without hearing from you, you do not need to do anything.
 
-    But once the judge decides, it is much harder to undo it.
+  But once the judge decides, it is much harder to undo it.
 
-    If you file an Answer, the judge will consider what you want, and there may be resources for you and ${ other_party_in_case } to work out any disagreements through mediation or a settlement conference.
+  If you file an Answer, the judge will consider what you want, and there may be resources for you and ${ other_party_in_case } to work out any disagreements through mediation or a settlement conference.
   % endif
 ---
 ---
@@ -753,7 +753,7 @@ content: |
   % endif
 ---
 comment: |
-  2025-08-07
+  2025-08-12
 template: answer_step
 subject: |
   Step ${ answer_idx }:
@@ -768,7 +768,6 @@ subject: |
       or (type_of_response['improper service'] and not proper_service and \
         ((type_of_response['wrong state'] and jurisdiction) or (type_of_response['case in 2 states'] and stage_of_other_case == 'ended with no order'))) \
       or (type_of_response['default'] and stage_of_default in ('application filed', 'hearing scheduled') and ((type_of_response['wrong state'] and jurisdiction) or (type_of_response['case in 2 states'] and stage_of_other_case == 'ended with no order'))) \
-      or (type_of_response.all_false('default', 'improper service') and type_of_response['case in 2 states'] and stage_of_other_case == 'ended with no order') \
       or (type_of_response.all_true('default', exclusive = True) and stage_of_default in('application filed', 'hearing scheduled')):
     If you decide to move forward, fill
   % elif (type_of_response['case in 2 states'] and stage_of_other_case == 'still going') and ((jurisdiction and type_of_response['default'] and stage_of_default in('application filed', 'hearing scheduled')) or (type_of_response.all_false('default'))):
@@ -1639,13 +1638,13 @@ content: |
 ---
 comment: |
   Need to update this step in branding package aka2j_templates.yml after this interview passes all tests
-  2025-08-06
+  2025-08-12
 template: cert_of_service_step
 subject: |
   Step ${ cert_of_service_idx }:
   % if user_need in('respond to motion in custody', 'respond to motion in divorce') and type_of_response == 'reconsider':
   If the judge asks you to respond to the Motion to Reconsider, fill out the Certificate of Service
-  % elif user_need in('answer custody', 'answer divorce') and (type_of_response.all_true('improper service', exclusive = True) or (type_of_response['improper service'] and not proper_service and ((type_of_response['wrong state'] and jurisdiction) or (type_of_response['case in 2 states'] and stage_of_other_case in('still going', 'ended with no order')))) or ((type_of_response['default'] and stage_of_default in ('application filed', 'hearing scheduled')) and ((type_of_response['wrong state'] and jurisdiction) or (type_of_response['case in 2 states'] and ((stage_of_other_case == 'still going' and jurisdiction) or stage_of_other_case =='ended with no order')))) or (type_of_response.all_true('default', exclusive=True) and stage_of_default in ('application filed', 'hearing scheduled'))):
+  % elif user_need in('answer custody', 'answer divorce') and (type_of_response.all_true('improper service', exclusive = True) or (type_of_response['improper service'] and not proper_service and ((type_of_response['wrong state'] and jurisdiction) or (type_of_response['case in 2 states'] and stage_of_other_case == 'ended with no order'))) or ((type_of_response['default'] and stage_of_default in ('application filed', 'hearing scheduled')) and ((type_of_response['wrong state'] and jurisdiction) or (type_of_response['case in 2 states'] and stage_of_other_case =='ended with no order'))) or (type_of_response.all_true('default', exclusive=True) and stage_of_default in ('application filed', 'hearing scheduled'))):
   If you decide to move forward, fill
   % elif type_of_response['default'] and stage_of_default == 'judgment entered':
   If you are asking to set aside the default, fill
