@@ -1,5 +1,5 @@
 comment: |
-    last updated: 2025-08-12
+    last updated: 2025-08-15
     2025-06-04 until we get the doc1assemble interview Learn about motions: <a href="https://docassemble.akcourts.gov/start/FilingAMotion">Asking for an Order in a Divorce Case When the Issue Can't Wait for the Court's Final Decision (Filing a Motion) GA</a> live, use the link to the court webpage in the list under "Read." See Github branding issue https://github.com/A2JatAKCourts/docassemble-AKA2JBrandingIssues/issues/64
 ---
 generic object: ALDocumentBundle
@@ -1276,14 +1276,14 @@ content: |
 ---
 comment: |
   hoping to use as a generic
-  2025-08-06
+  2025-08-15
 template: answer_file_and_serve_step
 subject: |
   Step ${ answer_file_and_serve_idx }:
   % if defined('file_step_heading'):
   ${ file_step_heading }
   % else:
-  % if user_need in('answer custody', 'answer divorce') and (type_of_response.all_true('improper service', exclusive = True) or (type_of_response['improper service'] and not proper_service and ((type_of_response['wrong state'] and jurisdiction) or (type_of_response['case in 2 states'] and stage_of_other_case in('still going', 'ended with no order')))) or ((type_of_response['default'] and stage_of_default in ('application filed', 'hearing scheduled')) and ((type_of_response['wrong state'] and jurisdiction) or (type_of_response['case in 2 states'] and ((stage_of_other_case == 'still going' and jurisdiction) or stage_of_other_case =='ended with no order')))) or (type_of_response.all_true('default', exclusive=True) and stage_of_default in ('application filed', 'hearing scheduled'))):
+  % if user_need in('answer custody', 'answer divorce') and (type_of_response.all_true('improper service', exclusive = True) or (type_of_response['improper service'] and not proper_service and ((type_of_response['wrong state'] and jurisdiction) or (type_of_response['case in 2 states'] and stage_of_other_case == 'ended with no order'))) or ((type_of_response['default'] and stage_of_default in ('application filed', 'hearing scheduled')) and ((type_of_response['wrong state'] and jurisdiction) or (type_of_response['case in 2 states'] and stage_of_other_case =='ended with no order'))) or (type_of_response.all_true('default', exclusive=True) and stage_of_default in ('application filed', 'hearing scheduled'))):
   If you decide to move forward, file
   % elif type_of_response['default'] and stage_of_default == 'judgment entered':
   If you are asking to set aside the default, file

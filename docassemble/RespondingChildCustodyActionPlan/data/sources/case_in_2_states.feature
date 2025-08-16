@@ -1,6 +1,6 @@
 @case_in_2_states
 Feature: User paths
-# 2025-08-12
+# 2025-08-15
 
 Background: 
   Given the maximum seconds for each Step is 90
@@ -196,7 +196,7 @@ Scenario: row29
     And I should see the phrase "Step 4: If you decide to move forward, fill out the forms to answer the complaint"
     And I should see the phrase "Step 5: If you decide to move forward, fill out the Certificate of Service"
     And I should see the phrase "Step 6: If you decide to move forward, file your documents with the court and serve the other parent"
-    And I should see the phrase "Step 7: If you decide to move forward, read the "Domestic Relations Procedural Order" or Standing Order that was with the Complaint"
+    And I should see the phrase "Step 7: Read the "Domestic Relations Procedural Order" or Standing Order that was with the Complaint"
     And I should see the phrase "Step 8: What to expect after you file your Answer"
     And I should see the phrase "Step 9: If your case is moving forward, learn more about the process"
     And I should see the phrase "Step 10: Get more information or help"
@@ -304,7 +304,7 @@ Scenario: row62
     | military                             | True              |         | 
     | proper_service                       | True              |         | 
     And I should see the phrase "Your Action Plan for responding in your child custody case in 6 steps"
-    And I should see the phrase "Step 1: Learn default judgment"
+    And I should see the phrase "Step 1: Learn about default judgment"
     And I should see the phrase "Step 2: File a motion to dismiss your Alaska case"
     And I should see the phrase "Step 3: Fill out the Certificate of Service"
     And I should see the phrase "Step 4: File your documents with the court and serve the other parent"
@@ -327,7 +327,7 @@ Scenario: row63
     | military                             | False             |         | 
     | proper_service                       | False             |         |  
     And I should see the phrase "Your Action Plan for responding in your child custody case in 6 steps"
-    And I should see the phrase "Step 1: Learn default judgment"
+    And I should see the phrase "Step 1: Learn about default judgment"
     And I should see the phrase "Step 2: File a motion to dismiss your Alaska case"
     And I should see the phrase "Step 3: Fill out the Certificate of Service"
     And I should see the phrase "Step 4: File your documents with the court and serve the other parent"
@@ -350,7 +350,7 @@ Scenario: row64
     | military                             | False             |         | 
     | proper_service                       | True              |         |  
     And I should see the phrase "Your Action Plan for responding in your child custody case in 6 steps"
-    And I should see the phrase "Step 1: Learn default judgment"
+    And I should see the phrase "Step 1: Learn about default judgment"
     And I should see the phrase "Step 2: File a motion to dismiss your Alaska case"
     And I should see the phrase "Step 3: Fill out the Certificate of Service"
     And I should see the phrase "Step 4: File your documents with the court and serve the other parent"
@@ -373,7 +373,7 @@ Scenario: row65
     | military                             | True              |         | 
     | proper_service                       | False             |         |  
     And I should see the phrase "Your Action Plan for responding in your child custody case in 6 steps"
-    And I should see the phrase "Step 1: Learn default judgment"
+    And I should see the phrase "Step 1: Learn about default judgment"
     And I should see the phrase "Step 2: File a motion to dismiss your Alaska case"
     And I should see the phrase "Step 3: Fill out the Certificate of Service"
     And I should see the phrase "Step 4: File your documents with the court and serve the other parent"
@@ -396,7 +396,7 @@ Scenario: row66
     | military                             | False            |         | 
     | proper_service                       | True             |         |  
     And I should see the phrase "Your Action Plan for responding in your child custody case in 6 steps"
-    And I should see the phrase "Step 1: Learn default judgment"
+    And I should see the phrase "Step 1: Learn about default judgment"
     And I should see the phrase "Step 2: File a motion to dismiss your Alaska case"
     And I should see the phrase "Step 3: Fill out the Certificate of Service"
     And I should see the phrase "Step 4: File your documents with the court and serve the other parent"
@@ -419,7 +419,7 @@ Scenario: row67
     | military                             | True             |         | 
     | proper_service                       | False            |         |  
     And I should see the phrase "Your Action Plan for responding in your child custody case in 6 steps"
-    And I should see the phrase "Step 1: Learn default judgment"
+    And I should see the phrase "Step 1: Learn about default judgment"
     And I should see the phrase "Step 2: File a motion to dismiss your Alaska case"
     And I should see the phrase "Step 3: Fill out the Certificate of Service"
     And I should see the phrase "Step 4: File your documents with the court and serve the other parent"
