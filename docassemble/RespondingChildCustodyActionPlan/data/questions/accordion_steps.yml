@@ -147,7 +147,7 @@ code: |
       add_unique_step((fill_set_aside_step, "fill_set_aside_idx"), step_list)
     if stage_of_other_case in('still going', 'ended with no order') and not (type_of_response['default'] and stage_of_default == 'judgment entered'):
       add_unique_step((answer_step, "answer_idx"), step_list)
-    if stage_of_other_case in('still going', 'ended with order') or (type_of_response['default'] and stage_of_default in('application filed', 'hearing scheduled')):
+    if (stage_of_other_case in('still going', 'ended with order') and not(type_of_response['default'] and stage_of_default == 'judgment entered')) or (type_of_response['default'] and stage_of_default in('application filed', 'hearing scheduled')):
       add_unique_step((dismiss_step, "dismiss_idx"), step_list)  
   
   if type_of_response.all_true('default', exclusive = True):
@@ -1377,9 +1377,11 @@ content: |
   % endif
 ---
 comment: |
+  Need to update this step in branding package aka2j_templates.yml after this interview passes all tests
+  2025-08-18
 template: learn_more_about_process_step
 subject: |
-  % if user_need == 'answer custody' and (type_of_response.all_true('improper service', exclusive = True) or type_of_response['wrong state'] or (type_of_response['case in 2 states'] and stage_of_other_case == 'still going') or (type_of_response.all_true('default', exclusive=True) and stage_of_default in ('application filed', 'hearing scheduled'))):
+  % if user_need == 'answer custody' and (type_of_response.all_true('improper service', exclusive = True) or type_of_response['wrong state'] or (type_of_response['case in 2 states'] and stage_of_other_case == 'still going') or (type_of_response.all_true('improper service', 'case in 2 states') and stage_of_other_case == 'ended with no order' and not proper_service) or (type_of_response.all_true('default', exclusive=True) and stage_of_default in ('application filed', 'hearing scheduled'))):
   Step ${ learn_more_about_process_idx }: If your case is moving forward in Alaska, learn more about the process
   % else:
   Step ${ learn_more_about_process_idx }: Learn more about the process
@@ -1721,40 +1723,3 @@ content: |
 
   **Wait** for the court's answer before you act. Learn about motions. See [Motions: Requesting an Order from the Court; Opposing a Motion](https://courts.alaska.gov/shc/family/motions.htm).
 ---
-
----
-comment: |
-  Need to update this step in branding package aka2j_templates.yml after this interview passes all tests
-  2025-08-04
-template: learn_more_about_process_step
-subject: |
-  Step ${ learn_more_about_process_idx }: 
-  % if type_of_response.all_true('improper service', exclusive = True) or type_of_response['wrong state'] or (type_of_response['case in 2 states'] and stage_of_other_case == 'still going') or (type_of_response.all_true('default', exclusive=True) and stage_of_default in ('application filed', 'hearing scheduled')):
-  If your case is moving forward in Alaska, learn
-  % else:
-  Learn
-  % endif
-  more about the process
-content: | 
-  <div class='step-subheading'>Read</div>
-  <ul>
-    <li><strong>Flow Chart  for Case Process, SHC-185</strong> <br>
-      as a <a href="http://courts.alaska.gov/shc/family/docs/shc-185.doc">Word</a> file<br>
-      as a <a href="http://courts.alaska.gov/shc/family/docs/shc-185n.pdf">PDF</a></li>
-    <li><strong>The Life  of a Case</strong>, <a href="http://courts.alaska.gov/shc/family/docs/shc-180n.pdf">SHC-180</a><br>
-    </li>
-  </ul>
-  <div class='step-subheading'>Watch a Video</div>
-  <ul>
-    <li><a href="https://www.youtube.com/watch?v=z2d2CLllPUU&t=0s&index=2&list=PLRS0LlEIQsuTsfO0wSTsSTIvVE5RO8sLc">Introduction  to Divorce and Custody Cases in Alaska</a></li>
-    <li><a href="https://www.youtube.com/watch?v=EzSV4Caz6Co&index=4&list=PLRS0LlEIQsuTsfO0wSTsSTIvVE5RO8sLc&t=0s">Overview  and Timeline of the Case</a></li>
-    <li>Find other Alaska Videos:
-      <ul>
-        <li><a href="https://www.youtube.com/playlist?list=PLRS0LlEIQsuTsfO0wSTsSTIvVE5RO8sLc">English</a></li>
-        <li><a href="http://aklawselfhelp.org/?page_id=29">Spanish</a></li>
-        <li><a href="http://aklawselfhelp.org/?page_id=158">Tagalog</a></li>
-      </ul>
-    </li>
-    <li><a href="https://www.youtube.com/playlist?list=PL82589B66ED712B4B">Alaska  Family Law Hearing &amp; Trial Preparation Videos</a></li>
-  </ul>
----  
