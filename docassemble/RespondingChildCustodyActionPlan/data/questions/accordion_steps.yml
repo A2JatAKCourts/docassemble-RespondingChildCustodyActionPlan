@@ -1,5 +1,5 @@
 comment: |
-    last updated: 2025-08-15
+    last updated: 2025-08-22
     2025-06-04 until we get the doc1assemble interview Learn about motions: <a href="https://docassemble.akcourts.gov/start/FilingAMotion">Asking for an Order in a Divorce Case When the Issue Can't Wait for the Court's Final Decision (Filing a Motion) GA</a> live, use the link to the court webpage in the list under "Read." See Github branding issue https://github.com/A2JatAKCourts/docassemble-AKA2JBrandingIssues/issues/64
 ---
 generic object: ALDocumentBundle
@@ -528,12 +528,12 @@ content: |
   % endif 
 ---
 comment: |
-  August 5 2025
+  August 22 2025
 template: default_options_step
 subject: |
   Step ${ default_options_idx }: Options 
   % if stage_of_default in('application filed', 'hearing scheduled'):
-    if ${ other_party_in_case } asked for default judgment
+    if ${ other_party_in_case } asked for a default judgment
     % if type_of_response['case in 2 states'] and stage_of_other_case == 'still going':
       when you have cases in 2 states
     % endif
@@ -1378,10 +1378,12 @@ content: |
 ---
 comment: |
   Need to update this step in branding package aka2j_templates.yml after this interview passes all tests
-  2025-08-18
+  2025-08-22
 template: learn_more_about_process_step
 subject: |
-  % if user_need == 'answer custody' and (type_of_response.all_true('improper service', exclusive = True) or type_of_response['wrong state'] or (type_of_response['case in 2 states'] and stage_of_other_case == 'still going') or (type_of_response.all_true('improper service', 'case in 2 states') and stage_of_other_case == 'ended with no order' and not proper_service) or (type_of_response.all_true('default', exclusive=True) and stage_of_default in ('application filed', 'hearing scheduled'))):
+  % if user_need == 'answer custody' and (type_of_response.all_true('improper service', exclusive = True) or (type_of_response.all_true('default', exclusive=True) and stage_of_default in ('application filed', 'hearing scheduled'))):
+  Step ${ learn_more_about_process_idx }: If your case is moving forward, learn more about the process
+  % elif user_need == 'answer custody' and (type_of_response['wrong state'] or (type_of_response['case in 2 states'] and stage_of_other_case == 'still going') or (type_of_response.all_true('improper service', 'case in 2 states') and stage_of_other_case == 'ended with no order' and not proper_service)):
   Step ${ learn_more_about_process_idx }: If your case is moving forward in Alaska, learn more about the process
   % else:
   Step ${ learn_more_about_process_idx }: Learn more about the process
@@ -1689,11 +1691,11 @@ content: |
 ---
 comment: |
   Need to update this step in branding package aka2j_templates.yml after this interview passes all tests
-  2025-08-06
+  2025-08-22
 template: read_drpo_step
 subject: |
   Step ${ read_drpo_idx }:
-  % if type_of_response.all_true('improper service', exclusive = True) or (type_of_response.all_true('improper service', 'wrong state') and jurisdiction and not proper_service) or (type_of_response.all_true('default', exclusive=True) and stage_of_default in ('application filed', 'hearing scheduled')):
+  % if type_of_response.all_true('improper service', exclusive = True) or (type_of_response.all_true('improper service', 'wrong state') and jurisdiction and not proper_service):
   If you decide to move forward, read
   % else:
   Read
