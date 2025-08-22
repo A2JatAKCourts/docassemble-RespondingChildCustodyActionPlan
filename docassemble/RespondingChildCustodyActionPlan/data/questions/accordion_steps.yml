@@ -166,9 +166,9 @@ code: |
   
   if type_of_response.all_true('ak custody case', exclusive = True):
     proper_service = True
-    add_unique_step((answer_step, "answer_idx"), step_list)
     if (response_to_complaint in('agree', 'some') or (response_to_complaint == 'none' and want_help_to_agree)):
       add_unique_step((want_help_to_agree_step, "want_help_to_agree_idx"), step_list)
+    add_unique_step((answer_step, "answer_idx"), step_list)
 
   
   if type_of_response.any_true():
@@ -180,8 +180,28 @@ code: |
     add_unique_step((read_drpo_step, "read_drpo_idx"), step_list)
   add_unique_step((expect_after_answer_step, "expect_after_answer_idx"), step_list)
 
+
   if not ((type_of_response.all_true('wrong state', 'default') and not jurisdiction) or (type_of_response['case in 2 states'] and stage_of_other_case == 'ended with order') or (type_of_response['default'] and stage_of_default == 'judgment entered') or type_of_response.all_false()):
     add_unique_step((learn_more_about_process_step, "learn_more_about_process_idx"), step_list)
+
+  if type_of_response.any_true('ak custody case', 'improper service') or (type_of_response['default'] and stage_of_default in('application filed', 'hearing scheduled')):
+    if domestic_violence:
+      add_unique_step((answer_domestic_violence_step, "answer_domestic_violence_idx"), step_list)
+    if paternity:
+      add_unique_step((paternity_step, "paternity_idx"), step_list)
+  
+  if type_of_response.all_false():
+    want_help_to_agree = True
+    default_info = False
+    add_unique_step((want_help_to_agree_step, "want_help_to_agree_idx"), step_list)  
+    # add_unique_step((parent_agreements_step, "parent_agreements_idx"), step_list)
+    if agreement_documents:
+      add_unique_step((uncontested_custody_forms_step, "uncontested_custody_forms_idx"), step_list)
+      add_unique_step((file_complaint_step, "file_complaint_idx"), step_list)
+      add_unique_step((read_drpo_step, "read_drpo_idx"), step_list)
+      add_unique_step((expect_after_answer_step, "expect_after_answer_idx"), step_list)
+    if domestic_violence:
+      add_unique_step((answer_domestic_violence_step, "answer_domestic_violence_idx"), step_list)
   
   
   add_unique_step((get_help, "get_help_idx"), step_list)
