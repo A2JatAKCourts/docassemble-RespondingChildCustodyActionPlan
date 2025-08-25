@@ -281,20 +281,22 @@ fields:
     datatype: yesnoradio
 ---
 id: Domestic violence
+comment: |
+  last updated 2025-08-25 to take out agreeing with complaint in custody language in any circumstance where akcustody is not the only choice
 question: |
   Do you want your Action Plan to include information about domestic violence resources and how domestic violence
-  % if type_of_response['ak custody case'] and response_to_complaint == 'none' and not want_help_to_agree:
-  affects your case?
-  % else:
+  % if type_of_response.all_true('ak custody case', exclusive = True) and (response_to_complaint in('agree', 'some') or (response_to_complaint == 'none' and want_help_to_agree)):
   can affect your agreement?
+  % else:
+  affects your case?
   % endif
 subquestion: |
   If there is 
-  % if type_of_response['ak custody case'] and response_to_complaint == 'none' and not want_help_to_agree:
+  % if type_of_response.all_true('ak custody case', exclusive = True) and response_to_complaint == 'none' and not want_help_to_agree:
   a history of 
   % endif
   abuse or domestic violence between you and the other parent, it may affect your case and 
-  % if type_of_response['ak custody case'] and not (response_to_complaint == 'none' and not want_help_to_agree):
+  % if type_of_response.all_true('ak custody case', exclusive = True) and not (response_to_complaint == 'none' and not want_help_to_agree):
   what you can agree to in 
   % endif
   your parenting plan.
@@ -304,7 +306,7 @@ fields:
     datatype: yesnoradio
 under: |
   #### <i class="fa-regular fa-lightbulb"></i> Learn more ####
-  % if type_of_response['ak custody case'] and response_to_complaint in('agree', 'some'):
+  % if type_of_response.all_true('ak custody case', exclusive = True) and response_to_complaint in('agree', 'some'):
   Sometimes a person in a relationship with domestic violence feels pressured to agree to things they do not want. And the
   % else:
   The 

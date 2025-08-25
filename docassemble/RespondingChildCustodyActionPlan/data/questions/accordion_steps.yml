@@ -1,5 +1,5 @@
 comment: |
-    last updated: 2025-08-22
+    last updated: 2025-08-25
     2025-06-04 until we get the doc1assemble interview Learn about motions: <a href="https://docassemble.akcourts.gov/start/FilingAMotion">Asking for an Order in a Divorce Case When the Issue Can't Wait for the Court's Final Decision (Filing a Motion) GA</a> live, use the link to the court webpage in the list under "Read." See Github branding issue https://github.com/A2JatAKCourts/docassemble-AKA2JBrandingIssues/issues/64
 ---
 generic object: ALDocumentBundle
@@ -178,17 +178,21 @@ code: |
 
     if not ((type_of_response['default'] and stage_of_default == 'judgment entered') or (type_of_response.all_true('wrong state', 'default') and not jurisdiction) or (type_of_response['case in 2 states'] and stage_of_other_case == 'ended with order')):
       add_unique_step((read_drpo_step, "read_drpo_idx"), step_list)
-      add_unique_step((expect_after_answer_step, "expect_after_answer_idx"), step_list)
+  
+    add_unique_step((expect_after_answer_step, "expect_after_answer_idx"), step_list)
 
     if not ((type_of_response.all_true('wrong state', 'default') and not jurisdiction) or (type_of_response['case in 2 states'] and stage_of_other_case == 'ended with order') or (type_of_response['default'] and stage_of_default == 'judgment entered') or type_of_response.all_false()):
       add_unique_step((learn_more_about_process_step, "learn_more_about_process_idx"), step_list)
 
-  if type_of_response.any_true('ak custody case', 'improper service') or (type_of_response['default'] and stage_of_default in('application filed', 'hearing scheduled')):
+  if type_of_response['ak custody case']:
     if domestic_violence:
       add_unique_step((answer_domestic_violence_step, "answer_domestic_violence_idx"), step_list)
-    if paternity:
-      add_unique_step((paternity_step, "paternity_idx"), step_list)
-  
+    #### if (wrong state or case in 2 states) and not served properly - do not ask paternity
+    if type_of_response.all_true('ak custody case', exclusive = True) or (type_of_response['ak custody case'] and (type_of_response['default'] and stage_of_default in('application filed', 'hearing scheduled'))):
+      if paternity:
+        add_unique_step((paternity_step, "paternity_idx"), step_list)
+
+
   if type_of_response.all_false():
     want_help_to_agree = True
     default_info = False
@@ -337,16 +341,16 @@ content: |
   After you are served, you have **20** days to file an Answer.
 
   If you do not file an Answer in 20 days, ${ other_party_in_case } may ask the court for a default judgment.
-  % if type_of_response.all_true('improper service', exclusive = True) or (type_of_response['default'] and proper_service) or (type_of_response.any_true('wrong state', 'cases in 2 states') and not proper_service):
+  % if type_of_response.all_true('improper service', exclusive = True) or (type_of_response['default'] and proper_service) or (type_of_response.any_true('wrong state', 'case in 2 states') and not proper_service):
   <div class="step-subheading">Default judgment</div>
   % endif
   % endif
 
-  % if type_of_response.all_true('improper service', exclusive = True) or type_of_response['default'] or (type_of_response.any_true('wrong state', 'cases in 2 states') and not proper_service):
+  % if type_of_response.all_true('improper service', exclusive = True) or type_of_response['default'] or (type_of_response.any_true('wrong state', 'case in 2 states') and not proper_service):
   A default judgment is when the judge decides your case without hearing from you.
   % endif
   
-  % if type_of_response.all_true('improper service', exclusive = True) or (type_of_response.any_true('wrong state', 'cases in 2 states') and not proper_service) and not type_of_response['default']:
+  % if type_of_response.all_true('improper service', exclusive = True) or (type_of_response.any_true('wrong state', 'case in 2 states') and not proper_service) and not type_of_response['default']:
   If ${ other_party_in_case } thinks they served you correctly, they may ask the court for a default judgment if you do not file an Answer in 20 days. They are supposed to give you a copy of the **Default Application** if they file one with the court. If you want to make sure ${ other_party_in_case } has not filed for default, you can look up your case on [the court's CourtView webpage](https://records.courts.alaska.gov/eaccess/home.page.2).
   % endif
 
@@ -447,7 +451,7 @@ subject: |
   % if stage_of_other_case == 'ended with order':
   a court order from another state
   % elif stage_of_other_case == 'still going':
-  cases in 2 states
+  case in 2 states
   % if type_of_response.any_true('improper service', 'default') and not proper_service:
    and you were not properly served
   % endif
@@ -464,7 +468,7 @@ content: |
 
   % if stage_of_other_case == 'still going':
     % if not type_of_response['default']:
-      If you have open custody cases in 2 states, one state will close its case.
+      If you have open custody case in 2 states, one state will close its case.
     % endif
       You can (1) tell both judges you think your case should be in Alaska, or (2) ask the Alaska judge to dismiss your case so you can move forward in the other state.
     % if type_of_response.any_true('improper service', 'default') and not proper_service:
@@ -483,7 +487,7 @@ content: |
 
   % if stage_of_other_case == 'still going':
   % if not type_of_response['default']:
-  If you have open custody cases in 2 states, one state will close its case.
+  If you have open custody case in 2 states, one state will close its case.
   % endif
   You can (1) tell both judges you think your case should be in Alaska, or (2) ask the Alaska judge to dismiss your case so you can move forward in the other state.
   % if type_of_response.any_true('improper service', 'default') and not proper_service:
@@ -554,7 +558,7 @@ subject: |
   % if stage_of_default in('application filed', 'hearing scheduled'):
     if ${ other_party_in_case } asked for a default judgment
     % if type_of_response['case in 2 states'] and stage_of_other_case == 'still going':
-      when you have cases in 2 states
+      when you have case in 2 states
     % endif
     % if not proper_service:
       and did not properly serve you
@@ -667,7 +671,7 @@ subject: |
   % if stage_of_default in('application filed', 'hearing scheduled'):
   if ${ other_party_in_case } asked for default judgment
   % if type_of_response['case in 2 states'] and stage_of_other_case == 'still going':
-   when you have cases in 2 states
+   when you have case in 2 states
   % endif
   % if not proper_service:
     and did not properly serve you
@@ -1431,13 +1435,14 @@ content: |
   </ul>
 ---
 comment: |
+  last updated 2025-08-25 to take out agreeing with complaint in custody language in any circumstance where akcustody is not the only choice
   compare this step with AKA2J domestic_violence_step  headings and content.
   [Comparing domestic violence in answering divorce google sheet](https://docs.google.com/spreadsheets/d/1AUnHuheq_VsuTufg75G9cM5TGnd3OAa7-jd-RzIwnA4/edit?usp=sharing), tab for asking cust div and 
 template: answer_domestic_violence_step
 subject: |
   Step ${ answer_domestic_violence_idx }:
   % if type_of_response.any_true():
-  % if ((user_need == 'answer custody' and type_of_response['ak custody case']) or (user_need == 'answer divorce' and type_of_response['ak divorce case']) or (type_of_response['case in 2 states'] and stage_of_other_case == 'ended with no order')) and (response_to_complaint in('agree', 'some') or (response_to_complaint == 'none' and want_help_to_agree)):
+  % if ((user_need == 'answer custody' and type_of_response.all_true('ak custody case', exclusive = True)) or (user_need == 'answer divorce' and type_of_response['ak divorce case'])) and (response_to_complaint in('agree', 'some') or (response_to_complaint == 'none' and want_help_to_agree)):
   Abuse or domestic violence resources and reaching an agreement
   % else:
   Abuse or domestic violence and parenting
@@ -1452,8 +1457,6 @@ content: |
   People who have experienced domestic violence can be at greater risk when they start a court case.
   % elif user_need == 'divorce':
   People who have experienced domestic violence can be at greater risk when they separate from their spouse or start a court case to end their marriage.
-  % elif user_need in('answer custody', 'answer divorce'):
-  People who have experienced domestic violence can be at greater risk during a court case.
   % endif
    During this time, safety is very important. 
   
@@ -1463,7 +1466,7 @@ content: |
   * You can get information about asking the court for a protective order by answering more questions. See the Court Guide Action Plan: [Protective Orders](https://docassemble.akcourts.gov/start/ProtectiveOrders).
   * See if you qualify for [legal assistance through your local domestic violence program](https://www.andvsa.org/for-survivors/) or [Alaska Legal Services Corporation](https://www.alsc-law.org/apply-for-services).
   
-  % if ((user_need == 'answer custody' and type_of_response['ak custody case']) or (user_need == 'answer divorce' and type_of_response['ak divorce case']) or (type_of_response['case in 2 states'] and stage_of_other_case == 'ended with no order')) and (response_to_complaint in('agree', 'some') or (response_to_complaint == 'none' and want_help_to_agree)):
+  % if ((user_need == 'answer custody' and type_of_response.all_true('ak custody case', exclusive = True)) or (user_need == 'answer divorce' and type_of_response['ak divorce case'])) and (response_to_complaint in('agree', 'some') or (response_to_complaint == 'none' and want_help_to_agree)):
   % if user_need == 'answer divorce':
   However, some people in a marriage with domestic violence are comfortable reaching an agreement about 
   % if minor_children:
@@ -1510,7 +1513,7 @@ content: |
   A "history of domestic violence" is defined by the law as either one incident of domestic violence that caused serious physical injury, or more than one incident. The parent's domestic violence behavior needs to fit under one of the domestic violence crimes in the law. There does not have to be a protective order or criminal case for the court to find a parent has a history of domestic violence. The court can find domestic violence based on one parent's testimony.
   % endif
   
-  % if ((user_need == 'answer custody' and type_of_response['ak custody case']) or (user_need == 'answer divorce' and type_of_response['ak divorce case']) or (type_of_response['case in 2 states'] and stage_of_other_case == 'ended with no order')) and (response_to_complaint in('agree', 'some') or (response_to_complaint == 'none' and want_help_to_agree)):
+  % if ((user_need == 'answer custody' and type_of_response.all_true('ak custody case', exclusive = True)) or (user_need == 'answer divorce' and type_of_response['ak divorce case'])) and (response_to_complaint in('agree', 'some') or (response_to_complaint == 'none' and want_help_to_agree)):
     % if user_need in('custody', 'answer custody') or (user_need in('divorce', 'answer divorce') and minor_children):
     <div class='step-subheading'>Considerations if you and ${ other_party_in_case } cannot agree</div>
     % endif
@@ -1527,7 +1530,7 @@ content: |
   
   If the judge finds the domestic violence presumption applies, the judge will usually permit supervised contact between the parent and the children while the parent is completing a batterer's intervention or substance abuse treatment program. After the parent finishes the program and any other requirements the judge ordered, the judge may lift the supervision restriction and allow a different parenting schedule.
   
-  % if ((user_need == 'answer custody' and type_of_response['ak custody case']) or (user_need == 'answer divorce' and type_of_response['ak divorce case']) or (type_of_response['case in 2 states'] and stage_of_other_case == 'ended with no order')) and (response_to_complaint == 'none' and not want_help_to_agree):
+  % if ((user_need == 'answer custody' and type_of_response.all_true('ak custody case', exclusive = True)) or (user_need == 'answer divorce' and type_of_response['ak divorce case'])) and (response_to_complaint == 'none' and not want_help_to_agree):
   <div class="step-subheading">Tell the judge your concerns</div>
   % endif 
 
