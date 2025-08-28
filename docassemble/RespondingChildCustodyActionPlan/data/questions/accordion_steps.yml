@@ -1,5 +1,5 @@
 comment: |
-    last updated: 2025-08-25
+    last updated: 2025-08-27
     2025-06-04 until we get the doc1assemble interview Learn about motions: <a href="https://docassemble.akcourts.gov/start/FilingAMotion">Asking for an Order in a Divorce Case When the Issue Can't Wait for the Court's Final Decision (Filing a Motion) GA</a> live, use the link to the court webpage in the list under "Read." See Github branding issue https://github.com/A2JatAKCourts/docassemble-AKA2JBrandingIssues/issues/64
 ---
 generic object: ALDocumentBundle
@@ -103,7 +103,11 @@ code: |
     if type_of_response.any_true('improper service', 'default'):
       add_unique_step((proper_service_step, "proper_service_idx"), step_list)
     if type_of_response['improper service'] and jurisdiction and not proper_service:
-      add_unique_step((decide_after_improper_service_step, "decide_after_improper_service_idx"), step_list) 
+      add_unique_step((decide_after_improper_service_step, "decide_after_improper_service_idx"), step_list)
+    if not type_of_response['default']:
+      add_unique_step((answer_step, "answer_idx"), step_list)  
+      if not jurisdiction:
+        add_unique_step((dismiss_step, "dismiss_idx"), step_list) 
     if type_of_response['default'] and stage_of_default in('application filed', 'hearing scheduled'):
       if jurisdiction:
         add_unique_step((default_options_step, "default_options_idx"), step_list)
@@ -115,18 +119,6 @@ code: |
         add_unique_step((default_options_step, "default_options_idx"), step_list)
       add_unique_step((learn_set_aside_step, "learn_set_aside_idx"), step_list)
       add_unique_step((fill_set_aside_step, "fill_set_aside_idx"), step_list)
-  
-  if type_of_response['wrong state']:
-    jurisdiction
-    add_unique_step((answer_jurisdiction_step, "answer_jurisdiction_idx"), step_list)
-    if type_of_response.any_true('improper service', 'default'):
-      add_unique_step((proper_service_step, "proper_service_idx"), step_list)
-    if type_of_response['improper service'] and jurisdiction and not proper_service:
-        add_unique_step((decide_after_improper_service_step, "decide_after_improper_service_idx"), step_list)
-    if not type_of_response['default']:
-      add_unique_step((answer_step, "answer_idx"), step_list)  
-      if not jurisdiction:
-        add_unique_step((dismiss_step, "dismiss_idx"), step_list)
 
 
   if type_of_response['case in 2 states']:
@@ -188,7 +180,7 @@ code: |
     if domestic_violence:
       add_unique_step((answer_domestic_violence_step, "answer_domestic_violence_idx"), step_list)
     #### if (wrong state or case in 2 states) and not served properly - do not ask paternity
-    if type_of_response.all_true('ak custody case', exclusive = True) or (type_of_response['ak custody case'] and (type_of_response['default'] and stage_of_default in('application filed', 'hearing scheduled'))):
+    if type_of_response.all_true('ak custody case', exclusive = True) or (type_of_response['ak custody case'] and (type_of_response.any_true('wrong state', 'case in 2 states') and type_of_response.all_false('improper service'))) or (type_of_response['ak custody case'] and (type_of_response['default'] and stage_of_default in('application filed', 'hearing scheduled'))):
       if paternity:
         add_unique_step((paternity_step, "paternity_idx"), step_list)
 
@@ -440,7 +432,7 @@ content: |
   If neither you nor ${ other_party_in_case } files anything, the court will close your case.
 ---
 comment: |
-  July 31, 2025
+  August 27, 2025
 template: case_in_2_states_step
 subject: |
   Step ${ case_in_2_states_idx }: Options 
@@ -451,7 +443,7 @@ subject: |
   % if stage_of_other_case == 'ended with order':
   a court order from another state
   % elif stage_of_other_case == 'still going':
-  case in 2 states
+  cases in 2 states
   % if type_of_response.any_true('improper service', 'default') and not proper_service:
    and you were not properly served
   % endif
@@ -1713,16 +1705,11 @@ content: |
 ---
 comment: |
   Need to update this step in branding package aka2j_templates.yml after this interview passes all tests
-  2025-08-22
+  2025-08-27
 template: read_drpo_step
 subject: |
   Step ${ read_drpo_idx }:
-  % if type_of_response.all_true('improper service', exclusive = True) or (type_of_response.all_true('improper service', 'wrong state') and jurisdiction and not proper_service):
-  If you decide to move forward, read
-  % else:
-  Read
-  % endif
-  the &ldquo;Domestic Relations Procedural Order&rdquo; or Standing Order
+  Read the &ldquo;Domestic Relations Procedural Order&rdquo; or Standing Order
   % if user_need in('custody', 'divorce') or (user_need in('answer custody', 'answer divorce') and type_of_response.all_false()):
    if the clerk gives you one when you file your case
   % elif user_need in('answer custody', 'answer divorce'):

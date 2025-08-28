@@ -1,6 +1,6 @@
 @wrong_state
 Feature: user paths
-# 2025-08-25 added in scenarios with akcustody case
+# 2025-08-27 
 
 Background: 
   Given the maximum seconds for each Step is 90
@@ -178,7 +178,7 @@ Scenario: Row #52
     And I should see the phrase "Your Action Plan for responding in your child custody case in 10 steps"
     And I should see the phrase "Step 1: Learn if Alaska is the right state for your custody case"
     And I should see the phrase "Step 2: Learn about default judgment"
-    And I should see the phrase "Step 3: Options if the other parent asked for default judgment"
+    And I should see the phrase "Step 3: Options if the other parent asked for a default judgment"
     And I should see the phrase "Step 4: If you decide to move forward, fill out the forms to answer the complaint and respond within 20 days"
     And I should see the phrase "Step 5: If you decide to move forward, fill out the Certificate of Service"
     And I should see the phrase "Step 6: If you decide to move forward, file your documents with the court and serve the other parent"
@@ -231,7 +231,7 @@ Scenario: Row #54
     And I should see the phrase "Your Action Plan for responding in your child custody case in 10 steps"
     And I should see the phrase "Step 1: Learn if Alaska is the right state for your custody case"
     And I should see the phrase "Step 2: Learn about default judgment"
-    And I should see the phrase "Step 3: Options if the other parent asked for default judgment"
+    And I should see the phrase "Step 3: Options if the other parent asked for a default judgment"
     And I should see the phrase "Step 4: If you decide to move forward, fill out the forms to answer the complaint and respond within 20 days"
     And I should see the phrase "Step 5: If you decide to move forward, fill out the Certificate of Service"
     And I should see the phrase "Step 6: If you decide to move forward, file your documents with the court and serve the other parent"
@@ -541,7 +541,7 @@ Scenario: Row #110m
     And I should see the phrase "Your Action Plan for responding in your child custody case in 12 steps"
     And I should see the phrase "Step 1: Learn if Alaska is the right state for your custody case"
     And I should see the phrase "Step 2: Learn about default judgment"
-    And I should see the phrase "Step 3: Options if the other parent asked for default judgment"
+    And I should see the phrase "Step 3: Options if the other parent asked for a default judgment"
     And I should see the phrase "Step 4: If you decide to move forward, fill out the forms to answer the complaint and respond within 20 days"
     And I should see the phrase "Step 5: If you decide to move forward, fill out the Certificate of Service"
     And I should see the phrase "Step 6: If you decide to move forward, file your documents with the court and serve the other parent"
@@ -602,7 +602,7 @@ Scenario: Row #114m
     And I should see the phrase "Your Action Plan for responding in your child custody case in 11 steps"
     And I should see the phrase "Step 1: Learn if Alaska is the right state for your custody case"
     And I should see the phrase "Step 2: Learn about default judgment"
-    And I should see the phrase "Step 3: Options if the other parent asked for default judgment"
+    And I should see the phrase "Step 3: Options if the other parent asked for a default judgment"
     And I should see the phrase "Step 4: If you decide to move forward, fill out the forms to answer the complaint and respond within 20 days"
     And I should see the phrase "Step 5: If you decide to move forward, fill out the Certificate of Service"
     And I should see the phrase "Step 6: If you decide to move forward, file your documents with the court and serve the other parent"
@@ -653,10 +653,12 @@ Scenario: Row #118m
     | type_of_response['ak custody case'] | True             |         | 
     | type_of_response['wrong state']     | True             |         | 
     | type_of_response['default']         | True             |         | 
+    | jurisdiction                        | True             |         | 
     | proper_service                      | True             |         | 
     | military                            | True             |         | 
     | stage_of_default                    | judgment entered |         | 
     | domestic_violence                   | True             |         | 
+    | paternity                           | False            |         | 
     And I should see the phrase "Your Action Plan for responding in your child custody case in 10 steps"
     And I should see the phrase "Step 1: Learn if Alaska is the right state for your custody case"
     And I should see the phrase "Step 2: Learn about default judgment"
@@ -716,6 +718,7 @@ Scenario: Row #127m
     | stage_of_default                    | judgment entered |         | 
     | military                            | True             |         | 
     | domestic_violence                   | True             |         | 
+    | paternity                           | False            |         | 
     And I should see the phrase "Your Action Plan for responding in your child custody case in 9 steps"
     And I should see the phrase "Step 1: Learn if Alaska is the right state for your custody case"
     And I should see the phrase "Step 2: Learn about proper service and default judgment"

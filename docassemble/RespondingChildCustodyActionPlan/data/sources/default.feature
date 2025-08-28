@@ -154,19 +154,10 @@ Scenario: Row #46
     | proper_service              | False           |         | 
     | military                    | False             |         | 
     | stage_of_default            | hearing scheduled |         | 
-    And I should see the phrase "Your Action Plan for responding in your child custody case in 9 steps"
-    And I should see the phrase "Learn about proper service and default judgment"
-    And I tap the "#cHJvcGVyX3NlcnZpY2Vfc3RlcA .al_toggle" element and stay on the same page
-    And I should see the phrase "Options if the other parent asked for a default judgment"
-    And I tap the "#ZGVmYXVsdF9vcHRpb25zX3N0ZXA .al_toggle" element and stay on the same page
-    And I should see the phrase "Get more information or help"
-    And I take a screenshot
-    And I download "responding_child_custody_action_plan.pdf"
-    And I download "responding_child_custody_action_plan.docx"
     And I should see the phrase "Your Action Plan for responding in your child custody case in 10 steps"
-    And I should see the phrase "Step 1: Learn about default judgment"
+    And I should see the phrase "Step 1: Learn about proper service and default judgment"
     And I tap the "#cHJvcGVyX3NlcnZpY2Vfc3RlcA .al_toggle" element and stay on the same page
-    And I should see the phrase "Step 2: Options if the other parent asked for a default judgment"
+    And I should see the phrase "Step 2: Options if the other parent asked for a default judgment and did not properly serve you"
     And I tap the "#ZGVmYXVsdF9vcHRpb25zX3N0ZXA .al_toggle" element and stay on the same page
     And I should see the phrase "Step 3: If you decide to move forward, fill out the forms to answer the complaint"
     And I should see the phrase "Step 4: Tell the judge you were not served the correct way and ask to dismiss the case"
