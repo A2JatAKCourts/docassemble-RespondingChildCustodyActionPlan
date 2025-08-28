@@ -768,7 +768,7 @@ content: |
   % endif
 ---
 comment: |
-  2025-08-12
+  2025-08-28
 template: answer_step
 subject: |
   Step ${ answer_idx }:
@@ -791,7 +791,7 @@ subject: |
     Fill
   % endif
     out the forms to answer the complaint
-    % if (type_of_response.all_true('ak custody case', exclusive = True) or  type_of_response.all_true('improper service', exclusive = True) or type_of_response.all_true('wrong state', exclusive = True) or type_of_response.all_true('case in 2 states', exclusive = True)) or (type_of_response.any_true('ak custody case','improper service', 'wrong state', 'case in 2 states') and type_of_response.any_true('improper service', 'default') and proper_service):
+    % if not (type_of_response.any_true('improper service', 'default') and not proper_service):
     and respond within 20 days
     % endif
   % endif

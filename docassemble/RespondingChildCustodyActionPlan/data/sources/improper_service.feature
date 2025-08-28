@@ -1,6 +1,6 @@
 @service
 Feature: User paths
-# August 27, 2025
+# August 28, 2025
 
 Background: 
   Given the maximum seconds for each Step is 90
@@ -14,7 +14,7 @@ Scenario: Row #17
     | type_of_response['improper service'] | True           |         | 
     | proper_service                       | server to me   |         | 
 
-    And I should see the phrase "Your Personal Action Plan for responding in your child custody case in 2 steps"
+    And I should see the phrase "Your Personal Action Plan for responding in your child custody case in 9 steps"
     And I should see the phrase "Step 1: Learn about proper service and default judgment"
     And I tap the "#cHJvcGVyX3NlcnZpY2Vfc3RlcA .al_toggle" element and stay on the same page
     And I should see the phrase "Step 2: Decide if you want to move forward or wait"
