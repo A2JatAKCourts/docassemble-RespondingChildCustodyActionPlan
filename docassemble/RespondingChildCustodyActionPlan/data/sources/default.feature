@@ -160,10 +160,10 @@ Scenario: Row #46
     And I should see the phrase "Step 2: Options if the other parent asked for a default judgment and did not properly serve you"
     And I tap the "#ZGVmYXVsdF9vcHRpb25zX3N0ZXA .al_toggle" element and stay on the same page
     And I should see the phrase "Step 3: If you decide to move forward, fill out the forms to answer the complaint"
-    And I should see the phrase "Step 4: Tell the judge you were not served the correct way and ask to dismiss the case"
+    And I should see the phrase "Step 4: Or, tell the judge you were not served the correct way and ask to dismiss the case"
     And I tap the "#YW5zd2VyX3N0ZXA .al_toggle" element and stay on the same page
-    And I should see the phrase "Step 5: If you decide to move forward, fill out the Certificate of Service"
-    And I should see the phrase "Step 6: If you decide to move forward, file your documents with the court and serve the other parent"
+    And I should see the phrase "Step 5: Fill out the Certificate of Service"
+    And I should see the phrase "Step 6: File your documents with the court and serve the other parent"
     And I should see the phrase "Step 7: Read the “Domestic Relations Procedural Order” or Standing Order that was with the Complaint"
     And I should see the phrase "Step 8: What to expect after you file your documents"
     And I should see the phrase "Step 9: If your case is moving forward, learn more about the process"
