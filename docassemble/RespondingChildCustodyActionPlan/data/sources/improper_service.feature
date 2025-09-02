@@ -12,7 +12,7 @@ Scenario: Row #17
     | var                                  | value          | trigger | 
     | user_need                            | answer custody |         | 
     | type_of_response['improper service'] | True           |         | 
-    | proper_service                       | server to me   |         | 
+    | proper_service                       | True           |         | 
 
     And I should see the phrase "Your Action Plan for responding in your child custody case in 9 steps"
     And I should see the phrase "Step 1: Learn about proper service and default judgment"
@@ -21,7 +21,7 @@ Scenario: Row #17
     And I should see the phrase "Step 3: If you decide to move forward, fill out the forms to answer the complaint and respond within 20 days"
     And I should see the phrase "Step 4: If you decide to move forward, fill out the Certificate of Service"
     And I should see the phrase "Step 5: If you decide to move forward, file your documents with the court and serve the other parent"
-    And I should see the phrase "step 6: Read the “Domestic Relations Procedural Order” or Standing Order that was with the Complaint"
+    And I should see the phrase "Step 6: Read the “Domestic Relations Procedural Order” or Standing Order that was with the Complaint"
     And I should see the phrase "Step 7: What to expect after you file your documents"
     And I should see the phrase "Step 8: If your case is moving forward, learn more about the process"
     And I should see the phrase "Step 9: Get more information or help"

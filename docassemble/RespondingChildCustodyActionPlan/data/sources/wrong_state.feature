@@ -5,51 +5,6 @@ Feature: user paths
 Background: 
   Given the maximum seconds for each Step is 90
 
-@row30
-# Scenario when the user indicates the case is in the wrong state and Alaska has jurisdiction
-Scenario: Row #30
-  Given I start the interview at "responding_child_custody_action_plan.yml"
-    And I get to the question id "final screen" with this data:
-    | var                             | value          | trigger | 
-    | user_need                       | answer custody |         | 
-    | type_of_response['wrong state'] | True           |         | 
-    | jurisdiction                    | True           |         | 
-    And I should see the phrase "Your Action Plan for responding in your child custody case in 8 steps"
-    And I should see the phrase "Step 1: Learn if Alaska is the right state for your custody case"
-    And I should see the phrase "Step 2: Fill out the forms to answer the complaint and respond within 20 days"
-    And I should see the phrase "Step 3: Fill out the Certificate of Service"
-    And I should see the phrase "Step 4: File your documents with the court and serve the other parent"
-    And I should see the phrase "Step 5: Read the "Domestic Relations Procedural Order" or Standing Order that was with the Complaint"
-    And I should see the phrase "Step 6: What to expect after you file your documents"
-    And I should see the phrase "Step 7: If your case is moving forward in Alaska, learn more about the process"
-    And I should see the phrase "Step 8: Get more information or help"
-    And I take a screenshot
-    And I download "responding_child_custody_action_plan.pdf"
-    And I download "responding_child_custody_action_plan.docx"
-
-@row31
-# Scenario when the user indicates the case is in the wrong state and Alaska does not have jurisdiction
-Scenario: Row #31
-  Given I start the interview at "responding_child_custody_action_plan.yml"
-    And I get to the question id "final screen" with this data:
-    | var                             | value          | trigger | 
-    | user_need                       | answer custody |         | 
-    | type_of_response['wrong state'] | True           |         | 
-    | jurisdiction                    | False          |         | 
-    And I should see the phrase "Your Action Plan for responding in your child custody case in 9 steps"
-    And I should see the phrase "Step 1: Learn if Alaska is the right state for your custody case"
-    And I should see the phrase "Step 2: Fill out the forms to respond in 20 days and ask to dismiss if you think Alaska is the wrong state"
-    And I should see the phrase "Step 3: If you think Alaska is the wrong state, file a motion to dismiss your Alaska case"
-    And I should see the phrase "Step 4: Fill out the Certificate of Service"
-    And I should see the phrase "Step 5: File your documents with the court and serve the other parent"
-    And I should see the phrase "Step 6: Read the "Domestic Relations Procedural Order" or Standing Order that was with the Complaint"
-    And I should see the phrase "Step 7: What to expect after you file your documents"
-    And I should see the phrase "Step 8: If your case is moving forward in Alaska, learn more about the process"
-    And I should see the phrase "Step 9: Get more information or help"
-    And I take a screenshot
-    And I download "responding_child_custody_action_plan.pdf"
-    And I download "responding_child_custody_action_plan.docx"
-
 @row18
 # Scenario when the user indicates the case is in the wrong state and also selects improper service, Alaska has jurisdiction, and the user reports they were properly served
 Scenario: Row #18
@@ -162,9 +117,54 @@ Scenario: Row #21
     And I download "responding_child_custody_action_plan.pdf"
     And I download "responding_child_custody_action_plan.docx"
 
-@row52
+@row30
+# Scenario when the user indicates the case is in the wrong state and Alaska has jurisdiction
+Scenario: Row #30
+  Given I start the interview at "responding_child_custody_action_plan.yml"
+    And I get to the question id "final screen" with this data:
+    | var                             | value          | trigger | 
+    | user_need                       | answer custody |         | 
+    | type_of_response['wrong state'] | True           |         | 
+    | jurisdiction                    | True           |         | 
+    And I should see the phrase "Your Action Plan for responding in your child custody case in 8 steps"
+    And I should see the phrase "Step 1: Learn if Alaska is the right state for your custody case"
+    And I should see the phrase "Step 2: Fill out the forms to answer the complaint and respond within 20 days"
+    And I should see the phrase "Step 3: Fill out the Certificate of Service"
+    And I should see the phrase "Step 4: File your documents with the court and serve the other parent"
+    And I should see the phrase "Step 5: Read the "Domestic Relations Procedural Order" or Standing Order that was with the Complaint"
+    And I should see the phrase "Step 6: What to expect after you file your documents"
+    And I should see the phrase "Step 7: If your case is moving forward in Alaska, learn more about the process"
+    And I should see the phrase "Step 8: Get more information or help"
+    And I take a screenshot
+    And I download "responding_child_custody_action_plan.pdf"
+    And I download "responding_child_custody_action_plan.docx"
+
+@row31
+# Scenario when the user indicates the case is in the wrong state and Alaska does not have jurisdiction
+Scenario: Row #31
+  Given I start the interview at "responding_child_custody_action_plan.yml"
+    And I get to the question id "final screen" with this data:
+    | var                             | value          | trigger | 
+    | user_need                       | answer custody |         | 
+    | type_of_response['wrong state'] | True           |         | 
+    | jurisdiction                    | False          |         | 
+    And I should see the phrase "Your Action Plan for responding in your child custody case in 9 steps"
+    And I should see the phrase "Step 1: Learn if Alaska is the right state for your custody case"
+    And I should see the phrase "Step 2: Fill out the forms to respond in 20 days and ask to dismiss if you think Alaska is the wrong state"
+    And I should see the phrase "Step 3: If you think Alaska is the wrong state, file a motion to dismiss your Alaska case"
+    And I should see the phrase "Step 4: Fill out the Certificate of Service"
+    And I should see the phrase "Step 5: File your documents with the court and serve the other parent"
+    And I should see the phrase "Step 6: Read the "Domestic Relations Procedural Order" or Standing Order that was with the Complaint"
+    And I should see the phrase "Step 7: What to expect after you file your documents"
+    And I should see the phrase "Step 8: If your case is moving forward in Alaska, learn more about the process"
+    And I should see the phrase "Step 9: Get more information or help"
+    And I take a screenshot
+    And I download "responding_child_custody_action_plan.pdf"
+    And I download "responding_child_custody_action_plan.docx"
+
+@row52m
 # Scenario when the user indicates the case is in the wrong state, the user reports they were properly served, other parent filed default application, and Alaska has jurisdiction
-Scenario: Row #52
+Scenario: Row #52m
   Given I start the interview at "responding_child_custody_action_plan.yml"
     And I get to the question id "final screen" with this data:
     | var                             | value             | trigger | 
@@ -215,9 +215,9 @@ Scenario: Row #53
     And I download "responding_child_custody_action_plan.pdf"
     And I download "responding_child_custody_action_plan.docx"
 
-@row54
+@row54m
 # Scenario when the user indicates the case is in the wrong state, the user reports they were properly served, clerk signed entry of judgment and set a hearing, and Alaska has jurisdiction
-Scenario: Row #54
+Scenario: Row #54m
   Given I start the interview at "responding_child_custody_action_plan.yml"
     And I get to the question id "final screen" with this data:
     | var                             | value             | trigger | 
@@ -268,9 +268,9 @@ Scenario: Row #55
     And I download "responding_child_custody_action_plan.pdf"
     And I download "responding_child_custody_action_plan.docx"
 
-@row56
+@row56m
 # Scenario when the user indicates the case is in the wrong state, the user reports they were properly served, the court has entered a default judgment, and Alaska does not have jurisdiction
-Scenario: Row #56
+Scenario: Row #56m
   Given I start the interview at "responding_child_custody_action_plan.yml"
     And I get to the question id "final screen" with this data:
     | var                             | value            | trigger | 
@@ -295,9 +295,9 @@ Scenario: Row #56
     And I download "responding_child_custody_action_plan.pdf"
     And I download "responding_child_custody_action_plan.docx"
 
-@row58
+@row59
 # Scenario when the user indicates the case is in the wrong state, the user reports they were not properly served, other parent filed default application, and Alaska does not have jurisdiction
-Scenario: Row #58
+Scenario: Row #59
   Given I start the interview at "responding_child_custody_action_plan.yml"
     And I get to the question id "final screen" with this data:
     | var                             | value             | trigger | 
@@ -305,8 +305,8 @@ Scenario: Row #58
     | type_of_response['wrong state'] | True              |         | 
     | type_of_response['default']     | True              |         | 
     | jurisdiction                    | False             |         | 
-    | proper_service                  | False             |         | 
     | stage_of_default                | application filed |         | 
+    | proper_service                  | False             |         | 
     | military                        | False             |         | 
     And I should see the phrase "Your Action Plan for responding in your child custody case in 7 steps"
     And I should see the phrase "Step 1: Learn if Alaska is the right state for your custody case"
@@ -320,9 +320,9 @@ Scenario: Row #58
     And I download "responding_child_custody_action_plan.pdf"
     And I download "responding_child_custody_action_plan.docx"
 
-@row61
+@row62m
 # Scenario when the user indicates the case is in the wrong state, the user reports they were not properly served, the court has entered a default judgment, and Alaska does not have jurisdiction
-Scenario: Row #61
+Scenario: Row #62m
   Given I start the interview at "responding_child_custody_action_plan.yml"
     And I get to the question id "final screen" with this data:
     | var                             | value            | trigger | 
@@ -732,7 +732,5 @@ Scenario: Row #127m
     And I take a screenshot
     And I download "responding_child_custody_action_plan.pdf"
     And I download "responding_child_custody_action_plan.docx"
-
-
 
 

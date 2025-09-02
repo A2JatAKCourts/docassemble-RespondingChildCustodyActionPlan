@@ -139,7 +139,7 @@ code: |
       add_unique_step((fill_set_aside_step, "fill_set_aside_idx"), step_list)
     if stage_of_other_case in('still going', 'ended with no order') and not (type_of_response['default'] and stage_of_default == 'judgment entered'):
       add_unique_step((answer_step, "answer_idx"), step_list)
-    if (stage_of_other_case in('still going', 'ended with order') and not(type_of_response['default'] and stage_of_default == 'judgment entered')) or (type_of_response['default'] and stage_of_default in('application filed', 'hearing scheduled')):
+    if (stage_of_other_case in('still going', 'ended with order') and (not (type_of_response['default'] and stage_of_default == 'judgment entered')) or (type_of_response['default'] and not proper_service and stage_of_default in('application filed', 'hearing scheduled'))):
       add_unique_step((dismiss_step, "dismiss_idx"), step_list)  
   
   if type_of_response.all_true('default', exclusive = True):
@@ -176,7 +176,7 @@ code: |
     if not ((type_of_response.all_true('wrong state', 'default') and not jurisdiction) or (type_of_response['case in 2 states'] and stage_of_other_case == 'ended with order') or (type_of_response['default'] and stage_of_default == 'judgment entered') or type_of_response.all_false()):
       add_unique_step((learn_more_about_process_step, "learn_more_about_process_idx"), step_list)
 
-  if type_of_response['ak custody case']:
+  if type_of_response['ak custody case'] and not(type_of_response['case in 2 states'] and stage_of_other_case == 'ended with order'):
     if domestic_violence:
       add_unique_step((answer_domestic_violence_step, "answer_domestic_violence_idx"), step_list)
     #### if (wrong state or case in 2 states) and not served properly - do not ask paternity
@@ -791,7 +791,7 @@ subject: |
     Fill
   % endif
     out the forms to answer the complaint
-    % if not (type_of_response.any_true('improper service', 'default') and not proper_service):
+    % if type_of_response.all_true('improper service', exclusive = True) or (not (type_of_response.any_true('improper service', 'default') and not proper_service)):
     and respond within 20 days
     % endif
   % endif
@@ -1008,7 +1008,7 @@ content: |
     % endif
 ---
 Comment: |
-    last updated: 2025-08-06
+    last updated: 2025-08-28
     note 2025-06-04 - until we get this docassemble interview 
     Learn about motions: <a href="https://docassemble.akcourts.gov/start/FilingAMotion">Asking for an Order in a Divorce Case When the Issue Can't Wait for the Court's Final Decision (Filing a Motion) GA</a> live,     
     use the link to the court webpage in the list under "Read." See Github branding issue https://github.com/A2JatAKCourts/docassemble-AKA2JBrandingIssues/issues/64
@@ -1026,8 +1026,8 @@ subject: |
       If you decide to move forward in the other state, file a motion to dismiss your Alaska case
       % endif
     % else:
-      % if ((type_of_response.all_true('default', exclusive = True) and stage_of_default in('application filed', 'hearing scheduled')) or (type_of_response.all_true('improper service', 'wrong state') and jurisdiction) or (type_of_response.all_true('wrong state', 'default') and jurisdiction and stage_of_default in('application filed', 'hearing scheduled'))) and not proper_service:
-      Tell the judge you were not served the correct way and ask to dismiss the case
+      % if (type_of_response.all_true('default', exclusive = True) or (type_of_response['default']) and ((type_of_response['wrong state'] and jurisdiction) or (type_of_response['case in 2 states'] and stage_of_other_case == 'ended with no order'))) and not proper_service and stage_of_default in('application filed', 'hearing scheduled'):
+      Or, tell the judge you were not served the correct way and ask to dismiss the case
       % endif
       % if (type_of_response['wrong state'] or (type_of_response['case in 2 states'] and stage_of_other_case == 'still going')) and not jurisdiction:
       Fill out the forms to respond and tell the court Alaska is the wrong state
@@ -1070,7 +1070,7 @@ content: |
   Because the other parent asked for a default judgment, it is important to file your motion as soon as possible to prevent the judge from entering a default judgment order.
   % endif
 
-  If you choose to ask the judge to dismiss your case, use Motion (Request) and Affidavit, TF-706 [[Fill-in PDF](https://public.courts.alaska.gov/web/forms/docs/tf-706.pdf)]. Tell the judge why
+  If you choose to ask the judge to dismiss your case, use **Motion (Request) and Affidavit, TF-706** [[Fill-in PDF](https://public.courts.alaska.gov/web/forms/docs/tf-706.pdf)]. Tell the judge why
   % if type_of_response.any_true('wrong state', 'case in 2 states'):
   you think the court does not have jurisdiction and any other reason
   % endif
@@ -1087,14 +1087,13 @@ content: |
 
   Watch: [Motions Part 1: How to Ask the Court For Something](https://www.youtube.com/watch?v=2irmxT0_0EA).
 
-  Read: Getting Your Message to the Judge, SHC-1380 [Word](https://courts.alaska.gov/shc/family/docs/shc-1380.doc) | [PDF](https://courts.alaska.gov/shc/family/docs/shc-1302n.pdf).
+  Read: **Getting Your Message to the Judge, SHC-1380** [Word](https://courts.alaska.gov/shc/family/docs/shc-1380.doc) | [PDF](https://courts.alaska.gov/shc/family/docs/shc-1302n.pdf).
 
   Learn about motions: See [Motions: Requesting an Order from the Court; Opposing a Motion](https://courts.alaska.gov/shc/family/motions.htm).
 
-
-  % if (type_of_response.all_true('default', exclusive = True) and stage_of_default in('application filed', 'hearing scheduled') or (type_of_response.all_true('improper service', 'wrong state') and jurisdiction) or (type_of_response.all_true('wrong state', 'default') and jurisdiction and stage_of_default in('application filed', 'hearing scheduled'))) and not proper_service:
+  % if (type_of_response.all_true('default', exclusive = True) or (type_of_response['default']) and ((type_of_response['wrong state'] and jurisdiction) or (type_of_response['case in 2 states'] and stage_of_other_case == 'ended with no order'))) and not proper_service and stage_of_default in('application filed', 'hearing scheduled'):
   If ${ other_party_in_case } serves you properly in the future, the court may decide not to dismiss your case.   
-  Read Step ${ answer_idx }: If you decide to move forward, fill out the forms you need to answer the complaint and respond" to learn about filing an Answer.
+  Read Step ${ answer_idx } to learn about filing an Answer.
   % endif
 ---
 comment: |
@@ -1291,14 +1290,14 @@ content: |
 ---
 comment: |
   hoping to use as a generic
-  2025-08-15
+  2025-08-29
 template: answer_file_and_serve_step
 subject: |
   Step ${ answer_file_and_serve_idx }:
   % if defined('file_step_heading'):
   ${ file_step_heading }
   % else:
-  % if user_need in('answer custody', 'answer divorce') and (type_of_response.all_true('improper service', exclusive = True) or (type_of_response['improper service'] and not proper_service and ((type_of_response['wrong state'] and jurisdiction) or (type_of_response['case in 2 states'] and stage_of_other_case == 'ended with no order'))) or ((type_of_response['default'] and stage_of_default in ('application filed', 'hearing scheduled')) and ((type_of_response['wrong state'] and jurisdiction) or (type_of_response['case in 2 states'] and stage_of_other_case =='ended with no order'))) or (type_of_response.all_true('default', exclusive=True) and stage_of_default in ('application filed', 'hearing scheduled'))):
+  % if user_need in('answer custody', 'answer divorce') and (type_of_response.all_true('improper service', exclusive = True) or (type_of_response['improper service'] and not proper_service and ((type_of_response['wrong state'] and jurisdiction) or (type_of_response['case in 2 states'] and stage_of_other_case == 'ended with no order'))) or ((type_of_response['default'] and stage_of_default in ('application filed', 'hearing scheduled') and proper_service) and ((type_of_response['wrong state'] and jurisdiction) or (type_of_response['case in 2 states'] and stage_of_other_case =='ended with no order'))) or (type_of_response.all_true('default', exclusive=True) and stage_of_default in ('application filed', 'hearing scheduled'))):
   If you decide to move forward, file
   % elif type_of_response['default'] and stage_of_default == 'judgment entered':
   If you are asking to set aside the default, file
@@ -1656,13 +1655,13 @@ content: |
 ---
 comment: |
   Need to update this step in branding package aka2j_templates.yml after this interview passes all tests
-  2025-08-12
+  2025-08-29
 template: cert_of_service_step
 subject: |
   Step ${ cert_of_service_idx }:
   % if user_need in('respond to motion in custody', 'respond to motion in divorce') and type_of_response == 'reconsider':
   If the judge asks you to respond to the Motion to Reconsider, fill out the Certificate of Service
-  % elif user_need in('answer custody', 'answer divorce') and (type_of_response.all_true('improper service', exclusive = True) or (type_of_response['improper service'] and not proper_service and ((type_of_response['wrong state'] and jurisdiction) or (type_of_response['case in 2 states'] and stage_of_other_case == 'ended with no order'))) or ((type_of_response['default'] and stage_of_default in ('application filed', 'hearing scheduled')) and ((type_of_response['wrong state'] and jurisdiction) or (type_of_response['case in 2 states'] and stage_of_other_case =='ended with no order'))) or (type_of_response.all_true('default', exclusive=True) and stage_of_default in ('application filed', 'hearing scheduled'))):
+  % elif user_need in('answer custody', 'answer divorce') and (type_of_response.all_true('improper service', exclusive = True) or (type_of_response['improper service'] and not proper_service and ((type_of_response['wrong state'] and jurisdiction) or (type_of_response['case in 2 states'] and stage_of_other_case == 'ended with no order'))) or ((type_of_response['default'] and stage_of_default in ('application filed', 'hearing scheduled') and proper_service) and ((type_of_response['wrong state'] and jurisdiction) or (type_of_response['case in 2 states'] and stage_of_other_case =='ended with no order'))) or (type_of_response.all_true('default', exclusive=True) and stage_of_default in ('application filed', 'hearing scheduled'))):
   If you decide to move forward, fill
   % elif type_of_response['default'] and stage_of_default == 'judgment entered':
   If you are asking to set aside the default, fill
