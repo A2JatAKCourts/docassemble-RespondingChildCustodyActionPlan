@@ -130,7 +130,8 @@ code: |
       add_unique_step((answer_jurisdiction_step, "answer_jurisdiction_idx"), step_list)
     if type_of_response['improper service'] or type_of_response['default']:
       proper_service
-      military
+      if type_of_response['default']:
+        military
       add_unique_step((proper_service_step, "proper_service_idx"), step_list)
     if stage_of_other_case == 'ended with no order'and type_of_response['improper service'] and not proper_service:
         add_unique_step((decide_after_improper_service_step, "decide_after_improper_service_idx"), step_list)
