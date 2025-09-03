@@ -430,16 +430,18 @@ Scenario: Row #167m
     | proper_service                       | True              |         | 
     | domestic_violence                    | False             |         | 
     | paternity                            | False             |         | 
-    And I should see the phrase "Your Action Plan for responding in your child custody case in 9 steps"
+    And I should see the phrase "Your Action Plan for responding in your child custody case in 11 steps"
     And I should see the phrase "Step 1: Learn if Alaska is the right state for your custody case"
     And I should see the phrase "Step 2: Learn about default judgment"
-    And I should see the phrase "Step 3: Fill out the forms to respond and tell the court Alaska is the wrong state"
-    And I should see the phrase "Step 4: Fill out the Certificate of Service"
-    And I should see the phrase "Step 5: File your documents with the court and serve the other parent"
-    And I should see the phrase "Step 6: Read the “Domestic Relations Procedural Order” or Standing Order that was with the Complaint" 
-    And I should see the phrase "Step 7: What to expect after you file your documents"
-    And I should see the phrase "Step 8: Learn more about the process"
-    And I should see the phrase "Step 9: Get more information or help"
+    And I should see the phrase "Step 3: Options if the other parent asked for default judgment when you have cases in 2 states"
+    And I should see the phrase "Step 4: If you decide to move forward in Alaska, fill out the forms to answer the complaint "
+    And I should see the phrase "Step 5: If you decide to move forward in the other state, file a Motion to Dismiss your Alaska case "
+    And I should see the phrase "Step 6: Fill out the Certificate of Service"
+    And I should see the phrase "Step 7: File your documents with the court and serve the other parent"
+    And I should see the phrase "Step 8: Read the “Domestic Relations Procedural Order” or Standing Order that was with the Complaint" 
+    And I should see the phrase "Step 9: What to expect after you file your documents"
+    And I should see the phrase "Step 10: Learn more about the process"
+    And I should see the phrase "Step 11: Get more information or help"
     And I take a screenshot
     And I download "responding_child_custody_action_plan.pdf"
     And I download "responding_child_custody_action_plan.docx"
