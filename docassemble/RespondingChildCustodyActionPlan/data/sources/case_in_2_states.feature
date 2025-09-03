@@ -1,6 +1,6 @@
 @case_in_2_states
 Feature: User paths
-# 2025-09-02
+# 2025-09-03
 
 Background: 
   Given the maximum seconds for each Step is 90
@@ -173,7 +173,7 @@ Scenario: Row #28
     And I should see the phrase "Step 5: File your documents with the court and serve the other parent"
     And I should see the phrase "Step 6: Read the “Domestic Relations Procedural Order” or Standing Order that was with the Complaint"
     And I should see the phrase "Step 7: What to expect after you file your Answer"
-    And I should see the phrase "Step 8: Learn more about the process"
+    And I should see the phrase "Step 8: If your case is moving forward in Alaska, learn more about the process"
     And I should see the phrase "Step 9: Get more information or help"
     And I take a screenshot
     And I download "responding_child_custody_action_plan.pdf"
@@ -285,7 +285,7 @@ Scenario: Row #35
     And I should see the phrase "Step 4: File your documents with the court and serve the other parent"
     And I should see the phrase "Step 5: Read the “Domestic Relations Procedural Order” or Standing Order that was with the Complaint"
     And I should see the phrase "Step 6: What to expect after you file your Answer"
-    And I should see the phrase "Step 7: Learn more about the process"
+    And I should see the phrase "Step 7: If your case is moving forward in Alaska, learn more about the process"
     And I should see the phrase "Step 8: Get more information or help"
     And I take a screenshot
     And I download "responding_child_custody_action_plan.pdf"
@@ -445,7 +445,7 @@ Scenario: Row #68
     | stage_of_default                     | application filed   |         | 
     | military                             | False               |         | 
     | proper_service                       | True                |         | 
-    And I should see the phrase "Your Action Plan for responding in your child custody case in 6 steps"
+    And I should see the phrase "Your Action Plan for responding in your child custody case in 10 steps"
     And I should see the phrase "Step 1: You can move forward with your Alaska case"
     And I should see the phrase "Step 2: Learn about default judgment"
     And I should see the phrase "Step 3: Options if the other parent asked for a default judgment"
@@ -454,7 +454,8 @@ Scenario: Row #68
     And I should see the phrase "Step 6: If you decide to move forward, file your documents with the court and serve the other parent"
     And I should see the phrase "Step 7: Read the “Domestic Relations Procedural Order” or Standing Order that was with the Complaint"
     And I should see the phrase "Step 8: What to expect after you file your documents"
-    And I should see the phrase "Step 9: Get more information or help"
+    And I should see the phrase "Step 9: If your case is moving forward in Alaska, learn more about the process"
+    And I should see the phrase "Step 10: Get more information or help"
     And I take a screenshot
     And I download "responding_child_custody_action_plan.pdf"
     And I download "responding_child_custody_action_plan.docx"
@@ -480,7 +481,7 @@ Scenario: Row #71m
     And I should see the phrase "Step 6: Fill out the Certificate of Service"
     And I should see the phrase "Step 7: File your documents with the court and serve the other parent"
     And I should see the phrase "Step 8: Read the “Domestic Relations Procedural Order” or Standing Order that was with the Complaint"
-    And I should see the phrase "Step 9: What to expect after you file your Answer"
+    And I should see the phrase "Step 9: What to expect after you file your documents"
     And I should see the phrase "Step 10: If your case is moving forward in Alaska, learn more about the process"
     And I should see the phrase "Step 11: Get more information or help"
     And I take a screenshot
@@ -500,15 +501,14 @@ Scenario: Row #73
     | military                             | False               |         | 
     | proper_service                       | False               |         | 
     And I should see the phrase "Your Action Plan for responding in your child custody case in 9 steps"
-    And I should see the phrase "Step 1: You can move forward with your Alaska case"
-    And I should see the phrase "Step 2: Learn about proper service and default judgment"
-    And I should see the phrase "Step 3: Options when the judge entered a default judgment"
-    And I should see the phrase "Step 4: Learn about the Motion to Set Aside Judgment or Order"
-    And I should see the phrase "Step 5: If you want to ask to set aside the default, fill out the forms"
-    And I should see the phrase "Step 6: If you are asking to set aside the default, fill out the Certificate of Service"
-    And I should see the phrase "Step 7: If you are asking to set aside the default, file your documents with the court and serve the other parent"
-    And I should see the phrase "Step 8: What to expect after you file your documents"
-    And I should see the phrase "Step 9: Get more information or help"
+    And I should see the phrase "Step 1: Learn about proper service and default judgment"
+    And I should see the phrase "Step 2: Options when the judge entered a default judgment"
+    And I should see the phrase "Step 3: Learn about the Motion to Set Aside Judgment or Order"
+    And I should see the phrase "Step 4: If you want to ask to set aside the default, fill out the forms"
+    And I should see the phrase "Step 5: If you are asking to set aside the default, fill out the Certificate of Service"
+    And I should see the phrase "Step 6: If you are asking to set aside the default, file your documents with the court and serve the other parent"
+    And I should see the phrase "Step 7: What to expect after you file your documents"
+    And I should see the phrase "Step 8: Get more information or help"
     And I take a screenshot
     And I download "responding_child_custody_action_plan.pdf"
     And I download "responding_child_custody_action_plan.docx"
@@ -530,8 +530,8 @@ Scenario: Row #74
     And I should see the phrase "Step 1: Learn if Alaska is the right state for your custody case"
     And I should see the phrase "Step 2: Learn about default judgment"
     And I should see the phrase "Step 3: Options if the other parent asked for default judgment when you have cases in 2 states"
-    And I should see the phrase "Step 4: If you decide to move forward in Alaska, fill out the forms to answer the complaint "
-    And I should see the phrase "Step 5: If you decide to move forward in the other state, file a Motion to Dismiss your Alaska case "
+    And I should see the phrase "Step 4: If you decide to move forward in Alaska, fill out the forms to answer the complaint"
+    And I should see the phrase "Step 5: If you decide to move forward in the other state, file a Motion to Dismiss your Alaska case"
     And I should see the phrase "Step 6: Fill out the Certificate of Service"
     And I should see the phrase "Step 7: File your documents with the court and serve the other parent"
     And I should see the phrase "Step 8: Read the “Domestic Relations Procedural Order” or Standing Order that was with the Complaint" 
@@ -557,10 +557,10 @@ Scenario: Row #77m
     | proper_service                       | False             |         | 
     And I should see the phrase "Your Action Plan for responding in your child custody case in 11 steps"
     And I should see the phrase "Step 1: Learn if Alaska is the right state for your custody case"
-    And I should see the phrase "Step 2: Learn about default judgment"
+    And I should see the phrase "Step 2: Learn about proper service and default judgment"
     And I should see the phrase "Step 3: Options if the other parent asked for default judgment when you have cases in 2 states"
-    And I should see the phrase "Step 4: If you decide to move forward in Alaska, fill out the forms to answer the complaint "
-    And I should see the phrase "Step 5: If you decide to move forward in the other state, file a Motion to Dismiss your Alaska case "
+    And I should see the phrase "Step 4: If you decide to move forward in Alaska, fill out the forms to answer the complaint"
+    And I should see the phrase "Step 5: If you decide to move forward in the other state, file a Motion to Dismiss your Alaska case"
     And I should see the phrase "Step 6: Fill out the Certificate of Service"
     And I should see the phrase "Step 7: File your documents with the court and serve the other parent"
     And I should see the phrase "Step 8: Read the “Domestic Relations Procedural Order” or Standing Order that was with the Complaint" 
@@ -584,7 +584,7 @@ Scenario: Row #79
     | stage_of_default                     | judgment entered |         | 
     | military                             | False            |         | 
     | proper_service                       | False            |         | 
-    And I should see the phrase "Your Action Plan for responding in your child custody case in 9 steps"
+    And I should see the phrase "Your Action Plan for responding in your child custody case in 7 steps"
     And I should see the phrase "Step 1: Learn about proper service and default judgment"
     And I should see the phrase "Step 2: Learn about the Motion to Set Aside Judgment or Order"
     And I should see the phrase "Step 3: If you want to ask to set aside the default, fill out the forms"
@@ -610,8 +610,8 @@ Scenario: Row #81m
     And I should see the phrase "Step 1: Learn if Alaska is the right state for your custody case"
     And I should see the phrase "Step 2: Learn about proper service and default judgment"
     And I should see the phrase "Step 3: Options if the other parent asked for default judgment when you have cases in 2 states"
-    And I should see the phrase "Step 4: If you decide to move forward in Alaska, fill out the forms to answer the complaint "
-    And I should see the phrase "Step 5: If you decide to move forward in the other state, file a Motion to Dismiss your Alaska case "
+    And I should see the phrase "Step 4: If you decide to move forward in Alaska, fill out the forms to answer the complaint"
+    And I should see the phrase "Step 5: If you decide to move forward in the other state, file a Motion to Dismiss your Alaska case"
     And I should see the phrase "Step 6: Fill out the Certificate of Service"
     And I should see the phrase "Step 7: File your documents with the court and serve the other parent"
     And I should see the phrase "Step 8: Read the “Domestic Relations Procedural Order” or Standing Order that was with the Complaint" 
@@ -639,8 +639,8 @@ Scenario: Row #82
     And I should see the phrase "Step 1: Learn if Alaska is the right state for your custody case"
     And I should see the phrase "Step 2: Learn about default judgment"
     And I should see the phrase "Step 3: Options if the other parent asked for default judgment when you have cases in 2 states"
-    And I should see the phrase "Step 4: If you decide to move forward in Alaska, fill out the forms to answer the complaint "
-    And I should see the phrase "Step 5: If you decide to move forward in the other state, file a Motion to Dismiss your Alaska case "
+    And I should see the phrase "Step 4: If you decide to move forward in Alaska, fill out the forms to answer the complaint"
+    And I should see the phrase "Step 5: If you decide to move forward in the other state, file a Motion to Dismiss your Alaska case"
     And I should see the phrase "Step 6: Fill out the Certificate of Service"
     And I should see the phrase "Step 7: File your documents with the court and serve the other parent"
     And I should see the phrase "Step 8: Read the “Domestic Relations Procedural Order” or Standing Order that was with the Complaint" 
@@ -664,15 +664,14 @@ Scenario: Row #84m
     | stage_of_default                     | judgment entered |         | 
     | military                             | True             |         | 
     | proper_service                       | True             |         | 
-    And I should see the phrase "Your Action Plan for responding in your child custody case in 8 steps"
-    And I should see the phrase "Step 1: Learn if Alaska is the right state for your custody case"
-    And I should see the phrase "Step 2: Learn about default judgment"
-    And I should see the phrase "Step 3: Learn about the Motion to Set Aside Judgment or Order"
-    And I should see the phrase "Step 4: If you want to ask to set aside the default, fill out the forms"
-    And I should see the phrase "Step 5: If you are asking to set aside the default, fill out the Certificate of Service"
-    And I should see the phrase "Step 6: If you are asking to set aside the default, file your documents with the court and serve the other parent"
-    And I should see the phrase "Step 7: What to expect after you file your documents"
-    And I should see the phrase "Step 8: Get more information or help"
+    And I should see the phrase "Your Action Plan for responding in your child custody case in 7 steps"
+    And I should see the phrase "Step 1: Learn about default judgment"
+    And I should see the phrase "Step 2: Learn about the Motion to Set Aside Judgment or Order"
+    And I should see the phrase "Step 3: If you want to ask to set aside the default, fill out the forms"
+    And I should see the phrase "Step 4: If you are asking to set aside the default, fill out the Certificate of Service"
+    And I should see the phrase "Step 5: If you are asking to set aside the default, file your documents with the court and serve the other parent"
+    And I should see the phrase "Step 6: What to expect after you file your documents"
+    And I should see the phrase "Step 7: Get more information or help"
 
 
 
