@@ -285,7 +285,7 @@ Scenario: Row #35
     And I should see the phrase "Step 4: File your documents with the court and serve the other parent"
     And I should see the phrase "Step 5: Read the “Domestic Relations Procedural Order” or Standing Order that was with the Complaint"
     And I should see the phrase "Step 6: What to expect after you file your Answer"
-    And I should see the phrase "Step 7: If your case is moving forward in Alaska, learn more about the process"
+    And I should see the phrase "Step 7: Learn more about the process"
     And I should see the phrase "Step 8: Get more information or help"
     And I take a screenshot
     And I download "responding_child_custody_action_plan.pdf"
