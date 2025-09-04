@@ -657,9 +657,7 @@ Scenario: Row #118m
     | proper_service                      | True             |         | 
     | military                            | True             |         | 
     | stage_of_default                    | judgment entered |         | 
-    | domestic_violence                   | True             |         | 
-    | paternity                           | False            |         | 
-    And I should see the phrase "Your Action Plan for responding in your child custody case in 10 steps"
+    And I should see the phrase "Your Action Plan for responding in your child custody case in 9 steps"
     And I should see the phrase "Step 1: Learn if Alaska is the right state for your custody case"
     And I should see the phrase "Step 2: Learn about default judgment"
     And I should see the phrase "Step 3: Options when the judge entered a default judgment"
@@ -668,8 +666,7 @@ Scenario: Row #118m
     And I should see the phrase "Step 6: If you are asking to set aside the default, fill out the Certificate of Service"
     And I should see the phrase "Step 7: If you are asking to set aside the default, file your documents with the court and serve the other parent"
     And I should see the phrase "Step 8: What to expect after you file your documents"
-    And I should see the phrase "Step 9: Abuse or domestic violence and parenting"
-    And I should see the phrase "Step 10: Get more information or help"
+    And I should see the phrase "Step 9: Get more information or help"
     And I take a screenshot
     And I download "responding_child_custody_action_plan.pdf"
     And I download "responding_child_custody_action_plan.docx"
@@ -717,9 +714,7 @@ Scenario: Row #127m
     | proper_service                      | False            |         | 
     | stage_of_default                    | judgment entered |         | 
     | military                            | True             |         | 
-    | domestic_violence                   | True             |         | 
-    | paternity                           | False            |         | 
-    And I should see the phrase "Your Action Plan for responding in your child custody case in 9 steps"
+    And I should see the phrase "Your Action Plan for responding in your child custody case in 8 steps"
     And I should see the phrase "Step 1: Learn if Alaska is the right state for your custody case"
     And I should see the phrase "Step 2: Learn about proper service and default judgment"
     And I should see the phrase "Step 3: Learn about the Motion to Set Aside Judgment or Order"
@@ -727,8 +722,7 @@ Scenario: Row #127m
     And I should see the phrase "Step 5: If you are asking to set aside the default, fill out the Certificate of Service"
     And I should see the phrase "Step 6: If you are asking to set aside the default, file your documents with the court and serve the other parent"
     And I should see the phrase "Step 7: What to expect after you file your documents"
-    And I should see the phrase "Step 8: Abuse or domestic violence and parenting"
-    And I should see the phrase "Step 9: Get more information or help"
+    And I should see the phrase "Step 8: Get more information or help"
     And I take a screenshot
     And I download "responding_child_custody_action_plan.pdf"
     And I download "responding_child_custody_action_plan.docx"
