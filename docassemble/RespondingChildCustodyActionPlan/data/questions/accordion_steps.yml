@@ -1,5 +1,5 @@
 comment: |
-    last updated: 2025-09-07
+    last updated: 2025-09-04
     2025-06-04 until we get the doc1assemble interview Learn about motions: <a href="https://docassemble.akcourts.gov/start/FilingAMotion">Asking for an Order in a Divorce Case When the Issue Can't Wait for the Court's Final Decision (Filing a Motion) GA</a> live, use the link to the court webpage in the list under "Read." See Github branding issue https://github.com/A2JatAKCourts/docassemble-AKA2JBrandingIssues/issues/64
 ---
 generic object: ALDocumentBundle
@@ -102,7 +102,9 @@ code: |
     add_unique_step((answer_jurisdiction_step, "answer_jurisdiction_idx"), step_list)
     if type_of_response.any_true('improper service', 'default'):
       proper_service
-      military
+      if type_of_response['default']:
+        military
+      add_unique_step((proper_service_step, "proper_service_idx"), step_list)
       add_unique_step((proper_service_step, "proper_service_idx"), step_list)
     if type_of_response['improper service'] and jurisdiction and not proper_service:
       add_unique_step((decide_after_improper_service_step, "decide_after_improper_service_idx"), step_list)
