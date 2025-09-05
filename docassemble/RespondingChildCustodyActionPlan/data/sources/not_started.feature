@@ -1,12 +1,11 @@
 @not_started
 Feature: User paths
-# 2025-08-22
 
 Background: 
   Given the maximum seconds for each Step is 90
 
-@row48
-Scenario: Row #48
+@row69
+Scenario: Row #69
   Given I start the interview at "responding_child_custody_action_plan.yml"
     And I get to the question id "final screen" with this data:
     | var                      | value          | trigger | 
@@ -14,7 +13,7 @@ Scenario: Row #48
     | type_of_response['None'] | True           |         | 
     | agreement_documents      | True           |         | 
     | domestic_violence        | True           |         | 
-    And I should see the phrase "Your Action Plan for responding in your child custody case in 7 steps"
+    And I should see the phrase "Your Personal Action Plan for responding in your child custody case in 7 steps"
     And I should see the phrase "Options if the other parent wants to talk about a Parenting Plan and starting a custody case"
     And I tap the "#d2FudF9oZWxwX3RvX2FncmVlX3N0ZXA .al_toggle" element and stay on the same page
     And I should see the phrase "Fill out the forms to start your uncontested custody case"
@@ -28,8 +27,8 @@ Scenario: Row #48
     And I download "responding_child_custody_action_plan.pdf"
     And I download "responding_child_custody_action_plan.docx"
 
-@row49
-Scenario: Row #49
+@row70
+Scenario: Row #70
   Given I start the interview at "responding_child_custody_action_plan.yml"
     And I get to the question id "final screen" with this data:
     | var                      | value          | trigger | 
@@ -37,7 +36,7 @@ Scenario: Row #49
     | type_of_response['None'] | True           |         | 
     | agreement_documents      | True           |         | 
     | domestic_violence        | False          |         | 
-    And I should see the phrase "Your Action Plan for responding in your child custody case in 6 steps"
+    And I should see the phrase "Your Personal Action Plan for responding in your child custody case in 6 steps"
     And I should see the phrase "Options if the other parent wants to talk about a Parenting Plan and starting a custody case"
     And I tap the "#d2FudF9oZWxwX3RvX2FncmVlX3N0ZXA .al_toggle" element and stay on the same page
     And I should see the phrase "Fill out the forms to start your uncontested custody case"
@@ -49,8 +48,8 @@ Scenario: Row #49
     And I download "responding_child_custody_action_plan.pdf"
     And I download "responding_child_custody_action_plan.docx"
 
-@row50
-Scenario: Row #50
+@row71
+Scenario: Row #71
   Given I start the interview at "responding_child_custody_action_plan.yml"
     And I get to the question id "final screen" with this data:
     | var                      | value          | trigger | 
@@ -58,7 +57,7 @@ Scenario: Row #50
     | type_of_response['None'] | True           |         | 
     | agreement_documents      | False          |         | 
     | domestic_violence        | True           |         | 
-    And I should see the phrase "Your Action Plan for responding in your child custody case in 3 steps"
+    And I should see the phrase "Your Personal Action Plan for responding in your child custody case in 3 steps"
     And I should see the phrase "Options if the other parent wants to talk about a Parenting Plan and starting a custody case"
     And I tap the "#d2FudF9oZWxwX3RvX2FncmVlX3N0ZXA .al_toggle" element and stay on the same page
     And I should see the phrase "Abuse or domestic violence resources and reaching an agreement"
@@ -68,8 +67,8 @@ Scenario: Row #50
     And I download "responding_child_custody_action_plan.pdf"
     And I download "responding_child_custody_action_plan.docx"
 
-@row51
-Scenario: Row #51
+@row72
+Scenario: Row #72
   Given I start the interview at "responding_child_custody_action_plan.yml"
     And I get to the question id "final screen" with this data:
     | var                      | value          | trigger | 
@@ -77,12 +76,10 @@ Scenario: Row #51
     | type_of_response['None'] | True           |         | 
     | agreement_documents      | False          |         | 
     | domestic_violence        | False          |         | 
-    And I should see the phrase "Your Action Plan for responding in your child custody case in 2 steps"
+    And I should see the phrase "Your Personal Action Plan for responding in your child custody case in 2 steps"
     And I should see the phrase "Options if the other parent wants to talk about a Parenting Plan and starting a custody case"
     And I tap the "#d2FudF9oZWxwX3RvX2FncmVlX3N0ZXA .al_toggle" element and stay on the same page
     And I should see the phrase "Get more information or help"
     And I take a screenshot
     And I download "responding_child_custody_action_plan.pdf"
     And I download "responding_child_custody_action_plan.docx"
-
-
