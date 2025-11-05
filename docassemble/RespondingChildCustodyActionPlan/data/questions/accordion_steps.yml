@@ -246,6 +246,7 @@ subject: |
   % else:
   Learn if Alaska is the right state for your custody case
   % endif
+  (answer_jurisdiction_step)
 content: |
   % if type_of_response['case in 2 states'] and stage_of_other_case == 'ended with no order':
   If the case in the other state is over, and the court did not issue any orders, you can move forward with the Alaska case.
@@ -328,6 +329,7 @@ subject: |
   % if type_of_response.all_true('improper service', exclusive = True) or (type_of_response.any_true('improper service', 'default') and not proper_service) or type_of_response['default']:
   default judgment
   % endif
+  (proper_service_step)
  
 content: |
   % if (type_of_response['improper service'] and not type_of_response['default']) or (type_of_response['default'] and not proper_service):

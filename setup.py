@@ -50,11 +50,10 @@ setup(name='docassemble.RespondingChildCustodyActionPlan',
       long_description_content_type='text/markdown',
       author='Caroline Robinson',
       author_email='CRobinson@akcourts.gov',
-      license='The MIT License',
+      license='MIT',
       url='https://courtformsonline.org',
       packages=find_namespace_packages(),
-      install_requires=['docassemble.AKA2JBranding @ git+https://github.com/A2JatAKCourts/docassemble-AKA2JBranding.git@main', 'docassemble.AssemblyLine>=3.5.1'],
+      install_requires=['docassemble.AKA2JBranding @ git+https://github.com/A2JatAKCourts/docassemble-AKA2JBranding.git@main', 'docassemble.AssemblyLine>=4.2.0'],
       zip_safe=False,
       package_data=find_package_data(where='docassemble/RespondingChildCustodyActionPlan/', package='docassemble.RespondingChildCustodyActionPlan'),
      )
-
