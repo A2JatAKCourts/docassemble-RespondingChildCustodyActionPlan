@@ -44,13 +44,13 @@ def find_package_data(where='.', package='', exclude=standard_exclude, exclude_d
     return out
 
 setup(name='docassemble.RespondingChildCustodyActionPlan',
-      version='2025.09.043',
+      version='2025.11.05',
       description=('Responding in your child custody case  - action plan'),
       long_description='# docassemble.RespondingChildCustodyActionPlan\r\n\r\nResponding in your child custody case  - action plan\r\n\r\n## Author\r\n\r\nAlaska Court System\r\n',
       long_description_content_type='text/markdown',
       author='Caroline Robinson',
       author_email='CRobinson@akcourts.gov',
-      license='MIT',
+      license='',
       url='https://courtformsonline.org',
       packages=find_namespace_packages(),
       install_requires=['docassemble.AKA2JBranding @ git+https://github.com/A2JatAKCourts/docassemble-AKA2JBranding.git@main', 'docassemble.AssemblyLine>=4.2.0'],

@@ -1,6 +1,6 @@
 @wrong_state
 Feature: user paths
-# 2025-08-27 
+# 2025-11-05
 
 Background: 
   Given the maximum seconds for each Step is 90
@@ -128,6 +128,9 @@ Scenario: Row #30
     | jurisdiction                    | True           |         | 
     And I should see the phrase "Your Action Plan for responding in your child custody case in 8 steps"
     And I should see the phrase "Step 1: Learn if Alaska is the right state for your custody case"
+    And I tap the "#YW5zd2VyX2p1cmlzZGljdGlvbl9zdGVw .al_toggle" element and stay on the same page
+  And I should see the phrase "Generally, if your children have lived in Alaska for the last 6 months, Alaska is the children's "home state." The Alaska court has jurisdiction to make decisions, enter a parenting plan, or order child support."
+    And I should see the phrase "Step 1: Learn if Alaska is the right state for your custody case"
     And I should see the phrase "Step 2: Fill out the forms to answer the complaint and respond within 20 days"
     And I should see the phrase "Step 3: Fill out the Certificate of Service"
     And I should see the phrase "Step 4: File your documents with the court and serve the other parent"
@@ -150,6 +153,9 @@ Scenario: Row #31
     | jurisdiction                    | False          |         | 
     And I should see the phrase "Your Action Plan for responding in your child custody case in 9 steps"
     And I should see the phrase "Step 1: Learn if Alaska is the right state for your custody case"
+  And I tap the "#YW5zd2VyX2p1cmlzZGljdGlvbl9zdGVw .al_toggle" element and stay on the same page
+  And I should see the phrase "Generally, if your children have not lived in Alaska the last 6 months, Alaska is not the children's "home state," and the Alaska court does not have jurisdiction to make decisions, enter a parenting plan, or order child support."
+  And I should see the phrase "Sometimes there is no home state."
     And I should see the phrase "Step 2: Fill out the forms to respond in 20 days and ask to dismiss if you think Alaska is the wrong state"
     And I should see the phrase "Step 3: If you think Alaska is the wrong state, file a motion to dismiss your Alaska case"
     And I should see the phrase "Step 4: Fill out the Certificate of Service"
@@ -177,6 +183,8 @@ Scenario: Row #52m
     | stage_of_default                | application filed |         | 
     And I should see the phrase "Your Action Plan for responding in your child custody case in 10 steps"
     And I should see the phrase "Step 1: Learn if Alaska is the right state for your custody case"
+    And I tap the "#YW5zd2VyX2p1cmlzZGljdGlvbl9zdGVw .al_toggle" element and stay on the same page
+    And I should see the phrase "If you think your custody case should be in another state, you can tell the judge in the Affirmative Defense section of your Answer and attach a Motion to Dismiss."
     And I should see the phrase "Step 2: Learn about default judgment"
     And I should see the phrase "Step 3: Options if the other parent asked for a default judgment"
     And I should see the phrase "Step 4: If you decide to move forward, fill out the forms to answer the complaint and respond within 20 days"
