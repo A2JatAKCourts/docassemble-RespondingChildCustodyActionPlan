@@ -235,8 +235,124 @@ code: |
       image_list.append(new_image)
 ---
 comment: |
-  2025-07-18 version
+  2025-09-11
+  with the help of ChatGPT, integrated responding to custody and divorce cases
 template: answer_jurisdiction_step
+subject: |
+  Step ${ answer_jurisdiction_idx }:
+  % if type_of_response['case in 2 states'] and stage_of_other_case == 'ended with no order':
+  You can move forward with your Alaska case
+
+  % elif type_of_response.all_true('case in 2 states', 'default') and stage_of_other_case == 'still going' and stage_of_default == 'judgment entered' and (user_need == 'answer divorce' or (user_need == 'answer custody' and jurisdiction)):
+  Learn about default judgment
+
+  % elif type_of_response['case in 2 states'] and stage_of_other_case == 'ended with order':
+  File a motion to dismiss your Alaska case
+
+  % else:
+  Learn if Alaska is the right state for your custody case
+  % endif
+
+content: |
+  % if type_of_response['case in 2 states'] and stage_of_other_case == 'ended with no order':
+  If the case in the other state is over, and the court did not issue any orders, you can move forward with the Alaska case.
+
+  % elif type_of_response.all_true('case in 2 states', 'default') and stage_of_other_case == 'still going' and stage_of_default == 'judgment entered' and (user_need == 'answer divorce' or (user_need == 'answer custody' and jurisdiction)):
+  A default judgment is when the judge decides your case without hearing from you.
+  
+  When a judge enters a default judgment, they usually also enter a 
+  % if user_need == 'answer custody':
+  custody decree, parenting plan, and child support order
+  % elif user_need == 'answer divorce':
+  divorce decree and findings of fact and conclusions of law dividing your property and debt
+  % if (minor_children or wife_is_pregnant in ('husband','not husband')):
+  , parenting plan, and child support order
+  % endif
+  % endif
+  . These are final orders in the case.
+  
+  If you have final orders in your Alaska case and an open case in another state, your situation is complicated.
+  
+  [Talk to a lawyer](https://courts.alaska.gov/shc/shclawyer.htm). It is important to let both courts know there are 2 cases going on.
+  
+  If you want to ask the Alaska judge to undo the orders in your Alaska case you can file a **Motion to Set Aside** the Alaska orders.
+
+  % else:
+  You can argue that the Alaska court is the wrong court for your ${ case_type } if the court does not have the authority, called "jurisdiction," to issue a 
+  % if user_need == 'answer custody':
+  custody decree, parenting plan, and child support order
+  % elif user_need == 'answer divorce':
+  divorce decree and findings of fact and conclusions of law dividing your property and debt
+  % if (minor_children or wife_is_pregnant in ('husband','not husband')):
+  , parenting plan, and child support order
+  % endif
+  % endif
+  .
+
+  % if (user_need == 'answer custody' and jurisdiction) or (user_need == 'answer divorce' and (minor_children or wife_is_pregnant in ('husband','not husband'))):
+  
+  Generally, if your children have lived in Alaska for the last 6 months, Alaska is the children's "home state." The Alaska court has jurisdiction to make decisions, enter a parenting plan, or order child support.
+
+  % elif (user_need == 'answer custody' and not jurisdiction) or (user_need == 'answer divorce' and (minor_children or wife_is_pregnant in ('husband','not husband'))):
+    % if user_need == 'answer custody' and not jurisdiction:
+  
+  Generally,
+    % elif user_need == 'answer divorce' and (minor_children or wife_is_pregnant in ('husband','not husband')):
+  
+  But
+    % endif
+  if your children have not lived in Alaska for the last 6 months, Alaska is not the children's "home state," and the Alaska court does not have jurisdiction to make decisions, enter a parenting plan, or order child support.
+
+  Sometimes there is no home state. For example, if a baby is less than 6 months old and has moved between states, there may not be a "home state." The Alaska court may be able to decide issues about the child, even though the child hasn't lived here for 6 months. If you think your child does not have a home state, [talking to a lawyer](https://courts.alaska.gov/shc/shclawyer.htm) can help you decide the best state for your case.
+  % endif
+
+  % if (user_need == 'answer custody' and jurisdiction) or user_need == 'answer divorce':
+  If you want to learn about 
+  % if (user_need == 'answer divorce' and (minor_children or wife_is_pregnant in ('husband','not husband'))):
+  other 
+  % endif 
+  reasons Alaska might be the wrong court for your case, [talking to a lawyer](https://courts.alaska.gov/shc/shclawyer.htm) can help.
+  % endif
+
+  Or you can get help from the resources listed in Step ${ get_help_idx }: Get more information or help.
+  
+  % if (type_of_response['wrong state'] and type_of_response.all_false('default')) or ((type_of_response.any_true('wrong state', 'case in 2 states') and type_of_response['default']) and stage_of_default in ('application filed', 'hearing scheduled')):
+  % if (user_need == 'answer custody' and jurisdiction) or user_need == 'answer divorce':
+  If you think your 
+  % if (user_need == 'answer custody' and jurisdiction):
+  custody case
+  % elif user_need == 'answer divorce':
+  divorce case
+  % endif
+   should be in another state, you can tell the judge in the Affirmative Defense section of your **Answer** and attach a **Motion to Dismiss**.
+  % endif
+    % if type_of_response.all_false('default'):
+      % if (user_need == 'answer custody' and not jurisdiction) or user_need == 'answer divorce':
+  
+  See:
+
+  * Step ${ answer_idx }: Fill out the forms to respond and tell the court Alaska is the wrong state within 20 days, and
+  * Step ${ dismiss_idx }: File a motion to dismiss your Alaska case.
+      % endif
+  
+  Whatever you decide, you should file an **Answer** to respond to the Complaint.
+  
+  If you do not respond 
+      % if type_of_response.all_false('improper service'):
+  in 20 days
+      % endif
+  , ${ other_party_in_case } can ask for a default judgment, and the judge can decide without hearing from you.
+    % endif
+  % endif
+
+  % if type_of_response.any_true('wrong state', 'case in 2 states') and type_of_response['default'] and stage_of_default == 'judgment entered' and ((user_need == 'answer custody' and not jurisdiction) or (user_need == 'answer divorce' and (minor_children or wife_is_pregnant in ('husband','not husband')))):
+  If you think the Alaska court did not have jurisdiction to decide your custody case, you can file a **Motion (Request) and Affidavit to Set Aside Judgment or Order, CIV-807** [[Fill-in PDF](https://public.courts.alaska.gov/web/forms/docs/civ-807.pdf)]
+  % endif
+  % endif
+---
+comment: |
+  2025-07-18 version
+template: old_answer_jurisdiction_step
 subject: |
   Step ${ answer_jurisdiction_idx }:
   % if type_of_response['case in 2 states'] and stage_of_other_case == 'ended with no order':
@@ -1288,7 +1404,7 @@ content: |
    The judge does not get involved in making the decisions. Learn more about the Association on [their website](https://www.alaskacollaborative.org).
   
   % if type_of_response.all_false() and not agreement_documents:
-  <div class ="">What to do if you reach an agreement</div>
+  <div class = 'step-subheading'>What to do if you reach an agreement</div>
   Use the Court Guide Action Plan: 
   % if user_need == 'answer custody':
   [Starting a Custody Case](https://docassemble.akcourts.gov/start/AskingForChildCustody).
