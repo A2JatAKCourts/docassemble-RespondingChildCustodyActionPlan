@@ -1,3 +1,5 @@
+comment: |
+  2025-11-05 choosing display if grey boxes over validation message to prevent users from picking both wrong state and cases in 2 states options on first screen.
 ---
 include:
   - docassemble.AssemblyLine:assembly_line.yml
@@ -47,6 +49,7 @@ code: |
 ---
 objects:
   - users: ALPeopleList
+  - type_of_response: DADict.using(auto_gather=False)
 ---
 features:
   css: 
@@ -102,28 +105,62 @@ continue button field: responding_child_custody_action_plan_intro
 question: |
   Responding in your child custody case
 subquestion: |
-  This Guided Assistant asks you questions and uses your answers to build a Personal Action Plan - a list of steps to help you respond in your child custody case. Your Action Plan will include information about the Alaska court process and other resources.
+  This Court Guide asks you questions and uses your answers to build a Personal Action Plan - a list of steps to help you respond in your child custody case. Your Action Plan will include information about the Alaska court process and other resources.
   
   What information do you need?
-fields: 
-  - no label: type_of_response
-    datatype: checkboxes
-    choices:
-      - "The other parent started a custody case and I want to respond.": ak custody case
-      - "The other parent started a custody case, but did not give me the filed documents in the correct way.": improper service
-        help: |
-          The other parent is supposed to give you a copy by process server, or send it by certified mail/restricted delivery/return receipt. 
-      - "The other parent started a custody case in Alaska, but I think the case should be in a different state.": wrong state
-      - "2 custody cases were filed – Alaska and another state.": case in 2 states
-      - "The other parent started a custody case against me, I did not respond, and I got papers about a 'default judgment.'": default
-    none of the above: |
-      The other parent has not started a custody case yet, but wants to see if we can agree on a parenting plan and custody order.
+fields:
+  - label: The other parent started a custody case and I want to respond.
+    field: type_of_response['ak custody case']
+    datatype: yesnowide
+  - label: The other parent started a custody case, but did not give me the filed documents in the correct way.
+    field: type_of_response['improper service']
+    datatype: yesnowide
+    help: |
+      The other parent is supposed to give you a copy by process server, or send it by certified mail/restricted delivery/return receipt. 
+  - label: The other parent started a custody case in Alaska, but I think the case should be in a different state.
+    field: type_of_response['wrong state']
+    datatype: yesnowide
+    disable if: type_of_response['case in 2 states']
+    help: |
+      You can pick this option, or “2 custody cases were filed,” not both. 
+  - label: 2 custody cases were filed – Alaska and another state.
+    field: type_of_response['case in 2 states']
+    datatype: yesnowide
+    disable if: type_of_response['wrong state']
+    help: |
+      You can pick this option, or “I think the case should be in a different state,” not both.
+  - label: The other parent started a custody case against me, I did not respond, and I got papers about a "default judgment."
+    field: type_of_response['default']
+    datatype: yesnowide
+  - label: The other parent has not started a custody case yet, but wants to see if we can agree on a parenting plan and custody order.
+    field: type_of_response.nocase
+    datatype: yesnowide
+    uncheck others: True
+validation code: |
+  # Mark type_of_response as gathered so DA won’t ask for more answers
+  type_of_response.gathered = True
+
+  # Seed defaults: make sure every checkbox key exists with a True/False value
+  for k in (
+      'ak custody case',
+      'improper service',
+      'wrong state',
+      'case in 2 states',
+      'default',
+      'nocase',
+      'stay married',
+  ):
+      type_of_response.setdefault(k, False)
+
+  # Enforce mutual exclusivity:
+  # If both somehow end up True, "case in 2 states" takes priority
+  if type_of_response.get('case in 2 states', False):
+      type_of_response['wrong state'] = False
+  elif type_of_response.get('wrong state', False):
+      type_of_response['case in 2 states'] = False
 under: |
   #### <i class="fa-regular fa-lightbulb"></i> Learn more ####
   We provide information about the process in Alaska only. Look for information in other states on their [court](https://www.ncsc.org/information-and-resources/state-court-websites) and [legal aid programs'](https://lawhelp.org) websites.
-validation code: | 
-  if type_of_response['wrong state'] and type_of_response['case in 2 states']:
-    validation_error("Pick only 1 of these 2 choices, 'I think the other parent filed in the wrong state', <strong>or</strong> '2 custody cases were filed.' You cannot pick both.")
 ---
 id: Have children lived in AK long enough
 css class: after
