@@ -120,7 +120,11 @@ fields:
         help: |
           The other parent is supposed to give you a copy by process server, or send it by certified mail/restricted delivery/return receipt. 
       - "The other parent started a custody case in Alaska, but I think the case should be in a different state.": wrong state
+        help: |
+          Pick this choice if only one case was filed and you think it should **not** have been filed in Alaska. 
       - "2 custody cases were filed – Alaska and another state.": case in 2 states
+        help: |
+          Pick this choice if cases to end your marriage were filed in both Alaska and another state. This choice includes steps if you think Alaska is the wrong state.
       - "The other parent started a custody case against me, I did not respond, and I got papers about a 'default judgment.'": default
     none of the above: |
       The other parent has not started a custody case yet, but wants to see if we can agree on a parenting plan and custody order.
