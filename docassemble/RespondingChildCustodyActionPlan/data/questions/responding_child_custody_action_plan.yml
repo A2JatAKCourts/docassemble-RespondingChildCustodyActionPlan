@@ -1,5 +1,8 @@
 comment: |
-  2025-11-05 choosing display if grey boxes over validation message to prevent users from picking both wrong state and cases in 2 states options on first screen.
+  2025-11-06 greyed out disable if check boxes can't be used - need to revert to js show if note and validation code - Jonathan's message in Slack: 
+  You can't have two show if, hide if, or disable if fields that reference each other. You did that here, and on the web page the fields appear to work somewhat, but if you look at the JavaScript console, there are errors appearing right away that say "too much recursion." The code is getting into an infinite loop because of the mutual dependency. Once you comment out one of the disable if statements, the problem goes away.
+  Instead, you could have a note controlled by js show if that appears if the user selects an illegal combination of choices, and the note could explain why the combination of choices is not allowed. This can then be reinforced with validation code that prevents the user from going forward until they fix the problem.
+  
 ---
 include:
   - docassemble.AssemblyLine:assembly_line.yml
@@ -49,7 +52,6 @@ code: |
 ---
 objects:
   - users: ALPeopleList
-  - type_of_response: DADict.using(auto_gather=False)
 ---
 features:
   css: 
@@ -108,59 +110,30 @@ subquestion: |
   This Court Guide asks you questions and uses your answers to build a Personal Action Plan - a list of steps to help you respond in your child custody case. Your Action Plan will include information about the Alaska court process and other resources.
   
   What information do you need?
-fields:
-  - label: The other parent started a custody case and I want to respond.
-    field: type_of_response['ak custody case']
-    datatype: yesnowide
-  - label: The other parent started a custody case, but did not give me the filed documents in the correct way.
-    field: type_of_response['improper service']
-    datatype: yesnowide
-    help: |
-      The other parent is supposed to give you a copy by process server, or send it by certified mail/restricted delivery/return receipt. 
-  - label: The other parent started a custody case in Alaska, but I think the case should be in a different state.
-    field: type_of_response['wrong state']
-    datatype: yesnowide
-    disable if: type_of_response['case in 2 states']
-    help: |
-      You can pick this option, or “2 custody cases were filed,” not both. 
-  - label: 2 custody cases were filed – Alaska and another state.
-    field: type_of_response['case in 2 states']
-    datatype: yesnowide
-    disable if: type_of_response['wrong state']
-    help: |
-      You can pick this option, or “I think the case should be in a different state,” not both.
-  - label: The other parent started a custody case against me, I did not respond, and I got papers about a "default judgment."
-    field: type_of_response['default']
-    datatype: yesnowide
-  - label: The other parent has not started a custody case yet, but wants to see if we can agree on a parenting plan and custody order.
-    field: type_of_response.nocase
-    datatype: yesnowide
-    uncheck others: True
-validation code: |
-  # Mark type_of_response as gathered so DA won’t ask for more answers
-  type_of_response.gathered = True
+fields: 
+  - no label: type_of_response
+    datatype: checkboxes
+    choices:
+      - "The other parent started a custody case and I want to respond.": ak custody case
+      - "The other parent started a custody case, but did not give me the filed documents in the correct way.": improper service
+        help: |
+          The other parent is supposed to give you a copy by process server, or send it by certified mail/restricted delivery/return receipt. 
+      - "The other parent started a custody case in Alaska, but I think the case should be in a different state.": wrong state
+      - "2 custody cases were filed – Alaska and another state.": case in 2 states
+      - "The other parent started a custody case against me, I did not respond, and I got papers about a 'default judgment.'": default
+    none of the above: |
+      The other parent has not started a custody case yet, but wants to see if we can agree on a parenting plan and custody order.
+  - note: |
+      <span style = "color:red">You can only choose "the case was filed in the wrong state" or "the case was filed in 2 states." If the case was filed in 2 states and you think it should not have been filed in Alaska, your Action Plan will give you your next steps.</span>
+    js show if: |
+      val("type_of_response['wrong state']") && val("type_of_response['case in 2 states']")
 
-  # Seed defaults: make sure every checkbox key exists with a True/False value
-  for k in (
-      'ak custody case',
-      'improper service',
-      'wrong state',
-      'case in 2 states',
-      'default',
-      'nocase',
-      'stay married',
-  ):
-      type_of_response.setdefault(k, False)
-
-  # Enforce mutual exclusivity:
-  # If both somehow end up True, "case in 2 states" takes priority
-  if type_of_response.get('case in 2 states', False):
-      type_of_response['wrong state'] = False
-  elif type_of_response.get('wrong state', False):
-      type_of_response['case in 2 states'] = False
 under: |
   #### <i class="fa-regular fa-lightbulb"></i> Learn more ####
   We provide information about the process in Alaska only. Look for information in other states on their [court](https://www.ncsc.org/information-and-resources/state-court-websites) and [legal aid programs'](https://lawhelp.org) websites.
+validation code: | 
+  if type_of_response['wrong state'] and type_of_response['case in 2 states']:
+    validation_error("Pick only 1 of these 2 choices, 'I think the other parent filed in the wrong state', <strong>or</strong> '2 custody cases were filed.' You cannot pick both.")
 ---
 id: Have children lived in AK long enough
 css class: after
