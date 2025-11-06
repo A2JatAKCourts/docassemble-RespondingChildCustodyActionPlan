@@ -1,3 +1,26 @@
 [build-system]
-requires = ["setuptools"]
+requires = [
+    "setuptools==80.9.0",
+]
 build-backend = "setuptools.build_meta"
+
+[project]
+name = "docassemble.RespondingChildCustodyActionPlan"
+version = "2025.11.07"
+description = "Responding in your child custody case  - action plan"
+readme = "README.md"
+authors = [
+    { name = "Caroline Robinson", email = "CRobinson@akcourts.gov" },
+]
+dependencies = [
+    "docassemble.AKA2JBranding @ git+https://github.com/A2JatAKCourts/docassemble-AKA2JBranding.git@main",
+    "docassemble.AssemblyLine>=4.2.0",
+]
+
+[project.urls]
+Homepage = "https://courtformsonline.org"
+
+[tool.setuptools.packages.find]
+where = [
+    ".",
+]
