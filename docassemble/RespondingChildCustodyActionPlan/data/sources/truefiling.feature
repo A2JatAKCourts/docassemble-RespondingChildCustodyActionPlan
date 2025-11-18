@@ -77,7 +77,7 @@ Scenario: Row #144TF
     And I should see the phrase "Step 3: Fill out the forms to answer the complaint and respond within 20 days"
     And I should see the phrase "Step 4: File and serve electronically"
     And I tap the "#dHJ1ZWZpbGVfYW5zd2VyX2ZpbGVfYW5kX3NlcnZlX3N0ZXA .al_toggle" element and stay on the same page
-    And I should see the phrase "Step 5: Read the \"Domestic Relations Procedural Order\" or Standing Order that was with the Complaint"
+    And I should see the phrase "Step 5: Read the “Domestic Relations Procedural Order” or Standing Order that was with the Complaint"
     And I should see the phrase "Step 6: What to expect after you file your Answer"
     And I should see the phrase "Step 7: If your case is moving forward in Alaska, learn more about the process"
     And I should see the phrase "Step 8: Abuse or domestic violence and parenting"
@@ -107,7 +107,7 @@ Scenario: Row #147TF
     And I should see the phrase "Step 4: If you decide to move forward, fill out the forms to answer the complaint"
     And I should see the phrase "Step 5: If you decide to move forward, file and serve electronically"
     And I tap the "#dHJ1ZWZpbGVfYW5zd2VyX2ZpbGVfYW5kX3NlcnZlX3N0ZXA .al_toggle" element and stay on the same page
-    And I should see the phrase "Step 6: Read the \"Domestic Relations Procedural Order\" or Standing Order that was with the Complaint"
+    And I should see the phrase "Step 6: Read the “Domestic Relations Procedural Order” or Standing Order that was with the Complaint"
     And I should see the phrase "Step 7: What to expect after you file your Answer"
     And I should see the phrase "Step 8: If your case is moving forward in Alaska, learn more about the process"
     And I should see the phrase "Step 9: Get more information or help"
@@ -137,7 +137,7 @@ Scenario: Row #148TF
     And I should see the phrase "Step 5: If you decide to move forward in the other state, file a motion to dismiss your Alaska case"
     And I should see the phrase "Step 6: File and serve electronically"
     And I tap the "#dHJ1ZWZpbGVfYW5zd2VyX2ZpbGVfYW5kX3NlcnZlX3N0ZXA .al_toggle" element and stay on the same page
-    And I should see the phrase "Step 7: Read the \"Domestic Relations Procedural Order\" or Standing Order that was with the Complaint"
+    And I should see the phrase "Step 7: Read the “Domestic Relations Procedural Order” or Standing Order that was with the Complaint"
     And I should see the phrase "Step 8: What to expect after you file your documents"
     And I should see the phrase "Step 9: If your case is moving forward in Alaska, learn more about the process"
     And I should see the phrase "Step 10: Abuse or domestic violence and parenting"
@@ -169,7 +169,7 @@ Scenario: Row #151TF
     And I should see the phrase "Step 5: If you decide to move forward in the other state, file a motion to dismiss your Alaska case"
     And I should see the phrase "Step 6: File and serve electronically"
     And I tap the "#dHJ1ZWZpbGVfYW5zd2VyX2ZpbGVfYW5kX3NlcnZlX3N0ZXA .al_toggle" element and stay on the same page
-    And I should see the phrase "Step 7: Read the \"Domestic Relations Procedural Order\" or Standing Order that was with the Complaint"
+    And I should see the phrase "Step 7: Read the “Domestic Relations Procedural Order” or Standing Order that was with the Complaint"
     And I should see the phrase "Step 8: What to expect after you file your documents"
     And I should see the phrase "Step 9: If your case is moving forward in Alaska, learn more about the process"
     And I should see the phrase "Step 10: Get more information or help"
@@ -265,7 +265,7 @@ Scenario: Row #161TF
     And I should see the phrase "Step 5: If you decide to move forward in the other state, file a motion to dismiss your Alaska case"
     And I should see the phrase "Step 6: File and serve electronically"
     And I tap the "#dHJ1ZWZpbGVfYW5zd2VyX2ZpbGVfYW5kX3NlcnZlX3N0ZXA .al_toggle" element and stay on the same page
-    And I should see the phrase "Step 7: Read the â€œDomestic Relations Procedural Orderâ€ or Standing Order that was with the Complaint" 
+    And I should see the phrase "Step 7: Read the “Domestic Relations Procedural Order” or Standing Order that was with the Complaint" 
     And I should see the phrase "Step 8: What to expect after you file your documents"
     And I should see the phrase "Step 9: If your case is moving forward in Alaska, learn more about the process"
     And I should see the phrase "Step 10: Abuse or domestic violence and parenting"
@@ -295,7 +295,7 @@ Scenario: Row #3TF
     And I tap the "#YW5zd2VyX3N0ZXA .al_toggle" element and stay on the same page
     And I should see the phrase "Step 3: File and serve electronically"
     And I tap the "#dHJ1ZWZpbGVfYW5zd2VyX2ZpbGVfYW5kX3NlcnZlX3N0ZXA .al_toggle" element and stay on the same page
-    And I should see the phrase "Step 4: Read the â€œDomestic Relations Procedural Orderâ€ or Standing Order that was with the Complaint"
+    And I should see the phrase "Step 4: Read the “Domestic Relations Procedural Order” or Standing Order that was with the Complaint"
     And I should see the phrase "Step 5: What to expect after you file your Answer"
     And I should see the phrase "Step 6: Learn more about the process"
     And I should see the phrase "Step 7: Learn about paternity"
@@ -360,7 +360,7 @@ Scenario: Row #167mTF
     And I should see the phrase "Step 5: If you decide to move forward in the other state, file a motion to dismiss your Alaska case"
     And I should see the phrase "Step 6: File electronically and serve the other parent"
     And I tap the "#dHJ1ZWZpbGVfYW5zd2VyX2ZpbGVfYW5kX3NlcnZlX3N0ZXA .al_toggle" element and stay on the same page
-    And I should see the phrase "Step 7: Read the â€œDomestic Relations Procedural Orderâ€ or Standing Order that was with the Complaint" 
+    And I should see the phrase "Step 7: Read the “Domestic Relations Procedural Order” or Standing Order that was with the Complaint" 
     And I should see the phrase "Step 8: What to expect after you file your documents"
     And I should see the phrase "Step 9: If your case is moving forward in Alaska, learn more about the process"
     And I should see the phrase "Step 10: Get more information or help"
@@ -395,7 +395,7 @@ Scenario: Row #170mTF
     And I should see the phrase "Step 5: If you decide to move forward in the other state, file a motion to dismiss your Alaska case"
     And I should see the phrase "Step 6: File electronically and serve the other parent"
     And I tap the "#dHJ1ZWZpbGVfYW5zd2VyX2ZpbGVfYW5kX3NlcnZlX3N0ZXA .al_toggle" element and stay on the same page
-    And I should see the phrase "Step 7: Read the â€œDomestic Relations Procedural Orderâ€ or Standing Order that was with the Complaint" 
+    And I should see the phrase "Step 7: Read the “Domestic Relations Procedural Order” or Standing Order that was with the Complaint" 
     And I should see the phrase "Step 8: What to expect after you file your documents"
     And I should see the phrase "Step 9: If your case is moving forward in Alaska, learn more about the process"
     And I should see the phrase "Step 10: Abuse or domestic violence and parenting"
