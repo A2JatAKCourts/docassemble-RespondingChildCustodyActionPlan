@@ -176,7 +176,6 @@ Scenario: Row #151TF
     And I should see the phrase "Step 6: File and serve electronically"
     And I tap the "#dHJ1ZWZpbGVfYW5zd2VyX2ZpbGVfYW5kX3NlcnZlX3N0ZXA .al_toggle" element and stay on the same page
     And I should see the phrase "Look at the other parent’s complaint to see if they checked they were exempt."
-    And I should see the phrase ""
     And I should see the phrase "Step 7: Read the “Domestic Relations Procedural Order” or Standing Order that was with the Complaint"
     And I should see the phrase "Step 8: What to expect after you file your documents"
     And I should see the phrase "Step 9: If your case is moving forward in Alaska, learn more about the process"
