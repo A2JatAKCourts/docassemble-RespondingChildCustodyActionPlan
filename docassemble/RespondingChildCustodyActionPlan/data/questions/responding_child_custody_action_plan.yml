@@ -6,6 +6,8 @@ include:
   - docassemble.AKA2JBranding:aka2j_motion_response_templates.yml    
   - docassemble.AKA2JBranding:aka2j_mod_cust_div_templates.yml
   - accordion_steps.yml
+  # - true_filing_questions.yml
+  - truefiling_more_conditions.yml
 ---
 metadata:
   title: >-
@@ -118,6 +120,10 @@ fields:
       - "The other parent started a custody case against me, I did not respond, and I got papers about a 'default judgment.'": default
     none of the above: |
       The other parent has not started a custody case yet, but wants to see if we can agree on a parenting plan and custody order.
+  - note: |
+      <span style = "background-color: pink" >Choose only one or the other: "The case was filed in the wrong state." or "The case was filed in 2 states." If the case was filed in 2 states, and you think it should not have been filed in Alaska, your Action Plan will give you your next steps.</span>
+    js show if: |
+      val("type_of_response['wrong state']") && val("type_of_response['case in 2 states']")
 under: |
   #### <i class="fa-regular fa-lightbulb"></i> Learn more ####
   We provide information about the process in Alaska only. Look for information in other states on their [court](https://www.ncsc.org/information-and-resources/state-court-websites) and [legal aid programs'](https://lawhelp.org) websites.

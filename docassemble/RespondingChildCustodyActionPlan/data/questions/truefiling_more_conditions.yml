@@ -1,0 +1,161 @@
+comment: |
+  2025-11-17
+# mandatory: true
+# code: |
+#   user_need = 'answer custody'
+#   other_party_in_case = 'the other parent'
+#   if have_complaint:
+#     other_party_exempt
+#   last_screen
+---
+question: |
+  Do you have a copy of the complaint?
+yesno: have_complaint
+---
+question: |
+  Is ${ other_party_in_case } exempt from using TrueFiling?
+subquestion: |
+  Look at the complaint.
+  At the end, did ${ other_party_in_case } check the box to say they are exempt from using TrueFiling, the court’s electronic filing system? 
+fields:
+  - Did they check the 'exempt' box?: other_party_exempt
+    input type: radio
+    choices:
+      - Yes: yes
+      - No: no
+      - "I don’t have the complaint right now.": none
+  - Did ${ other_party_in_case } put their email in the complaint?: other_party_enter_email
+    datatype: yesnomaybe
+    show if: 
+      variable: other_party_exempt
+      is: yes
+---
+event: last_screen
+question: |
+  ${ truefile_answer_file_and_serve_step.subject }
+subquestion: |
+  ${ truefile_answer_file_and_serve_step.content }
+  % if user_need in('answer custody', 'answer divorce'):
+  % if type_of_response.all_true('improper service', exclusive = True) or (type_of_response['improper service'] and not proper_service and ((user_need == 'answer custody' and type_of_response['wrong state'] and jurisdiction) or (user_need == 'answer divorce' and type_of_response['wrong state']) or (type_of_response['case in 2 states'] and stage_of_other_case == 'ended with no order'))) or ((type_of_response['default'] and stage_of_default in ('application filed', 'hearing scheduled') and proper_service) and ((user_need == 'answer custody' and type_of_response['wrong state'] and jurisdiction) or (user_need == 'answer divorce' and type_of_response['wrong state']) or (type_of_response['case in 2 states'] and stage_of_other_case =='ended with no order'))) or (type_of_response.all_true('default', exclusive=True) and stage_of_default in ('application filed', 'hearing scheduled') and proper_service):
+  If you decide to move forward, file
+  % elif type_of_response['default'] and stage_of_default == 'judgment entered':
+  If you are asking to set aside the default, file
+  % else:
+  File
+  % endif 
+  % if (type_of_response.all_true('improper service', exclusive = True) or (((type_of_response.any_true('ak custody case', 'ak divorce case', 'wrong state', 'case in 2 states') and type_of_response.any_true('improper service', 'default'))  or type_of_response.all_true('default', exclusive = True)) and (proper_service or (not proper_service and have_complaint)))) and other_party_exempt == 'yes' and not other_party_enter_email:
+  electronically and serve ${ other_party_in_case }
+  % else:
+  and serve electronically
+  % endif
+  % else:
+  File and serve electronically
+  % endif
+---
+template: truefile_answer_file_and_serve_step
+subject: |
+  Step ${ truefile_answer_file_and_serve_idx }:
+  % if user_need in('answer custody', 'answer divorce'):
+  % if type_of_response.all_true('improper service', exclusive = True) or (type_of_response['improper service'] and not proper_service and ((user_need == 'answer custody' and type_of_response['wrong state'] and jurisdiction) or (user_need == 'answer divorce' and type_of_response['wrong state']) or (type_of_response['case in 2 states'] and stage_of_other_case == 'ended with no order'))) or ((type_of_response['default'] and stage_of_default in ('application filed', 'hearing scheduled') and proper_service) and ((user_need == 'answer custody' and type_of_response['wrong state'] and jurisdiction) or (user_need == 'answer divorce' and type_of_response['wrong state']) or (type_of_response['case in 2 states'] and stage_of_other_case == 'ended with no order'))) or (type_of_response.all_true('default', exclusive=True) and stage_of_default in ('application filed', 'hearing scheduled') and proper_service):
+  If you decide to move forward, file
+  % elif type_of_response['default'] and stage_of_default == 'judgment entered':
+  If you are asking to set aside the default, file
+  % else:
+  File
+  % endif 
+  % if (type_of_response.all_true('improper service', exclusive = True) or (((type_of_response.any_true('ak custody case', 'ak divorce case', 'wrong state', 'case in 2 states') and type_of_response.any_true('improper service', 'default'))  or type_of_response.all_true('default', exclusive = True)) and (proper_service or (not proper_service and have_complaint)))) and other_party_exempt == 'yes' and not other_party_enter_email:
+  electronically and serve ${ other_party_in_case }
+  % else:
+  and serve electronically
+  % endif
+  % else:
+  File and serve electronically
+  % endif
+content: |
+  % if user_need in('answer custody', 'answer divorce'):
+  % if type_of_response.all_true('improper service', exclusive = True) or (type_of_response.any_true('ak custody case', 'ak divorce case',  'wrong state', 'case in 2 states') and type_of_response.all_false('improper service', 'default')) or (type_of_response.any_true('ak custody case', 'ak divorce case',  'wrong state', 'case in 2 states') and  type_of_response.any_true('improper service', 'default') and  proper_service):
+  You have 20 days after you receive the Complaint to file your documents with the court and serve ${ other_party_in_case }.
+  % endif 
+  After you finish your Answer, you need to send it to the court. 
+  % else:
+  text for user filing complaint or motion
+  % endif
+  This is called “filing.”  
+  
+  You also need to give ${ other_party_in_case } a copy of everything you file with the court. This is called “service.”
+  
+  <div class = "step-subheading">Filing</div>
+  
+  The court has a system called TrueFiling that you need to use unless you are exempt. You are exempt if one of these applies:
+  
+    * You are in a jail or correctional facility.
+    * You have a disability under the Americans with Disabilities Act (ADA).
+    * You do not have safe access to a computer, internet, or email.
+    * You cannot get the help you need to use TrueFiling.
+    * You have a language barrier or are Limited English Proficient.
+  
+  **If you are exempt and choose not to use TrueFiling:**
+  
+    * Mark it on your form, or 
+    * Fill out **[TF-820 Notice of Change to Use of Email or TrueFiling](https://public.courts.alaska.gov/web/forms/docs/tf-820.pdf)**. 
+    * File the form with your other documents.
+    * Read [If I am not using TrueFiling, how do I serve the other side?](https://courts.alaska.gov/shc/family/serve.htm)
+  
+  **If you are not exempt:**
+  
+    * [Create an account](https://akfile.truefiling.com/register) and file your documents.
+
+
+  
+  <div class= "step-subheading">Filing same for everyone</div>
+
+  
+  <div class= "step-subheading">Serving ${ other_party_in_case } when you are using TrueFiling</div>
+
+  
+  % if (((type_of_response.any_true('ak custody case', 'wrong state', 'case in 2 states') and type_of_response.any_true('improper service', 'default')) or type_of_response['default']) and (proper_service or (not proper_service and have_complaint))) or (type_of_response.any_true('ak custody case', 'wrong state', 'case in 2 states') and type_of_response.all_false('improper service', 'default')):
+   % if other_party_exempt == 'no':
+   Use TrueFiling to serve ${ other_party_in_case }. Read [If I am using TrueFiling, how do I serve the other side?](https://courts.alaska.gov/shc/family/serve.htm#truefiling-serve)
+   % elif other_party_exempt == 'yes' and other_party_enter_email:
+   Use TrueFiling to serve ${ other_party_in_case }. Read [I am not using TrueFiling, how do I serve the other side?](https://courts.alaska.gov/shc/family/serve.htm)
+   % elif other_party_exempt == 'none' or (other_party_exempt == 'yes' and other_party_enter_email == 'None'):
+   Look at ${ other_party_in_case }'s complaint to see if they checked they were exempt. If not, they are using TrueFiling. Even if they checked they are exempt, look to see if they put their email anywhere on the complaint. If they put an email, you can serve them through TrueFiling.  Read [Serving the Other Side](https://courts.alaska.gov/shc/family/serve.htm).
+   % endif
+   % endif
+   % if ((type_of_response.any_true('ak custody case', 'wrong state', 'case in 2 states') and type_of_response.any_true('improper service', 'default')) or type_of_response['default']) and not proper_service and not have_complaint:
+   If you do not have a copy of the complaint, you may not know if the other person is using TrueFiling. If you use TrueFiling, and the other person is using it, you can serve them through TrueFiling. Read [If I am using TrueFiling, how do I serve the other side?](https://courts.alaska.gov/shc/family/serve.htm#truefiling-serve).
+   % elif (((type_of_response.any_true('ak custody case', 'wrong state', 'case in 2 states') and type_of_response.any_true('improper service', 'default')) or type_of_response['default']) and (proper_service or (not proper_service and have_complaint))) or (type_of_response.any_true('ak custody case', 'wrong state', 'case in 2 states') and type_of_response.all_false('improper service', 'default')):
+   % if other_party_exempt == 'yes' and not other_party_enter_email:
+   Because the other person is not using TrueFiling and did not give an email address, you cannot serve them through TrueFiling.
+   % endif
+   % endif
+   % if (((type_of_response.any_true('ak custody case', 'wrong state', 'case in 2 states') and type_of_response.any_true('improper service', 'default')) or type_of_response['default']) and not proper_service and not have_complaint) or (((((type_of_response.any_true('ak custody case', 'wrong state', 'case in 2 states') and type_of_response.any_true('improper service', 'default')) or type_of_response['default']) and (proper_service or (not proper_service and have_complaint))) or (type_of_response.any_true('ak custody case', 'wrong state', 'case in 2 states') and type_of_response.all_false('improper service', 'default'))) and other_party_exempt == 'yes' and not other_party_enter_email):
+  Wait to file your documents with the court until after you fill out the **Certificate of Service** and serve ${other_party_in_case }.
+
+    1. To serve ${ other_party_in_case }, send them a copy of all your documents by regular, 1st class mail, or hand-deliver it.
+    2. Decide the date you will serve ${ other_party_in_case }. Try to serve ${ other_party_in_case } the same day you file your documents with the court.
+    3. Fill out the **Certificate of Service** at the end of your court forms. The "certificate" tells the court how you are giving a copy of all the documents you file with the court to ${ other_party_in_case }. If the form does not have a **Certificate of Service**, use **Certificate of Service, TF-700**[Fill in PDF](https://public.courts.alaska.gov/web/forms/docs/tf-700.pdf).
+    4. File your documents with the court using TrueFiling.  Include a copy of the **Certificate of Service.** 
+    5.  If you do not fill out the Certificate of Service:
+
+    % if user_need in('answer custody', 'answer divorce', 'respond to motion in custody', 'respond to motion in divorce'):
+    * The court will send you a **Deficiency Notice**, and
+    * The judge may not get your paperwork.
+    % else:
+    * The court may not accept your motion or may send you a **Deficiency Notice**, and
+    * The judge may not see your motion or make a decision.
+    % endif
+    % endif
+---
+
+    
+
+
+  
+  
+  
+                                                                 
+                                                                 
+  
+  
+  
