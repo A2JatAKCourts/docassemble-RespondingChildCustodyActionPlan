@@ -82,7 +82,7 @@ content: |
    % if other_party_exempt == 'no':
    Use TrueFiling to serve ${ other_party_in_case }. Read [If I am using TrueFiling, how do I serve the other side?](https://courts.alaska.gov/shc/family/serve.htm#truefiling-serve)
    % elif other_party_exempt == 'yes' and other_party_enter_email:
-   Use TrueFiling to serve ${ other_party_in_case }. Read [I am not using TrueFiling, how do I serve the other side?](https://courts.alaska.gov/shc/family/serve.htm)
+   Use TrueFiling to serve ${ other_party_in_case }. Follow the TrueFiling instructions to serve them at their email address. Read [If I am not using TrueFiling, how do I serve the other side?](https://courts.alaska.gov/shc/family/serve.htm)
    % elif other_party_exempt == 'none' or (other_party_exempt == 'yes' and other_party_enter_email is None):
    Look at ${ other_party_in_case }'s complaint to see if they checked they were exempt. If not, they are using TrueFiling. Even if they checked they are exempt, look to see if they put their email anywhere on the complaint. If they put an email, you can serve them through TrueFiling.  Read [Serving the Other Side](https://courts.alaska.gov/shc/family/serve.htm).
    % endif

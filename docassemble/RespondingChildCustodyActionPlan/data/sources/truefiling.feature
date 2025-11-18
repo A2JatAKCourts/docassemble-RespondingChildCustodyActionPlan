@@ -54,7 +54,7 @@ Scenario: Row #143TF
     And I should see the phrase "Step 3: File and serve electronically"
     And I tap the "#dHJ1ZWZpbGVfYW5zd2VyX2ZpbGVfYW5kX3NlcnZlX3N0ZXA .al_toggle" element and stay on the same page
     And I should see the phrase "If you do not have a copy of the complaint, you may not know if the other person is using TrueFiling."
-    And I should see the phrase "Wait to file your document with the court until after you fill out the Certificate of Service and serve the other parent."
+    And I should see the phrase "Wait to file your documents with the court until after you fill out the Certificate of Service and serve the other parent."
     And I should see the phrase "Step 4: What to expect after you file your documents"
     And I should see the phrase "Step 5: Get more information or help"
     And I take a screenshot
@@ -133,7 +133,7 @@ Scenario: Row #148TF
       | jurisdiction                         | True           |         |
       | proper_service                       | True           |         |
       | domestic_violence                    | True           |         |
-      | other_party_exempt                   | no             |         |
+      | other_party_exempt                   | none             |         |
     And I should see the phrase "Your Action Plan for responding in your child custody case in 11 steps"
     And I should see the phrase "Step 1: Learn if Alaska is the right state for your custody case"
     And I should see the phrase "Step 2: Learn about proper service"
@@ -443,7 +443,7 @@ Scenario: Row #175TF
     And I should see the phrase "Step 4: If you are asking to set aside the default, file electronically and serve the other parent"
     And I tap the "#dHJ1ZWZpbGVfYW5zd2VyX2ZpbGVfYW5kX3NlcnZlX3N0ZXA .al_toggle" element and stay on the same page
     And I should see the phrase "Because the other person is not using TrueFiling and did not give an email address, you cannot serve them through TrueFiling."
-    And I should see the phrase "Wait to file your document with the court until after you fill out the Certificate of Service and serve the other parent."
+    And I should see the phrase "Wait to file your documents with the court until after you fill out the Certificate of Service and serve the other parent."
     And I should see the phrase "Step 5: What to expect after you file your documents"
     And I should see the phrase "Step 6: Get more information or help"
     And I take a screenshot
@@ -471,7 +471,7 @@ Scenario: Row #176mTF
     And I should see the phrase "Step 3: File electronically and serve the other parent"
     And I tap the "#dHJ1ZWZpbGVfYW5zd2VyX2ZpbGVfYW5kX3NlcnZlX3N0ZXA .al_toggle" element and stay on the same page
     And I should see the phrase "Because the other person is not using TrueFiling and did not give an email address, you cannot serve them through TrueFiling."
-    And I should see the phrase "Wait to file your document with the court until after you fill out the Certificate of Service and serve the other parent."
+    And I should see the phrase "Wait to file your documents with the court until after you fill out the Certificate of Service and serve the other parent."
     And I should see the phrase "Step 4: What to expect after you file your documents"
     And I should see the phrase "Step 5: Get more information or help"
     And I take a screenshot
@@ -494,7 +494,7 @@ Scenario: Row #128TF
     And I should see the phrase "Step 2: File electronically and serve the other parent"
     And I tap the "#dHJ1ZWZpbGVfYW5zd2VyX2ZpbGVfYW5kX3NlcnZlX3N0ZXA .al_toggle" element and stay on the same page
     And I should see the phrase "Because the other person is not using TrueFiling and did not give an email address, you cannot serve them through TrueFiling."
-    And I should see the phrase "Wait to file your document with the court until after you fill out the Certificate of Service and serve the other parent."
+    And I should see the phrase "Wait to file your documents with the court until after you fill out the Certificate of Service and serve the other parent."
     And I should see the phrase "Step 3: What to expect after you file your documents"
     And I should see the phrase "Step 4: Get more information or help"
     And I take a screenshot
