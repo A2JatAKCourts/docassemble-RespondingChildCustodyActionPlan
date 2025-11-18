@@ -43,7 +43,7 @@ subquestion: |
   % else:
   File
   % endif 
-  % if (type_of_response.all_true('improper service', exclusive = True) or (((type_of_response.any_true('ak custody case', 'ak divorce case', 'wrong state', 'case in 2 states') and type_of_response.any_true('improper service', 'default'))  or type_of_response.all_true('default', exclusive = True)) and (proper_service or (not proper_service and have_complaint)))) and other_party_exempt == 'yes' and not other_party_enter_email:
+  % if (type_of_response.all_true('improper service', exclusive = True) or (((type_of_response.any_true('ak custody case', 'ak divorce case', 'wrong state', 'case in 2 states') and type_of_response.any_true('improper service', 'default'))  or type_of_response.all_true('default', exclusive = True)) and (proper_service or (not proper_service and have_complaint))) or (type_of_response.any_true('ak custody case', 'ak divorce case', 'wrong state', 'case in 2 states') and type_of_response.all_false('improper service', 'default'))) and other_party_exempt == 'yes' and not other_party_enter_email:
   electronically and serve ${ other_party_in_case }
   % else:
   and serve electronically
@@ -63,7 +63,7 @@ subject: |
   % else:
   File
   % endif 
-  % if (type_of_response.all_true('improper service', exclusive = True) or (((type_of_response.any_true('ak custody case', 'ak divorce case', 'wrong state', 'case in 2 states') and type_of_response.any_true('improper service', 'default'))  or type_of_response.all_true('default', exclusive = True)) and (proper_service or (not proper_service and have_complaint)))) and other_party_exempt == 'yes' and not other_party_enter_email:
+  % if (type_of_response.all_true('improper service', exclusive = True) or ((type_of_response.any_true('ak custody case', 'ak divorce case', 'wrong state', 'case in 2 states') and type_of_response.any_true('improper service', 'default') or type_of_response.all_true('default', exclusive = True)) and (proper_service or (not proper_service and have_complaint))) or (type_of_response.any_true('ak custody case', 'ak divorce case', 'wrong state', 'case in 2 states') and type_of_response.all_false('improper service', 'default'))) and other_party_exempt == 'yes' and not other_party_enter_email:
   electronically and serve ${ other_party_in_case }
   % else:
   and serve electronically
@@ -104,28 +104,22 @@ content: |
   **If you are not exempt:**
   
     * [Create an account](https://akfile.truefiling.com/register) and file your documents.
-
-
-  
-  <div class= "step-subheading">Filing same for everyone</div>
-
   
   <div class= "step-subheading">Serving ${ other_party_in_case } when you are using TrueFiling</div>
 
-  
   % if (((type_of_response.any_true('ak custody case', 'wrong state', 'case in 2 states') and type_of_response.any_true('improper service', 'default')) or type_of_response['default']) and (proper_service or (not proper_service and have_complaint))) or (type_of_response.any_true('ak custody case', 'wrong state', 'case in 2 states') and type_of_response.all_false('improper service', 'default')):
    % if other_party_exempt == 'no':
    Use TrueFiling to serve ${ other_party_in_case }. Read [If I am using TrueFiling, how do I serve the other side?](https://courts.alaska.gov/shc/family/serve.htm#truefiling-serve)
    % elif other_party_exempt == 'yes' and other_party_enter_email:
    Use TrueFiling to serve ${ other_party_in_case }. Read [I am not using TrueFiling, how do I serve the other side?](https://courts.alaska.gov/shc/family/serve.htm)
-   % elif other_party_exempt == 'none' or (other_party_exempt == 'yes' and other_party_enter_email == 'None'):
+   % elif other_party_exempt == 'none' or (other_party_exempt == 'yes' and other_party_enter_email is None):
    Look at ${ other_party_in_case }'s complaint to see if they checked they were exempt. If not, they are using TrueFiling. Even if they checked they are exempt, look to see if they put their email anywhere on the complaint. If they put an email, you can serve them through TrueFiling.  Read [Serving the Other Side](https://courts.alaska.gov/shc/family/serve.htm).
    % endif
    % endif
    % if ((type_of_response.any_true('ak custody case', 'wrong state', 'case in 2 states') and type_of_response.any_true('improper service', 'default')) or type_of_response['default']) and not proper_service and not have_complaint:
    If you do not have a copy of the complaint, you may not know if the other person is using TrueFiling. If you use TrueFiling, and the other person is using it, you can serve them through TrueFiling. Read [If I am using TrueFiling, how do I serve the other side?](https://courts.alaska.gov/shc/family/serve.htm#truefiling-serve).
    % elif (((type_of_response.any_true('ak custody case', 'wrong state', 'case in 2 states') and type_of_response.any_true('improper service', 'default')) or type_of_response['default']) and (proper_service or (not proper_service and have_complaint))) or (type_of_response.any_true('ak custody case', 'wrong state', 'case in 2 states') and type_of_response.all_false('improper service', 'default')):
-   % if other_party_exempt == 'yes' and not other_party_enter_email:
+   % if other_party_exempt == 'yes' and other_party_enter_email is False:
    Because the other person is not using TrueFiling and did not give an email address, you cannot serve them through TrueFiling.
    % endif
    % endif

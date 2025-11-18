@@ -327,7 +327,7 @@ Scenario: Row #44TF
     And I should see the phrase "Step 4: If you want to ask to set aside the default, fill out the forms"
     And I should see the phrase "Step 5: If you are asking to set aside the default, file electronically and serve the other parent"
     And I tap the "#dHJ1ZWZpbGVfYW5zd2VyX2ZpbGVfYW5kX3NlcnZlX3N0ZXA .al_toggle" element and stay on the same page
-    And I should see the phrase "Look at their complaint to see if they checked they were exempt."
+    And I should see the phrase "Look at the other parent’s complaint to see if they checked they were exempt."
     And I should see the phrase "Step 6: What to expect after you file your documents"
     And I should see the phrase "Step 7: Get more information or help"
     And I take a screenshot
