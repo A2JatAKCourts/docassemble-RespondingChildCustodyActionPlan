@@ -1,6 +1,6 @@
 @truefiling
 Feature: User paths
-# 2025-11-17
+# 2025-11-18
 
 Background:
   Given the maximum seconds for each Step is 90
@@ -23,6 +23,7 @@ Scenario: Row #1TF
     And I tap the "#YW5zd2VyX3N0ZXA .al_toggle" element and stay on the same page
     And I should see the phrase "Step 3: File and serve electronically"
     And I tap the "#dHJ1ZWZpbGVfYW5zd2VyX2ZpbGVfYW5kX3NlcnZlX3N0ZXA .al_toggle" element and stay on the same page
+    And I should see the phrase "Read If I am using TrueFiling, how do I serve the other side?"
     And I should see the phrase "Step 4: Read the “Domestic Relations Procedural Order” or Standing Order that was with the Complaint"
     And I should see the phrase "Step 5: What to expect after you file your Answer"
     And I should see the phrase "Step 6: Learn more about the process"
@@ -52,6 +53,8 @@ Scenario: Row #143TF
     And I should see the phrase "Step 2: File a motion to dismiss your Alaska case"
     And I should see the phrase "Step 3: File and serve electronically"
     And I tap the "#dHJ1ZWZpbGVfYW5zd2VyX2ZpbGVfYW5kX3NlcnZlX3N0ZXA .al_toggle" element and stay on the same page
+    And I should see the phrase "If you do not have a copy of the complaint, you may not know if the other person is using TrueFiling."
+    And I should see the phrase "Wait to file your document with the court until after you fill out the Certificate of Service and serve the other parent."
     And I should see the phrase "Step 4: What to expect after you file your documents"
     And I should see the phrase "Step 5: Get more information or help"
     And I take a screenshot
@@ -77,6 +80,7 @@ Scenario: Row #144TF
     And I should see the phrase "Step 3: Fill out the forms to answer the complaint and respond within 20 days"
     And I should see the phrase "Step 4: File and serve electronically"
     And I tap the "#dHJ1ZWZpbGVfYW5zd2VyX2ZpbGVfYW5kX3NlcnZlX3N0ZXA .al_toggle" element and stay on the same page
+    And I should see the phrase "Read If I am using TrueFiling, how do I serve the other side?"
     And I should see the phrase "Step 5: Read the “Domestic Relations Procedural Order” or Standing Order that was with the Complaint"
     And I should see the phrase "Step 6: What to expect after you file your Answer"
     And I should see the phrase "Step 7: If your case is moving forward in Alaska, learn more about the process"
@@ -107,6 +111,7 @@ Scenario: Row #147TF
     And I should see the phrase "Step 4: If you decide to move forward, fill out the forms to answer the complaint"
     And I should see the phrase "Step 5: If you decide to move forward, file and serve electronically"
     And I tap the "#dHJ1ZWZpbGVfYW5zd2VyX2ZpbGVfYW5kX3NlcnZlX3N0ZXA .al_toggle" element and stay on the same page
+    And I should see the phrase "Read If I am using TrueFiling, how do I serve the other side?"
     And I should see the phrase "Step 6: Read the “Domestic Relations Procedural Order” or Standing Order that was with the Complaint"
     And I should see the phrase "Step 7: What to expect after you file your Answer"
     And I should see the phrase "Step 8: If your case is moving forward in Alaska, learn more about the process"
@@ -137,6 +142,7 @@ Scenario: Row #148TF
     And I should see the phrase "Step 5: If you decide to move forward in the other state, file a motion to dismiss your Alaska case"
     And I should see the phrase "Step 6: File and serve electronically"
     And I tap the "#dHJ1ZWZpbGVfYW5zd2VyX2ZpbGVfYW5kX3NlcnZlX3N0ZXA .al_toggle" element and stay on the same page
+    And I should see the phrase "Look at the other parent’s complaint to see if they checked they were exempt."
     And I should see the phrase "Step 7: Read the “Domestic Relations Procedural Order” or Standing Order that was with the Complaint"
     And I should see the phrase "Step 8: What to expect after you file your documents"
     And I should see the phrase "Step 9: If your case is moving forward in Alaska, learn more about the process"
@@ -169,6 +175,8 @@ Scenario: Row #151TF
     And I should see the phrase "Step 5: If you decide to move forward in the other state, file a motion to dismiss your Alaska case"
     And I should see the phrase "Step 6: File and serve electronically"
     And I tap the "#dHJ1ZWZpbGVfYW5zd2VyX2ZpbGVfYW5kX3NlcnZlX3N0ZXA .al_toggle" element and stay on the same page
+    And I should see the phrase "Look at the other parent’s complaint to see if they checked they were exempt."
+    And I should see the phrase ""
     And I should see the phrase "Step 7: Read the “Domestic Relations Procedural Order” or Standing Order that was with the Complaint"
     And I should see the phrase "Step 8: What to expect after you file your documents"
     And I should see the phrase "Step 9: If your case is moving forward in Alaska, learn more about the process"
@@ -194,6 +202,7 @@ Scenario: Row #131TF
     And I should see the phrase "Step 2: Fill out the forms to answer the complaint and respond within 20 days"
     And I should see the phrase "Step 3: File and serve electronically"
     And I tap the "#dHJ1ZWZpbGVfYW5zd2VyX2ZpbGVfYW5kX3NlcnZlX3N0ZXA .al_toggle" element and stay on the same page
+    And I should see the phrase "Look at the other parent’s complaint to see if they checked they were exempt."
     And I should see the phrase "Step 4: Read the “Domestic Relations Procedural Order” or Standing Order that was with the Complaint"
     And I should see the phrase "Step 5: What to expect after you file your Answer"
     And I should see the phrase "Step 6: Learn more about the process"
@@ -202,8 +211,8 @@ Scenario: Row #131TF
     And I download "responding_child_custody_action_plan.pdf"
     And I download "responding_child_custody_action_plan.docx"
 
-@row158mTFTF
-Scenario: Row #158mTFTF
+@row158mTF
+Scenario: Row #158mTF
   Given I start the interview at "responding_child_custody_action_plan.yml"
     And I get to the question id "final screen" with this data:
       | var                                  | value             | trigger |
@@ -229,6 +238,7 @@ Scenario: Row #158mTFTF
     And I should see the phrase "Step 5: If you decide to move forward in the other state, file a motion to dismiss your Alaska case"
     And I should see the phrase "Step 6: File and serve electronically"
     And I tap the "#dHJ1ZWZpbGVfYW5zd2VyX2ZpbGVfYW5kX3NlcnZlX3N0ZXA .al_toggle" element and stay on the same page
+    And I should see the phrase "Follow the TrueFiling instructions to serve them at their email address."
     And I should see the phrase "Step 7: Read the “Domestic Relations Procedural Order” or Standing Order that was with the Complaint"
     And I should see the phrase "Step 8: What to expect after you file your documents"
     And I should see the phrase "Step 9: If your case is moving forward in Alaska, learn more about the process"
@@ -265,6 +275,7 @@ Scenario: Row #161TF
     And I should see the phrase "Step 5: If you decide to move forward in the other state, file a motion to dismiss your Alaska case"
     And I should see the phrase "Step 6: File and serve electronically"
     And I tap the "#dHJ1ZWZpbGVfYW5zd2VyX2ZpbGVfYW5kX3NlcnZlX3N0ZXA .al_toggle" element and stay on the same page
+    And I should see the phrase "Follow the TrueFiling instructions to serve them at their email address."
     And I should see the phrase "Step 7: Read the “Domestic Relations Procedural Order” or Standing Order that was with the Complaint" 
     And I should see the phrase "Step 8: What to expect after you file your documents"
     And I should see the phrase "Step 9: If your case is moving forward in Alaska, learn more about the process"
@@ -295,6 +306,7 @@ Scenario: Row #3TF
     And I tap the "#YW5zd2VyX3N0ZXA .al_toggle" element and stay on the same page
     And I should see the phrase "Step 3: File and serve electronically"
     And I tap the "#dHJ1ZWZpbGVfYW5zd2VyX2ZpbGVfYW5kX3NlcnZlX3N0ZXA .al_toggle" element and stay on the same page
+    And I should see the phrase "Follow the TrueFiling instructions to serve them at their email address."
     And I should see the phrase "Step 4: Read the “Domestic Relations Procedural Order” or Standing Order that was with the Complaint"
     And I should see the phrase "Step 5: What to expect after you file your Answer"
     And I should see the phrase "Step 6: Learn more about the process"
@@ -360,6 +372,7 @@ Scenario: Row #167mTF
     And I should see the phrase "Step 5: If you decide to move forward in the other state, file a motion to dismiss your Alaska case"
     And I should see the phrase "Step 6: File electronically and serve the other parent"
     And I tap the "#dHJ1ZWZpbGVfYW5zd2VyX2ZpbGVfYW5kX3NlcnZlX3N0ZXA .al_toggle" element and stay on the same page
+    And I should see the phrase "Look at the other parent’s complaint to see if they checked they were exempt."
     And I should see the phrase "Step 7: Read the “Domestic Relations Procedural Order” or Standing Order that was with the Complaint" 
     And I should see the phrase "Step 8: What to expect after you file your documents"
     And I should see the phrase "Step 9: If your case is moving forward in Alaska, learn more about the process"
@@ -395,6 +408,7 @@ Scenario: Row #170mTF
     And I should see the phrase "Step 5: If you decide to move forward in the other state, file a motion to dismiss your Alaska case"
     And I should see the phrase "Step 6: File electronically and serve the other parent"
     And I tap the "#dHJ1ZWZpbGVfYW5zd2VyX2ZpbGVfYW5kX3NlcnZlX3N0ZXA .al_toggle" element and stay on the same page
+    And I should see the phrase "Look at the other parent’s complaint to see if they checked they were exempt."
     And I should see the phrase "Step 7: Read the “Domestic Relations Procedural Order” or Standing Order that was with the Complaint" 
     And I should see the phrase "Step 8: What to expect after you file your documents"
     And I should see the phrase "Step 9: If your case is moving forward in Alaska, learn more about the process"
@@ -428,6 +442,8 @@ Scenario: Row #175TF
     And I should see the phrase "Step 3: If you want to ask to set aside the default, fill out the forms"
     And I should see the phrase "Step 4: If you are asking to set aside the default, file electronically and serve the other parent"
     And I tap the "#dHJ1ZWZpbGVfYW5zd2VyX2ZpbGVfYW5kX3NlcnZlX3N0ZXA .al_toggle" element and stay on the same page
+    And I should see the phrase "Because the other person is not using TrueFiling and did not give an email address, you cannot serve them through TrueFiling."
+    And I should see the phrase "Wait to file your document with the court until after you fill out the Certificate of Service and serve the other parent."
     And I should see the phrase "Step 5: What to expect after you file your documents"
     And I should see the phrase "Step 6: Get more information or help"
     And I take a screenshot
@@ -454,6 +470,8 @@ Scenario: Row #176mTF
     And I should see the phrase "Step 2: File a motion to dismiss your Alaska case"
     And I should see the phrase "Step 3: File electronically and serve the other parent"
     And I tap the "#dHJ1ZWZpbGVfYW5zd2VyX2ZpbGVfYW5kX3NlcnZlX3N0ZXA .al_toggle" element and stay on the same page
+    And I should see the phrase "Because the other person is not using TrueFiling and did not give an email address, you cannot serve them through TrueFiling."
+    And I should see the phrase "Wait to file your document with the court until after you fill out the Certificate of Service and serve the other parent."
     And I should see the phrase "Step 4: What to expect after you file your documents"
     And I should see the phrase "Step 5: Get more information or help"
     And I take a screenshot
@@ -475,6 +493,8 @@ Scenario: Row #128TF
     And I should see the phrase "Step 1: File a motion to dismiss your Alaska case"
     And I should see the phrase "Step 2: File electronically and serve the other parent"
     And I tap the "#dHJ1ZWZpbGVfYW5zd2VyX2ZpbGVfYW5kX3NlcnZlX3N0ZXA .al_toggle" element and stay on the same page
+    And I should see the phrase "Because the other person is not using TrueFiling and did not give an email address, you cannot serve them through TrueFiling."
+    And I should see the phrase "Wait to file your document with the court until after you fill out the Certificate of Service and serve the other parent."
     And I should see the phrase "Step 3: What to expect after you file your documents"
     And I should see the phrase "Step 4: Get more information or help"
     And I take a screenshot
