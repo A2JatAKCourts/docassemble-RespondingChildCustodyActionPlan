@@ -175,15 +175,21 @@ under: |
   
   Before the court can default you, the other parent is supposed to give you copies of the Complaint and the attached documents (called “service”) by process server or certified mail.  If the other parent did not, you may be able to challenge a default judgment.  
 ---
-id: Answer forms
+id: Stage of default
 question: |
-  Do you want more information?
-fields:
-  - I want to: continue_for_answer
+  What stage of the default process are you at?
+fields: 
+  - no label: stage_of_default
     input type: radio
     choices:
-      - Quit and get my Action Plan: quit
-      - Get the information I need to fill out an Answer in my case.: continue 
+      - "The other parent filed a “Default Application” with the court.": application filed
+      - "The court signed an “Entry of Default” or “Default Entry” and set a “Default Hearing” but it has not happened yet.": hearing scheduled
+      - "The court held a 'Default Hearing' without me and entered a 'Default Judgment' against me.": judgment entered
+under: |
+  #### <i class="fa-regular fa-lightbulb"></i> Learn more ####
+  How do I know the stage my case is at?
+  
+  You can search for your case on the Alaska Court System website, or ask your local court.
 ---
 id: Step 4 Q. 1 Info on agree
 question: |
