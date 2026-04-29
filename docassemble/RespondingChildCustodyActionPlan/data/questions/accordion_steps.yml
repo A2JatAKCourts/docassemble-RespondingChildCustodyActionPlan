@@ -1,5 +1,5 @@
 comment: |
-    last updated: 2025-11-17
+    last updated: 2026-02-17 'ak custody' + 'improper service' needed steps
     2025-06-04 until we get the doc1assemble interview Learn about motions: <a href="https://docassemble.akcourts.gov/start/FilingAMotion">Asking for an Order in a Divorce Case When the Issue Can't Wait for the Court's Final Decision (Filing a Motion) GA</a> live, use the link to the court webpage in the list under "Read." See Github branding issue https://github.com/A2JatAKCourts/docassemble-AKA2JBrandingIssues/issues/64
 ---
 generic object: ALDocumentBundle
@@ -170,6 +170,9 @@ code: |
 
   if type_of_response.all_true('ak custody case', 'improper service'):
     proper_service
+    add_unique_step((proper_service_step, "proper_service_idx"), step_list)
+    add_unique_step((decide_after_improper_service_step, "decide_after_improper_service_idx"), step_list)
+    add_unique_step((answer_step, "answer_idx"), step_list)
 
   if type_of_response.any_true():
     add_unique_step((truefile_answer_file_and_serve_step, "truefile_answer_file_and_serve_idx"), step_list)
