@@ -1,3 +1,9 @@
+comment: |
+  2025-11-06 deleted information only and has been added to action plan screens and a duplicate agreement_documents question.
+  2025-11-06 greyed out disable if check boxes can't be used - need to revert to js show if note and validation code - Jonathan's message in Slack: 
+  You can't have two show if, hide if, or disable if fields that reference each other. You did that here, and on the web page the fields appear to work somewhat, but if you look at the JavaScript console, there are errors appearing right away that say "too much recursion." The code is getting into an infinite loop because of the mutual dependency. Once you comment out one of the disable if statements, the problem goes away.
+  Instead, you could have a note controlled by js show if that appears if the user selects an illegal combination of choices, and the note could explain why the combination of choices is not allowed. This can then be reinforced with validation code that prevents the user from going forward until they fix the problem.
+  
 ---
 include:
   - docassemble.AssemblyLine:assembly_line.yml
@@ -227,7 +233,6 @@ subquestion: |
   what you can agree to in 
   % endif
   your parenting plan.
-
 fields:
   - no label: domestic_violence
     datatype: yesnoradio
