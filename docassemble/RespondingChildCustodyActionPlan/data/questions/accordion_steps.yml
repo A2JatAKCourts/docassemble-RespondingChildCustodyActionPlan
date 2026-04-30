@@ -10,7 +10,11 @@ content: |
 generic object: ALDocumentBundle
 template: x.send_email_template
 subject: |
-  Your Action Plan for responding in your child custody case
+  % if type_of_response.any_true():
+  Your Action Plan for responding in your child custody case in ${ len(step_list) } steps
+  % else:
+  Your Action Plan for responding when the other parent has not started a custody case yet, but wants to see if you can agree on a Parenting Plan and custody order
+  % endif
 content: |
   Thank you for using the Alaska Court System's Court Guide Action Plan.
 
@@ -30,8 +34,11 @@ question: |
   # <i class="fa-thin fa-list"></i>Your Action Plan is ready!
   % endif
 subquestion: |
+  % if type_of_response.any_true():
   #### Your Action Plan for responding in your child custody case in ${ len(step_list) } steps
- 
+  % else:
+  #### Your Action Plan for responding when the other parent has not started a custody case yet, but wants to see if you can agree on a Parenting Plan and custody order
+  % endif
   % if get_config("debug", False):
   <button id="akc_expand_all" class="btn other stuff">Expand all</button>
   <button id="akc_collapse_all" class="btn other stuff">Collapse all</button>
@@ -74,7 +81,7 @@ code: |
   distribution_certificate_list = []
   reply_certificate_list = []
   other_party_in_case  = 'the other parent'
-  case_type = 'custody case'  
+  case_type = 'custody'  
   type_of_response['ak divorce case'] = False  
   type_of_response['stay married'] = False
   distribution_certificate_list.append({'image': distrib_cert_custody_divorce_image, 'text': "Certificate of Distribution shows the date the court sent your order to you."})
@@ -101,6 +108,7 @@ code: |
   
   if type_of_response.all_true('improper service', exclusive = True):
     proper_service = False
+    military
     add_unique_step((proper_service_step, "proper_service_idx"), step_list)
     add_unique_step((decide_after_improper_service_step, "decide_after_improper_service_idx"), step_list)
     add_unique_step((answer_step, "answer_idx"), step_list)
