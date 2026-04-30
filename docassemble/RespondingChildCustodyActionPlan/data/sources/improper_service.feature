@@ -1,6 +1,6 @@
 @service
 Feature: User paths
-# 2026-04-29
+# 2026-04-30
 
 Background: 
   Given the maximum seconds for each Step is 90
@@ -25,7 +25,7 @@ Scenario: Row #17
     And I should see the phrase "Step 3: If you decide to move forward, fill out the forms to answer the complaint and respond within 20 days"
     And I should see the phrase "Step 4: If you decide to move forward, file your documents with the court and serve the other parent"
     And I should see the phrase "Step 5: Serve the other parent"
-    And I should see the phrase "Step 6: Read the “Domestic Relations Procedural Order” or Standing Order that was with the Complaint"
+    And I should see the phrase "Step 6: Read the Standing Order"
     And I should see the phrase "Step 7: What to expect after you file your documents"
     And I should see the phrase "Step 8: If your case is moving forward, learn more about the process"
     And I should see the phrase "Step 9: Get more information or help"
@@ -53,7 +53,7 @@ Scenario: Row #17b
     And I should see the phrase "Step 4: Sign if you use paper forms or do not use TrueFiling"
     And I should see the phrase "Step 5: If you decide to move forward, file your documents with the court and serve the other parent"
     And I should see the phrase "Step 6: Serve the other parent"
-    And I should see the phrase "Step 7: Read the “Domestic Relations Procedural Order” or Standing Order that was with the Complaint"
+    And I should see the phrase "Step 7: Read the Standing Order"
     And I should see the phrase "Step 8: What to expect after you file your documents"
     And I should see the phrase "Step 9: If your case is moving forward, learn more about the process"
     And I should see the phrase "Step 10: Get more information or help"
@@ -82,7 +82,7 @@ Scenario: Row #17c
     And I should see the phrase "Step 4: Sign if you use paper forms or do not use TrueFiling"
     And I should see the phrase "Step 5: If you decide to move forward, file your documents with the court and serve the other parent"
     And I should see the phrase "Step 6: Serve the other parent"
-    And I should see the phrase "Step 7: Read the “Domestic Relations Procedural Order” or Standing Order that was with the Complaint"
+    And I should see the phrase "Step 7: Read the Standing Order"
     And I should see the phrase "Step 8: What to expect after you file your documents"
     And I should see the phrase "Step 9: If your case is moving forward, learn more about the process"
     And I should see the phrase "Step 10: Get more information or help"

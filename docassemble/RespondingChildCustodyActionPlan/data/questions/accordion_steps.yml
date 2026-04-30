@@ -1,6 +1,6 @@
 comment: |
     last updated: 2026-04-29 deleted all templates from this file. Now using only branding package for steps or templates in this file.
-    2025-06-04 until we get the doc1assemble interview Learn about motions: <a href="https://docassemble.akcourts.gov/start/FilingAMotion">Asking for an Order in a Divorce Case When the Issue Can't Wait for the Court's Final Decision (Filing a Motion) GA</a> live, use the link to the court webpage in the list under "Read." See Github branding issue https://github.com/A2JatAKCourts/docassemble-AKA2JBrandingIssues/issues/64
+    2025-06-04 until we get the docassemble interview Learn about motions: <a href="https://courtguide.akcourts.gov/start/FilingAMotion">Asking for an Order in a Divorce Case When the Issue Can't Wait for the Court's Final Decision (Filing a Motion) GA</a> live, use the link to the court webpage in the list under "Read." See Github branding issue https://github.com/A2JatAKCourts/docassemble-AKA2JBrandingIssues/issues/64
 ---
 generic object: ALDocumentBundle
 template: x.get_email_copy

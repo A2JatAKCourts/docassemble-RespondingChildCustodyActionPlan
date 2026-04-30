@@ -1,6 +1,6 @@
 @not_started
 Feature: User paths
-# 2025-11-07
+# 2026-04-30
 
 Background: 
   Given the maximum seconds for each Step is 90
@@ -19,7 +19,7 @@ Scenario: Row #48
     And I tap the "#d2FudF9oZWxwX3RvX2FncmVlX3N0ZXA .al_toggle" element and stay on the same page
     And I should see the phrase "Fill out the forms to start your uncontested custody case"
     And I should see the phrase "File the original with your local court"
-    And I should see the phrase "Read the “Domestic Relations Procedural Order” or Standing Order if the clerk gives you one when you file your case"
+    And I should see the phrase "Read the Standing Order"
     And I should see the phrase "What to expect after you file your Complaint"
     And I should see the phrase "Abuse or domestic violence resources and reaching an agreement"
     And I tap the "#YW5zd2VyX2RvbWVzdGljX3Zpb2xlbmNlX3N0ZXA .al_toggle" element and stay on the same page
@@ -42,7 +42,7 @@ Scenario: Row #49
     And I tap the "#d2FudF9oZWxwX3RvX2FncmVlX3N0ZXA .al_toggle" element and stay on the same page
     And I should see the phrase "Fill out the forms to start your uncontested custody case"
     And I should see the phrase "File the original with your local court"
-    And I should see the phrase "Read the “Domestic Relations Procedural Order” or Standing Order if the clerk gives you one when you file your case"
+    And I should see the phrase "Read the Standing Order"
     And I should see the phrase "What to expect after you file your Complaint"
     And I should see the phrase "Get more information or help"
     And I take a screenshot
