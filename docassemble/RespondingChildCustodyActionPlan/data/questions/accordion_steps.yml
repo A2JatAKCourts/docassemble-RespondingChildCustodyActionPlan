@@ -108,19 +108,17 @@ code: |
   
   if type_of_response.all_true('improper service', exclusive = True):
     proper_service = False
-    military
     add_unique_step((proper_service_step, "proper_service_idx"), step_list)
     add_unique_step((decide_after_improper_service_step, "decide_after_improper_service_idx"), step_list)
     add_unique_step((answer_step, "answer_idx"), step_list)
          
   if type_of_response['wrong state']:
     jurisdiction
-    military
     add_unique_step((answer_jurisdiction_step, "answer_jurisdiction_idx"), step_list)
     if type_of_response.any_true('improper service', 'default'):
       proper_service
-      # if type_of_response['default']:
-      # military
+      if type_of_response['default']:
+        military
       add_unique_step((proper_service_step, "proper_service_idx"), step_list)
     if type_of_response['improper service'] and jurisdiction and not proper_service:
       add_unique_step((decide_after_improper_service_step, "decide_after_improper_service_idx"), step_list)
@@ -145,12 +143,11 @@ code: |
     if stage_of_other_case == 'still going':
       jurisdiction 
     if stage_of_other_case in('still going', 'ended with no order') and not(type_of_response['default'] and stage_of_default == 'judgment entered'):
-      military
       add_unique_step((answer_jurisdiction_step, "answer_jurisdiction_idx"), step_list)
     if type_of_response['improper service'] or type_of_response['default']:
       proper_service
-      # if type_of_response['default']:
-      #   military
+      if type_of_response['default']:
+        military
       add_unique_step((proper_service_step, "proper_service_idx"), step_list)
     if stage_of_other_case == 'ended with no order'and type_of_response['improper service'] and not proper_service:
         add_unique_step((decide_after_improper_service_step, "decide_after_improper_service_idx"), step_list)
