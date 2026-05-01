@@ -17,7 +17,6 @@ Scenario: Row #36
     | military                    | True              |         | 
     | filling_manner              | electronically    |         | 
     | filing_method               | efiling           |         | 
-    | have_complaint              | True              |         | 
     | other_party_exempt          | yes               |         | 
     | other_party_enter_email     | True              |         | 
     And I should see the phrase "Your Action Plan for responding in your child custody case in 9 steps"
@@ -50,7 +49,7 @@ Scenario: Row #37
     | military                    | True              |         | 
     | filling_manner              | electronically    |         | 
     | filing_method               | mail or in person |         | 
-    | have_complaint              | False             |         | 
+    | other_party_exempt          | none              |         | 
     And I should see the phrase "Your Action Plan for responding in your child custody case in 10 steps"
     And I should see the phrase "Step 1: Learn about default judgment"
     And I tap the "#cHJvcGVyX3NlcnZpY2Vfc3RlcA .al_toggle" element and stay on the same page
@@ -82,7 +81,6 @@ Scenario: Row #38
     | military                    | True             |         | 
     | filling_manner              | electronically   |         | 
     | filing_method               | dunno            |         | 
-    | have_complaint              | True             |         | 
     | other_party_exempt          | yes              |         | 
     | other_party_enter_email     | False            |         | 
     And I should see the phrase "Your Action Plan for responding in your child custody case in 9 steps"
@@ -114,7 +112,8 @@ Scenario: Row #41
     | military                    | False            |         | 
     | filling_manner              | paper            |         | 
     | filing_method               | efiling          |         | 
-    | have_complaint              | False            |         | 
+    | other_party_exempt          | yes              |         | 
+    | other_party_enter_email     | None             |         | 
     And I should see the phrase "Your Action Plan for responding in your child custody case in 9 steps"
     And I should see the phrase "Step 1: Learn about default judgment"
     And I tap the "#cHJvcGVyX3NlcnZpY2Vfc3RlcA .al_toggle" element and stay on the same page

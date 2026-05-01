@@ -189,13 +189,18 @@ code: |
   if type_of_response.all_true('ak custody case', 'improper service'):
     proper_service
     add_unique_step((proper_service_step, "proper_service_idx"), step_list)
-    add_unique_step((decide_after_improper_service_step, "decide_after_improper_service_idx"), step_list)
+    if not proper_service:
+      add_unique_step((decide_after_improper_service_step, "decide_after_improper_service_idx"), step_list)
     add_unique_step((answer_step, "answer_idx"), step_list)
 
   if type_of_response.any_true():
     if filling_manner in('paper', 'dunno') or filing_method in('mail or in person', 'dunno'):
       add_unique_step((sign_step, "sign_idx"), step_list)
-    other_party_exempt
+    if type_of_response.any_true('improper service', 'default') and not proper_service: 
+      if have_complaint:
+        other_party_exempt
+    else:
+      other_party_exempt
     add_unique_step((truefiling_file_and_serve_step, "truefiling_file_and_serve_idx"), step_list)
     add_unique_step((truefiling_serve_step, "truefiling_serve_idx"), step_list)
 
@@ -235,10 +240,10 @@ code: |
   
   add_unique_step((get_help, "get_help_idx"), step_list)
 
-  log("STEP LIST IDS: " + repr([step_tuple[1] for step_tuple in step_list]))
-  log("filling_manner: " + repr(filling_manner))
-  log("filing_method: " + repr(filing_method))
-    
+  #  log("STEP LIST IDS: " + repr([step_tuple[1] for step_tuple in step_list]))
+  #  log("filling_manner: " + repr(filling_manner))
+  #  log("filing_method: " + repr(filing_method))
+   
   for iter_idx, step_tuple in enumerate( step_list ):
     define(step_tuple[ 1 ], iter_idx + 1)
   get_steps = True

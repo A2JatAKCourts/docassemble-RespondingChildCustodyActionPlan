@@ -53,6 +53,7 @@ Scenario: Row #19
     | proper_service                       | False             |         | 
     | filling_manner                       | electronically    |         | 
     | filing_method                        | mail or in person |         | 
+    | have_complaint                       | True              |         | 
     | other_party_exempt                   | no                |         | 
     And I should see the phrase "Your Action Plan for responding in your child custody case in 11 steps"
     And I should see the phrase "Step 1: Learn if Alaska is the right state for your custody case"
