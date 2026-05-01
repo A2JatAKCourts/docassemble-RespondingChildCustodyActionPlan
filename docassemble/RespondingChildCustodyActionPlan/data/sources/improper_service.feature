@@ -1,7 +1,6 @@
 @service
 Feature: User paths
-# 2026-04-30
-
+# 2026-05-01
 Background: 
   Given the maximum seconds for each Step is 90
 
@@ -12,10 +11,9 @@ Scenario: Row #17
     | var                                  | value          | trigger | 
     | user_need                            | answer custody |         | 
     | type_of_response['improper service'] | True           |         | 
-    | military                             | True           |         |
     | filling_manner                       | electronically |         | 
     | filing_method                        | efiling        |         | 
-    | proper_service                       | True           |         | 
+    | have_complaint                       | True           |         | 
     | other_party_exempt                   | yes            |         | 
     | other_party_enter_email              | True           |         | 
 
@@ -33,6 +31,7 @@ Scenario: Row #17
     And I take a screenshot
     And I download "responding_child_custody_action_plan.pdf"
     And I download "responding_child_custody_action_plan.docx"
+    And I wait 1 second
 
 @row17b
 Scenario: Row #17b
@@ -41,7 +40,6 @@ Scenario: Row #17b
     | var                                  | value             | trigger | 
     | user_need                            | answer custody    |         | 
     | type_of_response['improper service'] | True              |         | 
-    | military                             | False             |         |
     | filling_manner                       | electronically    |         | 
     | filing_method                        | mail or in person |         | 
     | proper_service                       | False             |         | 
@@ -62,7 +60,7 @@ Scenario: Row #17b
     And I take a screenshot
     And I download "responding_child_custody_action_plan.pdf"
     And I download "responding_child_custody_action_plan.docx"
-
+    And I wait 1 second
 @row17c
 Scenario: Row #17c
   Given I start the interview at "responding_child_custody_action_plan.yml"
@@ -70,7 +68,6 @@ Scenario: Row #17c
     | var                                  | value          | trigger | 
     | user_need                            | answer custody |         | 
     | type_of_response['improper service'] | True           |         | 
-    | military                             | True           |         |
     | filling_manner                       | electronically |         | 
     | filing_method                        | dunno          |         | 
     | proper_service                       | False          |         | 
@@ -92,5 +89,5 @@ Scenario: Row #17c
     And I take a screenshot
     And I download "responding_child_custody_action_plan.pdf"
     And I download "responding_child_custody_action_plan.docx"
-
+    And I wait 1 second
 

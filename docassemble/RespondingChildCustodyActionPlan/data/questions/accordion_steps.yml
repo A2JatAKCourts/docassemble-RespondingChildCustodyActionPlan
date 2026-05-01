@@ -115,11 +115,12 @@ code: |
          
   if type_of_response['wrong state']:
     jurisdiction
+    military
     add_unique_step((answer_jurisdiction_step, "answer_jurisdiction_idx"), step_list)
     if type_of_response.any_true('improper service', 'default'):
       proper_service
-      if type_of_response['default']:
-        military
+      # if type_of_response['default']:
+      # military
       add_unique_step((proper_service_step, "proper_service_idx"), step_list)
     if type_of_response['improper service'] and jurisdiction and not proper_service:
       add_unique_step((decide_after_improper_service_step, "decide_after_improper_service_idx"), step_list)
@@ -144,11 +145,12 @@ code: |
     if stage_of_other_case == 'still going':
       jurisdiction 
     if stage_of_other_case in('still going', 'ended with no order') and not(type_of_response['default'] and stage_of_default == 'judgment entered'):
+      military
       add_unique_step((answer_jurisdiction_step, "answer_jurisdiction_idx"), step_list)
     if type_of_response['improper service'] or type_of_response['default']:
       proper_service
-      if type_of_response['default']:
-        military
+      # if type_of_response['default']:
+      #   military
       add_unique_step((proper_service_step, "proper_service_idx"), step_list)
     if stage_of_other_case == 'ended with no order'and type_of_response['improper service'] and not proper_service:
         add_unique_step((decide_after_improper_service_step, "decide_after_improper_service_idx"), step_list)
@@ -221,7 +223,9 @@ code: |
     # add_unique_step((parent_agreements_step, "parent_agreements_idx"), step_list)
     if agreement_documents:
       add_unique_step((uncontested_custody_forms_step, "uncontested_custody_forms_idx"), step_list)
-      add_unique_step((file_complaint_step, "file_complaint_idx"), step_list)
+      if filling_manner in('paper', 'dunno') or filing_method in('mail or in person', 'dunno'):
+        add_unique_step((sign_step, "sign_idx"), step_list)
+      add_unique_step((truefiling_file_and_serve_step, "truefiling_file_and_serve_idx"), step_list)
       add_unique_step((read_standing_order_step, "read_standing_order_idx"), step_list)
       add_unique_step((expect_after_motion_or_answer_step, "expect_after_motion_or_answer_idx"), step_list)
     if domestic_violence:

@@ -1,6 +1,6 @@
 @akcustody
 Feature: User paths
-# 2026-04-29
+# 2026-05-01
 
 Background: 
   Given the maximum seconds for each Step is 90
@@ -37,6 +37,7 @@ Scenario: Row #1
     And I take a screenshot
     And I download "responding_child_custody_action_plan.pdf"
     And I download "responding_child_custody_action_plan.docx"
+    And I wait 1 second
 
 @row3
 Scenario: Row #3
@@ -69,7 +70,7 @@ Scenario: Row #3
     And I take a screenshot
     And I download "responding_child_custody_action_plan.pdf"
     And I download "responding_child_custody_action_plan.docx"
-
+    And I wait 1 second
 @row5
 Scenario: Row #5
   Given I start the interview at "responding_child_custody_action_plan.yml"
@@ -101,7 +102,7 @@ Scenario: Row #5
     And I take a screenshot
     And I download "responding_child_custody_action_plan.pdf"
     And I download "responding_child_custody_action_plan.docx"
-
+    And I wait 1 second
 @row8
 Scenario: Row #8
   Given I start the interview at "responding_child_custody_action_plan.yml"
@@ -130,7 +131,7 @@ Scenario: Row #8
     And I take a screenshot
     And I download "responding_child_custody_action_plan.pdf"
     And I download "responding_child_custody_action_plan.docx"
-
+    And I wait 1 second
 @row9
 Scenario: Row #9
   Given I start the interview at "responding_child_custody_action_plan.yml"
@@ -163,7 +164,7 @@ Scenario: Row #9
     And I take a screenshot
     And I download "responding_child_custody_action_plan.pdf"
     And I download "responding_child_custody_action_plan.docx"
-
+    And I wait 1 second
 @row14
 Scenario: Row #14
   Given I start the interview at "responding_child_custody_action_plan.yml"
@@ -193,4 +194,4 @@ Scenario: Row #14
     And I take a screenshot
     And I download "responding_child_custody_action_plan.pdf"
     And I download "responding_child_custody_action_plan.docx"
-
+    And I wait 1 second

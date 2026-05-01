@@ -15,9 +15,10 @@ Scenario: Row #18
     | type_of_response['wrong state']      | True           |         | 
     | type_of_response['improper service'] | True           |         | 
     | jurisdiction                         | True           |         | 
+    | military                             | True           |         | 
+    | proper_service                       | True           |         | 
     | filling_manner                       | electronically |         | 
     | filing_method                        | efiling        |         | 
-    | proper_service                       | True           |         | 
     | other_party_exempt                   | yes            |         | 
     | other_party_enter_email              | True           |         | 
     And I should see the phrase "Your Action Plan for responding in your child custody case in 9 steps"
@@ -36,6 +37,7 @@ Scenario: Row #18
     And I take a screenshot
     And I download "responding_child_custody_action_plan.pdf"
     And I download "responding_child_custody_action_plan.docx"
+    And I wait 1 second
 
 @row19
 # Scenario when the user indicates the case is in the wrong state and also selects improper service, Alaska has jurisdiction, and the user reports they were not properly served
@@ -47,10 +49,10 @@ Scenario: Row #19
     | type_of_response['wrong state']      | True              |         | 
     | type_of_response['improper service'] | True              |         | 
     | jurisdiction                         | True              |         | 
+    | military                             | False             |         | 
+    | proper_service                       | False             |         | 
     | filling_manner                       | electronically    |         | 
     | filing_method                        | mail or in person |         | 
-    | proper_service                       | False             |         | 
-    | have_complaint                       | True              |         | 
     | other_party_exempt                   | no                |         | 
     And I should see the phrase "Your Action Plan for responding in your child custody case in 11 steps"
     And I should see the phrase "Step 1: Learn if Alaska is the right state for your custody case"
@@ -70,6 +72,7 @@ Scenario: Row #19
     And I take a screenshot
     And I download "responding_child_custody_action_plan.pdf"
     And I download "responding_child_custody_action_plan.docx"
+    And I wait 1 second
 
 @row20
 # Scenario when the user indicates the case is in the wrong state and also selects improper service, Alaska does not have jurisdiction, and the user reports they were properly served
@@ -81,9 +84,10 @@ Scenario: Row #20
     | type_of_response['wrong state']      | True           |         | 
     | type_of_response['improper service'] | True           |         | 
     | jurisdiction                         | False          |         | 
+    | military                             | True           |         | 
+    | proper_service                       | True           |         | 
     | filling_manner                       | electronically |         | 
     | filing_method                        | dunno          |         | 
-    | proper_service                       | True           |         | 
     | other_party_exempt                   | none           |         | 
     And I should see the phrase "Your Action Plan for responding in your child custody case in 11 steps"
     And I should see the phrase "Step 1: Learn if Alaska is the right state for your custody case"
@@ -103,6 +107,7 @@ Scenario: Row #20
     And I take a screenshot
     And I download "responding_child_custody_action_plan.pdf"
     And I download "responding_child_custody_action_plan.docx"
+    And I wait 1 second
 
 @row21
 # Scenario when the user indicates the case is in the wrong state and also selects improper service, Alaska does not have jurisdiction, and the user reports they were not properly served
@@ -114,9 +119,10 @@ Scenario: Row #21
     | type_of_response['wrong state']      | True           |         | 
     | type_of_response['improper service'] | True           |         | 
     | jurisdiction                         | False          |         | 
+    | military                             | False          |         | 
+    | proper_service                       | False          |         | 
     | filling_manner                       | paper          |         | 
     | filing_method                        | efiling        |         | 
-    | proper_service                       | False          |         | 
     | have_complaint                       | False          |         | 
     And I should see the phrase "Your Action Plan for responding in your child custody case in 11 steps"
     And I should see the phrase "Step 1: Learn if Alaska is the right state for your custody case"
@@ -133,6 +139,7 @@ Scenario: Row #21
     And I take a screenshot
     And I download "responding_child_custody_action_plan.pdf"
     And I download "responding_child_custody_action_plan.docx"
+    And I wait 1 second
 
 @row30
 # Scenario when the user indicates the case is in the wrong state and Alaska has jurisdiction
@@ -145,6 +152,7 @@ Scenario: Row #30
     | filling_manner                  | paper             |         | 
     | filing_method                   | mail or in person |         | 
     | jurisdiction                    | True              |         | 
+    | military                        | True              |         | 
     | other_party_exempt              | no                |         | 
     And I should see the phrase "Your Action Plan for responding in your child custody case in 9 steps"
     And I should see the phrase "Step 1: Learn if Alaska is the right state for your custody case"
@@ -162,6 +170,7 @@ Scenario: Row #30
     And I take a screenshot
     And I download "responding_child_custody_action_plan.pdf"
     And I download "responding_child_custody_action_plan.docx"
+    And I wait 1 second
 
 @row31
 # Scenario when the user indicates the case is in the wrong state and Alaska does not have jurisdiction
@@ -174,6 +183,7 @@ Scenario: Row #31
     | filling_manner                  | paper          |         | 
     | filing_method                   | dunno          |         | 
     | jurisdiction                    | False          |         | 
+    | military                        | False          |         | 
     | other_party_exempt              | none           |         | 
     And I should see the phrase "Your Action Plan for responding in your child custody case in 10 steps"
     And I should see the phrase "Step 1: Learn if Alaska is the right state for your custody case"
@@ -192,6 +202,7 @@ Scenario: Row #31
     And I take a screenshot
     And I download "responding_child_custody_action_plan.pdf"
     And I download "responding_child_custody_action_plan.docx"
+    And I wait 1 second
 
 @row52m
 # Scenario when the user indicates the case is in the wrong state, the user reports they were properly served, other parent filed default application, and Alaska has jurisdiction
@@ -202,12 +213,12 @@ Scenario: Row #52m
     | user_need                       | answer custody    |         | 
     | type_of_response['wrong state'] | True              |         | 
     | type_of_response['default']     | True              |         | 
+    | stage_of_default                | application filed |         | 
     | jurisdiction                    | True              |         | 
+    | military                        | True              |         | 
+    | proper_service                  | True              |         | 
     | filling_manner                  | electronically    |         | 
     | filing_method                   | efiling           |         | 
-    | proper_service                  | True              |         | 
-    | military                        | True              |         | 
-    | stage_of_default                | application filed |         | 
     | other_party_exempt              | yes               |         | 
     | other_party_enter_email         | False             |         | 
     And I should see the phrase "Your Action Plan for responding in your child custody case in 10 steps"
@@ -226,6 +237,7 @@ Scenario: Row #52m
     And I take a screenshot
     And I download "responding_child_custody_action_plan.pdf"
     And I download "responding_child_custody_action_plan.docx"
+    And I wait 1 second
 
 @row53
 # Scenario when the user indicates the case is in the wrong state, the user reports they were properly served, other parent filed default application, and Alaska does not have jurisdiction
@@ -236,12 +248,12 @@ Scenario: Row #53
     | user_need                       | answer custody    |         | 
     | type_of_response['wrong state'] | True              |         | 
     | type_of_response['default']     | True              |         | 
+    | stage_of_default                | application filed |         | 
     | jurisdiction                    | False             |         | 
+    | military                        | False             |         | 
+    | proper_service                  | True              |         | 
     | filling_manner                  | electronically    |         | 
     | filing_method                   | mail or in person |         | 
-    | proper_service                  | True              |         | 
-    | stage_of_default                | application filed |         | 
-    | military                        | False             |         | 
     | other_party_exempt              | no                |         | 
     And I should see the phrase "Your Action Plan for responding in your child custody case in 8 steps"
     And I should see the phrase "Step 1: Learn if Alaska is the right state for your custody case"
@@ -255,6 +267,7 @@ Scenario: Row #53
     And I take a screenshot
     And I download "responding_child_custody_action_plan.pdf"
     And I download "responding_child_custody_action_plan.docx"
+    And I wait 1 second
 
 @row54m
 # Scenario when the user indicates the case is in the wrong state, the user reports they were properly served, clerk signed entry of judgment and set a hearing, and Alaska has jurisdiction
@@ -265,12 +278,12 @@ Scenario: Row #54m
     | user_need                       | answer custody    |         | 
     | type_of_response['wrong state'] | True              |         | 
     | type_of_response['default']     | True              |         | 
+    | stage_of_default                | hearing scheduled |         | 
+    | proper_service                  | True              |         | 
     | filling_manner                  | electronically    |         | 
     | filing_method                   | dunno             |         | 
-    | proper_service                  | True              |         | 
-    | military                        | True              |         | 
-    | stage_of_default                | hearing scheduled |         | 
     | jurisdiction                    | True              |         | 
+    | military                        | True              |         | 
     | other_party_exempt              | none              |         | 
     And I should see the phrase "Your Action Plan for responding in your child custody case in 11 steps"
     And I should see the phrase "Step 1: Learn if Alaska is the right state for your custody case"
@@ -287,6 +300,7 @@ Scenario: Row #54m
     And I take a screenshot
     And I download "responding_child_custody_action_plan.pdf"
     And I download "responding_child_custody_action_plan.docx"
+    And I wait 1 second
 
 @row55
 # Scenario when the user indicates the case is in the wrong state, the user reports they were properly served, clerk signed entry of judgment and set a hearing, and Alaska does not have jurisdiction
@@ -297,12 +311,12 @@ Scenario: Row #55
     | user_need                       | answer custody    |         | 
     | type_of_response['wrong state'] | True              |         | 
     | type_of_response['default']     | True              |         | 
+    | stage_of_default                | hearing scheduled |         | 
+    | proper_service                  | True              |         | 
     | filling_manner                  | paper             |         | 
     | filing_method                   | efiling           |         | 
-    | proper_service                  | True              |         | 
-    | military                        | False             |         | 
-    | stage_of_default                | hearing scheduled |         | 
     | jurisdiction                    | False             |         | 
+    | military                        | False             |         | 
     | other_party_exempt              | yes               |         | 
     | other_party_enter_email         | None              |         | 
     And I should see the phrase "Your Action Plan for responding in your child custody case in 8 steps"
@@ -317,6 +331,7 @@ Scenario: Row #55
     And I take a screenshot
     And I download "responding_child_custody_action_plan.pdf"
     And I download "responding_child_custody_action_plan.docx"
+    And I wait 1 second
 
 @row56m
 # Scenario when the user indicates the case is in the wrong state, the user reports they were properly served, the court has entered a default judgment, and Alaska does not have jurisdiction
@@ -327,12 +342,12 @@ Scenario: Row #56m
     | user_need                       | answer custody    |         | 
     | type_of_response['wrong state'] | True              |         | 
     | type_of_response['default']     | True              |         | 
+    | stage_of_default                | judgment entered  |         | 
     | jurisdiction                    | True              |         | 
+    | military                        | True              |         | 
+    | proper_service                  | True              |         | 
     | filling_manner                  | paper             |         | 
     | filing_method                   | mail or in person |         | 
-    | proper_service                  | True              |         | 
-    | military                        | True              |         | 
-    | stage_of_default                | judgment entered  |         | 
     | other_party_exempt              | no                |         | 
     And I should see the phrase "Your Action Plan for responding in your child custody case in 10 steps"
     And I should see the phrase "Step 1: Learn if Alaska is the right state for your custody case"
@@ -348,6 +363,7 @@ Scenario: Row #56m
     And I take a screenshot
     And I download "responding_child_custody_action_plan.pdf"
     And I download "responding_child_custody_action_plan.docx"
+    And I wait 1 second
 
 @row59
 # Scenario when the user indicates the case is in the wrong state, the user reports they were not properly served, other parent filed default application, and Alaska does not have jurisdiction
@@ -358,12 +374,13 @@ Scenario: Row #59
     | user_need                       | answer custody    |         | 
     | type_of_response['wrong state'] | True              |         | 
     | type_of_response['default']     | True              |         | 
-    | jurisdiction                    | False             |         | 
     | stage_of_default                | application filed |         | 
+    | jurisdiction                    | False             |         | 
+    | military                        | False             |         | 
+    | proper_service                  | False             |         | 
     | filling_manner                  | paper             |         | 
     | filing_method                   | dunno             |         | 
-    | proper_service                  | False             |         | 
-    | military                        | False             |         | 
+    | have_complaint                  | True              |         | 
     | other_party_exempt              | none              |         | 
     And I should see the phrase "Your Action Plan for responding in your child custody case in 8 steps"
     And I should see the phrase "Step 1: Learn if Alaska is the right state for your custody case"
@@ -377,6 +394,7 @@ Scenario: Row #59
     And I take a screenshot
     And I download "responding_child_custody_action_plan.pdf"
     And I download "responding_child_custody_action_plan.docx"
+    And I wait 1 second
 
 @row62m
 # Scenario when the user indicates the case is in the wrong state, the user reports they were not properly served, the court has entered a default judgment, and Alaska does not have jurisdiction
@@ -387,12 +405,13 @@ Scenario: Row #62m
     | user_need                       | answer custody   |         | 
     | type_of_response['wrong state'] | True             |         | 
     | type_of_response['default']     | True             |         | 
+    | stage_of_default                | judgment entered |         | 
     | jurisdiction                    | False            |         | 
+    | military                        | True             |         | 
+    | proper_service                  | False            |         | 
     | filling_manner                  | electronically   |         | 
     | filing_method                   | efiling          |         | 
-    | proper_service                  | False            |         | 
-    | stage_of_default                | judgment entered |         | 
-    | military                        | True             |         | 
+    | have_complaint                  | True             |         | 
     | other_party_exempt              | yes              |         | 
     | other_party_enter_email         | True             |         | 
     And I should see the phrase "Your Action Plan for responding in your child custody case in 8 steps"
@@ -407,6 +426,7 @@ Scenario: Row #62m
     And I take a screenshot
     And I download "responding_child_custody_action_plan.pdf"
     And I download "responding_child_custody_action_plan.docx"
+    And I wait 1 second
 
 @row86
 # Scenario when the user indicates the case is in the wrong state and Alaska has jurisdiction
@@ -418,6 +438,7 @@ Scenario: Row #86
     | type_of_response['ak custody case'] | True              |         | 
     | type_of_response['wrong state']     | True              |         | 
     | jurisdiction                        | True              |         | 
+    | military                            | False             |         | 
     | filling_manner                      | electronically    |         | 
     | filing_method                       | mail or in person |         | 
     | domestic_violence                   | True              |         | 
@@ -438,6 +459,7 @@ Scenario: Row #86
     And I take a screenshot
     And I download "responding_child_custody_action_plan.pdf"
     And I download "responding_child_custody_action_plan.docx"
+    And I wait 1 second
 
 @row96
 # Scenario when the user indicates the case is in the wrong state and Alaska does not have jurisdiction
@@ -449,6 +471,7 @@ Scenario: Row #96
     | type_of_response['ak custody case'] | True           |         | 
     | type_of_response['wrong state']     | True           |         | 
     | jurisdiction                        | False          |         | 
+    | military                            | True           |         | 
     | filling_manner                      | electronically |         | 
     | filing_method                       | dunno          |         | 
     | domestic_violence                   | False          |         | 
@@ -469,6 +492,7 @@ Scenario: Row #96
     And I take a screenshot
     And I download "responding_child_custody_action_plan.pdf"
     And I download "responding_child_custody_action_plan.docx"
+    And I wait 1 second
 
 @row102
 # Scenario when the user indicates the case is in the wrong state and also selects improper service, Alaska has jurisdiction, and the user reports they were properly served
@@ -481,6 +505,7 @@ Scenario: Row #102
     | type_of_response['wrong state']      | True           |         | 
     | type_of_response['improper service'] | True           |         | 
     | jurisdiction                         | True           |         | 
+    | military                             | False          |         | 
     | proper_service                       | True           |         | 
     | filling_manner                       | paper          |         | 
     | filing_method                        | efiling        |         | 
@@ -505,6 +530,7 @@ Scenario: Row #102
     And I take a screenshot
     And I download "responding_child_custody_action_plan.pdf"
     And I download "responding_child_custody_action_plan.docx"
+    And I wait 1 second
 
 @row105
 # Scenario when the user indicates the case is in the wrong state and also selects improper service, Alaska has jurisdiction, and the user reports they were not properly served
@@ -517,6 +543,7 @@ Scenario: Row #105
     | type_of_response['wrong state']      | True              |         | 
     | type_of_response['improper service'] | True              |         | 
     | jurisdiction                         | True              |         | 
+    | military                             | True              |         | 
     | proper_service                       | False             |         | 
     | filling_manner                       | paper             |         | 
     | filing_method                        | mail or in person |         | 
@@ -541,6 +568,7 @@ Scenario: Row #105
     And I take a screenshot
     And I download "responding_child_custody_action_plan.pdf"
     And I download "responding_child_custody_action_plan.docx"
+    And I wait 1 second
 
 @row106
 # Scenario when the user indicates the case is in the wrong state and also selects improper service, Alaska does not have jurisdiction, and the user reports they were properly served
@@ -553,6 +581,7 @@ Scenario: Row #106
     | type_of_response['wrong state']      | True           |         | 
     | type_of_response['improper service'] | True           |         | 
     | jurisdiction                         | False          |         | 
+    | military                             | False          |         | 
     | proper_service                       | True           |         | 
     | filling_manner                       | paper          |         | 
     | filing_method                        | dunno          |         | 
@@ -577,6 +606,7 @@ Scenario: Row #106
     And I take a screenshot
     And I download "responding_child_custody_action_plan.pdf"
     And I download "responding_child_custody_action_plan.docx"
+    And I wait 1 second
 
 @row109
 # Scenario when the user indicates the case is in the wrong state and also selects improper service, Alaska does not have jurisdiction, and the user reports they were not properly served
@@ -589,6 +619,7 @@ Scenario: Row #109
     | type_of_response['wrong state']      | True           |         | 
     | type_of_response['improper service'] | True           |         | 
     | jurisdiction                         | False          |         | 
+    | military                             | True           |         | 
     | proper_service                       | False          |         | 
     | filling_manner                       | electronically |         | 
     | filing_method                        | efiling        |         | 
@@ -608,6 +639,7 @@ Scenario: Row #109
     And I take a screenshot
     And I download "responding_child_custody_action_plan.pdf"
     And I download "responding_child_custody_action_plan.docx"
+    And I wait 1 second
 
 @row110m
 # Scenario when the user indicates the case is in the wrong state, the user reports they were properly served, other parent filed default application, and Alaska has jurisdiction
@@ -619,10 +651,10 @@ Scenario: Row #110m
     | type_of_response['ak custody case'] | True              |         | 
     | type_of_response['wrong state']     | True              |         | 
     | type_of_response['default']         | True              |         | 
-    | jurisdiction                        | True              |         | 
-    | proper_service                      | True              |         | 
-    | military                            | True              |         | 
     | stage_of_default                    | application filed |         | 
+    | jurisdiction                        | True              |         | 
+    | military                            | True              |         | 
+    | proper_service                      | True              |         | 
     | filling_manner                      | electronically    |         | 
     | filing_method                       | mail or in person |         | 
     | domestic_violence                   | True              |         | 
@@ -645,6 +677,7 @@ Scenario: Row #110m
     And I take a screenshot
     And I download "responding_child_custody_action_plan.pdf"
     And I download "responding_child_custody_action_plan.docx"
+    And I wait 1 second
 
 @row113
 # Scenario when the user indicates the case is in the wrong state, the user reports they were properly served, other parent filed default application, and Alaska does not have jurisdiction
@@ -656,10 +689,10 @@ Scenario: Row #113
     | type_of_response['ak custody case'] | True              |         | 
     | type_of_response['wrong state']     | True              |         | 
     | type_of_response['default']         | True              |         | 
-    | jurisdiction                        | False             |         | 
-    | proper_service                      | True              |         | 
     | stage_of_default                    | application filed |         | 
+    | jurisdiction                        | False             |         | 
     | military                            | False             |         | 
+    | proper_service                      | True              |         | 
     | filling_manner                      | electronically    |         | 
     | filing_method                       | dunno             |         | 
     | domestic_violence                   | False             |         | 
@@ -677,6 +710,7 @@ Scenario: Row #113
     And I take a screenshot
     And I download "responding_child_custody_action_plan.pdf"
     And I download "responding_child_custody_action_plan.docx"
+    And I wait 1 second
 
 @row114m
 # Scenario when the user indicates the case is in the wrong state, the user reports they were properly served, clerk signed entry of judgment and set a hearing, and Alaska has jurisdiction
@@ -688,10 +722,10 @@ Scenario: Row #114m
     | type_of_response['ak custody case'] | True              |         | 
     | type_of_response['wrong state']     | True              |         | 
     | type_of_response['default']         | True              |         | 
-    | proper_service                      | True              |         | 
-    | military                            | True              |         | 
     | stage_of_default                    | hearing scheduled |         | 
+    | proper_service                      | True              |         | 
     | jurisdiction                        | True              |         | 
+    | military                            | True              |         | 
     | filling_manner                      | paper             |         | 
     | filing_method                       | efiling           |         | 
     | domestic_violence                   | True              |         | 
@@ -714,6 +748,7 @@ Scenario: Row #114m
     And I take a screenshot
     And I download "responding_child_custody_action_plan.pdf"
     And I download "responding_child_custody_action_plan.docx"
+    And I wait 1 second
 
 @row117
 # Scenario when the user indicates the case is in the wrong state, the user reports they were properly served, clerk signed entry of judgment and set a hearing, and Alaska does not have jurisdiction
@@ -725,10 +760,10 @@ Scenario: Row #117
     | type_of_response['ak custody case'] | True              |         | 
     | type_of_response['wrong state']     | True              |         | 
     | type_of_response['default']         | True              |         | 
-    | proper_service                      | True              |         | 
-    | military                            | False             |         | 
     | stage_of_default                    | hearing scheduled |         | 
+    | proper_service                      | True              |         | 
     | jurisdiction                        | False             |         | 
+    | military                            | False             |         | 
     | filling_manner                      | paper             |         | 
     | filing_method                       | mail or in person |         | 
     | domestic_violence                   | False             |         | 
@@ -746,7 +781,8 @@ Scenario: Row #117
     And I take a screenshot
     And I download "responding_child_custody_action_plan.pdf"
     And I download "responding_child_custody_action_plan.docx"
-
+    And I wait 1 second 
+    
 @row118m
 # Scenario when the user indicates the case is in the wrong state, the user reports they were properly served, the court has entered a default judgment, and Alaska does not have jurisdiction
 Scenario: Row #118m
@@ -757,12 +793,12 @@ Scenario: Row #118m
     | type_of_response['ak custody case'] | True             |         | 
     | type_of_response['wrong state']     | True             |         | 
     | type_of_response['default']         | True             |         | 
+    | stage_of_default                    | judgment entered |         | 
     | jurisdiction                        | True             |         | 
+    | military                            | True             |         | 
+    | proper_service                      | True             |         | 
     | filling_manner                      | paper            |         | 
     | filing_method                       | dunno            |         | 
-    | proper_service                      | True             |         | 
-    | military                            | True             |         | 
-    | stage_of_default                    | judgment entered |         | 
     | other_party_exempt                  | none             |         | 
     And I should see the phrase "Your Action Plan for responding in your child custody case in 10 steps"
     And I should see the phrase "Step 1: Learn if Alaska is the right state for your custody case"
@@ -778,6 +814,7 @@ Scenario: Row #118m
     And I take a screenshot
     And I download "responding_child_custody_action_plan.pdf"
     And I download "responding_child_custody_action_plan.docx"
+    And I wait 1 second
 
 @row122
 # Scenario when the user indicates the case is in the wrong state, the user reports they were not properly served, other parent filed default application, and Alaska does not have jurisdiction
@@ -789,14 +826,15 @@ Scenario: Row #122
     | type_of_response['ak custody case'] | True              |         | 
     | type_of_response['wrong state']     | True              |         | 
     | type_of_response['default']         | True              |         | 
-    | jurisdiction                        | False             |         | 
-    | proper_service                      | False             |         | 
     | stage_of_default                    | application filed |         | 
+    | jurisdiction                        | False             |         | 
     | military                            | False             |         | 
+    | proper_service                      | False             |         | 
     | filling_manner                      | electronically    |         | 
     | filing_method                       | efiling           |         | 
     | domestic_violence                   | False             |         | 
     | paternity                           | True              |         | 
+    | have_complaint                      | True              |         | 
     | other_party_exempt                  | yes               |         | 
     | other_party_enter_email             | True              |         | 
     And I should see the phrase "Your Action Plan for responding in your child custody case in 8 steps"
@@ -811,6 +849,7 @@ Scenario: Row #122
     And I take a screenshot
     And I download "responding_child_custody_action_plan.pdf"
     And I download "responding_child_custody_action_plan.docx"
+    And I wait 1 second
 
 @row127m
 # Scenario when the user indicates the case is in the wrong state, the user reports they were not properly served, the court has entered a default judgment, and Alaska does not have jurisdiction
@@ -822,13 +861,13 @@ Scenario: Row #127m
     | type_of_response['ak custody case'] | True              |         | 
     | type_of_response['wrong state']     | True              |         | 
     | type_of_response['default']         | True              |         | 
+    | stage_of_default                    | judgment entered  |         | 
     | jurisdiction                        | False             |         | 
+    | military                            | True              |         | 
     | filling_manner                      | electronically    |         | 
     | filing_method                       | mail or in person |         | 
     | proper_service                      | False             |         | 
-    | stage_of_default                    | judgment entered  |         | 
-    | military                            | True              |         | 
-    | other_party_exempt                  | no                |         | 
+    | have_complaint                      | False             |         | 
     And I should see the phrase "Your Action Plan for responding in your child custody case in 9 steps"
     And I should see the phrase "Step 1: Learn if Alaska is the right state for your custody case"
     And I should see the phrase "Step 2: Learn about proper service and default judgment"
@@ -842,5 +881,5 @@ Scenario: Row #127m
     And I take a screenshot
     And I download "responding_child_custody_action_plan.pdf"
     And I download "responding_child_custody_action_plan.docx"
-
+    And I wait 1 second
 
