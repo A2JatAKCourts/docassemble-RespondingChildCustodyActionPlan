@@ -280,11 +280,11 @@ Scenario: Row #54m
     | type_of_response['wrong state'] | True              |         | 
     | type_of_response['default']     | True              |         | 
     | stage_of_default                | hearing scheduled |         | 
+    | jurisdiction                    | True              |         | 
+    | military                        | True              |         | 
     | proper_service                  | True              |         | 
     | filling_manner                  | electronically    |         | 
     | filing_method                   | dunno             |         | 
-    | jurisdiction                    | True              |         | 
-    | military                        | True              |         | 
     | other_party_exempt              | none              |         | 
     And I should see the phrase "Your Action Plan for responding in your child custody case in 11 steps"
     And I should see the phrase "Step 1: Learn if Alaska is the right state for your custody case"
@@ -313,11 +313,11 @@ Scenario: Row #55
     | type_of_response['wrong state'] | True              |         | 
     | type_of_response['default']     | True              |         | 
     | stage_of_default                | hearing scheduled |         | 
+    | jurisdiction                    | False             |         | 
+    | military                        | False             |         | 
     | proper_service                  | True              |         | 
     | filling_manner                  | paper             |         | 
     | filing_method                   | efiling           |         | 
-    | jurisdiction                    | False             |         | 
-    | military                        | False             |         | 
     | other_party_exempt              | yes               |         | 
     | other_party_enter_email         | None              |         | 
     And I should see the phrase "Your Action Plan for responding in your child custody case in 8 steps"
@@ -329,6 +329,41 @@ Scenario: Row #55
     And I should see the phrase "Step 6: Serve the other parent"
     And I should see the phrase "Step 7: What to expect after you file your documents"
     And I should see the phrase "Step 8: Get more information or help"
+    And I take a screenshot
+    And I download "responding_child_custody_action_plan.pdf"
+    And I download "responding_child_custody_action_plan.docx"
+    And I wait 1 second
+
+@row58
+# Scenario when the user indicates the case is in the wrong state, the default judgment path clerk set a hearing, Alaska has jurisdiction, and the user reports they were not properly served
+Scenario: Row #58
+  Given I start the interview at "responding_child_custody_action_plan.yml"
+    And I get to the question id "final screen" with this data:
+    | var                                 | value             | trigger | 
+    | user_need                           | answer custody    |         | 
+    | type_of_response['wrong state']     | True              |         | 
+    | type_of_response['default']         | True              |         | 
+    | stage_of_default                    | hearing scheduled |         | 
+    | jurisdiction                        | True              |         | 
+    | military                            | False             |         | 
+    | proper_service                      | False             |         | 
+    | filling_manner                      | electronically    |         | 
+    | filing_method                       | efiling           |         | 
+    | domestic_violence                   | False             |         | 
+    | paternity                           | False             |         | 
+    | have_complaint                      | False             |         | 
+    And I should see the phrase "Your Action Plan for responding in your child custody case in 11 steps"
+    And I should see the phrase "Step 1: Learn if Alaska is the right state for your custody case"
+    And I should see the phrase "Step 2: Learn about default judgment"
+    And I should see the phrase "Step 3: Options if the other parent asked for a default judgment"
+    And I should see the phrase "Step 4: If you decide to move forward, fill out the forms to answer the complaint and respond within 20 days"
+    And I should see the phrase "Step 5: Sign if you use paper forms or do not use TrueFiling"
+    And I should see the phrase "Step 6: If you decide to move forward, file your documents with the court and serve the other parent"
+    And I should see the phrase "Step 7: Serve the other parent"
+    And I should see the phrase "Step 8: Read the Standing Order"
+    And I should see the phrase "Step 9: What to expect after you file your documents"
+    And I should see the phrase "Step 10: If your case is moving forward in Alaska, learn more about the process"
+    And I should see the phrase "Step 11: Get more information or help"
     And I take a screenshot
     And I download "responding_child_custody_action_plan.pdf"
     And I download "responding_child_custody_action_plan.docx"
