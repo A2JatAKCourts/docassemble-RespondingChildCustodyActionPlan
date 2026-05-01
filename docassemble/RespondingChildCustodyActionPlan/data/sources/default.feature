@@ -89,7 +89,7 @@ Scenario: Row #38
     And I should see the phrase "Step 2: Options when the judge entered a default judgment"
     And I tap the "#ZGVmYXVsdF9vcHRpb25zX3N0ZXA .al_toggle" element and stay on the same page
     And I should see the phrase "Step 3: Learn about the Motion to Set Aside Judgment or Order"
-    And I should see the phrase "Step 4: If you want to ask to set aside the default, fill out the forms"
+    And I should see the phrase "Step 4: If you want to ask the court to set aside the default, fill out the forms"
     And I should see the phrase "Step 5: Sign if you use paper forms or do not use TrueFiling"
     And I should see the phrase "Step 6: If you are asking to set aside the default, file your documents with the court and serve the other parent"
     And I should see the phrase "Step 7: Serve the other parent"
@@ -120,7 +120,7 @@ Scenario: Row #41
     And I should see the phrase "Step 2: Options when the judge entered a default judgment"
     And I tap the "#ZGVmYXVsdF9vcHRpb25zX3N0ZXA .al_toggle" element and stay on the same page
     And I should see the phrase "Step 3: Learn about the Motion to Set Aside Judgment or Order"
-    And I should see the phrase "Step 4: If you want to ask to set aside the default, fill out the forms"
+    And I should see the phrase "Step 4: If you want to ask the court to set aside the default, fill out the forms"
     And I should see the phrase "Step 5: Sign if you use paper forms or do not use TrueFiling"
     And I should see the phrase "Step 6: If you are asking to set aside the default, file your documents with the court and serve the other parent"
     And I should see the phrase "Step 7: Serve the other parent"
@@ -152,7 +152,7 @@ Scenario: Row #44
     And I should see the phrase "Step 2: Options when the judge entered a default judgment"
     And I tap the "#ZGVmYXVsdF9vcHRpb25zX3N0ZXA .al_toggle" element and stay on the same page
     And I should see the phrase "Step 3: Learn about the Motion to Set Aside Judgment or Order"
-    And I should see the phrase "Step 4: If you want to ask to set aside the default, fill out the forms"
+    And I should see the phrase "Step 4: If you want to ask the court to set aside the default, fill out the forms"
     And I should see the phrase "Step 5: Sign if you use paper forms or do not use TrueFiling"
     And I should see the phrase "Step 6: If you are asking to set aside the default, file your documents with the court and serve the other parent"
     And I should see the phrase "Step 7: Serve the other parent"
@@ -216,7 +216,7 @@ Scenario: Row #47
     And I should see the phrase "Step 2: Options when the judge entered a default judgment"
     And I tap the "#ZGVmYXVsdF9vcHRpb25zX3N0ZXA .al_toggle" element and stay on the same page
     And I should see the phrase "Step 3: Learn about the Motion to Set Aside Judgment or Order"
-    And I should see the phrase "Step 4: If you want to ask to set aside the default, fill out the forms"
+    And I should see the phrase "Step 4: If you want to ask the court to set aside the default, fill out the forms"
     And I should see the phrase "Step 5: If you are asking to set aside the default, file your documents with the court and serve the other parent"
     And I should see the phrase "Step 6: Serve the other parent"
     And I should see the phrase "Step 7: What to expect after you file your documents"
