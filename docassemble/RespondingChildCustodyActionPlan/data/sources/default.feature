@@ -1,6 +1,6 @@
 @default
 Feature: User paths
-# 2026-04-30
+# 2026-05-01
 
 Background: 
   Given the maximum seconds for each Step is 90
@@ -12,11 +12,11 @@ Scenario: Row #36
     | var                         | value             | trigger | 
     | user_need                   | answer custody    |         | 
     | type_of_response['default'] | True              |         | 
-    | filling_manner              | electronically    |         | 
-    | filing_method               | efiling           |         | 
+    | stage_of_default            | application filed |         | 
     | proper_service              | True              |         | 
     | military                    | True              |         | 
-    | stage_of_default            | application filed |         | 
+    | filling_manner              | electronically    |         | 
+    | filing_method               | efiling           |         | 
     | have_complaint              | True              |         | 
     | other_party_exempt          | yes               |         | 
     | other_party_enter_email     | True              |         | 
@@ -36,6 +36,7 @@ Scenario: Row #36
     And I take a screenshot
     And I download "responding_child_custody_action_plan.pdf"
     And I download "responding_child_custody_action_plan.docx"
+    And I wait 1 second
 
 @row37
 Scenario: Row #37
@@ -44,11 +45,11 @@ Scenario: Row #37
     | var                         | value             | trigger | 
     | user_need                   | answer custody    |         | 
     | type_of_response['default'] | True              |         | 
-    | filling_manner              | electronically    |         | 
-    | filing_method               | mail or in person |         | 
+    | stage_of_default            | hearing scheduled |         | 
     | proper_service              | True              |         | 
     | military                    | True              |         | 
-    | stage_of_default            | hearing scheduled |         | 
+    | filling_manner              | electronically    |         | 
+    | filing_method               | mail or in person |         | 
     | have_complaint              | False             |         | 
     And I should see the phrase "Your Action Plan for responding in your child custody case in 10 steps"
     And I should see the phrase "Step 1: Learn about default judgment"
@@ -67,6 +68,7 @@ Scenario: Row #37
     And I take a screenshot
     And I download "responding_child_custody_action_plan.pdf"
     And I download "responding_child_custody_action_plan.docx"
+    And I wait 1 second
 
 @row38
 Scenario: Row #38
@@ -75,11 +77,11 @@ Scenario: Row #38
     | var                         | value            | trigger | 
     | user_need                   | answer custody   |         | 
     | type_of_response['default'] | True             |         | 
-    | filling_manner              | electronically   |         | 
-    | filing_method               | dunno            |         | 
+    | stage_of_default            | judgment entered |         | 
     | proper_service              | True             |         | 
     | military                    | True             |         | 
-    | stage_of_default            | judgment entered |         | 
+    | filling_manner              | electronically   |         | 
+    | filing_method               | dunno            |         | 
     | have_complaint              | True             |         | 
     | other_party_exempt          | yes              |         | 
     | other_party_enter_email     | False            |         | 
@@ -98,7 +100,8 @@ Scenario: Row #38
     And I take a screenshot
     And I download "responding_child_custody_action_plan.pdf"
     And I download "responding_child_custody_action_plan.docx"
-
+    And I wait 1 second
+    
 @row41
 Scenario: Row #41
   Given I start the interview at "responding_child_custody_action_plan.yml"
@@ -106,11 +109,11 @@ Scenario: Row #41
     | var                         | value            | trigger | 
     | user_need                   | answer custody   |         | 
     | type_of_response['default'] | True             |         | 
-    | filling_manner              | paper            |         | 
-    | filing_method               | efiling          |         | 
+    | stage_of_default            | judgment entered |         | 
     | proper_service              | True             |         | 
     | military                    | False            |         | 
-    | stage_of_default            | judgment entered |         | 
+    | filling_manner              | paper            |         | 
+    | filing_method               | efiling          |         | 
     | have_complaint              | False            |         | 
     And I should see the phrase "Your Action Plan for responding in your child custody case in 9 steps"
     And I should see the phrase "Step 1: Learn about default judgment"
@@ -127,7 +130,8 @@ Scenario: Row #41
     And I take a screenshot
     And I download "responding_child_custody_action_plan.pdf"
     And I download "responding_child_custody_action_plan.docx"
-
+    And I wait 1 second
+    
 @row44
 Scenario: Row #44
   Given I start the interview at "responding_child_custody_action_plan.yml"
@@ -135,11 +139,11 @@ Scenario: Row #44
     | var                         | value             | trigger | 
     | user_need                   | answer custody    |         | 
     | type_of_response['default'] | True              |         | 
-    | filling_manner              | paper             |         | 
-    | filing_method               | mail or in person |         | 
+    | stage_of_default            | judgment entered  |         | 
     | proper_service              | False             |         | 
     | military                    | True              |         | 
-    | stage_of_default            | judgment entered  |         | 
+    | filling_manner              | paper             |         | 
+    | filing_method               | mail or in person |         | 
     | have_complaint              | True              |         | 
     | other_party_exempt          | yes               |         | 
     | other_party_enter_email     | None              |         | 
@@ -158,7 +162,8 @@ Scenario: Row #44
     And I take a screenshot
     And I download "responding_child_custody_action_plan.pdf"
     And I download "responding_child_custody_action_plan.docx"
-
+    And I wait 1 second
+    
 @row46
 Scenario: Row #46
   Given I start the interview at "responding_child_custody_action_plan.yml"
@@ -166,11 +171,11 @@ Scenario: Row #46
     | var                         | value             | trigger | 
     | user_need                   | answer custody    |         | 
     | type_of_response['default'] | True              |         | 
-    | filling_manner              | paper             |         | 
-    | filing_method               | dunno             |         | 
+    | stage_of_default            | hearing scheduled |         | 
     | proper_service              | False             |         | 
     | military                    | False             |         | 
-    | stage_of_default            | hearing scheduled |         | 
+    | filling_manner              | paper             |         | 
+    | filing_method               | dunno             |         | 
     | have_complaint              | False             |         | 
     And I should see the phrase "Your Action Plan for responding in your child custody case in 11 steps"
     And I should see the phrase "Step 1: Learn about proper service and default judgment"
@@ -190,6 +195,7 @@ Scenario: Row #46
     And I take a screenshot
     And I download "responding_child_custody_action_plan.pdf"
     And I download "responding_child_custody_action_plan.docx"
+    And I wait 1 second
 
 @row47
 Scenario: Row #47
@@ -198,11 +204,11 @@ Scenario: Row #47
     | var                         | value            | trigger | 
     | user_need                   | answer custody   |         | 
     | type_of_response['default'] | True             |         | 
-    | filling_manner              | electronically   |         | 
-    | filing_method               | efiling          |         | 
+    | stage_of_default            | judgment entered |         | 
     | proper_service              | False            |         | 
     | military                    | False            |         | 
-    | stage_of_default            | judgment entered |         | 
+    | filling_manner              | electronically   |         | 
+    | filing_method               | efiling          |         | 
     | have_complaint              | True             |         | 
     | other_party_exempt          | none             |         | 
     And I should see the phrase "Your Action Plan for responding in your child custody case in 8 steps"
@@ -219,4 +225,5 @@ Scenario: Row #47
     And I take a screenshot
     And I download "responding_child_custody_action_plan.pdf"
     And I download "responding_child_custody_action_plan.docx"
-
+    And I wait 1 second
+    
