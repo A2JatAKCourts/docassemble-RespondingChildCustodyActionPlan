@@ -195,6 +195,7 @@ code: |
   if type_of_response.any_true():
     if filling_manner in('paper', 'dunno') or filing_method in('mail or in person', 'dunno'):
       add_unique_step((sign_step, "sign_idx"), step_list)
+    other_party_exempt
     add_unique_step((truefiling_file_and_serve_step, "truefiling_file_and_serve_idx"), step_list)
     add_unique_step((truefiling_serve_step, "truefiling_serve_idx"), step_list)
 
