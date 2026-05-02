@@ -162,7 +162,7 @@ Scenario: Row #143
     | proper_service                       | False            |         | 
     | filling_manner                       | paper            |         | 
     | filing_method                        | dunno            |         | 
-    | domestic_violence                    | False            |         | 
+    | have_complaint                       | True             |         | 
     | other_party_exempt                   | none             |         | 
     And I should see the phrase "Your Action Plan for responding in your child custody case in 7 steps"
     And I should see the phrase "Step 1: Learn about proper service and default judgment"
@@ -219,23 +219,24 @@ Scenario: Row #147
     | type_of_response['improper service'] | True                |         | 
     | stage_of_other_case                  | ended with no order |         | 
     | proper_service                       | False               |         | 
+    | jurisdiction                         | True                |         | 
     | filling_manner                       | dunno               |         | 
     | filing_method                        | mail or in person   |         | 
+    | have_complaint                       | True                |         | 
     | domestic_violence                    | False               |         | 
     | other_party_exempt                   | no                  |         | 
-    And I should see the phrase "Your Action Plan for responding in your child custody case in 12 steps"
+    And I should see the phrase "Your Action Plan for responding in your child custody case in 11 steps"
     And I should see the phrase "Step 1: You can move forward with your Alaska case"
     And I should see the phrase "Step 2: Learn about proper service and default judgment"
     And I should see the phrase "Step 3: Decide if you want to move forward or wait"
     And I should see the phrase "Step 4: If you decide to move forward, fill out the forms to answer the complaint"
-    And I should see the phrase "Step 5: If you decide to move forward, fill out the Certificate of Service"
-    And I should see the phrase "Step 6: Sign if you use paper forms or do not use TrueFiling"
-    And I should see the phrase "Step 7: If you decide to move forward, file your documents with the court and serve the other parent"
-    And I should see the phrase "Step 8: Serve the other parent"
-    And I should see the phrase "Step 9: Read the Standing Order"
-    And I should see the phrase "Step 10: What to expect after you file your Answer"
-    And I should see the phrase "Step 11: If your case is moving forward in Alaska, learn more about the process"
-    And I should see the phrase "Step 12: Get more information or help"
+    And I should see the phrase "Step 5: Sign if you use paper forms or do not use TrueFiling"
+    And I should see the phrase "Step 6: If you decide to move forward, file your documents with the court and serve the other parent"
+    And I should see the phrase "Step 7: Serve the other parent"
+    And I should see the phrase "Step 8: Read the Standing Order"
+    And I should see the phrase "Step 9: What to expect after you file your Answer"
+    And I should see the phrase "Step 10: If your case is moving forward in Alaska, learn more about the process"
+    And I should see the phrase "Step 11: Get more information or help"
     And I take a screenshot
     And I download "responding_child_custody_action_plan.pdf"
     And I download "responding_child_custody_action_plan.docx"
@@ -289,6 +290,7 @@ Scenario: Row #151
     | filling_manner                       | electronically |         | 
     | filing_method                        | efiling        |         | 
     | domestic_violence                    | False          |         | 
+    | have_complaint                       | True           |         | 
     | other_party_exempt                   | yes            |         | 
     | other_party_enter_email              | True           |         | 
     And I should see the phrase "Your Action Plan for responding in your child custody case in 11 steps"
@@ -356,6 +358,7 @@ Scenario: Row #155
     | filling_manner                       | electronically |         | 
     | filing_method                        | dunno          |         | 
     | domestic_violence                    | False          |         | 
+    | have_complaint                       | True           |         | 
     | other_party_exempt                   | none           |         | 
     And I should see the phrase "Your Action Plan for responding in your child custody case in 12 steps"
     And I should see the phrase "Step 1: Learn if Alaska is the right state for your custody case"
@@ -392,8 +395,7 @@ Scenario: Row #158m
     | filing_method                        | efiling           |         | 
     | domestic_violence                    | True              |         | 
     | paternity                            | True              |         | 
-    | other_party_exempt                   | yes               |         | 
-    | other_party_enter_email              | False             |         | 
+    | have_complaint                       | False             |         | 
     And I should see the phrase "Your Action Plan for responding in your child custody case in 14 steps"
     And I should see the phrase "Step 1: Learn if Alaska is the right state for your custody case"
     And I should see the phrase "Step 2: Learn about proper service and default judgment"
@@ -403,7 +405,7 @@ Scenario: Row #158m
     And I should see the phrase "Step 6: Sign if you use paper forms or do not use TrueFiling"
     And I should see the phrase "Step 7: File your documents with the court and serve the other parent"
     And I should see the phrase "Step 8: Serve the other parent"
-    And I should see the phrase "Step 9: Read the “Domestic Relations Procedural Order” or Standing Order that was with the Complaint" 
+    And I should see the phrase "Step 9: Read the Standing Order " 
     And I should see the phrase "Step 10: What to expect after you file your documents"
     And I should see the phrase "Step 11: If your case is moving forward in Alaska, learn more about the process"
     And I should see the phrase "Step 12: Abuse or domestic violence and parenting"
@@ -441,7 +443,7 @@ Scenario: Row #161
     And I should see the phrase "Step 6: Sign if you use paper forms or do not use TrueFiling"
     And I should see the phrase "Step 7: File your documents with the court and serve the other parent"
     And I should see the phrase "Step 8: Serve the other parent"
-    And I should see the phrase "Step 9: Read the “Domestic Relations Procedural Order” or Standing Order that was with the Complaint" 
+    And I should see the phrase "Step 9: Read the Standing Order"
     And I should see the phrase "Step 10: What to expect after you file your documents"
     And I should see the phrase "Step 11: If your case is moving forward in Alaska, learn more about the process"
     And I should see the phrase "Step 12: Abuse or domestic violence and parenting"
@@ -467,16 +469,15 @@ Scenario: Row #164
     | filling_manner                       | paper            |         | 
     | filing_method                        | dunno            |         | 
     | other_party_exempt                   | none             |         | 
-    And I should see the phrase "Your Action Plan for responding in your child custody case in 9 steps"
+    And I should see the phrase "Your Action Plan for responding in your child custody case in 8 steps"
     And I should see the phrase "Step 1: Learn about default judgment"
     And I should see the phrase "Step 2: Learn about the Motion to Set Aside Judgment or Order"
-    And I should see the phrase "Step 3: If you want to ask to set aside the default, fill out the forms"
-    And I should see the phrase "Step 4: If you are asking to set aside the default, fill out the Certificate of Service"
-    And I should see the phrase "Step 5: Sign if you use paper forms or do not use TrueFiling"
-    And I should see the phrase "Step 6: If you are asking to set aside the default, file your documents with the court and serve the other parent"
-    And I should see the phrase "Step 7: Serve the other parent"
-    And I should see the phrase "Step 8: What to expect after you file your documents"
-    And I should see the phrase "Step 9: Get more information or help"
+    And I should see the phrase "Step 3: If you want to ask the court to set aside the default fill out the forms"
+    And I should see the phrase "Step 4: Sign if you use paper forms or do not use TrueFiling"
+    And I should see the phrase "Step 5: If you are asking to set aside the default, file your documents with the court and serve the other parent"
+    And I should see the phrase "Step 6: Serve the other parent"
+    And I should see the phrase "Step 7: What to expect after you file your documents"
+    And I should see the phrase "Step 8: Get more information or help"
 
 @row167m
 Scenario: Row #167m
@@ -507,7 +508,7 @@ Scenario: Row #167m
     And I should see the phrase "Step 6: Sign if you use paper forms or do not use TrueFiling"
     And I should see the phrase "Step 7: File your documents with the court and serve the other parent"
     And I should see the phrase "Step 8: Serve the other parent"
-    And I should see the phrase "Step 9: Read the “Domestic Relations Procedural Order” or Standing Order that was with the Complaint" 
+    And I should see the phrase "Step 9: Read the Standing Order " 
     And I should see the phrase "Step 10: What to expect after you file your documents"
     And I should see the phrase "Step 11: If your case is moving forward in Alaska, learn more about the process"
     And I should see the phrase "Step 12: Get more information or help"
@@ -533,7 +534,7 @@ Scenario: Row #170m
     | filing_method                        | mail or in person |         | 
     | domestic_violence                    | True              |         | 
     | paternity                            | True              |         | 
-    | other_party_exempt                   | no                |         | 
+    | have_complaint                       | False             |         | 
     And I should see the phrase "Your Action Plan for responding in your child custody case in 14 steps"
     And I should see the phrase "Step 1: Learn if Alaska is the right state for your custody case"
     And I should see the phrase "Step 2: Learn about proper service and default judgment"
@@ -543,7 +544,7 @@ Scenario: Row #170m
     And I should see the phrase "Step 6: Sign if you use paper forms or do not use TrueFiling"
     And I should see the phrase "Step 7: File your documents with the court and serve the other parent"
     And I should see the phrase "Step 8: Serve the other parent"
-    And I should see the phrase "Step 9: Read the “Domestic Relations Procedural Order” or Standing Order that was with the Complaint" 
+    And I should see the phrase "Step 9: Read the Standing Order " 
     And I should see the phrase "Step 10: What to expect after you file your documents"
     And I should see the phrase "Step 11: If your case is moving forward in Alaska, learn more about the process"
     And I should see the phrase "Step 12: Abuse or domestic violence and parenting"
@@ -569,11 +570,11 @@ Scenario: Row #175
     | proper_service                       | False            |         | 
     | filling_manner                       | dunno            |         | 
     | filing_method                        | dunno            |         | 
-    | other_party_exempt                   | none             |         | 
+    | have_complaint                       | False            |         | 
     And I should see the phrase "Your Action Plan for responding in your child custody case in 9 steps"
     And I should see the phrase "Step 1: Learn about proper service and default judgment"
     And I should see the phrase "Step 2: Learn about the Motion to Set Aside Judgment or Order"
-    And I should see the phrase "Step 3: If you want to ask to set aside the default, fill out the forms"
+    And I should see the phrase "Step 3: If you want to ask the court to set aside the default fill out the forms"
     And I should see the phrase "Step 4: If you are asking to set aside the default, fill out the Certificate of Service"
     And I should see the phrase "Step 5: Sign if you use paper forms or do not use TrueFiling"
     And I should see the phrase "Step 6: If you are asking to set aside the default, file your documents with the court and serve the other parent"
@@ -624,7 +625,7 @@ Scenario: Row #177
     | proper_service                       | False             |         | 
     | filling_manner                       | electronically    |         | 
     | filing_method                        | mail or in person |         | 
-    | other_party_exempt                   | no                |         | 
+    | have_complaint                       | False             |         | 
     And I should see the phrase "Your Action Plan for responding in your child custody case in 7 steps"
     And I should see the phrase "Step 1: Learn about proper service and default judgment"
     And I should see the phrase "Step 2: File a motion to dismiss your Alaska case"
@@ -680,8 +681,7 @@ Scenario: Row #179m
     | proper_service                       | False             |         | 
     | filling_manner                       | paper             |         | 
     | filing_method                        | efiling           |         | 
-    | other_party_exempt                   | yes               |         | 
-    | other_party_enter_email              | False             |         | 
+    | have_complaint                       | False             |         | 
     And I should see the phrase "Your Action Plan for responding in your child custody case in 7 steps"
     And I should see the phrase "Step 1: Learn about proper service and default judgment"
     And I should see the phrase "Step 2: File a motion to dismiss your Alaska case"
@@ -710,17 +710,16 @@ Scenario: Row #180
     | filling_manner                       | paper             |         | 
     | filing_method                        | mail or in person |         | 
     | other_party_exempt                   | no                |         | 
-    And I should see the phrase "Your Action Plan for responding in your child custody case in 10 steps"
+    And I should see the phrase "Your Action Plan for responding in your child custody case in 9 steps"
     And I should see the phrase "Step 1: Learn about default judgment"
     And I should see the phrase "Step 2: Options when the judge entered a default judgment"
     And I should see the phrase "Step 3: Learn about the Motion to Set Aside Judgment or Order"
-    And I should see the phrase "Step 4: If you want to ask to set aside the default, fill out the forms"
-    And I should see the phrase "Step 5: If you are asking to set aside the default, fill out the Certificate of Service"
-    And I should see the phrase "Step 6: Sign if you use paper forms or do not use TrueFiling"
-    And I should see the phrase "Step 7: If you are asking to set aside the default, file your documents with the court and serve the other parent"
-    And I should see the phrase "Step 8: Serve the other parent"
-    And I should see the phrase "Step 9: What to expect after you file your documents"
-    And I should see the phrase "Step 10: Get more information or help"
+    And I should see the phrase "Step 4: If you want to ask the court to set aside the default fill out the forms"
+    And I should see the phrase "Step 5: Sign if you use paper forms or do not use TrueFiling"
+    And I should see the phrase "Step 6: If you are asking to set aside the default, file your documents with the court and serve the other parent"
+    And I should see the phrase "Step 7: Serve the other parent"
+    And I should see the phrase "Step 8: What to expect after you file your documents"
+    And I should see the phrase "Step 9: Get more information or help"
     And I take a screenshot
     And I download "responding_child_custody_action_plan.pdf"
     And I download "responding_child_custody_action_plan.docx"
@@ -741,12 +740,12 @@ Scenario: Row #181m
     | filling_manner                       | paper            |         | 
     | filing_method                        | dunno            |         | 
     | domestic_violence                    | False            |         | 
-    | other_party_exempt                   | none             |         | 
+    | have_complaint                       | False            |         | 
     And I should see the phrase "Your Action Plan for responding in your child custody case in 10 steps"
     And I should see the phrase "Step 1: Learn about proper service and default judgment"
     And I should see the phrase "Step 2: Options when the judge entered a default judgment"
     And I should see the phrase "Step 3: Learn about the Motion to Set Aside Judgment or Order"
-    And I should see the phrase "Step 4: If you want to ask to set aside the default, fill out the forms"
+    And I should see the phrase "Step 4: If you want to ask the court to set aside the default fill out the forms"
     And I should see the phrase "Step 5: If you are asking to set aside the default, fill out the Certificate of Service"
     And I should see the phrase "Step 6: Sign if you use paper forms or do not use TrueFiling"
     And I should see the phrase "Step 7: If you are asking to set aside the default, file your documents with the court and serve the other parent"
@@ -776,19 +775,18 @@ Scenario: Row #183m
     | paternity                            | False               |         | 
     | other_party_exempt                   | yes                 |         | 
     | other_party_enter_email              | None                |         | 
-    And I should see the phrase "Your Action Plan for responding in your child custody case in 12 steps"
+    And I should see the phrase "Your Action Plan for responding in your child custody case in 11 steps"
     And I should see the phrase "Step 1: You can move forward with your Alaska case"
     And I should see the phrase "Step 2: Learn about default judgment"
     And I should see the phrase "Step 3: Options if the other parent asked for a default judgment"
     And I should see the phrase "Step 4: If you decide to move forward, fill out the forms to answer the complaint and respond within 20 days"
-    And I should see the phrase "Step 5: If you decide to move forward, fill out the Certificate of Service"
-    And I should see the phrase "Step 6: Sign if you use paper forms or do not use TrueFiling"
-    And I should see the phrase "Step 7: If you decide to move forward, file your documents with the court and serve the other parent"
-    And I should see the phrase "Step 8: Serve the other parent"
-    And I should see the phrase "Step 9: Read the “Domestic Relations Procedural Order” or Standing Order that was with the Complaint"
-    And I should see the phrase "Step 10: What to expect after you file your documents"
-    And I should see the phrase "Step 11: If your case is moving forward in Alaska, learn more about the process"
-    And I should see the phrase "Step 12: Get more information or help"
+    And I should see the phrase "Step 5: Sign if you use paper forms or do not use TrueFiling"
+    And I should see the phrase "Step 6: If you decide to move forward, file your documents with the court and serve the other parent"
+    And I should see the phrase "Step 7: Serve the other parent"
+    And I should see the phrase "Step 8: Read the Standing Order"
+    And I should see the phrase "Step 9: What to expect after you file your documents"
+    And I should see the phrase "Step 10: If your case is moving forward in Alaska, learn more about the process"
+    And I should see the phrase "Step 11: Get more information or help"
     And I take a screenshot
     And I download "responding_child_custody_action_plan.pdf"
     And I download "responding_child_custody_action_plan.docx"
@@ -810,7 +808,7 @@ Scenario: Row #184m
     | filing_method                        | mail or in person   |         | 
     | domestic_violence                    | True                |         | 
     | paternity                            | True                |         | 
-    | other_party_exempt                   | no                  |         | 
+    | have_complaint                       | False               |         | 
     And I should see the phrase "Your Action Plan for responding in your child custody case in 14 steps"
     And I should see the phrase "Step 1: You can move forward with your Alaska case"
     And I should see the phrase "Step 2: Learn about proper service and default judgment"
@@ -820,7 +818,7 @@ Scenario: Row #184m
     And I should see the phrase "Step 6: Sign if you use paper forms or do not use TrueFiling"
     And I should see the phrase "Step 7: File your documents with the court and serve the other parent"
     And I should see the phrase "Step 8: Serve the other parent"
-    And I should see the phrase "Step 9: Read the “Domestic Relations Procedural Order” or Standing Order that was with the Complaint" 
+    And I should see the phrase "Step 9: Read the Standing Order " 
     And I should see the phrase "Step 10: What to expect after you file your documents"
     And I should see the phrase "Step 11: If your case is moving forward in Alaska, learn more about the process"
     And I should see the phrase "Step 12: Abuse or domestic violence and parenting"
@@ -848,20 +846,19 @@ Scenario: Row #186
     | domestic_violence                    | True                |         | 
     | paternity                            | False               |         | 
     | other_party_exempt                   | none                |         | 
-    And I should see the phrase "Your Action Plan for responding in your child custody case in 13 steps"
+    And I should see the phrase "Your Action Plan for responding in your child custody case in 12 steps"
     And I should see the phrase "Step 1: You can move forward with your Alaska case"
     And I should see the phrase "Step 2: Learn about default judgment"
     And I should see the phrase "Step 3: Options if the other parent asked for a default judgment"
     And I should see the phrase "Step 4: If you decide to move forward, fill out the forms to answer the complaint"
-    And I should see the phrase "Step 5: If you decide to move forward, fill out the Certificate of Service"
-    And I should see the phrase "Step 6: Sign if you use paper forms or do not use TrueFiling"
-    And I should see the phrase "Step 7: If you decide to move forward, file your documents with the court and serve the other parent"
-    And I should see the phrase "Step 8: Serve the other parent"
-    And I should see the phrase "Step 9: Read the “Domestic Relations Procedural Order” or Standing Order that was with the Complaint"
-    And I should see the phrase "Step 10: What to expect after you file your documents"
-    And I should see the phrase "Step 11: If your case is moving forward in Alaska, learn more about the process"
-    And I should see the phrase "Step 12: Abuse or domestic violence and parenting"
-    And I should see the phrase "Step 13: Get more information or help"
+    And I should see the phrase "Step 5: Sign if you use paper forms or do not use TrueFiling"
+    And I should see the phrase "Step 6: If you decide to move forward, file your documents with the court and serve the other parent"
+    And I should see the phrase "Step 7: Serve the other parent"
+    And I should see the phrase "Step 8: Read the Standing Order "
+    And I should see the phrase "Step 9: What to expect after you file your documents"
+    And I should see the phrase "Step 10: If your case is moving forward in Alaska, learn more about the process"
+    And I should see the phrase "Step 11: Abuse or domestic violence and parenting"
+    And I should see the phrase "Step 12: Get more information or help"
     And I take a screenshot
     And I download "responding_child_custody_action_plan.pdf"
     And I download "responding_child_custody_action_plan.docx"
@@ -883,8 +880,7 @@ Scenario: Row #187m
     | filing_method                        | efiling             |         | 
     | domestic_violence                    | True                |         | 
     | paternity                            | True                |         | 
-    | other_party_exempt                   | yes                 |         | 
-    | other_party_enter_email              | True                |         | 
+    | have_complaint                       | False               |         | 
     And I should see the phrase "Your Action Plan for responding in your child custody case in 13 steps"
     And I should see the phrase "Step 1: You can move forward with your Alaska case"
     And I should see the phrase "Step 2: Learn about proper service and default judgment"
@@ -893,7 +889,7 @@ Scenario: Row #187m
     And I should see the phrase "Step 5: Or, tell the judge you were not served the correct way and ask to dismiss the case"
     And I should see the phrase "Step 6: File your documents with the court and serve the other parent"
     And I should see the phrase "Step 7: Serve the other parent"
-    And I should see the phrase "Step 8: Read the “Domestic Relations Procedural Order” or Standing Order that was with the Complaint" 
+    And I should see the phrase "Step 8: Read the Standing Order " 
     And I should see the phrase "Step 9: What to expect after you file your documents"
     And I should see the phrase "Step 10: If your case is moving forward in Alaska, learn more about the process"
     And I should see the phrase "Step 11: Abuse or domestic violence and parenting"
@@ -919,17 +915,16 @@ Scenario: Row #190
     | filling_manner                       | electronically      |         | 
     | filing_method                        | mail or in person   |         | 
     | other_party_exempt                   | no                  |         | 
-    And I should see the phrase "Your Action Plan for responding in your child custody case in 10 steps"
+    And I should see the phrase "Your Action Plan for responding in your child custody case in 9 steps"
     And I should see the phrase "Step 1: Learn about default judgment"
     And I should see the phrase "Step 2: Options when the judge entered a default judgment"
     And I should see the phrase "Step 3: Learn about the Motion to Set Aside Judgment or Order"
-    And I should see the phrase "Step 4: If you want to ask to set aside the default, fill out the forms"
-    And I should see the phrase "Step 5: If you are asking to set aside the default, fill out the Certificate of Service"
-    And I should see the phrase "Step 6: Sign if you use paper forms or do not use TrueFiling"
-    And I should see the phrase "Step 7: If you are asking to set aside the default, file your documents with the court and serve the other parent"
-    And I should see the phrase "Step 8: Serve the other parent"
-    And I should see the phrase "Step 9: What to expect after you file your documents"
-    And I should see the phrase "Step 10: Get more information or help"
+    And I should see the phrase "Step 4: If you want to ask the court to set aside the default fill out the forms"
+    And I should see the phrase "Step 5: Sign if you use paper forms or do not use TrueFiling"
+    And I should see the phrase "Step 6: If you are asking to set aside the default, file your documents with the court and serve the other parent"
+    And I should see the phrase "Step 7: Serve the other parent"
+    And I should see the phrase "Step 8: What to expect after you file your documents"
+    And I should see the phrase "Step 9: Get more information or help"
 
 @row191 
 Scenario: Row #191
@@ -946,12 +941,12 @@ Scenario: Row #191
     | proper_service                       | False               |         | 
     | filling_manner                       | electronically      |         | 
     | filing_method                        | dunno               |         | 
-    | other_party_exempt                   | none                |         | 
+    | have_complaint                       | False               |         | 
     And I should see the phrase "Your Action Plan for responding in your child custody case in 10 steps"
     And I should see the phrase "Step 1: Learn about proper service and default judgment"
     And I should see the phrase "Step 2: Options when the judge entered a default judgment"
     And I should see the phrase "Step 3: Learn about the Motion to Set Aside Judgment or Order"
-    And I should see the phrase "Step 4: If you want to ask to set aside the default, fill out the forms"
+    And I should see the phrase "Step 4: If you want to ask the court to set aside the default fill out the forms"
     And I should see the phrase "Step 5: If you are asking to set aside the default, fill out the Certificate of Service"
     And I should see the phrase "Step 6: Sign if you use paper forms or do not use TrueFiling"
     And I should see the phrase "Step 7: If you are asking to set aside the default, file your documents with the court and serve the other parent"

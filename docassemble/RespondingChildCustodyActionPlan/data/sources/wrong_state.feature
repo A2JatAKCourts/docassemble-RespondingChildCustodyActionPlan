@@ -158,8 +158,7 @@ Scenario: Row #30
     And I should see the phrase "Your Action Plan for responding in your child custody case in 9 steps"
     And I should see the phrase "Step 1: Learn if Alaska is the right state for your custody case"
     And I tap the "#YW5zd2VyX2p1cmlzZGljdGlvbl9zdGVw .al_toggle" element and stay on the same page
-  And I should see the phrase "Generally, if your children have lived in Alaska for the last 6 months, Alaska is the children's "home state." The Alaska court has jurisdiction to make decisions, enter a parenting plan, or order child support."
-    And I should see the phrase "Step 1: Learn if Alaska is the right state for your custody case"
+    And I should see the phrase "Generally, if your children have not lived in Alaska for the last 6 months, Alaska is not the children’s “home state,” and the Alaska court does not have jurisdiction to make decisions, enter a Parenting Plan, or order child support."
     And I should see the phrase "Step 2: Fill out the forms to answer the complaint and respond within 20 days"
     And I should see the phrase "Step 3: Sign if you use paper forms or do not use TrueFiling"
     And I should see the phrase "Step 4: File your documents with the court and serve the other parent"
@@ -181,16 +180,16 @@ Scenario: Row #31
     | var                             | value          | trigger | 
     | user_need                       | answer custody |         | 
     | type_of_response['wrong state'] | True           |         | 
+    | jurisdiction                    | False          |         | 
     | filling_manner                  | paper          |         | 
     | filing_method                   | dunno          |         | 
-    | jurisdiction                    | False          |         | 
     | military                        | False          |         | 
     | other_party_exempt              | none           |         | 
     And I should see the phrase "Your Action Plan for responding in your child custody case in 10 steps"
     And I should see the phrase "Step 1: Learn if Alaska is the right state for your custody case"
-  And I tap the "#YW5zd2VyX2p1cmlzZGljdGlvbl9zdGVw .al_toggle" element and stay on the same page
-  And I should see the phrase "Generally, if your children have not lived in Alaska the last 6 months, Alaska is not the children's "home state," and the Alaska court does not have jurisdiction to make decisions, enter a parenting plan, or order child support."
-  And I should see the phrase "Sometimes there is no home state."
+    And I tap the "#YW5zd2VyX2p1cmlzZGljdGlvbl9zdGVw .al_toggle" element and stay on the same page
+    And I should see the phrase "Generally, if your children have not lived in Alaska the last 6 months, Alaska is not the children's "home state," and the Alaska court does not have jurisdiction to make decisions, enter a parenting plan, or order child support."
+    And I should see the phrase "Sometimes there is no home state."
     And I should see the phrase "Step 2: Fill out the forms to respond in 20 days and ask to dismiss if you think Alaska is the wrong state"
     And I should see the phrase "Step 3: If you think Alaska is the wrong state, file a motion to dismiss your Alaska case"
     And I should see the phrase "Step 4: Sign if you use paper forms or do not use TrueFiling"
@@ -339,19 +338,19 @@ Scenario: Row #55
 Scenario: Row #58
   Given I start the interview at "responding_child_custody_action_plan.yml"
     And I get to the question id "final screen" with this data:
-    | var                                 | value             | trigger | 
-    | user_need                           | answer custody    |         | 
-    | type_of_response['wrong state']     | True              |         | 
-    | type_of_response['default']         | True              |         | 
-    | stage_of_default                    | hearing scheduled |         | 
-    | jurisdiction                        | True              |         | 
-    | military                            | False             |         | 
-    | proper_service                      | False             |         | 
-    | filling_manner                      | electronically    |         | 
-    | filing_method                       | efiling           |         | 
-    | domestic_violence                   | False             |         | 
-    | paternity                           | False             |         | 
-    | have_complaint                      | False             |         | 
+    | var                             | value             | trigger | 
+    | user_need                       | answer custody    |         | 
+    | type_of_response['wrong state'] | True              |         | 
+    | type_of_response['default']     | True              |         | 
+    | stage_of_default                | hearing scheduled |         | 
+    | jurisdiction                    | True              |         | 
+    | military                        | False             |         | 
+    | proper_service                  | False             |         | 
+    | filling_manner                  | electronically    |         | 
+    | filing_method                   | efiling           |         | 
+    | domestic_violence               | False             |         | 
+    | paternity                       | False             |         | 
+    | have_complaint                  | False             |         | 
     And I should see the phrase "Your Action Plan for responding in your child custody case in 11 steps"
     And I should see the phrase "Step 1: Learn if Alaska is the right state for your custody case"
     And I should see the phrase "Step 2: Learn about default judgment"
@@ -818,7 +817,7 @@ Scenario: Row #117
     And I download "responding_child_custody_action_plan.pdf"
     And I download "responding_child_custody_action_plan.docx"
     And I wait 1 second 
-    
+
 @row118m
 # Scenario when the user indicates the case is in the wrong state, the user reports they were properly served, the court has entered a default judgment, and Alaska does not have jurisdiction
 Scenario: Row #118m
