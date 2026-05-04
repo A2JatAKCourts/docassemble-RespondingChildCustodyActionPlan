@@ -149,7 +149,7 @@ code: |
       if type_of_response['default']:
         military
       add_unique_step((proper_service_step, "proper_service_idx"), step_list)
-    if stage_of_other_case == 'ended with no order'and type_of_response['improper service'] and jurisdiction and not proper_service:
+    if stage_of_other_case == 'ended with no order'and type_of_response['improper service'] and not proper_service:
         add_unique_step((decide_after_improper_service_step, "decide_after_improper_service_idx"), step_list)
     if stage_of_other_case == 'still going' and not (type_of_response['default'] and stage_of_default == 'judgment entered'):
       add_unique_step((case_in_2_states_step, "case_in_2_states_idx"), step_list)
@@ -317,6 +317,11 @@ content: |
     
   Tell the judge in the **other** state about the Alaska case.  
   % endif
+  % if type_of_response.all_false('wrong state', 'case in 2 states') and not proper_service:
+  If you think you were not served the correct way and you want the court to dismiss the case, you can fill out and file a Motion to Dismiss that tells the court why you think you were not served in the correct way.
+  % endif
+
+
   
   Because ${ other_party_in_case } asked for a default judgment, it is important to file your motion as soon as possible to prevent the judge from entering a default judgment order.
   % endif
@@ -343,6 +348,7 @@ content: |
   % endif
 ---
 comment: |
+  2026-05-04 added first sentence in content w inline condition about not being properly served.
   2026-04-27 bitly links and move to branding package
   2026-04-17 format subject, replace the Joint Motion to Put Settlement on the Record, SHC-1063  with Request to Put Agreement on the Record, DR-264
   2026-04-14 removing no longer required forms, findings of fact and custody judgment
@@ -380,14 +386,20 @@ subject: |
   % endif
   % endif
 content: |
-  % if not(type_of_response.any_true('improper service', 'default') and not proper_service):
-  You have **20 days** from the date you get the complaint to:
-  % endif 
+  ${ "When you are properly served, You" if type_of_response.any_true('improper service', 'default') and not proper_service else "you" } have **20 days** from the date you get the complaint to:
 
   1.	File an **Answer** and other required forms with the court to tell the judge what you want to happen in your case.
   2.	Give a copy of the forms to ${ other_party_in_case }. See ${ truefiling_serve_step.subject }.
 
-    ${ signing_paragraph }
+  % if type_of_response['default'] and not proper_service:
+  The ${other_party_in_case} told the court they properly served you and then asked for a default judgment. You should file your Answer as soon as you can to stop the judge from deciding the case without hearing from you.
+  % endif
+  
+  ${ signing_paragraph }
+
+
+
+
   
   % if type_of_response['wrong state'] and (user_need == 'answer custody' and not jurisdiction):
   If you think Alaska is not the "home state," you can ask the court to dismiss your case:
@@ -609,10 +621,7 @@ content: |
   If you do not have a copy of the filed documents, you can ask ${ other_party_in_case } or get a copy from your file at the courthouse. Read about [getting copies of your court file](https://ak-courts.info/recordsrequest) on the court's website.
   % if not proper_service:
     <div class="step-subheading">Option 2. Tell the judge you were not served the correct way and ask to dismiss the case</div>
-    If you think you were not served the correct way and you want the court to dismiss the case, you can fill out and file a **Motion to Dismiss** that tells the court why you think you were not served properly. 
-  % if user_need == 'answer divorce' or (user_need == 'answer custody' and not jurisdiction):
-  See ${ dismiss_step.subject }.
-  % endif 
+    If you think you were not served the correct way and you want the court to dismiss the case, you can fill out and file a **Motion to Dismiss** that tells the court why you think you were not served properly. See ${ dismiss_step.subject }.
   
     <div class="step-subheading">Option 3. Do nothing</div>
   % else:
