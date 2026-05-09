@@ -478,6 +478,9 @@ Scenario: Row #164
     And I should see the phrase "Step 6: Serve the other parent"
     And I should see the phrase "Step 7: What to expect after you file your documents"
     And I should see the phrase "Step 8: Get more information or help"
+    And I take a screenshot
+    And I download "responding_child_custody_action_plan.pdf"
+    And I download "responding_child_custody_action_plan.docx"
 
 @row167m
 Scenario: Row #167m
@@ -580,6 +583,9 @@ Scenario: Row #175
     And I should see the phrase "Step 6: Serve the other parent"
     And I should see the phrase "Step 7: What to expect after you file your documents"
     And I should see the phrase "Step 8: Get more information or help"
+    And I take a screenshot
+    And I download "responding_child_custody_action_plan.pdf"
+    And I download "responding_child_custody_action_plan.docx"
 
 @row176m
 Scenario: Row #176m
@@ -923,6 +929,9 @@ Scenario: Row #190
     And I should see the phrase "Step 7: Serve the other parent"
     And I should see the phrase "Step 8: What to expect after you file your documents"
     And I should see the phrase "Step 9: Get more information or help"
+    And I take a screenshot
+    And I download "responding_child_custody_action_plan.pdf"
+    And I download "responding_child_custody_action_plan.docx"
 
 @row191 
 Scenario: Row #191
@@ -950,4 +959,7 @@ Scenario: Row #191
     And I should see the phrase "Step 7: Serve the other parent"
     And I should see the phrase "Step 8: What to expect after you file your documents"
     And I should see the phrase "Step 9: Get more information or help"
+    And I take a screenshot
+    And I download "responding_child_custody_action_plan.pdf"
+    And I download "responding_child_custody_action_plan.docx"
 
