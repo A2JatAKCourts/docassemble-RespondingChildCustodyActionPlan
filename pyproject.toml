@@ -6,7 +6,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "docassemble.RespondingChildCustodyActionPlan"
-version = "2026.05.09"
+version = "2026.05.10"
 description = "Responding in your child custody case  - action plan"
 readme = "README.md"
 authors = [

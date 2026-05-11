@@ -1,6 +1,6 @@
 @wrong_state
 Feature: user paths
-# 2026-04-30
+# 2026-05-11
 
 Background: 
   Given the maximum seconds for each Step is 90
@@ -351,17 +351,18 @@ Scenario: Row #58
     | domestic_violence               | False             |         | 
     | paternity                       | False             |         | 
     | have_complaint                  | False             |         | 
-    And I should see the phrase "Your Action Plan for responding in your child custody case in 10 steps"
+    And I should see the phrase "Your Action Plan for responding in your child custody case in 11 steps"
     And I should see the phrase "Step 1: Learn if Alaska is the right state for your custody case"
     And I should see the phrase "Step 2: Learn about proper service and default judgment"
     And I should see the phrase "Step 3: Options if the other parent asked for a default judgment"
     And I should see the phrase "Step 4: If you decide to move forward, fill out the forms to answer the complaint"
-    And I should see the phrase "Step 5: If you decide to move forward, file your documents with the court and serve the other parent"
-    And I should see the phrase "Step 6: Serve the other parent"
-    And I should see the phrase "Step 7: Read the Standing Order"
-    And I should see the phrase "Step 8: What to expect after you file your documents"
-    And I should see the phrase "Step 9: If your case is moving forward in Alaska, learn more about the process"
-    And I should see the phrase "Step 10: Get more information or help"
+    And I should see the phrase "Step 5: Or, tell the judge you were not served the correct way and ask to dismiss the case"
+    And I should see the phrase "Step 6: If you decide to move forward, file your documents with the court and serve the other parent"
+    And I should see the phrase "Step 7: Serve the other parent"
+    And I should see the phrase "Step 8: Read the Standing Order"
+    And I should see the phrase "Step 9 What to expect after you file your documents"
+    And I should see the phrase "Step 10: If your case is moving forward in Alaska, learn more about the process"
+    And I should see the phrase "Step 11: Get more information or help"
     And I take a screenshot
     And I download "responding_child_custody_action_plan.pdf"
     And I download "responding_child_custody_action_plan.docx"
