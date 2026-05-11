@@ -424,8 +424,8 @@ attachment:
   update references: True
   variable name: responding_child_custody_action_plan_attachment[i]
   skip undefined: True
-  # docx template file: dummy.docx
-  docx template file: responding_child_custody_action_plan.docx
+  docx template file: dummy.docx
+  # docx template file: responding_child_custody_action_plan.docx
   tagged pdf: True
 ---
 attachment:
@@ -434,6 +434,6 @@ attachment:
   update references: True
   variable name: docx_responding_child_custody_action_plan_attachment
   skip undefined: True
-  # docx template file: dummy.docx
-  docx template file: responding_child_custody_action_plan.docx
+  docx template file: dummy.docx
+  # docx template file: responding_child_custody_action_plan.docx
   tagged pdf: True

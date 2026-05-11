@@ -45,7 +45,9 @@ subquestion: |
   % endif  
   
   % for iteration_index, step_tuple in enumerate( step_list ):
+  ${ (log("RENDER START: " + step_tuple[1]) or "") }
   ${ collapse_template(step_tuple[0], closed_icon="plus", open_icon="minus") }
+  ${ (log("RENDER END: " + step_tuple[1]) or "") }
   % endfor
   
   ${ al_user_bundle.download_list_html() }
@@ -109,34 +111,48 @@ code: |
   if type_of_response.all_true('improper service', exclusive = True):
     proper_service = False
     add_unique_step((proper_service_step, "proper_service_idx"), step_list)
+    log("STEP ADDED: proper_service_idx (improper exclusive)")
     add_unique_step((decide_after_improper_service_step, "decide_after_improper_service_idx"), step_list)
+    log("STEP ADDED: decide_after_improper_service_idx (improper exclusive)")
     add_unique_step((answer_step, "answer_idx"), step_list)
+    log("STEP ADDED: answer_idx (improper exclusive)")
          
   if type_of_response['wrong state']:
     jurisdiction
     add_unique_step((answer_jurisdiction_step, "answer_jurisdiction_idx"), step_list)
+    log("STEP ADDED: answer_jurisdiction_idx (wrong state)")
     if type_of_response.any_true('improper service', 'default'):
       proper_service
       if type_of_response['default']:
         military
       add_unique_step((proper_service_step, "proper_service_idx"), step_list)
+      log("STEP ADDED: proper_service_idx (wrong state)")
     if type_of_response['improper service'] and jurisdiction and not proper_service:
       add_unique_step((decide_after_improper_service_step, "decide_after_improper_service_idx"), step_list)
+      log("STEP ADDED: decide_after_improper_service_idx (wrong state)")
     if not type_of_response['default']:
-      add_unique_step((answer_step, "answer_idx"), step_list)  
-      if not jurisdiction or not proper_service:
-        add_unique_step((dismiss_step, "dismiss_idx"), step_list) 
+      add_unique_step((answer_step, "answer_idx"), step_list)
+      log("STEP ADDED: answer_idx (wrong state, not default)")
+      if not jurisdiction:
+        add_unique_step((dismiss_step, "dismiss_idx"), step_list)
+        log("STEP ADDED: dismiss_idx (wrong state, not default, not jurisdiction)")
     if type_of_response['default'] and stage_of_default in('application filed', 'hearing scheduled'):
       if jurisdiction:
         add_unique_step((default_options_step, "default_options_idx"), step_list)
-        add_unique_step((answer_step, "answer_idx"), step_list)  
+        log("STEP ADDED: default_options_idx (wrong state, default app/hearing, jurisdiction)")
+        add_unique_step((answer_step, "answer_idx"), step_list)
+        log("STEP ADDED: answer_idx (wrong state, default app/hearing, jurisdiction)")
       if not jurisdiction or not proper_service:
         add_unique_step((dismiss_step, "dismiss_idx"), step_list)
+        log("STEP ADDED: dismiss_idx (wrong state, default app/hearing, not jurisdiction or not proper_service)")
     if type_of_response['default'] and stage_of_default == 'judgment entered':
       if jurisdiction:
         add_unique_step((default_options_step, "default_options_idx"), step_list)
+        log("STEP ADDED: default_options_idx (wrong state, judgment entered, jurisdiction)")
       add_unique_step((learn_set_aside_step, "learn_set_aside_idx"), step_list)
+      log("STEP ADDED: learn_set_aside_idx (wrong state, judgment entered)")
       add_unique_step((fill_set_aside_step, "fill_set_aside_idx"), step_list)
+      log("STEP ADDED: fill_set_aside_idx (wrong state, judgment entered)")
 
 
   if type_of_response['case in 2 states']:
@@ -144,98 +160,135 @@ code: |
       jurisdiction 
     if stage_of_other_case in('still going', 'ended with no order') and not(type_of_response['default'] and stage_of_default == 'judgment entered'):
       add_unique_step((answer_jurisdiction_step, "answer_jurisdiction_idx"), step_list)
+      log("STEP ADDED: answer_jurisdiction_idx (case_in_2_states)")
     if type_of_response['improper service'] or type_of_response['default']:
       proper_service
       if type_of_response['default']:
         military
       add_unique_step((proper_service_step, "proper_service_idx"), step_list)
+      log("STEP ADDED: proper_service_idx (case_in_2_states)")
     if stage_of_other_case == 'ended with no order'and type_of_response['improper service'] and not proper_service:
         add_unique_step((decide_after_improper_service_step, "decide_after_improper_service_idx"), step_list)
+        log("STEP ADDED: decide_after_improper_service_idx (case_in_2_states, ended no order, improper)")
     if stage_of_other_case == 'still going' and not (type_of_response['default'] and stage_of_default == 'judgment entered'):
       add_unique_step((case_in_2_states_step, "case_in_2_states_idx"), step_list)
+      log("STEP ADDED: case_in_2_states_idx (case_in_2_states, still going)")
     if type_of_response['default'] and (stage_of_other_case == 'ended with no order' or (stage_of_other_case == 'ended with order' and stage_of_default == 'judgment entered')):
       add_unique_step((default_options_step, "default_options_idx"), step_list)
+      log("STEP ADDED: default_options_idx (case_in_2_states, default)")
     if type_of_response['default'] and stage_of_default == 'judgment entered':
       add_unique_step((learn_set_aside_step, "learn_set_aside_idx"), step_list)
+      log("STEP ADDED: learn_set_aside_idx (case_in_2_states, judgment entered)")
       add_unique_step((fill_set_aside_step, "fill_set_aside_idx"), step_list)
+      log("STEP ADDED: fill_set_aside_idx (case_in_2_states, judgment entered)")
     if stage_of_other_case in('still going', 'ended with no order') and not (type_of_response['default'] and stage_of_default == 'judgment entered'):
       add_unique_step((answer_step, "answer_idx"), step_list)
+      log("STEP ADDED: answer_idx (case_in_2_states, still going or ended no order)")
     if (stage_of_other_case in('still going', 'ended with order') and (not (type_of_response['default'] and stage_of_default == 'judgment entered')) or (type_of_response['default'] and not proper_service and stage_of_default in('application filed', 'hearing scheduled'))):
-      add_unique_step((dismiss_step, "dismiss_idx"), step_list)  
+      add_unique_step((dismiss_step, "dismiss_idx"), step_list)
+      log("STEP ADDED: dismiss_idx (case_in_2_states)")
   
   if type_of_response.all_true('default', exclusive = True):
     proper_service
     military
     add_unique_step((proper_service_step, "proper_service_idx"), step_list)
+    log("STEP ADDED: proper_service_idx (default exclusive)")
     add_unique_step((default_options_step, "default_options_idx"), step_list)
+    log("STEP ADDED: default_options_idx (default exclusive)")
     if stage_of_default in('application filed','hearing scheduled'):
       add_unique_step((answer_step, "answer_idx"), step_list)
+      log("STEP ADDED: answer_idx (default exclusive, app/hearing)")
       if not proper_service:
         add_unique_step((dismiss_step, "dismiss_idx"), step_list)
+        log("STEP ADDED: dismiss_idx (default exclusive, app/hearing, not proper_service)")
     if stage_of_default == 'judgment entered':
       add_unique_step((learn_set_aside_step, "learn_set_aside_idx"), step_list)
+      log("STEP ADDED: learn_set_aside_idx (default exclusive, judgment entered)")
       add_unique_step((fill_set_aside_step, "fill_set_aside_idx"), step_list)
+      log("STEP ADDED: fill_set_aside_idx (default exclusive, judgment entered)")
     
   
   if type_of_response.all_true('ak custody case', exclusive = True):
     proper_service = True
     if (response_to_complaint in('agree', 'some') or (response_to_complaint == 'none' and want_help_to_agree)):
       add_unique_step((want_help_to_agree_step, "want_help_to_agree_idx"), step_list)
+      log("STEP ADDED: want_help_to_agree_idx (ak custody exclusive)")
     add_unique_step((answer_step, "answer_idx"), step_list)
+    log("STEP ADDED: answer_idx (ak custody exclusive)")
 
   if type_of_response.all_true('ak custody case', 'improper service', exclusive = True):
     proper_service
     add_unique_step((proper_service_step, "proper_service_idx"), step_list)
+    log("STEP ADDED: proper_service_idx (ak custody + improper exclusive)")
     if not proper_service :
       add_unique_step((decide_after_improper_service_step, "decide_after_improper_service_idx"), step_list)
+      log("STEP ADDED: decide_after_improper_service_idx (ak custody + improper exclusive, not proper)")
     add_unique_step((answer_step, "answer_idx"), step_list)
+    log("STEP ADDED: answer_idx (ak custody + improper exclusive)")
 
   if type_of_response.any_true():
     if filling_manner in('paper', 'dunno') or filing_method in('mail or in person', 'dunno'):
       add_unique_step((sign_step, "sign_idx"), step_list)
+      log("STEP ADDED: sign_idx (any_true)")
     if type_of_response.any_true('improper service', 'default') and not proper_service: 
       if have_complaint:
         other_party_exempt
     else:
       other_party_exempt
     add_unique_step((truefiling_file_and_serve_step, "truefiling_file_and_serve_idx"), step_list)
+    log("STEP ADDED: truefiling_file_and_serve_idx (any_true)")
     add_unique_step((truefiling_serve_step, "truefiling_serve_idx"), step_list)
+    log("STEP ADDED: truefiling_serve_idx (any_true)")
 
     if not ((type_of_response['default'] and stage_of_default == 'judgment entered') or (type_of_response.all_true('wrong state', 'default') and not jurisdiction) or (type_of_response['case in 2 states'] and stage_of_other_case == 'ended with order')):
       add_unique_step((read_standing_order_step, "read_standing_order_idx"), step_list)
+      log("STEP ADDED: read_standing_order_idx (any_true)")
   
     add_unique_step((expect_after_motion_or_answer_step, "expect_after_motion_or_answer_idx"), step_list)
+    log("STEP ADDED: expect_after_motion_or_answer_idx (any_true)")
 
     if not ((type_of_response.all_true('wrong state', 'default') and not jurisdiction) or (type_of_response['case in 2 states'] and stage_of_other_case == 'ended with order') or (type_of_response['default'] and stage_of_default == 'judgment entered') or type_of_response.all_false()):
       add_unique_step((learn_more_about_process_step, "learn_more_about_process_idx"), step_list)
+      log("STEP ADDED: learn_more_about_process_idx (any_true)")
   
   ### Double check this condition test @143 gives value, this condition should ask for it I think.
   if type_of_response['ak custody case'] and not(type_of_response['default'] and stage_of_default == 'judgment entered') and (not(type_of_response['case in 2 states'] and stage_of_other_case == 'ended with order')):
     if domestic_violence:
       add_unique_step((answer_domestic_violence_step, "answer_domestic_violence_idx"), step_list)
+      log("STEP ADDED: answer_domestic_violence_idx (ak custody)")
     #### if (wrong state or case in 2 states) and not served properly - do not ask paternity
     if type_of_response.all_true('ak custody case', exclusive = True) or (type_of_response['ak custody case'] and (type_of_response.any_true('wrong state', 'case in 2 states') and type_of_response.all_false('improper service'))) or (type_of_response['ak custody case'] and (type_of_response['default'] and stage_of_default in('application filed', 'hearing scheduled'))):
       if paternity:
         add_unique_step((paternity_step, "paternity_idx"), step_list)
+        log("STEP ADDED: paternity_idx (ak custody)")
 
 
   if type_of_response.all_false():
     want_help_to_agree = True
     default_info = False
-    add_unique_step((want_help_to_agree_step, "want_help_to_agree_idx"), step_list)  
+    add_unique_step((want_help_to_agree_step, "want_help_to_agree_idx"), step_list)
+    log("STEP ADDED: want_help_to_agree_idx (all_false)")
     # add_unique_step((parent_agreements_step, "parent_agreements_idx"), step_list)
     if agreement_documents:
       add_unique_step((uncontested_custody_forms_step, "uncontested_custody_forms_idx"), step_list)
+      log("STEP ADDED: uncontested_custody_forms_idx (all_false, agreement)")
       if filling_manner in('paper', 'dunno') or filing_method in('mail or in person', 'dunno'):
         add_unique_step((sign_step, "sign_idx"), step_list)
+        log("STEP ADDED: sign_idx (all_false, agreement)")
       add_unique_step((truefiling_file_and_serve_step, "truefiling_file_and_serve_idx"), step_list)
+      log("STEP ADDED: truefiling_file_and_serve_idx (all_false, agreement)")
       add_unique_step((read_standing_order_step, "read_standing_order_idx"), step_list)
+      log("STEP ADDED: read_standing_order_idx (all_false, agreement)")
       add_unique_step((expect_after_motion_or_answer_step, "expect_after_motion_or_answer_idx"), step_list)
+      log("STEP ADDED: expect_after_motion_or_answer_idx (all_false, agreement)")
     if domestic_violence:
       add_unique_step((answer_domestic_violence_step, "answer_domestic_violence_idx"), step_list)
+      log("STEP ADDED: answer_domestic_violence_idx (all_false)")
   
   
   add_unique_step((get_help, "get_help_idx"), step_list)
+  log("STEP ADDED: get_help_idx")
+  log("STEP LIST FINAL: " + repr([step_tuple[1] for step_tuple in step_list]))
 
   #  log("STEP LIST IDS: " + repr([step_tuple[1] for step_tuple in step_list]))
   #  log("filling_manner: " + repr(filling_manner))
@@ -265,6 +318,113 @@ code: |
         is_unique = False
     if is_unique:
       image_list.append(new_image)
+---
+---
+comment: |
+  DIAGNOSTIC: real default_options_step body with ${ dismiss_step.subject }
+  swapped out, to test whether dismiss_step.subject is what triggers jurisdiction.
+template: default_options_step
+subject: |
+  Step ${ default_options_idx }:
+  Options
+  % if stage_of_default in('application filed', 'hearing scheduled'):
+  if ${ other_party_in_case } asked for a default judgment ${ "when you have case in 2 states" if type_of_response['case in 2 states'] and stage_of_other_case == 'still going' else ""}${ " and did not properly serve you" if not proper_service else "" }
+  % else: 
+  when the judge entered a default judgment
+  % endif
+content: | 
+  ${ (log("DOS rendering start") or "") }
+  % if type_of_response['default'] and stage_of_default == 'judgment entered':
+  % if not proper_service:
+    If ${ other_party_in_case } asked for a default judgment, it means they told the court they served you correctly. You can (1) tell the judge you were not served the correct way and ask to set aside the default judgment or (2) do nothing.
+  % else:
+    You can (1) ask the judge to set aside the default judgment or (2) do nothing.
+  % endif
+
+  <div class="step-subheading">Option 1. Ask to Set Aside the Default Judgment</div>
+
+  % if type_of_response['case in 2 states'] and stage_of_other_case == 'ended with order':
+  It can be complicated to have ${ "custody" if user_need == 'answer custody' else "court" } orders from 2 different state courts. You may want to ${ "tell the judge you were not served properly and ask" if not proper_service else "ask the judge" } to set aside the default judgment.
+  % else:
+  % if not proper_service:
+  If you were not served the correct way, you can tell the judge and ask the judge to set aside the judgment.
+  % endif
+  If you ${ "decide" if proper_service else "want" } to ask the judge to set aside the default judgment, fill out and file the paperwork as soon as you can.
+  % endif
+  % if type_of_response['case in 2 states'] and stage_of_other_case == 'ended with order':
+  Fill out and file the paperwork as soon as you can.
+  % endif
+  The longer you wait, the harder it is to set the judgment aside.
+  Read about asking the judge to set aside the default judgment in ${learn_set_aside_step.subject} and ${fill_set_aside_step.subject}.
+  <div class="step-subheading">Option 2. Do nothing</div>
+
+  % if not (type_of_response['case in 2 states'] and stage_of_other_case == 'ended with order'):
+  If you are okay with the judge's orders you do not need to do anything. 
+  % endif
+  Be sure you know exactly what the judge ordered. Read about [getting copies of your court file](https://ak-courts.info/recordsrequest) on the court's website. 
+  % if type_of_response['case in 2 states'] and stage_of_other_case == 'ended with order':
+  If the Alaska order is different from the ${ "custody" if user_need == 'answer custody' else "court" } order in the other state, it can be very complicated. It may be best to tell the judge about the other order and try to set aside the Alaska order. 
+  % endif
+  
+  You should decide quickly. The longer you wait, the harder it is to set aside the court's order.
+
+  % if type_of_response['case in 2 states'] and stage_of_other_case == 'ended with order':
+  You may want to [talk to a lawyer](https://ak-courts.info/findlawyer). 
+  % else:
+  % if user_need == 'answer custody' or (user_need == 'answer divorce' and minor_children):
+  If something changes substantially, and you want to ask to change the judge's custody, Parenting Plan, or child support order, read [Modifying Child Custody or Child Support Order](https://ak-courts.info/mtm) on the court's website.
+  % endif
+  % endif
+  % elif type_of_response['default'] and stage_of_default in('application filed', 'hearing scheduled'):
+  ${ (log("DOS in elif branch") or "") }
+  % if not proper_service:
+    If ${ other_party_in_case } asked for a default judgment, it means they told the court they served you correctly. The judge may decide without hearing from you if you do not respond.
+  % else:
+    If ${ other_party_in_case } asked for a default judgment, the judge may decide without hearing from you if you do not respond.
+  % endif
+  You can (1) move forward with the case, or 
+  % if not proper_service:
+    (2) tell the judge you were not served the correct way and ask to dismiss the case, or (3)
+  % else:
+    (2) 
+  % endif
+  do nothing
+  <div class="step-subheading">Option 1. Move forward with the case</div> 
+  % if not proper_service:
+    Even if you were not properly served, you
+  % else:
+    You
+  % endif
+  can file an Answer if:
+  
+  % if type_of_response['wrong state']:
+    *	You want to tell the Alaska court it does not have jurisdiction. Or
+  % endif
+    * You agree with ${ other_party_in_case } that there should be a case to 
+  % if user_need == 'answer custody':
+  get a custody, Parenting Plan, and child support order. Or
+  % elif user_need == 'answer divorce':
+  end your marriage${ ' and get a custody, Parenting Plan, and child support order.' if minor_children or wife_is_pregnant in('husband', 'not husband') else '.' } Or
+  % endif
+    * You do not want to risk a default judgment.
+
+  If you do not have a copy of the filed documents, you can ask ${ other_party_in_case } or get a copy from your file at the courthouse. Read about [getting copies of your court file](https://ak-courts.info/recordsrequest) on the court's website.
+  ${ (log("DOS just before dismiss_step.subject ref") or "") }
+  % if not proper_service:
+    <div class="step-subheading">Option 2. Tell the judge you were not served the correct way and ask to dismiss the case</div>
+    If you think you were not served the correct way and you want the court to dismiss the case, you can fill out and file a **Motion to Dismiss** that tells the court why you think you were not served properly. See the dismiss step below.
+  
+    <div class="step-subheading">Option 3. Do nothing</div>
+  % else:
+    <div class="step-subheading">Option 2. Do nothing</div>
+  % endif
+  If you are okay with the judge deciding the case based on ${ other_party_in_case }'s Complaint, without hearing from you, you do not need to do anything.
+
+  But once the judge decides, it is much harder to undo it.
+
+  If you file an Answer, the judge will consider what you want, and there may be resources for you and ${ other_party_in_case } to work out any disagreements through mediation or a settlement conference.
+  % endif
+  ${ (log("DOS rendering end") or "") }
 ---
 comment: |
   2026-05-10 limit extra information when stage_of_other_case is 'ended with order'
@@ -341,7 +501,7 @@ content: |
 
   % if type_of_response.any_true('improper service', 'default') and not (type_of_response['case in 2 states'] and stage_of_other_case == 'ended with order') and not proper_service:
   If ${ other_party_in_case } serves you properly in the future, the court may decide not to dismiss your case.
-  % if user_need == 'answer divorce' or (user_need == 'answer custody' and jurisdiction):
+  % if defined('answer_idx'):
   Read ${ answer_step.subject }.
   % endif 
   % endif

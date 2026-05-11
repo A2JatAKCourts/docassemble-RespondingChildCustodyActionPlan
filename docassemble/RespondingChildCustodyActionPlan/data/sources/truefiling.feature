@@ -1,6 +1,6 @@
 @truefiling
 Feature: User paths
-# 2026-04-30
+# 2026-05-11
 
 Background: 
   Given the maximum seconds for each Step is 90
@@ -25,9 +25,9 @@ Scenario: Row #1TF
     And I tap the "#YW5zd2VyX3N0ZXA .al_toggle" element and stay on the same page
     And I should see the phrase "Step 3: File your documents with the court and serve the other parent"
     And I should see the phrase "Step 4: Serve the other parent"
-    And I tap the "#dHJ1ZWZpbGVfYW5zd2VyX2ZpbGVfYW5kX3NlcnZlX3N0ZXA .al_toggle" element and stay on the same page
+    And I tap the "#dHJ1ZWZpbGluZ19zZXJ2ZV9zdGVw .al_toggle" element and stay on the same page
     And I should see the phrase "Read If I am using TrueFiling, how do I serve the other side?"
-    And I should see the phrase "Step 5: Read the “Domestic Relations Procedural Order” or Standing Order that was with the Complaint"
+    And I should see the phrase "Step 5: Read the Standing Order that was with the Complaint"
     And I should see the phrase "Step 6: What to expect after you file your Answer"
     And I should see the phrase "Step 7: Learn more about the process"
     And I should see the phrase "Step 8: Abuse or domestic violence resources and reaching an agreement"
@@ -60,7 +60,7 @@ Scenario: Row #143TF
     And I should see the phrase "Step 3: Sign if you use paper forms or do not use TrueFiling"
     And I should see the phrase "Step 4: File your documents with the court and serve the other parent"
     And I should see the phrase "Step 5: Serve the other parent"
-    And I tap the "#dHJ1ZWZpbGVfYW5zd2VyX2ZpbGVfYW5kX3NlcnZlX3N0ZXA .al_toggle" element and stay on the same page
+    And I tap the "#dHJ1ZWZpbGluZ19zZXJ2ZV9zdGVw .al_toggle" element and stay on the same page
     And I should see the phrase "If you do not have a copy of the complaint, you may not know if the other person is using TrueFiling."
     And I should see the phrase "Wait to file your documents with the court until after you fill out the Certificate of Service and serve the other parent."
     And I should see the phrase "Step 6: What to expect after you file your documents"
@@ -91,9 +91,9 @@ Scenario: Row #144TF
     And I should see the phrase "Step 4: Sign if you use paper forms or do not use TrueFiling"
     And I should see the phrase "Step 5: File your documents with the court and serve the other parent"
     And I should see the phrase "Step 6: Serve the other parent"
-    And I tap the "#dHJ1ZWZpbGVfYW5zd2VyX2ZpbGVfYW5kX3NlcnZlX3N0ZXA .al_toggle" element and stay on the same page
+    And I tap the "#dHJ1ZWZpbGluZ19zZXJ2ZV9zdGVw .al_toggle" element and stay on the same page
     And I should see the phrase "Read If I am using TrueFiling, how do I serve the other side?"
-    And I should see the phrase "Step 7: Read the “Domestic Relations Procedural Order” or Standing Order that was with the Complaint"
+    And I should see the phrase "Step 7: Read the Standing Order"
     And I should see the phrase "Step 8: What to expect after you file your Answer"
     And I should see the phrase "Step 9: If your case is moving forward in Alaska, learn more about the process"
     And I should see the phrase "Step 10: Abuse or domestic violence and parenting"
@@ -126,9 +126,9 @@ Scenario: Row #147TF
     And I should see the phrase "Step 5: Sign if you use paper forms or do not use TrueFiling"
     And I should see the phrase "Step 6: If you decide to move forward, file your documents with the court and serve the other parent"
     And I should see the phrase "Step 7: Serve the other parent"
-    And I tap the "#dHJ1ZWZpbGVfYW5zd2VyX2ZpbGVfYW5kX3NlcnZlX3N0ZXA .al_toggle" element and stay on the same page
+    And I tap the "#dHJ1ZWZpbGluZ19zZXJ2ZV9zdGVw .al_toggle" element and stay on the same page
     And I should see the phrase "Read If I am using TrueFiling, how do I serve the other side?"
-    And I should see the phrase "Step 8: Read the “Domestic Relations Procedural Order” or Standing Order that was with the Complaint"
+    And I should see the phrase "Step 8: Read the Standing Order"
     And I should see the phrase "Step 9: What to expect after you file your Answer"
     And I should see the phrase "Step 10: If your case is moving forward in Alaska, learn more about the process"
     And I should see the phrase "Step 11: Get more information or help"
@@ -161,9 +161,9 @@ Scenario: Row #148TF
     And I should see the phrase "Step 6: Sign if you use paper forms or do not use TrueFiling"
     And I should see the phrase "Step 7: File your documents with the court and serve the other parent"
     And I should see the phrase "Step 8: Serve the other parent"
-    And I tap the "#dHJ1ZWZpbGVfYW5zd2VyX2ZpbGVfYW5kX3NlcnZlX3N0ZXA .al_toggle" element and stay on the same page
+    And I tap the "#dHJ1ZWZpbGluZ19zZXJ2ZV9zdGVw .al_toggle" element and stay on the same page
     And I should see the phrase "Look at the other parent’s complaint to see if they checked they were exempt."
-    And I should see the phrase "Step 9: Read the “Domestic Relations Procedural Order” or Standing Order that was with the Complaint"
+    And I should see the phrase "Step 9: Read the Standing Order"
     And I should see the phrase "Step 10: What to expect after you file your documents"
     And I should see the phrase "Step 11: If your case is moving forward in Alaska, learn more about the process"
     And I should see the phrase "Step 12: Abuse or domestic violence and parenting"
@@ -198,9 +198,9 @@ Scenario: Row #151TF
     And I should see the phrase "Step 6: Sign if you use paper forms or do not use TrueFiling"
     And I should see the phrase "Step 7: File your documents with the court and serve the other parent"
     And I should see the phrase "Step 8: Serve the other parent"
-    And I tap the "#dHJ1ZWZpbGVfYW5zd2VyX2ZpbGVfYW5kX3NlcnZlX3N0ZXA .al_toggle" element and stay on the same page
+    And I tap the "#dHJ1ZWZpbGluZ19zZXJ2ZV9zdGVw .al_toggle" element and stay on the same page
     And I should see the phrase "Look at the other parent’s complaint to see if they checked they were exempt."
-    And I should see the phrase "Step 9: Read the “Domestic Relations Procedural Order” or Standing Order that was with the Complaint"
+    And I should see the phrase "Step 9: Read the Standing Order"
     And I should see the phrase "Step 10: What to expect after you file your documents"
     And I should see the phrase "Step 11: If your case is moving forward in Alaska, learn more about the process"
     And I should see the phrase "Step 12: Get more information or help"
@@ -228,9 +228,9 @@ Scenario: Row #131TF
     And I should see the phrase "Step 3: Sign if you use paper forms or do not use TrueFiling"
     And I should see the phrase "Step 4: File your documents with the court and serve the other parent"
     And I should see the phrase "Step 5: Serve the other parent"
-    And I tap the "#dHJ1ZWZpbGVfYW5zd2VyX2ZpbGVfYW5kX3NlcnZlX3N0ZXA .al_toggle" element and stay on the same page
+    And I tap the "#dHJ1ZWZpbGluZ19zZXJ2ZV9zdGVw .al_toggle" element and stay on the same page
     And I should see the phrase "Look at the other parent’s complaint to see if they checked they were exempt."
-    And I should see the phrase "Step 6: Read the “Domestic Relations Procedural Order” or Standing Order that was with the Complaint"
+    And I should see the phrase "Step 6: Read the Standing Order"
     And I should see the phrase "Step 7: What to expect after you file your Answer"
     And I should see the phrase "Step 8: Learn more about the process"
     And I should see the phrase "Step 9: Get more information or help"
@@ -268,9 +268,9 @@ Scenario: Row #158mTF
     And I should see the phrase "Step 6: Sign if you use paper forms or do not use TrueFiling"
     And I should see the phrase "Step 7: File your documents with the court and serve the other parent"
     And I should see the phrase "Step 8: Serve the other parent"
-    And I tap the "#dHJ1ZWZpbGVfYW5zd2VyX2ZpbGVfYW5kX3NlcnZlX3N0ZXA .al_toggle" element and stay on the same page
+    And I tap the "#dHJ1ZWZpbGluZ19zZXJ2ZV9zdGVw .al_toggle" element and stay on the same page
     And I should see the phrase "Follow the TrueFiling instructions to serve them at their email address."
-    And I should see the phrase "Step 9: Read the “Domestic Relations Procedural Order” or Standing Order that was with the Complaint"
+    And I should see the phrase "Step 9: Read the Standing Order"
     And I should see the phrase "Step 10: What to expect after you file your documents"
     And I should see the phrase "Step 11: If your case is moving forward in Alaska, learn more about the process"
     And I should see the phrase "Step 12: Abuse or domestic violence and parenting"
@@ -309,9 +309,9 @@ Scenario: Row #161TF
     And I should see the phrase "Step 20: Sign if you use paper forms or do not use TrueFiling"
     And I should see the phrase "Step 21: File your documents with the court and serve the other parent"
     And I should see the phrase "Step 22: Serve the other parent"
-    And I tap the "#dHJ1ZWZpbGVfYW5zd2VyX2ZpbGVfYW5kX3NlcnZlX3N0ZXA .al_toggle" element and stay on the same page
+    And I tap the "#dHJ1ZWZpbGluZ19zZXJ2ZV9zdGVw .al_toggle" element and stay on the same page
     And I should see the phrase "Follow the TrueFiling instructions to serve them at their email address."
-    And I should see the phrase "Step 23: Read the “Domestic Relations Procedural Order” or Standing Order that was with the Complaint" 
+    And I should see the phrase "Step 23: Read the Standing Order" 
     And I should see the phrase "Step 24: What to expect after you file your documents"
     And I should see the phrase "Step 25: If your case is moving forward in Alaska, learn more about the process"
     And I should see the phrase "Step 26: Abuse or domestic violence and parenting"
@@ -343,9 +343,9 @@ Scenario: Row #3TF
     And I should see the phrase "Step 3: Sign if you use paper forms or do not use TrueFiling"
     And I should see the phrase "Step 4: File your documents with the court and serve the other parent"
     And I should see the phrase "Step 5: Serve the other parent"
-    And I tap the "#dHJ1ZWZpbGVfYW5zd2VyX2ZpbGVfYW5kX3NlcnZlX3N0ZXA .al_toggle" element and stay on the same page
+    And I tap the "#dHJ1ZWZpbGluZ19zZXJ2ZV9zdGVw .al_toggle" element and stay on the same page
     And I should see the phrase "Follow the TrueFiling instructions to serve them at their email address."
-    And I should see the phrase "Step 6: Read the “Domestic Relations Procedural Order” or Standing Order that was with the Complaint"
+    And I should see the phrase "Step 6: Read the Standing Order"
     And I should see the phrase "Step 7: What to expect after you file your Answer"
     And I should see the phrase "Step 8: Learn more about the process"
     And I should see the phrase "Step 9: Learn about paternity"
@@ -378,7 +378,7 @@ Scenario: Row #44TF
     And I should see the phrase "Step 4: If you want to ask to set aside the default, fill out the forms"
     And I should see the phrase "Step 5: If you are asking to set aside the default, file your documents with the court and serve the other parent"
     And I should see the phrase "Step 6: Serve the other parent"
-    And I tap the "#dHJ1ZWZpbGVfYW5zd2VyX2ZpbGVfYW5kX3NlcnZlX3N0ZXA .al_toggle" element and stay on the same page
+    And I tap the "#dHJ1ZWZpbGluZ19zZXJ2ZV9zdGVw .al_toggle" element and stay on the same page
     And I should see the phrase "Look at the other parent’s complaint to see if they checked they were exempt."
     And I should see the phrase "Step 7: What to expect after you file your documents"
     And I should see the phrase "Step 8: Get more information or help"
@@ -415,9 +415,9 @@ Scenario: Row #167mTF
     And I should see the phrase "Step 6: Sign if you use paper forms or do not use TrueFiling"
     And I should see the phrase "Step 7: File your documents with the court and serve the other parent"
     And I should see the phrase "Step 8: Serve the other parent"
-    And I tap the "#dHJ1ZWZpbGVfYW5zd2VyX2ZpbGVfYW5kX3NlcnZlX3N0ZXA .al_toggle" element and stay on the same page
+    And I tap the "#dHJ1ZWZpbGluZ19zZXJ2ZV9zdGVw .al_toggle" element and stay on the same page
     And I should see the phrase "Look at the other parent’s complaint to see if they checked they were exempt."
-    And I should see the phrase "Step 9: Read the “Domestic Relations Procedural Order” or Standing Order that was with the Complaint" 
+    And I should see the phrase "Step 9: Read the Standing Order" 
     And I should see the phrase "Step 10: What to expect after you file your documents"
     And I should see the phrase "Step 11: If your case is moving forward in Alaska, learn more about the process"
     And I should see the phrase "Step 12: Get more information or help"
@@ -455,9 +455,9 @@ Scenario: Row #170mTF
     And I should see the phrase "Step 6: Sign if you use paper forms or do not use TrueFiling"
     And I should see the phrase "Step 7: File your documents with the court and serve the other parent"
     And I should see the phrase "Step 8: Serve the other parent"
-    And I tap the "#dHJ1ZWZpbGVfYW5zd2VyX2ZpbGVfYW5kX3NlcnZlX3N0ZXA .al_toggle" element and stay on the same page
+    And I tap the "#dHJ1ZWZpbGluZ19zZXJ2ZV9zdGVw .al_toggle" element and stay on the same page
     And I should see the phrase "Look at the other parent’s complaint to see if they checked they were exempt."
-    And I should see the phrase "Step 9: Read the “Domestic Relations Procedural Order” or Standing Order that was with the Complaint" 
+    And I should see the phrase "Step 9: Read the Standing Order" 
     And I should see the phrase "Step 10: What to expect after you file your documents"
     And I should see the phrase "Step 11: If your case is moving forward in Alaska, learn more about the process"
     And I should see the phrase "Step 12: Abuse or domestic violence and parenting"
@@ -493,7 +493,7 @@ Scenario: Row #175TF
     And I should see the phrase "Step 4: Sign if you use paper forms or do not use TrueFiling"
     And I should see the phrase "Step 5: If you are asking to set aside the default, file your documents with the court and serve the other parent"
     And I should see the phrase "Step 6: Serve the other parent"
-    And I tap the "#dHJ1ZWZpbGVfYW5zd2VyX2ZpbGVfYW5kX3NlcnZlX3N0ZXA .al_toggle" element and stay on the same page
+    And I tap the "#dHJ1ZWZpbGluZ19zZXJ2ZV9zdGVw .al_toggle" element and stay on the same page
     And I should see the phrase "Because the other person is not using TrueFiling and did not give an email address, you cannot serve them through TrueFiling."
     And I should see the phrase "Wait to file your documents with the court until after you fill out the Certificate of Service and serve the other parent."
     And I should see the phrase "Step 7: What to expect after you file your documents"
@@ -525,7 +525,7 @@ Scenario: Row #176mTF
     And I should see the phrase "Step 3: Sign if you use paper forms or do not use TrueFiling"
     And I should see the phrase "Step 4: File your documents with the court and serve the other parent"
     And I should see the phrase "Step 5: Serve the other parent"
-    And I tap the "#dHJ1ZWZpbGVfYW5zd2VyX2ZpbGVfYW5kX3NlcnZlX3N0ZXA .al_toggle" element and stay on the same page
+    And I tap the "#dHJ1ZWZpbGluZ19zZXJ2ZV9zdGVw .al_toggle" element and stay on the same page
     And I should see the phrase "Because the other person is not using TrueFiling and did not give an email address, you cannot serve them through TrueFiling."
     And I should see the phrase "Wait to file your documents with the court until after you fill out the Certificate of Service and serve the other parent."
     And I should see the phrase "Step 6: What to expect after you file your documents"
@@ -552,7 +552,7 @@ Scenario: Row #128TF
     And I should see the phrase "Step 2: Sign if you use paper forms or do not use TrueFiling"
     And I should see the phrase "Step 3: File your documents with the court and serve the other parent"
     And I should see the phrase "Step 4: Serve the other parent"
-    And I tap the "#dHJ1ZWZpbGVfYW5zd2VyX2ZpbGVfYW5kX3NlcnZlX3N0ZXA .al_toggle" element and stay on the same page
+    And I tap the "#dHJ1ZWZpbGluZ19zZXJ2ZV9zdGVw .al_toggle" element and stay on the same page
     And I should see the phrase "Because the other person is not using TrueFiling and did not give an email address, you cannot serve them through TrueFiling."
     And I should see the phrase "Wait to file your documents with the court until after you fill out the Certificate of Service and serve the other parent."
     And I should see the phrase "Step 5: What to expect after you file your documents"
