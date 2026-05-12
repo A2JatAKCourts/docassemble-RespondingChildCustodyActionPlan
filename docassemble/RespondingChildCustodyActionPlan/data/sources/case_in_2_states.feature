@@ -1,6 +1,6 @@
 @case_in_2_states
 Feature: User paths
-# 2025-09-03
+# 2026-04-30
 
 Background: 
   Given the maximum seconds for each Step is 90
@@ -14,12 +14,16 @@ Scenario: Row #22
     | type_of_response['case in 2 states'] | True             |         | 
     | type_of_response['improper service'] | True             |         | 
     | stage_of_other_case                  | ended with order |         | 
+    | filling_manner                       | electronically   |         | 
+    | filing_method                        | efiling          |         | 
     | proper_service                       | True             |         | 
+    | other_party_exempt                   | yes              |         | 
+    | other_party_enter_email              | True             |         | 
     And I should see the phrase "Your Action Plan for responding in your child custody case in 6 steps"
     And I should see the phrase "Step 1: Learn about proper service"
     And I should see the phrase "Step 2: File a motion to dismiss your Alaska case"
-    And I should see the phrase "Step 3: Fill out the Certificate of Service"
-    And I should see the phrase "Step 4: File your documents with the court and serve the other parent"
+    And I should see the phrase "Step 3: File your documents with the court and serve the other parent"
+    And I should see the phrase "Step 4: Serve the other parent"
     And I should see the phrase "Step 5: What to expect after you file your documents"
     And I should see the phrase "Step 6: Get more information or help"
     And I take a screenshot
@@ -30,19 +34,24 @@ Scenario: Row #22
 Scenario: Row #23
   Given I start the interview at "responding_child_custody_action_plan.yml"
     And I get to the question id "final screen" with this data:
-    | var                                  | value            | trigger | 
-    | user_need                            | answer custody   |         | 
-    | type_of_response['case in 2 states'] | True             |         | 
-    | type_of_response['improper service'] | True             |         | 
-    | stage_of_other_case                  | ended with order |         | 
-    | proper_service                       | False            |         | 
-    And I should see the phrase "Your Action Plan for responding in your child custody case in 6 steps"
+    | var                                  | value             | trigger | 
+    | user_need                            | answer custody    |         | 
+    | type_of_response['case in 2 states'] | True              |         | 
+    | type_of_response['improper service'] | True              |         | 
+    | stage_of_other_case                  | ended with order  |         | 
+    | filling_manner                       | electronically    |         | 
+    | filing_method                        | mail or in person |         | 
+    | proper_service                       | False             |         | 
+    | have_complaint                       | True              |         | 
+    | other_party_exempt                   | no                |         | 
+    And I should see the phrase "Your Action Plan for responding in your child custody case in 7 steps"
     And I should see the phrase "Step 1: Learn about proper service and default judgment"
     And I should see the phrase "Step 2: File a motion to dismiss your Alaska case"
-    And I should see the phrase "Step 3: Fill out the Certificate of Service"
+    And I should see the phrase "Step 3: Sign if you use paper forms or do not use TrueFiling"
     And I should see the phrase "Step 4: File your documents with the court and serve the other parent"
-    And I should see the phrase "Step 5: What to expect after you file your documents"
-    And I should see the phrase "Step 6: Get more information or help"
+    And I should see the phrase "Step 5: Serve the other parent"
+    And I should see the phrase "Step 6: What to expect after you file your documents"
+    And I should see the phrase "Step 7: Get more information or help"
     And I take a screenshot
     And I download "responding_child_custody_action_plan.pdf"
     And I download "responding_child_custody_action_plan.docx"
@@ -57,19 +66,23 @@ Scenario: Row #24
     | type_of_response['improper service'] | True           |         | 
     | stage_of_other_case                  | still going    |         | 
     | jurisdiction                         | True           |         | 
+    | filling_manner                       | electronically |         | 
+    | filing_method                        | dunno          |         | 
     | proper_service                       | True           |         | 
-    And I should see the phrase "Your Action Plan for responding in your child custody case in 11 steps"
+    | other_party_exempt                   | none           |         | 
+    And I should see the phrase "Your Action Plan for responding in your child custody case in 12 steps"
     And I should see the phrase "Step 1: Learn if Alaska is the right state for your custody case"
     And I should see the phrase "Step 2: Learn about proper service"
     And I should see the phrase "Step 3: Options when you have cases in 2 states"
     And I should see the phrase "Step 4: If you decide to move forward in Alaska, fill out the forms to answer the complaint and respond within 20 days"
     And I should see the phrase "Step 5: If you decide to move forward in the other state, file a motion to dismiss your Alaska case"
-    And I should see the phrase "Step 6: Fill out the Certificate of Service"
+    And I should see the phrase "Step 6: Sign if you use paper forms or do not use TrueFiling"
     And I should see the phrase "Step 7: File your documents with the court and serve the other parent"
-    And I should see the phrase "Step 8: Read the “Domestic Relations Procedural Order” or Standing Order that was with the Complaint"
-    And I should see the phrase "Step 9: What to expect after you file your documents"
-    And I should see the phrase "Step 10: If your case is moving forward in Alaska, learn more about the process"
-    And I should see the phrase "Step 11: Get more information or help"
+    And I should see the phrase "Step 8: Serve the other parent"
+    And I should see the phrase "Step 9: Read the Standing Order"
+    And I should see the phrase "Step 10: What to expect after you file your documents"
+    And I should see the phrase "Step 11: If your case is moving forward in Alaska, learn more about the process"
+    And I should see the phrase "Step 12: Get more information or help"
     And I take a screenshot
     And I download "responding_child_custody_action_plan.pdf"
     And I download "responding_child_custody_action_plan.docx"
@@ -84,19 +97,23 @@ Scenario: Row #25
     | type_of_response['improper service'] | True           |         | 
     | stage_of_other_case                  | still going    |         | 
     | jurisdiction                         | True           |         | 
+    | filling_manner                       | paper          |         | 
+    | filing_method                        | efiling        |         | 
     | proper_service                       | False          |         | 
-    And I should see the phrase "Your Action Plan for responding in your child custody case in 11 steps"
+    | have_complaint                       | False          |         | 
+    And I should see the phrase "Your Action Plan for responding in your child custody case in 12 steps"
     And I should see the phrase "Step 1: Learn if Alaska is the right state for your custody case"
     And I should see the phrase "Step 2: Learn about proper service and default judgment"
     And I should see the phrase "Step 3: Options when you have cases in 2 states and you were not properly served"
     And I should see the phrase "Step 4: If you decide to move forward in Alaska, fill out the forms to answer the complaint"
     And I should see the phrase "Step 5: If you decide to move forward in the other state, file a motion to dismiss your Alaska case"
-    And I should see the phrase "Step 6: Fill out the Certificate of Service"
+    And I should see the phrase "Step 6: Sign if you use paper forms or do not use TrueFiling"
     And I should see the phrase "Step 7: File your documents with the court and serve the other parent"
-    And I should see the phrase "Step 8: Read the “Domestic Relations Procedural Order” or Standing Order that was with the Complaint"
-    And I should see the phrase "Step 9: What to expect after you file your documents"
-    And I should see the phrase "Step 10: If your case is moving forward in Alaska, learn more about the process"
-    And I should see the phrase "Step 11: Get more information or help"
+    And I should see the phrase "Step 8: Serve the other parent"
+    And I should see the phrase "Step 9: Read the Standing Order"
+    And I should see the phrase "Step 10: What to expect after you file your documents"
+    And I should see the phrase "Step 11: If your case is moving forward in Alaska, learn more about the process"
+    And I should see the phrase "Step 12: Get more information or help"
     And I take a screenshot
     And I download "responding_child_custody_action_plan.pdf"
     And I download "responding_child_custody_action_plan.docx"
@@ -105,25 +122,30 @@ Scenario: Row #25
 Scenario: Row #26
   Given I start the interview at "responding_child_custody_action_plan.yml"
     And I get to the question id "final screen" with this data:
-    | var                                  | value          | trigger | 
-    | user_need                            | answer custody |         | 
-    | type_of_response['case in 2 states'] | True           |         | 
-    | type_of_response['improper service'] | True           |         | 
-    | stage_of_other_case                  | still going    |         | 
-    | jurisdiction                         | False          |         | 
-    | proper_service                       | True           |         | 
-    And I should see the phrase "Your Action Plan for responding in your child custody case in 11 steps"
+    | var                                  | value             | trigger | 
+    | user_need                            | answer custody    |         | 
+    | type_of_response['case in 2 states'] | True              |         | 
+    | type_of_response['improper service'] | True              |         | 
+    | stage_of_other_case                  | still going       |         | 
+    | jurisdiction                         | False             |         | 
+    | filling_manner                       | paper             |         | 
+    | filing_method                        | mail or in person |         | 
+    | proper_service                       | True              |         | 
+    | other_party_exempt                   | yes               |         | 
+    | other_party_enter_email              | False             |         | 
+    And I should see the phrase "Your Action Plan for responding in your child custody case in 12 steps"
     And I should see the phrase "Step 1: Learn if Alaska is the right state for your custody case"
     And I should see the phrase "Step 2: Learn about proper service"
     And I should see the phrase "Step 3: Options when you have cases in 2 states"
     And I should see the phrase "Step 4: If you decide to move forward in Alaska, fill out the forms to answer the complaint and respond within 20 days"
     And I should see the phrase "Step 5: If you decide to move forward in the other state, file a motion to dismiss your Alaska case"
-    And I should see the phrase "Step 6: Fill out the Certificate of Service"
+    And I should see the phrase "Step 6: Sign if you use paper forms or do not use TrueFiling"
     And I should see the phrase "Step 7: File your documents with the court and serve the other parent"
-    And I should see the phrase "Step 8: Read the “Domestic Relations Procedural Order” or Standing Order that was with the Complaint"
-    And I should see the phrase "Step 9: What to expect after you file your documents"
-    And I should see the phrase "Step 10: If your case is moving forward in Alaska, learn more about the process"
-    And I should see the phrase "Step 11: Get more information or help"
+    And I should see the phrase "Step 8: Serve the other parent"
+    And I should see the phrase "Step 9: Read the Standing Order"
+    And I should see the phrase "Step 10: What to expect after you file your documents"
+    And I should see the phrase "Step 11: If your case is moving forward in Alaska, learn more about the process"
+    And I should see the phrase "Step 12: Get more information or help"
     And I take a screenshot
     And I download "responding_child_custody_action_plan.pdf"
     And I download "responding_child_custody_action_plan.docx"
@@ -138,19 +160,24 @@ Scenario: Row #27
     | type_of_response['improper service'] | True           |         | 
     | stage_of_other_case                  | still going    |         | 
     | jurisdiction                         | False          |         | 
+    | filling_manner                       | paper          |         | 
+    | filing_method                        | dunno          |         | 
     | proper_service                       | False          |         | 
-    And I should see the phrase "Your Action Plan for responding in your child custody case in 11 steps"
+    | have_complaint                       | True           |         | 
+    | other_party_exempt                   | no             |         | 
+    And I should see the phrase "Your Action Plan for responding in your child custody case in 12 steps"
     And I should see the phrase "Step 1: Learn if Alaska is the right state for your custody case"
     And I should see the phrase "Step 2: Learn about proper service and default judgment"
     And I should see the phrase "Step 3: Options when you have cases in 2 states"
     And I should see the phrase "Step 4: If you decide to move forward in Alaska, fill out the forms to answer the complaint"
     And I should see the phrase "Step 5: If you decide to move forward in the other state, file a motion to dismiss your Alaska case"
-    And I should see the phrase "Step 6: Fill out the Certificate of Service"
+    And I should see the phrase "Step 6: Sign if you use paper forms or do not use TrueFiling"
     And I should see the phrase "Step 7: File your documents with the court and serve the other parent"
-    And I should see the phrase "Step 8: Read the “Domestic Relations Procedural Order” or Standing Order that was with the Complaint"
-    And I should see the phrase "Step 9: What to expect after you file your documents"
-    And I should see the phrase "Step 10: If your case is moving forward in Alaska, learn more about the process"
-    And I should see the phrase "Step 11: Get more information or help"
+    And I should see the phrase "Step 8: Serve the other parent"
+    And I should see the phrase "Step 9: Read the Standing Order"
+    And I should see the phrase "Step 10: What to expect after you file your documents"
+    And I should see the phrase "Step 11: If your case is moving forward in Alaska, learn more about the process"
+    And I should see the phrase "Step 12: Get more information or help"
     And I take a screenshot
     And I download "responding_child_custody_action_plan.pdf"
     And I download "responding_child_custody_action_plan.docx"
@@ -164,14 +191,17 @@ Scenario: Row #28
     | type_of_response['case in 2 states'] | True                |         | 
     | type_of_response['improper service'] | True                |         | 
     | stage_of_other_case                  | ended with no order |         | 
+    | filling_manner                       | electronically      |         | 
+    | filing_method                        | efiling             |         | 
     | proper_service                       | True                |         | 
+    | other_party_exempt                   | none                |         | 
     And I should see the phrase "Your Action Plan for responding in your child custody case in 9 steps"
     And I should see the phrase "Step 1: You can move forward with your Alaska case"
     And I should see the phrase "Step 2: Learn about proper service"
     And I should see the phrase "Step 3: Fill out the forms to answer the complaint and respond within 20 days"
-    And I should see the phrase "Step 4: Fill out the Certificate of Service"
-    And I should see the phrase "Step 5: File your documents with the court and serve the other parent"
-    And I should see the phrase "Step 6: Read the “Domestic Relations Procedural Order” or Standing Order that was with the Complaint"
+    And I should see the phrase "Step 4: File your documents with the court and serve the other parent"
+    And I should see the phrase "Step 5: Serve the other parent"
+    And I should see the phrase "Step 6: Read the Standing Order"
     And I should see the phrase "Step 7: What to expect after you file your Answer"
     And I should see the phrase "Step 8: If your case is moving forward in Alaska, learn more about the process"
     And I should see the phrase "Step 9: Get more information or help"
@@ -188,18 +218,22 @@ Scenario: Row #29
     | type_of_response['case in 2 states'] | True                |         | 
     | type_of_response['improper service'] | True                |         | 
     | stage_of_other_case                  | ended with no order |         | 
+    | filling_manner                       | electronically      |         | 
+    | filing_method                        | mail or in person   |         | 
     | proper_service                       | False               |         | 
-    And I should see the phrase "Your Action Plan for responding in your child custody case in 10 steps"
+    | have_complaint                       | False               |         | 
+    And I should see the phrase "Your Action Plan for responding in your child custody case in 11 steps"
     And I should see the phrase "Step 1: You can move forward with your Alaska case"
     And I should see the phrase "Step 2: Learn about proper service and default judgment"
     And I should see the phrase "Step 3: Decide if you want to move forward or wait"
     And I should see the phrase "Step 4: If you decide to move forward, fill out the forms to answer the complaint"
-    And I should see the phrase "Step 5: If you decide to move forward, fill out the Certificate of Service"
+    And I should see the phrase "Step 5: Sign if you use paper forms or do not use TrueFiling"
     And I should see the phrase "Step 6: If you decide to move forward, file your documents with the court and serve the other parent"
-    And I should see the phrase "Step 7: Read the "Domestic Relations Procedural Order" or Standing Order that was with the Complaint"
-    And I should see the phrase "Step 8: What to expect after you file your Answer"
-    And I should see the phrase "Step 9: If your case is moving forward in Alaska, learn more about the process"
-    And I should see the phrase "Step 10: Get more information or help"
+    And I should see the phrase "Step 7: Serve the other parent"
+    And I should see the phrase "Step 8: Read the Standing Order"
+    And I should see the phrase "Step 9: What to expect after you file your Answer"
+    And I should see the phrase "Step 10: If your case is moving forward in Alaska, learn more about the process"
+    And I should see the phrase "Step 11: Get more information or help"
     And I take a screenshot
     And I download "responding_child_custody_action_plan.pdf"
     And I download "responding_child_custody_action_plan.docx"
@@ -211,13 +245,18 @@ Scenario: Row #32
     | var                                  | value            | trigger | 
     | user_need                            | answer custody   |         | 
     | type_of_response['case in 2 states'] | True             |         | 
+    | filling_manner                       | electronically   |         | 
+    | filing_method                        | dunno            |         | 
     | stage_of_other_case                  | ended with order |         | 
-    And I should see the phrase "Your Action Plan for responding in your child custody case in 5 steps"
+    | other_party_exempt                   | yes              |         | 
+    | other_party_enter_email              | None             |         | 
+    And I should see the phrase "Your Action Plan for responding in your child custody case in 6 steps"
     And I should see the phrase "Step 1: File a motion to dismiss your Alaska case"
-    And I should see the phrase "Step 2: Fill out the Certificate of Service"
+    And I should see the phrase "Step 2: Sign if you use paper forms or do not use TrueFiling"
     And I should see the phrase "Step 3: File your documents with the court and serve the other parent"
-    And I should see the phrase "Step 4: What to expect after you file your documents"
-    And I should see the phrase "Step 5: Get more information or help"
+    And I should see the phrase "Step 4: Serve the other parent"
+    And I should see the phrase "Step 5: What to expect after you file your documents"
+    And I should see the phrase "Step 6: Get more information or help"
     And I take a screenshot
     And I download "responding_child_custody_action_plan.pdf"
     And I download "responding_child_custody_action_plan.docx"
@@ -230,18 +269,22 @@ Scenario: Row #33
     | user_need                            | answer custody |         | 
     | type_of_response['case in 2 states'] | True           |         | 
     | stage_of_other_case                  | still going    |         | 
+    | filling_manner                       | paper          |         | 
+    | filing_method                        | efiling        |         | 
     | jurisdiction                         | True           |         | 
-    And I should see the phrase "Your Action Plan for responding in your child custody case in 10 steps"
+    | other_party_exempt                   | no             |         | 
+    And I should see the phrase "Your Action Plan for responding in your child custody case in 11 steps"
     And I should see the phrase "Step 1: Learn if Alaska is the right state for your custody case"
     And I should see the phrase "Step 2: Options when you have cases in 2 states"
     And I should see the phrase "Step 3: If you decide to move forward in Alaska, fill out the forms to answer the complaint and respond within 20 days"
     And I should see the phrase "Step 4: If you decide to move forward in the other state, file a motion to dismiss your Alaska case"
-    And I should see the phrase "Step 5: Fill out the Certificate of Service"
+    And I should see the phrase "Step 5: Sign if you use paper forms or do not use TrueFiling"
     And I should see the phrase "Step 6: File your documents with the court and serve the other parent"
-    And I should see the phrase "Step 7: Read the “Domestic Relations Procedural Order” or Standing Order that was with the Complaint"
-    And I should see the phrase "Step 8: What to expect after you file your documents"
-    And I should see the phrase "Step 9: If your case is moving forward in Alaska, learn more about the process"
-    And I should see the phrase "Step 10: Get more information or help"
+    And I should see the phrase "Step 7: Serve the other parent"
+    And I should see the phrase "Step 8: Read the Standing Order"
+    And I should see the phrase "Step 9: What to expect after you file your documents"
+    And I should see the phrase "Step 10: If your case is moving forward in Alaska, learn more about the process"
+    And I should see the phrase "Step 11: Get more information or help"
     And I take a screenshot
     And I download "responding_child_custody_action_plan.pdf"
     And I download "responding_child_custody_action_plan.docx"
@@ -250,22 +293,26 @@ Scenario: Row #33
 Scenario: Row #34
   Given I start the interview at "responding_child_custody_action_plan.yml"
     And I get to the question id "final screen" with this data:
-    | var                                  | value          | trigger | 
-    | user_need                            | answer custody |         | 
-    | type_of_response['case in 2 states'] | True           |         | 
-    | stage_of_other_case                  | still going    |         | 
-    | jurisdiction                         | False          |         | 
-    And I should see the phrase "Your Action Plan for responding in your child custody case in 10 steps"
+    | var                                  | value             | trigger | 
+    | user_need                            | answer custody    |         | 
+    | type_of_response['case in 2 states'] | True              |         | 
+    | stage_of_other_case                  | still going       |         | 
+    | filling_manner                       | paper             |         | 
+    | filing_method                        | mail or in person |         | 
+    | jurisdiction                         | False             |         | 
+    | other_party_exempt                   | none              |         | 
+    And I should see the phrase "Your Action Plan for responding in your child custody case in 11 steps"
     And I should see the phrase "Step 1: Learn if Alaska is the right state for your custody case"
     And I should see the phrase "Step 2: Options when you have cases in 2 states"
     And I should see the phrase "Step 3: If you decide to move forward in Alaska, fill out the forms to answer the complaint and respond within 20 days"
     And I should see the phrase "Step 4: If you decide to move forward in the other state, file a motion to dismiss your Alaska case"
-    And I should see the phrase "Step 5: Fill out the Certificate of Service"
+    And I should see the phrase "Step 5: Sign if you use paper forms or do not use TrueFiling"
     And I should see the phrase "Step 6: File your documents with the court and serve the other parent"
-    And I should see the phrase "Step 7: Read the “Domestic Relations Procedural Order” or Standing Order that was with the Complaint"
-    And I should see the phrase "Step 8: What to expect after you file your documents"
-    And I should see the phrase "Step 9: If your case is moving forward in Alaska, learn more about the process"
-    And I should see the phrase "Step 10: Get more information or help"
+    And I should see the phrase "Step 7: Serve the other parent"
+    And I should see the phrase "Step 8: Read the Standing Order"
+    And I should see the phrase "Step 9: What to expect after you file your documents"
+    And I should see the phrase "Step 10: If your case is moving forward in Alaska, learn more about the process"
+    And I should see the phrase "Step 11: Get more information or help"
     And I take a screenshot
     And I download "responding_child_custody_action_plan.pdf"
     And I download "responding_child_custody_action_plan.docx"
@@ -277,16 +324,21 @@ Scenario: Row #35
     | var                                  | value               | trigger | 
     | user_need                            | answer custody      |         | 
     | type_of_response['case in 2 states'] | True                |         | 
+    | filling_manner                       | paper               |         | 
+    | filing_method                        | dunno               |         | 
     | stage_of_other_case                  | ended with no order |         | 
-    And I should see the phrase "Your Action Plan for responding in your child custody case in 8 steps"
+    | other_party_exempt                   | yes                 |         | 
+    | other_party_enter_email              | True                |         | 
+    And I should see the phrase "Your Action Plan for responding in your child custody case in 9 steps"
     And I should see the phrase "Step 1: You can move forward with your Alaska case"
     And I should see the phrase "Step 2: Fill out the forms to answer the complaint and respond within 20 days"
-    And I should see the phrase "Step 3: Fill out the Certificate of Service"
+    And I should see the phrase "Step 3: Sign if you use paper forms or do not use TrueFiling"
     And I should see the phrase "Step 4: File your documents with the court and serve the other parent"
-    And I should see the phrase "Step 5: Read the “Domestic Relations Procedural Order” or Standing Order that was with the Complaint"
-    And I should see the phrase "Step 6: What to expect after you file your Answer"
-    And I should see the phrase "Step 7: Learn more about the process"
-    And I should see the phrase "Step 8: Get more information or help"
+    And I should see the phrase "Step 5: Serve the other parent"
+    And I should see the phrase "Step 6: Read the Standing Order"
+    And I should see the phrase "Step 7: What to expect after you file your Answer"
+    And I should see the phrase "Step 8: Learn more about the process"
+    And I should see the phrase "Step 9: Get more information or help"
     And I take a screenshot
     And I download "responding_child_custody_action_plan.pdf"
     And I download "responding_child_custody_action_plan.docx"
@@ -302,12 +354,15 @@ Scenario: Row #62m
     | stage_of_other_case                  | ended with order  |         | 
     | stage_of_default                     | application filed |         | 
     | military                             | True              |         | 
+    | filling_manner                       | electronically    |         | 
+    | filing_method                        | efiling           |         | 
     | proper_service                       | True              |         | 
+    | other_party_exempt                   | no                |         | 
     And I should see the phrase "Your Action Plan for responding in your child custody case in 6 steps"
     And I should see the phrase "Step 1: Learn about default judgment"
     And I should see the phrase "Step 2: File a motion to dismiss your Alaska case"
-    And I should see the phrase "Step 3: Fill out the Certificate of Service"
-    And I should see the phrase "Step 4: File your documents with the court and serve the other parent"
+    And I should see the phrase "Step 3: File your documents with the court and serve the other parent"
+    And I should see the phrase "Step 4: Serve the other parent"
     And I should see the phrase "Step 5: What to expect after you file your documents"
     And I should see the phrase "Step 6: Get more information or help"
     And I take a screenshot
@@ -325,14 +380,19 @@ Scenario: Row #63
     | stage_of_other_case                  | ended with order  |         | 
     | stage_of_default                     | application filed |         | 
     | military                             | False             |         | 
+    | filling_manner                       | electronically    |         | 
+    | filing_method                        | mail or in person |         | 
     | proper_service                       | False             |         | 
-    And I should see the phrase "Your Action Plan for responding in your child custody case in 6 steps"
+    | have_complaint                       | True              |         |
+    | other_party_exempt                   | none              |         | 
+    And I should see the phrase "Your Action Plan for responding in your child custody case in 7 steps"
     And I should see the phrase "Step 1: Learn about proper service and default judgment"
     And I should see the phrase "Step 2: File a motion to dismiss your Alaska case"
-    And I should see the phrase "Step 3: Fill out the Certificate of Service"
+    And I should see the phrase "Step 3: Sign if you use paper forms or do not use TrueFiling"
     And I should see the phrase "Step 4: File your documents with the court and serve the other parent"
-    And I should see the phrase "Step 5: What to expect after you file your documents"
-    And I should see the phrase "Step 6: Get more information or help"
+    And I should see the phrase "Step 5: Serve the other parent"
+    And I should see the phrase "Step 6: What to expect after you file your documents"
+    And I should see the phrase "Step 7: Get more information or help"
     And I take a screenshot
     And I download "responding_child_custody_action_plan.pdf"
     And I download "responding_child_custody_action_plan.docx"
@@ -348,14 +408,19 @@ Scenario: Row #64
     | stage_of_other_case                  | ended with order  |         | 
     | stage_of_default                     | hearing scheduled |         | 
     | military                             | False             |         | 
+    | filling_manner                       | electronically    |         | 
+    | filing_method                        | dunno             |         | 
     | proper_service                       | True              |         | 
-    And I should see the phrase "Your Action Plan for responding in your child custody case in 6 steps"
+    | other_party_exempt                   | yes               |         | 
+    | other_party_enter_email              | False             |         | 
+    And I should see the phrase "Your Action Plan for responding in your child custody case in 7 steps"
     And I should see the phrase "Step 1: Learn about default judgment"
     And I should see the phrase "Step 2: File a motion to dismiss your Alaska case"
-    And I should see the phrase "Step 3: Fill out the Certificate of Service"
+    And I should see the phrase "Step 3: Sign if you use paper forms or do not use TrueFiling"
     And I should see the phrase "Step 4: File your documents with the court and serve the other parent"
-    And I should see the phrase "Step 5: What to expect after you file your documents"
-    And I should see the phrase "Step 6: Get more information or help"
+    And I should see the phrase "Step 5: Serve the other parent"
+    And I should see the phrase "Step 6: What to expect after you file your documents"
+    And I should see the phrase "Step 7: Get more information or help"
     And I take a screenshot
     And I download "responding_child_custody_action_plan.pdf"
     And I download "responding_child_custody_action_plan.docx"
@@ -371,14 +436,19 @@ Scenario: Row #65m
     | stage_of_other_case                  | ended with order  |         | 
     | stage_of_default                     | hearing scheduled |         | 
     | military                             | True              |         | 
+    | filling_manner                       | paper             |         | 
+    | filing_method                        | efiling           |         | 
     | proper_service                       | False             |         | 
-    And I should see the phrase "Your Action Plan for responding in your child custody case in 6 steps"
+    | have_complaint                       | True              |         |
+    | other_party_exempt                   | no                |         | 
+    And I should see the phrase "Your Action Plan for responding in your child custody case in 7 steps"
     And I should see the phrase "Step 1: Learn about proper service and default judgment"
     And I should see the phrase "Step 2: File a motion to dismiss your Alaska case"
-    And I should see the phrase "Step 3: Fill out the Certificate of Service"
+    And I should see the phrase "Step 3: Sign if you use paper forms or do not use TrueFiling"
     And I should see the phrase "Step 4: File your documents with the court and serve the other parent"
-    And I should see the phrase "Step 5: What to expect after you file your documents"
-    And I should see the phrase "Step 6: Get more information or help"
+    And I should see the phrase "Step 5: Serve the other parent"
+    And I should see the phrase "Step 6: What to expect after you file your documents"
+    And I should see the phrase "Step 7: Get more information or help"
     And I take a screenshot
     And I download "responding_child_custody_action_plan.pdf"
     And I download "responding_child_custody_action_plan.docx"
@@ -387,23 +457,27 @@ Scenario: Row #65m
 Scenario: Row #66
   Given I start the interview at "responding_child_custody_action_plan.yml"
     And I get to the question id "final screen" with this data:
-    | var                                  | value            | trigger | 
-    | user_need                            | answer custody   |         | 
-    | type_of_response['case in 2 states'] | True             |         | 
-    | type_of_response['default']          | True             |         | 
-    | stage_of_other_case                  | ended with order |         | 
-    | stage_of_default                     | judgment entered |         | 
-    | military                             | False            |         | 
-    | proper_service                       | True             |         | 
-    And I should see the phrase "Your Action Plan for responding in your child custody case in 8 steps"
+    | var                                  | value             | trigger | 
+    | user_need                            | answer custody    |         | 
+    | type_of_response['case in 2 states'] | True              |         | 
+    | type_of_response['default']          | True              |         | 
+    | stage_of_other_case                  | ended with order  |         | 
+    | stage_of_default                     | judgment entered  |         | 
+    | military                             | False             |         | 
+    | filling_manner                       | paper             |         | 
+    | filing_method                        | mail or in person |         | 
+    | proper_service                       | True              |         | 
+    | other_party_exempt                   | none              |         | 
+    And I should see the phrase "Your Action Plan for responding in your child custody case in 9 steps"
     And I should see the phrase "Step 1: Learn about default judgment"
     And I should see the phrase "Step 2: Options when the judge entered a default judgment"
     And I should see the phrase "Step 3: Learn about the Motion to Set Aside Judgment or Order"
-    And I should see the phrase "Step 4: If you want to ask to set aside the default, fill out the forms"
-    And I should see the phrase "Step 5: If you are asking to set aside the default, fill out the Certificate of Service"
+    And I should see the phrase "Step 4: If you want to ask the court to set aside the default, fill out the forms"
+    And I should see the phrase "Step 5: Sign if you use paper forms or do not use TrueFiling"
     And I should see the phrase "Step 6: If you are asking to set aside the default, file your documents with the court and serve the other parent"
-    And I should see the phrase "Step 7: What to expect after you file your documents"
-    And I should see the phrase "Step 8: Get more information or help"
+    And I should see the phrase "Step 7: Serve the other parent"
+    And I should see the phrase "Step 8: What to expect after you file your documents"
+    And I should see the phrase "Step 9: Get more information or help"
     And I take a screenshot
     And I download "responding_child_custody_action_plan.pdf"
     And I download "responding_child_custody_action_plan.docx"
@@ -419,16 +493,20 @@ Scenario: Row #67m
     | stage_of_other_case                  | ended with order |         | 
     | stage_of_default                     | judgment entered |         | 
     | military                             | True             |         | 
+    | filling_manner                       | paper            |         | 
+    | filing_method                        | dunno            |         | 
     | proper_service                       | False            |         | 
-    And I should see the phrase "Your Action Plan for responding in your child custody case in 8 steps"
+    | have_complaint                       | False            |         | 
+    And I should see the phrase "Your Action Plan for responding in your child custody case in 9 steps"
     And I should see the phrase "Step 1: Learn about proper service and default judgment"
     And I should see the phrase "Step 2: Options when the judge entered a default judgment"
     And I should see the phrase "Step 3: Learn about the Motion to Set Aside Judgment or Order"
-    And I should see the phrase "Step 4: If you want to ask to set aside the default, fill out the forms"
-    And I should see the phrase "Step 5: If you are asking to set aside the default, fill out the Certificate of Service"
+    And I should see the phrase "Step 4: If you want to ask the court to set aside the default, fill out the forms"
+    And I should see the phrase "Step 5: Sign if you use paper forms or do not use TrueFiling"
     And I should see the phrase "Step 6: If you are asking to set aside the default, file your documents with the court and serve the other parent"
-    And I should see the phrase "Step 7: What to expect after you file your documents"
-    And I should see the phrase "Step 8: Get more information or help"
+    And I should see the phrase "Step 7: Serve the other parent"
+    And I should see the phrase "Step 8: What to expect after you file your documents"
+    And I should see the phrase "Step 9: Get more information or help"
     And I take a screenshot
     And I download "responding_child_custody_action_plan.pdf"
     And I download "responding_child_custody_action_plan.docx"
@@ -444,15 +522,18 @@ Scenario: Row #68
     | stage_of_other_case                  | ended with no order |         | 
     | stage_of_default                     | application filed   |         | 
     | military                             | False               |         | 
+    | filling_manner                       | electronically      |         | 
+    | filing_method                        | efiling             |         | 
     | proper_service                       | True                |         | 
+    | other_party_exempt                   | no                  |         | 
     And I should see the phrase "Your Action Plan for responding in your child custody case in 10 steps"
     And I should see the phrase "Step 1: You can move forward with your Alaska case"
     And I should see the phrase "Step 2: Learn about default judgment"
     And I should see the phrase "Step 3: Options if the other parent asked for a default judgment"
     And I should see the phrase "Step 4: If you decide to move forward, fill out the forms to answer the complaint and respond within 20 days"
-    And I should see the phrase "Step 5: If you decide to move forward, fill out the Certificate of Service"
-    And I should see the phrase "Step 6: If you decide to move forward, file your documents with the court and serve the other parent"
-    And I should see the phrase "Step 7: Read the “Domestic Relations Procedural Order” or Standing Order that was with the Complaint"
+    And I should see the phrase "Step 5: If you decide to move forward, file your documents with the court and serve the other parent"
+    And I should see the phrase "Step 6: Serve the other parent"
+    And I should see the phrase "Step 7: Read the Standing Order"
     And I should see the phrase "Step 8: What to expect after you file your documents"
     And I should see the phrase "Step 9: If your case is moving forward in Alaska, learn more about the process"
     And I should see the phrase "Step 10: Get more information or help"
@@ -471,19 +552,24 @@ Scenario: Row #71m
     | stage_of_other_case                  | ended with no order |         | 
     | stage_of_default                     | hearing scheduled   |         | 
     | military                             | True                |         | 
+    | filling_manner                       | electronically      |         | 
+    | filing_method                        | mail or in person   |         | 
     | proper_service                       | False               |         | 
-    And I should see the phrase "Your Action Plan for responding in your child custody case in 11 steps"
+    | have_complaint                       | True                |         | 
+    | other_party_exempt                   | none                |         | 
+    And I should see the phrase "Your Action Plan for responding in your child custody case in 12 steps"
     And I should see the phrase "Step 1: You can move forward with your Alaska case"
     And I should see the phrase "Step 2: Learn about proper service and default judgment"
     And I should see the phrase "Step 3: Options if the other parent asked for a default judgment"
     And I should see the phrase "Step 4: If you decide to move forward, fill out the forms to answer the complaint"
     And I should see the phrase "Step 5: Or, tell the judge you were not served the correct way and ask to dismiss the case"
-    And I should see the phrase "Step 6: Fill out the Certificate of Service"
+    And I should see the phrase "Step 6: Sign if you use paper forms or do not use TrueFiling"
     And I should see the phrase "Step 7: File your documents with the court and serve the other parent"
-    And I should see the phrase "Step 8: Read the “Domestic Relations Procedural Order” or Standing Order that was with the Complaint"
-    And I should see the phrase "Step 9: What to expect after you file your documents"
-    And I should see the phrase "Step 10: If your case is moving forward in Alaska, learn more about the process"
-    And I should see the phrase "Step 11: Get more information or help"
+    And I should see the phrase "Step 8: Serve the other parent"
+    And I should see the phrase "Step 9: Read the Standing Order"
+    And I should see the phrase "Step 10: What to expect after you file your documents"
+    And I should see the phrase "Step 11: If your case is moving forward in Alaska, learn more about the process"
+    And I should see the phrase "Step 12: Get more information or help"
     And I take a screenshot
     And I download "responding_child_custody_action_plan.pdf"
     And I download "responding_child_custody_action_plan.docx"
@@ -499,16 +585,22 @@ Scenario: Row #73
     | stage_of_other_case                  | ended with no order |         | 
     | stage_of_default                     | judgment entered    |         | 
     | military                             | False               |         | 
+    | filling_manner                       | electronically      |         | 
+    | filing_method                        | dunno               |         | 
     | proper_service                       | False               |         | 
-    And I should see the phrase "Your Action Plan for responding in your child custody case in 8 steps"
+    | have_complaint                       | True                |         | 
+    | other_party_exempt                   | yes                 |         | 
+    | other_party_enter_email              | True                |         | 
+    And I should see the phrase "Your Action Plan for responding in your child custody case in 9 steps"
     And I should see the phrase "Step 1: Learn about proper service and default judgment"
     And I should see the phrase "Step 2: Options when the judge entered a default judgment"
     And I should see the phrase "Step 3: Learn about the Motion to Set Aside Judgment or Order"
-    And I should see the phrase "Step 4: If you want to ask to set aside the default, fill out the forms"
-    And I should see the phrase "Step 5: If you are asking to set aside the default, fill out the Certificate of Service"
+    And I should see the phrase "Step 4: If you want to ask the court to set aside the default, fill out the forms"
+    And I should see the phrase "Step 5: Sign if you use paper forms or do not use TrueFiling"
     And I should see the phrase "Step 6: If you are asking to set aside the default, file your documents with the court and serve the other parent"
-    And I should see the phrase "Step 7: What to expect after you file your documents"
-    And I should see the phrase "Step 8: Get more information or help"
+    And I should see the phrase "Step 7: Serve the other parent"
+    And I should see the phrase "Step 8: What to expect after you file your documents"
+    And I should see the phrase "Step 9: Get more information or help"
     And I take a screenshot
     And I download "responding_child_custody_action_plan.pdf"
     And I download "responding_child_custody_action_plan.docx"
@@ -525,19 +617,23 @@ Scenario: Row #74
     | jurisdiction                         | True              |         | 
     | stage_of_default                     | application filed |         | 
     | military                             | False             |         | 
+    | filling_manner                       | paper             |         | 
+    | filing_method                        | efiling           |         | 
     | proper_service                       | True              |         | 
-    And I should see the phrase "Your Action Plan for responding in your child custody case in 11 steps"
+    | other_party_exempt                   | no                |         | 
+    And I should see the phrase "Your Action Plan for responding in your child custody case in 12 steps"
     And I should see the phrase "Step 1: Learn if Alaska is the right state for your custody case"
     And I should see the phrase "Step 2: Learn about default judgment"
     And I should see the phrase "Step 3: Options if the other parent asked for default judgment when you have cases in 2 states"
     And I should see the phrase "Step 4: If you decide to move forward in Alaska, fill out the forms to answer the complaint"
     And I should see the phrase "Step 5: If you decide to move forward in the other state, file a motion to dismiss your Alaska case"
-    And I should see the phrase "Step 6: Fill out the Certificate of Service"
+    And I should see the phrase "Step 6: Sign if you use paper forms or do not use TrueFiling"
     And I should see the phrase "Step 7: File your documents with the court and serve the other parent"
-    And I should see the phrase "Step 8: Read the “Domestic Relations Procedural Order” or Standing Order that was with the Complaint" 
-    And I should see the phrase "Step 9: What to expect after you file your documents"
-    And I should see the phrase "Step 10: If your case is moving forward in Alaska, learn more about the process"
-    And I should see the phrase "Step 11: Get more information or help"
+    And I should see the phrase "Step 8: Serve the other parent"
+    And I should see the phrase "Step 9: Read the Standing Order" 
+    And I should see the phrase "Step 10: What to expect after you file your documents"
+    And I should see the phrase "Step 11: If your case is moving forward in Alaska, learn more about the process"
+    And I should see the phrase "Step 12: Get more information or help"
     And I take a screenshot
     And I download "responding_child_custody_action_plan.pdf"
     And I download "responding_child_custody_action_plan.docx"
@@ -554,19 +650,24 @@ Scenario: Row #77m
     | jurisdiction                         | True              |         | 
     | stage_of_default                     | hearing scheduled |         | 
     | military                             | True              |         | 
+    | filling_manner                       | paper             |         | 
+    | filing_method                        | mail or in person |         | 
     | proper_service                       | False             |         | 
-    And I should see the phrase "Your Action Plan for responding in your child custody case in 11 steps"
+    | have_complaint                       | True                |         | 
+    | other_party_exempt                   | none              |         | 
+    And I should see the phrase "Your Action Plan for responding in your child custody case in 12 steps"
     And I should see the phrase "Step 1: Learn if Alaska is the right state for your custody case"
     And I should see the phrase "Step 2: Learn about proper service and default judgment"
     And I should see the phrase "Step 3: Options if the other parent asked for default judgment when you have cases in 2 states"
     And I should see the phrase "Step 4: If you decide to move forward in Alaska, fill out the forms to answer the complaint"
     And I should see the phrase "Step 5: If you decide to move forward in the other state, file a motion to dismiss your Alaska case"
-    And I should see the phrase "Step 6: Fill out the Certificate of Service"
+    And I should see the phrase "Step 6: Sign if you use paper forms or do not use TrueFiling"
     And I should see the phrase "Step 7: File your documents with the court and serve the other parent"
-    And I should see the phrase "Step 8: Read the “Domestic Relations Procedural Order” or Standing Order that was with the Complaint" 
-    And I should see the phrase "Step 9: What to expect after you file your documents"
-    And I should see the phrase "Step 10: If your case is moving forward in Alaska, learn more about the process"
-    And I should see the phrase "Step 11: Get more information or help"
+    And I should see the phrase "Step 8: Serve the other parent"
+    And I should see the phrase "Step 9: Read the Standing Order" 
+    And I should see the phrase "Step 10: What to expect after you file your documents"
+    And I should see the phrase "Step 11: If your case is moving forward in Alaska, learn more about the process"
+    And I should see the phrase "Step 12: Get more information or help"
     And I take a screenshot
     And I download "responding_child_custody_action_plan.pdf"
     And I download "responding_child_custody_action_plan.docx"
@@ -583,15 +684,21 @@ Scenario: Row #79
     | jurisdiction                         | True             |         | 
     | stage_of_default                     | judgment entered |         | 
     | military                             | False            |         | 
+    | filling_manner                       | paper            |         | 
+    | filing_method                        | dunno            |         | 
     | proper_service                       | False            |         | 
-    And I should see the phrase "Your Action Plan for responding in your child custody case in 7 steps"
+    | have_complaint                       | True                |         | 
+    | other_party_exempt                   | yes              |         | 
+    | other_party_enter_email              | False            |         | 
+    And I should see the phrase "Your Action Plan for responding in your child custody case in 8 steps"
     And I should see the phrase "Step 1: Learn about proper service and default judgment"
     And I should see the phrase "Step 2: Learn about the Motion to Set Aside Judgment or Order"
-    And I should see the phrase "Step 3: If you want to ask to set aside the default, fill out the forms"
-    And I should see the phrase "Step 4: If you are asking to set aside the default, fill out the Certificate of Service"
+    And I should see the phrase "Step 3: If you want to ask the court to set aside the default, fill out the forms"
+    And I should see the phrase "Step 4: Sign if you use paper forms or do not use TrueFiling"
     And I should see the phrase "Step 5: If you are asking to set aside the default, file your documents with the court and serve the other parent"
-    And I should see the phrase "Step 6: What to expect after you file your documents"
-    And I should see the phrase "Step 7: Get more information or help"
+    And I should see the phrase "Step 6: Serve the other parent"
+    And I should see the phrase "Step 7: What to expect after you file your documents"
+    And I should see the phrase "Step 8: Get more information or help"
 
 @row81m
 Scenario: Row #81m
@@ -605,16 +712,20 @@ Scenario: Row #81m
     | jurisdiction                         | False             |         | 
     | stage_of_default                     | application filed |         | 
     | military                             | False             |         | 
+    | filling_manner                       | electronically    |         | 
+    | filing_method                        | efiling           |         | 
     | proper_service                       | False             |         | 
+    | have_complaint                       | True              |         | 
+    | other_party_exempt                   | no                |         | 
     And I should see the phrase "Your Action Plan for responding in your child custody case in 11 steps"
     And I should see the phrase "Step 1: Learn if Alaska is the right state for your custody case"
     And I should see the phrase "Step 2: Learn about proper service and default judgment"
     And I should see the phrase "Step 3: Options if the other parent asked for default judgment when you have cases in 2 states"
     And I should see the phrase "Step 4: If you decide to move forward in Alaska, fill out the forms to answer the complaint"
     And I should see the phrase "Step 5: If you decide to move forward in the other state, file a motion to dismiss your Alaska case"
-    And I should see the phrase "Step 6: Fill out the Certificate of Service"
-    And I should see the phrase "Step 7: File your documents with the court and serve the other parent"
-    And I should see the phrase "Step 8: Read the “Domestic Relations Procedural Order” or Standing Order that was with the Complaint" 
+    And I should see the phrase "Step 6: File your documents with the court and serve the other parent"
+    And I should see the phrase "Step 7: Serve the other parent"
+    And I should see the phrase "Step 8: Read the Standing Order" 
     And I should see the phrase "Step 9: What to expect after you file your documents"
     And I should see the phrase "Step 10: If your case is moving forward in Alaska, learn more about the process"
     And I should see the phrase "Step 11: Get more information or help"
@@ -634,19 +745,23 @@ Scenario: Row #82
     | jurisdiction                         | False             |         | 
     | stage_of_default                     | hearing scheduled |         | 
     | military                             | False             |         | 
+    | filling_manner                       | electronically    |         | 
+    | filing_method                        | mail or in person |         | 
     | proper_service                       | True              |         | 
-    And I should see the phrase "Your Action Plan for responding in your child custody case in 11 steps"
+    | other_party_exempt                   | none              |         | 
+    And I should see the phrase "Your Action Plan for responding in your child custody case in 12 steps"
     And I should see the phrase "Step 1: Learn if Alaska is the right state for your custody case"
     And I should see the phrase "Step 2: Learn about default judgment"
     And I should see the phrase "Step 3: Options if the other parent asked for default judgment when you have cases in 2 states"
     And I should see the phrase "Step 4: If you decide to move forward in Alaska, fill out the forms to answer the complaint"
     And I should see the phrase "Step 5: If you decide to move forward in the other state, file a motion to dismiss your Alaska case"
-    And I should see the phrase "Step 6: Fill out the Certificate of Service"
+    And I should see the phrase "Step 6: Sign if you use paper forms or do not use TrueFiling"
     And I should see the phrase "Step 7: File your documents with the court and serve the other parent"
-    And I should see the phrase "Step 8: Read the “Domestic Relations Procedural Order” or Standing Order that was with the Complaint" 
-    And I should see the phrase "Step 9: What to expect after you file your documents"
-    And I should see the phrase "Step 10: If your case is moving forward in Alaska, learn more about the process"
-    And I should see the phrase "Step 11: Get more information or help"
+    And I should see the phrase "Step 8: Serve the other parent"
+    And I should see the phrase "Step 9: Read the Standing Order" 
+    And I should see the phrase "Step 10: What to expect after you file your documents"
+    And I should see the phrase "Step 11: If your case is moving forward in Alaska, learn more about the process"
+    And I should see the phrase "Step 12: Get more information or help"
     And I take a screenshot
     And I download "responding_child_custody_action_plan.pdf"
     And I download "responding_child_custody_action_plan.docx"
@@ -663,15 +778,17 @@ Scenario: Row #84m
     | jurisdiction                         | False            |         | 
     | stage_of_default                     | judgment entered |         | 
     | military                             | True             |         | 
+    | filling_manner                       | electronically   |         | 
+    | filing_method                        | dunno            |         | 
     | proper_service                       | True             |         | 
-    And I should see the phrase "Your Action Plan for responding in your child custody case in 7 steps"
+    | other_party_exempt                   | yes              |         | 
+    | other_party_enter_email              | None             |         | 
+    And I should see the phrase "Your Action Plan for responding in your child custody case in 8 steps"
     And I should see the phrase "Step 1: Learn about default judgment"
     And I should see the phrase "Step 2: Learn about the Motion to Set Aside Judgment or Order"
-    And I should see the phrase "Step 3: If you want to ask to set aside the default, fill out the forms"
-    And I should see the phrase "Step 4: If you are asking to set aside the default, fill out the Certificate of Service"
+    And I should see the phrase "Step 3: If you want to ask the court to set aside the default, fill out the forms"
+    And I should see the phrase "Step 4: Sign if you use paper forms or do not use TrueFiling"
     And I should see the phrase "Step 5: If you are asking to set aside the default, file your documents with the court and serve the other parent"
-    And I should see the phrase "Step 6: What to expect after you file your documents"
-    And I should see the phrase "Step 7: Get more information or help"
-
-
-
+    And I should see the phrase "Step 6: Serve the other parent"
+    And I should see the phrase "Step 7: What to expect after you file your documents"
+    And I should see the phrase "Step 8: Get more information or help"

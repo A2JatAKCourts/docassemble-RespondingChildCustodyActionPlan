@@ -1,12 +1,12 @@
 [build-system]
 requires = [
-    "setuptools==80.9.0",
+    "setuptools>=80.9.0",
 ]
 build-backend = "setuptools.build_meta"
 
 [project]
 name = "docassemble.RespondingChildCustodyActionPlan"
-version = "2025.11.07"
+version = "2026.05.11"
 description = "Responding in your child custody case  - action plan"
 readme = "README.md"
 authors = [
@@ -14,7 +14,7 @@ authors = [
 ]
 dependencies = [
     "docassemble.AKA2JBranding @ git+https://github.com/A2JatAKCourts/docassemble-AKA2JBranding.git@main",
-    "docassemble.AssemblyLine>=4.2.0",
+    "docassemble.AssemblyLine>=4.5.0",
 ]
 
 [project.urls]
