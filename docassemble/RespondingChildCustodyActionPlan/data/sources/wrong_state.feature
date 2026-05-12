@@ -392,7 +392,7 @@ Scenario: Row #58
     And I should see the phrase "Step 6: File your documents with the court and serve the other parent"
     And I should see the phrase "Step 7: Serve the other parent"
     And I should see the phrase "Step 8: Read the Standing Order"
-    And I should see the phrase "Step 9: What to expect after you file your documents"
+    And I should see the phrase "Step 9 What to expect after you file your documents"
     And I should see the phrase "Step 10: If your case is moving forward in Alaska, learn more about the process"
     And I should see the phrase "Step 11: Get more information or help"
     And I take a screenshot
