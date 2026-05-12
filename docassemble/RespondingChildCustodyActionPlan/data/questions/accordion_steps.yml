@@ -412,7 +412,7 @@ content: |
   ${ (log("DOS just before dismiss_step.subject ref") or "") }
   % if not proper_service:
     <div class="step-subheading">Option 2. Tell the judge you were not served the correct way and ask to dismiss the case</div>
-    If you think you were not served the correct way and you want the court to dismiss the case, you can fill out and file a **Motion to Dismiss** that tells the court why you think you were not served properly. See the dismiss step below.
+    If you think you were not served the correct way and you want the court to dismiss the case, you can fill out and file a **Motion to Dismiss** that tells the court why you think you were not served properly. See ${ dismiss_step.subject } step below.
   
     <div class="step-subheading">Option 3. Do nothing</div>
   % else:
@@ -430,7 +430,7 @@ comment: |
   2026-05-10 limit extra information when stage_of_other_case is 'ended with order'
 template: dismiss_step
 subject: |
-  Step ${ dismiss_idx }: 
+  Step ${ dismiss_idx }:
   % if type_of_response['wrong state'] and (user_need == 'answer divorce' or (user_need == 'answer custody' and not type_of_response['default'] and not jurisdiction)):
   If you think Alaska is the wrong state, file a motion to dismiss your Alaska case
   % elif type_of_response['case in 2 states'] and stage_of_other_case == 'ended with order':
@@ -441,10 +441,15 @@ subject: |
   % if (type_of_response['wrong state'] or (type_of_response.all_true('case in 2 states', 'default') and stage_of_default in('application filed', 'hearing scheduled') and stage_of_other_case == 'still going')) and (user_need == 'answer custody' and not jurisdiction):
   Fill out the forms to respond and tell the court Alaska is the wrong state
   % endif
-  % if (type_of_response.all_true('default', exclusive = True) or type_of_response.all_true('default', 'stay married', exclusive = True) or (type_of_response['default'] and ((type_of_response['wrong state'] and user_need == 'answer custody' and jurisdiction) or (type_of_response['case in 2 states'] and stage_of_other_case == 'ended with no order')))) and not proper_service and stage_of_default in('application filed', 'hearing scheduled'):
+  % if type_of_response['default'] and not proper_service:
   Or, tell the judge you were not served the correct way and ask to dismiss the case
   % endif
   % endif
+
+
+
+
+  
 content: |
   % if type_of_response['case in 2 states'] and stage_of_other_case == 'ended with order':
   Your situation is complicated. You may want to [talk to a lawyer](https://ak-courts.info/findlawyer). If you do not respond to the Alaska case, the Alaska judge may enter a ${ case_type } order. This could be very complicated if you already have a ${ case_type } order in another state.
