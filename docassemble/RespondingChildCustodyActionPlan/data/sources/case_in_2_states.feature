@@ -1,6 +1,6 @@
 @case_in_2_states
 Feature: User paths
-# 2026-04-30
+# 2026-05-13
 
 Background: 
   Given the maximum seconds for each Step is 90
@@ -699,6 +699,9 @@ Scenario: Row #79
     And I should see the phrase "Step 6: Serve the other parent"
     And I should see the phrase "Step 7: What to expect after you file your documents"
     And I should see the phrase "Step 8: Get more information or help"
+    And I take a screenshot
+    And I download "responding_child_custody_action_plan.pdf"
+    And I download "responding_child_custody_action_plan.docx"
 
 @row81m
 Scenario: Row #81m
@@ -792,3 +795,6 @@ Scenario: Row #84m
     And I should see the phrase "Step 6: Serve the other parent"
     And I should see the phrase "Step 7: What to expect after you file your documents"
     And I should see the phrase "Step 8: Get more information or help"
+    And I take a screenshot
+    And I download "responding_child_custody_action_plan.pdf"
+    And I download "responding_child_custody_action_plan.docx"
