@@ -1,6 +1,6 @@
 @wrong_state
 Feature: user paths
-# 2026-05-11
+# 2026-05-12
 
 Background: 
   Given the maximum seconds for each Step is 90
@@ -386,7 +386,7 @@ Scenario: Row #58
     And I should see the phrase "Your Action Plan for responding in your child custody case in 11 steps"
     And I should see the phrase "Step 1: Learn if Alaska is the right state for your custody case"
     And I should see the phrase "Step 2: Learn about proper service and default judgment"
-    And I should see the phrase "Step 3: Options if the other parent asked for a default judgment"
+    And I should see the phrase "Step 3: Options if the other parent asked for a default judgment and did not properly serve you"
     And I should see the phrase "Step 4: If you decide to move forward, fill out the forms to answer the complaint"
     And I should see the phrase "Step 5: Or, tell the judge you were not served the correct way and ask to dismiss the case"
     And I should see the phrase "Step 6: File your documents with the court and serve the other parent"
