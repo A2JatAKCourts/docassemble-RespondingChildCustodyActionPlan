@@ -1,6 +1,6 @@
 @truefiling
 Feature: User paths
-# 2026-05-11
+# 2026-05-14
 
 Background: 
   Given the maximum seconds for each Step is 90
@@ -26,7 +26,7 @@ Scenario: Row #1TF
     And I should see the phrase "Step 3: File your documents with the court and serve the other parent"
     And I should see the phrase "Step 4: Serve the other parent"
     And I tap the "#dHJ1ZWZpbGluZ19zZXJ2ZV9zdGVw .al_toggle" element and stay on the same page
-    And I should see the phrase "Read If I am using TrueFiling, how do I serve the other side?"
+    And I should see the phrase "Use TrueFiling to serve the other parent."
     And I should see the phrase "Step 5: Read the Standing Order that was with the Complaint"
     And I should see the phrase "Step 6: What to expect after you file your Answer"
     And I should see the phrase "Step 7: Learn more about the process"
@@ -62,7 +62,8 @@ Scenario: Row #143TF
     And I should see the phrase "Step 5: Serve the other parent"
     And I tap the "#dHJ1ZWZpbGluZ19zZXJ2ZV9zdGVw .al_toggle" element and stay on the same page
     And I should see the phrase "If you do not have a copy of the complaint, you may not know if the other person is using TrueFiling."
-    And I should see the phrase "Wait to file your documents with the court until after you fill out the Certificate of Service and serve the other parent."
+    And I should see the phrase "If they are not using TrueFiling:"
+    And I should see the phrase "Wait to file your document with the court until after you fill out the certificate of service and serve the other parent."
     And I should see the phrase "Step 6: What to expect after you file your documents"
     And I should see the phrase "Step 7: Get more information or help"
     And I take a screenshot
@@ -92,7 +93,7 @@ Scenario: Row #144TF
     And I should see the phrase "Step 5: File your documents with the court and serve the other parent"
     And I should see the phrase "Step 6: Serve the other parent"
     And I tap the "#dHJ1ZWZpbGluZ19zZXJ2ZV9zdGVw .al_toggle" element and stay on the same page
-    And I should see the phrase "Read If I am using TrueFiling, how do I serve the other side?"
+    And I should see the phrase "Use TrueFiling to serve the other parent."
     And I should see the phrase "Step 7: Read the Standing Order"
     And I should see the phrase "Step 8: What to expect after you file your Answer"
     And I should see the phrase "Step 9: If your case is moving forward in Alaska, learn more about the process"
@@ -127,7 +128,7 @@ Scenario: Row #147TF
     And I should see the phrase "Step 6: If you decide to move forward, file your documents with the court and serve the other parent"
     And I should see the phrase "Step 7: Serve the other parent"
     And I tap the "#dHJ1ZWZpbGluZ19zZXJ2ZV9zdGVw .al_toggle" element and stay on the same page
-    And I should see the phrase "Read If I am using TrueFiling, how do I serve the other side?"
+    And I should see the phrase "Use TrueFiling to serve the other parent."
     And I should see the phrase "Step 8: Read the Standing Order"
     And I should see the phrase "Step 9: What to expect after you file your Answer"
     And I should see the phrase "Step 10: If your case is moving forward in Alaska, learn more about the process"
@@ -259,7 +260,7 @@ Scenario: Row #158mTF
     | have_complaint                       | True              |         | 
     | other_party_exempt                   | yes               |         | 
     | other_party_enter_email              | True              |         | 
-    And I should see the phrase "Your Action Plan for responding in your child custody case in 27 steps"
+    And I should see the phrase "Your Action Plan for responding in your child custody case in 14 steps"
     And I should see the phrase "Step 1: Learn if Alaska is the right state for your custody case"
     And I should see the phrase "Step 2: Learn about proper service and default judgment"
     And I should see the phrase "Step 3: Options if the other parent asked for default judgment when you have cases in 2 states and you were not properly served"
@@ -269,6 +270,7 @@ Scenario: Row #158mTF
     And I should see the phrase "Step 7: File your documents with the court and serve the other parent"
     And I should see the phrase "Step 8: Serve the other parent"
     And I tap the "#dHJ1ZWZpbGluZ19zZXJ2ZV9zdGVw .al_toggle" element and stay on the same page
+    And I should see the phrase "Use TrueFiling to serve the other parent."
     And I should see the phrase "Follow the TrueFiling instructions to serve them at their email address."
     And I should see the phrase "Step 9: Read the Standing Order"
     And I should see the phrase "Step 10: What to expect after you file your documents"
@@ -300,22 +302,23 @@ Scenario: Row #161TF
     | paternity                            | False             |         | 
     | other_party_exempt                   | yes               |         | 
     | other_party_enter_email              | True              |         | 
-    And I should see the phrase "Your Action Plan for responding in your child custody case in 27 steps"
-    And I should see the phrase "Step 15: Learn if Alaska is the right state for your custody case"
-    And I should see the phrase "Step 16: Learn about default judgment"
-    And I should see the phrase "Step 17: Options if the other parent asked for default judgment when you have cases in 2 states"
-    And I should see the phrase "Step 18: If you decide to move forward in Alaska, fill out the forms to answer the complaint"
-    And I should see the phrase "Step 19: If you decide to move forward in the other state, file a motion to dismiss your Alaska case"
-    And I should see the phrase "Step 20: Sign if you use paper forms or do not use TrueFiling"
-    And I should see the phrase "Step 21: File your documents with the court and serve the other parent"
-    And I should see the phrase "Step 22: Serve the other parent"
+    And I should see the phrase "Your Action Plan for responding in your child custody case in 13 steps"
+    And I should see the phrase "Step 1: Learn if Alaska is the right state for your custody case"
+    And I should see the phrase "Step 2: Learn about default judgment"
+    And I should see the phrase "Step 3: Options if the other parent asked for default judgment when you have cases in 2 states"
+    And I should see the phrase "Step 4: If you decide to move forward in Alaska, fill out the forms to answer the complaint"
+    And I should see the phrase "Step 5: If you decide to move forward in the other state, file a motion to dismiss your Alaska case"
+    And I should see the phrase "Step 6: Sign if you use paper forms or do not use TrueFiling"
+    And I should see the phrase "Step 7: File your documents with the court and serve the other parent"
+    And I should see the phrase "Step 8: Serve the other parent"
     And I tap the "#dHJ1ZWZpbGluZ19zZXJ2ZV9zdGVw .al_toggle" element and stay on the same page
+    And I should see the phrase "Use TrueFiling to serve the other parent."
     And I should see the phrase "Follow the TrueFiling instructions to serve them at their email address."
-    And I should see the phrase "Step 23: Read the Standing Order" 
-    And I should see the phrase "Step 24: What to expect after you file your documents"
-    And I should see the phrase "Step 25: If your case is moving forward in Alaska, learn more about the process"
-    And I should see the phrase "Step 26: Abuse or domestic violence and parenting"
-    And I should see the phrase "Step 27: Get more information or help"
+    And I should see the phrase "Step 9: Read the Standing Order"
+    And I should see the phrase "Step 10: What to expect after you file your documents"
+    And I should see the phrase "Step 11: If your case is moving forward in Alaska, learn more about the process"
+    And I should see the phrase "Step 12: Abuse or domestic violence and parenting"
+    And I should see the phrase "Step 13: Get more information or help"
     And I take a screenshot
     And I download "responding_child_custody_action_plan.pdf"
     And I download "responding_child_custody_action_plan.docx"
@@ -344,6 +347,7 @@ Scenario: Row #3TF
     And I should see the phrase "Step 4: File your documents with the court and serve the other parent"
     And I should see the phrase "Step 5: Serve the other parent"
     And I tap the "#dHJ1ZWZpbGluZ19zZXJ2ZV9zdGVw .al_toggle" element and stay on the same page
+    And I should see the phrase "Use TrueFiling to serve the other parent."
     And I should see the phrase "Follow the TrueFiling instructions to serve them at their email address."
     And I should see the phrase "Step 6: Read the Standing Order"
     And I should see the phrase "Step 7: What to expect after you file your Answer"
@@ -380,6 +384,7 @@ Scenario: Row #44TF
     And I should see the phrase "Step 6: Serve the other parent"
     And I tap the "#dHJ1ZWZpbGluZ19zZXJ2ZV9zdGVw .al_toggle" element and stay on the same page
     And I should see the phrase "Look at the other parent’s complaint to see if they checked they were exempt."
+    And I should see the phrase "Wait to file your document with the court until after you fill out the certificate of service and serve the other parent."
     And I should see the phrase "Step 7: What to expect after you file your documents"
     And I should see the phrase "Step 8: Get more information or help"
     And I take a screenshot
@@ -417,7 +422,8 @@ Scenario: Row #167mTF
     And I should see the phrase "Step 8: Serve the other parent"
     And I tap the "#dHJ1ZWZpbGluZ19zZXJ2ZV9zdGVw .al_toggle" element and stay on the same page
     And I should see the phrase "Look at the other parent’s complaint to see if they checked they were exempt."
-    And I should see the phrase "Step 9: Read the Standing Order" 
+    And I should see the phrase "Wait to file your document with the court until after you fill out the certificate of service and serve the other parent."
+    And I should see the phrase "Step 9: Read the Standing Order"
     And I should see the phrase "Step 10: What to expect after you file your documents"
     And I should see the phrase "Step 11: If your case is moving forward in Alaska, learn more about the process"
     And I should see the phrase "Step 12: Get more information or help"
@@ -457,7 +463,8 @@ Scenario: Row #170mTF
     And I should see the phrase "Step 8: Serve the other parent"
     And I tap the "#dHJ1ZWZpbGluZ19zZXJ2ZV9zdGVw .al_toggle" element and stay on the same page
     And I should see the phrase "Look at the other parent’s complaint to see if they checked they were exempt."
-    And I should see the phrase "Step 9: Read the Standing Order" 
+    And I should see the phrase "Wait to file your document with the court until after you fill out the certificate of service and serve the other parent."
+    And I should see the phrase "Step 9: Read the Standing Order"
     And I should see the phrase "Step 10: What to expect after you file your documents"
     And I should see the phrase "Step 11: If your case is moving forward in Alaska, learn more about the process"
     And I should see the phrase "Step 12: Abuse or domestic violence and parenting"
@@ -495,7 +502,7 @@ Scenario: Row #175TF
     And I should see the phrase "Step 6: Serve the other parent"
     And I tap the "#dHJ1ZWZpbGluZ19zZXJ2ZV9zdGVw .al_toggle" element and stay on the same page
     And I should see the phrase "Because the other person is not using TrueFiling and did not give an email address, you cannot serve them through TrueFiling."
-    And I should see the phrase "Wait to file your documents with the court until after you fill out the Certificate of Service and serve the other parent."
+    And I should see the phrase "Wait to file your document with the court until after you fill out the certificate of service and serve the other parent."
     And I should see the phrase "Step 7: What to expect after you file your documents"
     And I should see the phrase "Step 8: Get more information or help"
     And I take a screenshot
@@ -527,7 +534,7 @@ Scenario: Row #176mTF
     And I should see the phrase "Step 5: Serve the other parent"
     And I tap the "#dHJ1ZWZpbGluZ19zZXJ2ZV9zdGVw .al_toggle" element and stay on the same page
     And I should see the phrase "Because the other person is not using TrueFiling and did not give an email address, you cannot serve them through TrueFiling."
-    And I should see the phrase "Wait to file your documents with the court until after you fill out the Certificate of Service and serve the other parent."
+    And I should see the phrase "Wait to file your document with the court until after you fill out the certificate of service and serve the other parent."
     And I should see the phrase "Step 6: What to expect after you file your documents"
     And I should see the phrase "Step 7: Get more information or help"
     And I take a screenshot
@@ -554,7 +561,7 @@ Scenario: Row #128TF
     And I should see the phrase "Step 4: Serve the other parent"
     And I tap the "#dHJ1ZWZpbGluZ19zZXJ2ZV9zdGVw .al_toggle" element and stay on the same page
     And I should see the phrase "Because the other person is not using TrueFiling and did not give an email address, you cannot serve them through TrueFiling."
-    And I should see the phrase "Wait to file your documents with the court until after you fill out the Certificate of Service and serve the other parent."
+    And I should see the phrase "Wait to file your document with the court until after you fill out the certificate of service and serve the other parent."
     And I should see the phrase "Step 5: What to expect after you file your documents"
     And I should see the phrase "Step 6: Get more information or help"
     And I take a screenshot
