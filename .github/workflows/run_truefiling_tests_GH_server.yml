@@ -1,7 +1,7 @@
-name: Automatic tests for some truefiling tests  GitHub Server
+name: Old, no longer using, tests for some truefiling tests  GitHub Server
 
 on:
-  push:
+#  push:
   workflow_dispatch:
     inputs:
       tags:
