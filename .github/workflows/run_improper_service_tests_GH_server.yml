@@ -1,7 +1,7 @@
-name: Automatic test for improper service on GitHub Server
+name: test for improper service on GitHub Server
 
 on:
-  push:
+#  push:
   workflow_dispatch:
     inputs:
       tags:
