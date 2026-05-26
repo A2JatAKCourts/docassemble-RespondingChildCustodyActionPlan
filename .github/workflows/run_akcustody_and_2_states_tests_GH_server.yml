@@ -1,7 +1,7 @@
-name: Automatic tests for ak courts and case in 2 states on  GitHub Server
+name: Tests for ak courts and case in 2 states on GitHub Server
 
 on:
-  push:
+#  push:
   workflow_dispatch:
     inputs:
       tags:
