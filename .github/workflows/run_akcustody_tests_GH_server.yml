@@ -1,7 +1,7 @@
-name: Automatic tests for cases in AKcourts on GitHub Server
+name: Tests for cases in AKcourts on GitHub Server
 
 on:
-  push:
+#  push:
   workflow_dispatch:
     inputs:
       tags:
