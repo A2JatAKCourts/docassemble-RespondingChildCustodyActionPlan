@@ -1,4 +1,4 @@
-name: test for improper service on GitHub Server
+name: Test for improper service on GitHub Server
 
 on:
 #  push:
