@@ -1,7 +1,7 @@
-name: Automatic tests for not started on GitHub Server
+name: Tests for not started on GitHub Server
 
 on:
-  push:
+#  push:
   workflow_dispatch:
     inputs:
       tags:
