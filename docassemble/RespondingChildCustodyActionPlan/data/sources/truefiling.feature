@@ -1,6 +1,6 @@
 @truefiling
 Feature: User paths
-# 2026-05-14
+# 2026-05-27
 
 Background: 
   Given the maximum seconds for each Step is 90
@@ -128,7 +128,7 @@ Scenario: 16 — Row #128TF
     And I should see the phrase "Step 3: File your documents with the court and serve the other parent"
     And I should see the phrase "Step 4: Serve the other parent"
     And I tap the "#dHJ1ZWZpbGluZ19zZXJ2ZV9zdGVw .al_toggle" element and stay on the same page
-    And I should see the phrase "Because the other person is not using TrueFiling and did not give an email address, you cannot serve them through TrueFiling."
+    And I should see the phrase "Because the other parent is not using TrueFiling and did not give an email address, you cannot serve them through TrueFiling."
     And I should see the phrase "Wait to file your document with the court until after you fill out the certificate of service and serve the other parent."
     And I should see the phrase "Step 5: What to expect after you file your documents"
     And I should see the phrase "Step 6: Get more information or help"
@@ -532,7 +532,7 @@ Scenario: 14 — Row #175TF
     And I should see the phrase "Step 5: If you are asking to set aside the default, file your documents with the court and serve the other parent"
     And I should see the phrase "Step 6: Serve the other parent"
     And I tap the "#dHJ1ZWZpbGluZ19zZXJ2ZV9zdGVw .al_toggle" element and stay on the same page
-    And I should see the phrase "Because the other person is not using TrueFiling and did not give an email address, you cannot serve them through TrueFiling."
+    And I should see the phrase "Because the other parent is not using TrueFiling and did not give an email address, you cannot serve them through TrueFiling."
     And I should see the phrase "Wait to file your document with the court until after you fill out the certificate of service and serve the other parent."
     And I should see the phrase "Step 7: What to expect after you file your documents"
     And I should see the phrase "Step 8: Get more information or help"
@@ -564,7 +564,7 @@ Scenario: 15 — Row #176mTF
     And I should see the phrase "Step 4: File your documents with the court and serve the other parent"
     And I should see the phrase "Step 5: Serve the other parent"
     And I tap the "#dHJ1ZWZpbGluZ19zZXJ2ZV9zdGVw .al_toggle" element and stay on the same page
-    And I should see the phrase "Because the other person is not using TrueFiling and did not give an email address, you cannot serve them through TrueFiling."
+    And I should see the phrase "Because the other parent is not using TrueFiling and did not give an email address, you cannot serve them through TrueFiling."
     And I should see the phrase "Wait to file your document with the court until after you fill out the certificate of service and serve the other parent."
     And I should see the phrase "Step 6: What to expect after you file your documents"
     And I should see the phrase "Step 7: Get more information or help"
