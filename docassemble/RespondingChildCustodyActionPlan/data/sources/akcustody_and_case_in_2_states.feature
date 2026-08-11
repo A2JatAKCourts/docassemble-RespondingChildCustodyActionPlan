@@ -1,6 +1,6 @@
 @akcustody_and_case_in_2_states
 Feature: User paths
-# 2026-04-30
+# 2026-08-11
 
 Background: 
   Given the maximum seconds for each Step is 90
@@ -18,6 +18,7 @@ Scenario: Row #128
     | filing_method                        | efiling          |         | 
     | other_party_exempt                   | yes              |         | 
     | other_party_enter_email              | True             |         | 
+    | ak_patience_assembling               | True             |         | 
     And I should see the phrase "Your Action Plan for responding in your child custody case in 5 steps"
     And I should see the phrase "Step 1: File a motion to dismiss your Alaska case"
     And I should see the phrase "Step 2: File your documents with the court and serve the other parent"
@@ -42,6 +43,7 @@ Scenario: Row #131
     | domestic_violence                    | False               |         | 
     | paternity                            | False               |         | 
     | other_party_exempt                   | no                  |         | 
+    | ak_patience_assembling               | True                |         | 
     And I should see the phrase "Your Action Plan for responding in your child custody case in 9 steps"
     And I should see the phrase "Step 1: You can move forward with your Alaska case"
     And I should see the phrase "Step 2: Fill out the forms to answer the complaint and respond within 20 days"
@@ -71,6 +73,7 @@ Scenario: Row #132
     | domestic_violence                    | False          |         | 
     | paternity                            | True           |         | 
     | other_party_exempt                   | none           |         | 
+    | ak_patience_assembling               | True           |         | 
 
     And I should see the phrase "Your Action Plan for responding in your child custody case in 12 steps"
     And I should see the phrase "Step 1: Learn if Alaska is the right state for your custody case"
@@ -105,6 +108,7 @@ Scenario: Row #137
     | paternity                            | False          |         | 
     | other_party_exempt                   | yes            |         | 
     | other_party_enter_email              | False          |         | 
+    | ak_patience_assembling               | True           |         | 
     And I should see the phrase "Your Action Plan for responding in your child custody case in 12 steps"
     And I should see the phrase "Step 1: Learn if Alaska is the right state for your custody case"
     And I should see the phrase "Step 2: Options when you have cases in 2 states"
@@ -137,6 +141,7 @@ Scenario: Row #140
     | filing_method                        | mail or in person |         | 
     | domestic_violence                    | True              |         | 
     | other_party_exempt                   | no                |         | 
+    | ak_patience_assembling               | True              |         | 
     And I should see the phrase "Your Action Plan for responding in your child custody case in 7 steps"
     And I should see the phrase "Step 1: Learn about proper service"
     And I should see the phrase "Step 2: File a motion to dismiss your Alaska case"
@@ -164,6 +169,7 @@ Scenario: Row #143
     | filing_method                        | dunno            |         | 
     | have_complaint                       | True             |         | 
     | other_party_exempt                   | none             |         | 
+    | ak_patience_assembling               | True             |         | 
     And I should see the phrase "Your Action Plan for responding in your child custody case in 7 steps"
     And I should see the phrase "Step 1: Learn about proper service and default judgment"
     And I should see the phrase "Step 2: File a motion to dismiss your Alaska case"
@@ -192,6 +198,7 @@ Scenario: Row #144
     | domestic_violence                    | True                |         | 
     | other_party_exempt                   | yes                 |         | 
     | other_party_enter_email              | None                |         | 
+    | ak_patience_assembling               | True                |         | 
     And I should see the phrase "Your Action Plan for responding in your child custody case in 11 steps"
     And I should see the phrase "Step 1: You can move forward with your Alaska case"
     And I should see the phrase "Step 2: Learn about proper service"
@@ -225,6 +232,7 @@ Scenario: Row #147
     | have_complaint                       | True                |         | 
     | domestic_violence                    | False               |         | 
     | other_party_exempt                   | no                  |         | 
+    | ak_patience_assembling               | True                |         | 
     And I should see the phrase "Your Action Plan for responding in your child custody case in 11 steps"
     And I should see the phrase "Step 1: You can move forward with your Alaska case"
     And I should see the phrase "Step 2: Learn about proper service and default judgment"
@@ -257,6 +265,7 @@ Scenario: Row #148
     | filing_method                        | dunno          |         | 
     | domestic_violence                    | True           |         | 
     | other_party_exempt                   | none           |         | 
+    | ak_patience_assembling               | True           |         | 
     And I should see the phrase "Your Action Plan for responding in your child custody case in 13 steps"
     And I should see the phrase "Step 1: Learn if Alaska is the right state for your custody case"
     And I should see the phrase "Step 2: Learn about proper service"
@@ -293,6 +302,7 @@ Scenario: Row #151
     | have_complaint                       | True           |         | 
     | other_party_exempt                   | yes            |         | 
     | other_party_enter_email              | True           |         | 
+    | ak_patience_assembling               | True           |         | 
     And I should see the phrase "Your Action Plan for responding in your child custody case in 11 steps"
     And I should see the phrase "Step 1: Learn if Alaska is the right state for your custody case"
     And I should see the phrase "Step 2: Learn about proper service and default judgment"
@@ -325,6 +335,7 @@ Scenario: Row #152
     | filing_method                        | mail or in person |         | 
     | domestic_violence                    | True              |         | 
     | other_party_exempt                   | no                |         | 
+    | ak_patience_assembling               | True              |         | 
     And I should see the phrase "Your Action Plan for responding in your child custody case in 13 steps"
     And I should see the phrase "Step 1: Learn if Alaska is the right state for your custody case"
     And I should see the phrase "Step 2: Learn about proper service"
@@ -360,6 +371,7 @@ Scenario: Row #155
     | domestic_violence                    | False          |         | 
     | have_complaint                       | True           |         | 
     | other_party_exempt                   | none           |         | 
+    | ak_patience_assembling               | True           |         | 
     And I should see the phrase "Your Action Plan for responding in your child custody case in 12 steps"
     And I should see the phrase "Step 1: Learn if Alaska is the right state for your custody case"
     And I should see the phrase "Step 2: Learn about proper service and default judgment"
@@ -396,6 +408,7 @@ Scenario: Row #158m
     | domestic_violence                    | True              |         | 
     | paternity                            | True              |         | 
     | have_complaint                       | False             |         | 
+    | ak_patience_assembling               | True              |         | 
     And I should see the phrase "Your Action Plan for responding in your child custody case in 14 steps"
     And I should see the phrase "Step 1: Learn if Alaska is the right state for your custody case"
     And I should see the phrase "Step 2: Learn about proper service and default judgment"
@@ -434,6 +447,7 @@ Scenario: Row #161
     | domestic_violence                    | True              |         | 
     | paternity                            | False             |         | 
     | other_party_exempt                   | no                |         | 
+    | ak_patience_assembling               | True              |         | 
     And I should see the phrase "Your Action Plan for responding in your child custody case in 13 steps"
     And I should see the phrase "Step 1: Learn if Alaska is the right state for your custody case"
     And I should see the phrase "Step 2: Learn about default judgment"
@@ -469,6 +483,7 @@ Scenario: Row #164
     | filling_manner                       | paper            |         | 
     | filing_method                        | dunno            |         | 
     | other_party_exempt                   | none             |         | 
+    | ak_patience_assembling               | True             |         | 
     And I should see the phrase "Your Action Plan for responding in your child custody case in 8 steps"
     And I should see the phrase "Step 1: Learn about default judgment"
     And I should see the phrase "Step 2: Learn about the Motion to Set Aside Judgment or Order"
@@ -502,6 +517,7 @@ Scenario: Row #167m
     | paternity                            | False             |         | 
     | other_party_exempt                   | yes               |         | 
     | other_party_enter_email              | None              |         | 
+    | ak_patience_assembling               | True              |         | 
     And I should see the phrase "Your Action Plan for responding in your child custody case in 12 steps"
     And I should see the phrase "Step 1: Learn if Alaska is the right state for your custody case"
     And I should see the phrase "Step 2: Learn about default judgment"
@@ -538,6 +554,7 @@ Scenario: Row #170m
     | domestic_violence                    | True              |         | 
     | paternity                            | True              |         | 
     | have_complaint                       | False             |         | 
+    | ak_patience_assembling               | True              |         | 
     And I should see the phrase "Your Action Plan for responding in your child custody case in 14 steps"
     And I should see the phrase "Step 1: Learn if Alaska is the right state for your custody case"
     And I should see the phrase "Step 2: Learn about proper service and default judgment"
@@ -574,6 +591,7 @@ Scenario: Row #175
     | filling_manner                       | dunno            |         | 
     | filing_method                        | dunno            |         | 
     | have_complaint                       | False            |         | 
+    | ak_patience_assembling               | True             |         | 
     And I should see the phrase "Your Action Plan for responding in your child custody case in 8 steps"
     And I should see the phrase "Step 1: Learn about proper service and default judgment"
     And I should see the phrase "Step 2: Learn about the Motion to Set Aside Judgment or Order"
@@ -604,6 +622,7 @@ Scenario: Row #176m
     | filing_method                        | efiling           |         | 
     | other_party_exempt                   | yes               |         | 
     | other_party_enter_email              | True              |         | 
+    | ak_patience_assembling               | True              |         | 
     And I should see the phrase "Your Action Plan for responding in your child custody case in 6 steps"
     And I should see the phrase "Step 1: Learn about default judgment"
     And I should see the phrase "Step 2: File a motion to dismiss your Alaska case"
@@ -631,6 +650,7 @@ Scenario: Row #177
     | filling_manner                       | electronically    |         | 
     | filing_method                        | mail or in person |         | 
     | have_complaint                       | False             |         | 
+    | ak_patience_assembling               | True              |         | 
     And I should see the phrase "Your Action Plan for responding in your child custody case in 7 steps"
     And I should see the phrase "Step 1: Learn about proper service and default judgment"
     And I should see the phrase "Step 2: File a motion to dismiss your Alaska case"
@@ -659,6 +679,7 @@ Scenario: Row #178
     | filling_manner                       | electronically    |         | 
     | filing_method                        | dunno             |         | 
     | other_party_exempt                   | none              |         | 
+    | ak_patience_assembling               | True              |         | 
     And I should see the phrase "Your Action Plan for responding in your child custody case in 7 steps"
     And I should see the phrase "Step 1: Learn about default judgment"
     And I should see the phrase "Step 2: File a motion to dismiss your Alaska case"
@@ -687,6 +708,7 @@ Scenario: Row #179m
     | filling_manner                       | paper             |         | 
     | filing_method                        | efiling           |         | 
     | have_complaint                       | False             |         | 
+    | ak_patience_assembling               | True              |         | 
     And I should see the phrase "Your Action Plan for responding in your child custody case in 7 steps"
     And I should see the phrase "Step 1: Learn about proper service and default judgment"
     And I should see the phrase "Step 2: File a motion to dismiss your Alaska case"
@@ -715,6 +737,7 @@ Scenario: Row #180
     | filling_manner                       | paper             |         | 
     | filing_method                        | mail or in person |         | 
     | other_party_exempt                   | no                |         | 
+    | ak_patience_assembling               | True              |         | 
     And I should see the phrase "Your Action Plan for responding in your child custody case in 9 steps"
     And I should see the phrase "Step 1: Learn about default judgment"
     And I should see the phrase "Step 2: Options when the judge entered a default judgment"
@@ -746,6 +769,7 @@ Scenario: Row #181m
     | filing_method                        | dunno            |         | 
     | domestic_violence                    | False            |         | 
     | have_complaint                       | False            |         | 
+    | ak_patience_assembling               | True             |         | 
     And I should see the phrase "Your Action Plan for responding in your child custody case in 9 steps"
     And I should see the phrase "Step 1: Learn about proper service and default judgment"
     And I should see the phrase "Step 2: Options when the judge entered a default judgment"
@@ -779,6 +803,7 @@ Scenario: Row #183m
     | paternity                            | False               |         | 
     | other_party_exempt                   | yes                 |         | 
     | other_party_enter_email              | None                |         | 
+    | ak_patience_assembling               | True                |         | 
     And I should see the phrase "Your Action Plan for responding in your child custody case in 11 steps"
     And I should see the phrase "Step 1: You can move forward with your Alaska case"
     And I should see the phrase "Step 2: Learn about default judgment"
@@ -813,6 +838,7 @@ Scenario: Row #184m
     | domestic_violence                    | True                |         | 
     | paternity                            | True                |         | 
     | have_complaint                       | False               |         | 
+    | ak_patience_assembling               | True                |         | 
     And I should see the phrase "Your Action Plan for responding in your child custody case in 14 steps"
     And I should see the phrase "Step 1: You can move forward with your Alaska case"
     And I should see the phrase "Step 2: Learn about proper service and default judgment"
@@ -850,6 +876,7 @@ Scenario: Row #186
     | domestic_violence                    | True                |         | 
     | paternity                            | False               |         | 
     | other_party_exempt                   | none                |         | 
+    | ak_patience_assembling               | True                |         | 
     And I should see the phrase "Your Action Plan for responding in your child custody case in 12 steps"
     And I should see the phrase "Step 1: You can move forward with your Alaska case"
     And I should see the phrase "Step 2: Learn about default judgment"
@@ -885,6 +912,7 @@ Scenario: Row #187m
     | domestic_violence                    | True                |         | 
     | paternity                            | True                |         | 
     | have_complaint                       | False               |         | 
+    | ak_patience_assembling               | True                |         | 
     And I should see the phrase "Your Action Plan for responding in your child custody case in 13 steps"
     And I should see the phrase "Step 1: You can move forward with your Alaska case"
     And I should see the phrase "Step 2: Learn about proper service and default judgment"
@@ -919,6 +947,7 @@ Scenario: Row #190
     | filling_manner                       | electronically      |         | 
     | filing_method                        | mail or in person   |         | 
     | other_party_exempt                   | no                  |         | 
+    | ak_patience_assembling               | True                |         | 
     And I should see the phrase "Your Action Plan for responding in your child custody case in 9 steps"
     And I should see the phrase "Step 1: Learn about default judgment"
     And I should see the phrase "Step 2: Options when the judge entered a default judgment"
@@ -949,6 +978,7 @@ Scenario: Row #191
     | filling_manner                       | electronically      |         | 
     | filing_method                        | dunno               |         | 
     | have_complaint                       | False               |         | 
+    | ak_patience_assembling               | True                |         | 
     And I should see the phrase "Your Action Plan for responding in your child custody case in 9 steps"
     And I should see the phrase "Step 1: Learn about proper service and default judgment"
     And I should see the phrase "Step 2: Options when the judge entered a default judgment"

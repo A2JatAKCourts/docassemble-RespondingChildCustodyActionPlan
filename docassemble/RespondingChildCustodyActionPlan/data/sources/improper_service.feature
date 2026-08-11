@@ -1,6 +1,6 @@
 @service
 Feature: User paths
-# 2026-05-01
+# 2026-08-11
 Background: 
   Given the maximum seconds for each Step is 90
 
@@ -16,6 +16,7 @@ Scenario: Row #17
     | have_complaint                       | True           |         | 
     | other_party_exempt                   | yes            |         | 
     | other_party_enter_email              | True           |         | 
+    | ak_patience_assembling               | True           |         | 
 
     And I should see the phrase "Your Action Plan for responding in your child custody case in 9 steps"
     And I should see the phrase "Step 1: Learn about proper service and default judgment"
@@ -44,6 +45,7 @@ Scenario: Row #17b
     | filing_method                        | mail or in person |         | 
     | proper_service                       | False             |         | 
     | have_complaint                       | False             |         | 
+    | ak_patience_assembling               | True              |         | 
 
     And I should see the phrase "Your Action Plan for responding in your child custody case in 10 steps"
     And I should see the phrase "Step 1: Learn about proper service and default judgment"
@@ -73,6 +75,7 @@ Scenario: Row #17c
     | proper_service                       | False          |         | 
     | have_complaint                       | True           |         | 
     | other_party_exempt                   | none           |         | 
+    | ak_patience_assembling               | True           |         | 
 
     And I should see the phrase "Your Action Plan for responding in your child custody case in 10 steps"
     And I should see the phrase "Step 1: Learn about proper service and default judgment"

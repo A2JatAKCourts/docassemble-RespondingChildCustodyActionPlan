@@ -1,6 +1,6 @@
 @default
 Feature: User paths
-# 2026-05-01
+# 2026-08-11
 
 Background: 
   Given the maximum seconds for each Step is 90
@@ -19,6 +19,7 @@ Scenario: Row #36
     | filing_method               | efiling           |         | 
     | other_party_exempt          | yes               |         | 
     | other_party_enter_email     | True              |         | 
+    | ak_patience_assembling      | True              |         | 
     And I should see the phrase "Your Action Plan for responding in your child custody case in 9 steps"
     And I should see the phrase "Step 1: Learn about default judgment"
     And I tap the "#cHJvcGVyX3NlcnZpY2Vfc3RlcA .al_toggle" element and stay on the same page
@@ -50,6 +51,7 @@ Scenario: Row #37
     | filling_manner              | electronically    |         | 
     | filing_method               | mail or in person |         | 
     | other_party_exempt          | none              |         | 
+    | ak_patience_assembling      | True              |         | 
     And I should see the phrase "Your Action Plan for responding in your child custody case in 10 steps"
     And I should see the phrase "Step 1: Learn about default judgment"
     And I tap the "#cHJvcGVyX3NlcnZpY2Vfc3RlcA .al_toggle" element and stay on the same page
@@ -83,6 +85,7 @@ Scenario: Row #38
     | filing_method               | dunno            |         | 
     | other_party_exempt          | yes              |         | 
     | other_party_enter_email     | False            |         | 
+    | ak_patience_assembling      | True             |         | 
     And I should see the phrase "Your Action Plan for responding in your child custody case in 9 steps"
     And I should see the phrase "Step 1: Learn about default judgment"
     And I tap the "#cHJvcGVyX3NlcnZpY2Vfc3RlcA .al_toggle" element and stay on the same page
@@ -114,6 +117,7 @@ Scenario: Row #41
     | filing_method               | efiling          |         | 
     | other_party_exempt          | yes              |         | 
     | other_party_enter_email     | None             |         | 
+    | ak_patience_assembling      | True             |         | 
     And I should see the phrase "Your Action Plan for responding in your child custody case in 9 steps"
     And I should see the phrase "Step 1: Learn about default judgment"
     And I tap the "#cHJvcGVyX3NlcnZpY2Vfc3RlcA .al_toggle" element and stay on the same page
@@ -146,6 +150,7 @@ Scenario: Row #44
     | have_complaint              | True              |         | 
     | other_party_exempt          | yes               |         | 
     | other_party_enter_email     | None              |         | 
+    | ak_patience_assembling      | True              |         | 
     And I should see the phrase "Your Action Plan for responding in your child custody case in 9 steps"
     And I should see the phrase "Step 1: Learn about proper service and default judgment"
     And I tap the "#cHJvcGVyX3NlcnZpY2Vfc3RlcA .al_toggle" element and stay on the same page
@@ -176,6 +181,7 @@ Scenario: Row #46
     | filling_manner              | paper             |         | 
     | filing_method               | dunno             |         | 
     | have_complaint              | False             |         | 
+    | ak_patience_assembling      | True              |         | 
     And I should see the phrase "Your Action Plan for responding in your child custody case in 11 steps"
     And I should see the phrase "Step 1: Learn about proper service and default judgment"
     And I tap the "#cHJvcGVyX3NlcnZpY2Vfc3RlcA .al_toggle" element and stay on the same page
@@ -210,6 +216,7 @@ Scenario: Row #47
     | filing_method               | efiling          |         | 
     | have_complaint              | True             |         | 
     | other_party_exempt          | none             |         | 
+    | ak_patience_assembling      | True             |         | 
     And I should see the phrase "Your Action Plan for responding in your child custody case in 8 steps"
     And I should see the phrase "Step 1: Learn about proper service and default judgment"
     And I tap the "#cHJvcGVyX3NlcnZpY2Vfc3RlcA .al_toggle" element and stay on the same page

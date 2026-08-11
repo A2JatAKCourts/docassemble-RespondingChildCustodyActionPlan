@@ -1,6 +1,6 @@
 @akcustody
 Feature: User paths
-# 2026-05-01
+# 2026-08-11
 
 Background: 
   Given the maximum seconds for each Step is 90
@@ -19,6 +19,7 @@ Scenario: Row #1
     | paternity                           | True           |         | 
     | other_party_exempt                  | yes            |         | 
     | other_party_enter_email             | True           |         | 
+    | ak_patience_assembling              | True           |         | 
 
     And I should see the phrase "Your Action Plan for responding in your child custody case in 10 steps"
     And I should see the phrase "Step 1: Review your options when you agree with what the other parent is asking"
@@ -53,6 +54,7 @@ Scenario: Row #3
     | paternity                           | True              |         | 
     | other_party_exempt                  | yes               |         | 
     | other_party_enter_email             | False             |         | 
+    | ak_patience_assembling              | True              |         | 
 
     And I should see the phrase "Your Action Plan for responding in your child custody case in 10 steps"
     And I should see the phrase "Step 1: Review your options when you agree with what the other parent is asking"
@@ -85,6 +87,7 @@ Scenario: Row #5
     | paternity                           | False          |         | 
     | other_party_exempt                  | yes            |         | 
     | other_party_enter_email             | None           |         | 
+    | ak_patience_assembling              | True           |         | 
     And I should see the phrase "Your Action Plan for responding in your child custody case in 10 steps"
     And I should see the phrase "Step 1: Review your options when you agree with some of what the other parent is asking"
     And I tap the "#d2FudF9oZWxwX3RvX2FncmVlX3N0ZXA .al_toggle" element and stay on the same page
@@ -116,6 +119,7 @@ Scenario: Row #8
     | domestic_violence                   | False          |         | 
     | paternity                           | False          |         | 
     | other_party_exempt                  | no             |         | 
+    | ak_patience_assembling              | True           |         | 
     And I should see the phrase "Your Action Plan for responding in your child custody case in 9 steps"
     And I should see the phrase "Step 1: Review your options when you agree with some of what the other parent is asking"
     And I tap the "#d2FudF9oZWxwX3RvX2FncmVlX3N0ZXA .al_toggle" element and stay on the same page
@@ -146,6 +150,7 @@ Scenario: Row #9
     | domestic_violence                   | True              |         | 
     | paternity                           | True              |         | 
     | other_party_exempt                  | none              |         | 
+    | ak_patience_assembling              | True              |         | 
     And I should see the phrase "Your Action Plan for responding in your child custody case in 11 steps"
     And I should see the phrase "Step 1: Decide if you want to try to reach an agreement with the other parent."
     And I tap the "#d2FudF9oZWxwX3RvX2FncmVlX3N0ZXA .al_toggle" element and stay on the same page
@@ -179,6 +184,7 @@ Scenario: Row #14
     | domestic_violence                   | True           |         | 
     | paternity                           | False          |         | 
     | other_party_exempt                  | no             |         | 
+    | ak_patience_assembling              | True           |         | 
     And I should see the phrase "Your Action Plan for responding in your child custody case in 9 steps"
     And I should see the phrase "Step 1: Fill out the forms to answer the complaint and respond within 20 days"
     And I tap the "#YW5zd2VyX3N0ZXA .al_toggle" element and stay on the same page

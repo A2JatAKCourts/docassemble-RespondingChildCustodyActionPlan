@@ -1,6 +1,6 @@
 @not_started
 Feature: User paths
-# 2026-05-01
+# 2026-08-11
 
 Background: 
   Given the maximum seconds for each Step is 90
@@ -16,6 +16,7 @@ Scenario: Row #48
     | filling_manner           | electronically    |         | 
     | filing_method            | mail or in person |         | 
     | domestic_violence        | True              |         | 
+    | ak_patience_assembling   | True              |         | 
     # And I should see the phrase "Your Action Plan for responding in your child custody case in 8 steps"
     And I should see the phrase "Step 1: Options if the other parent wants to talk about a Parenting Plan and starting a custody case"
     And I tap the "#d2FudF9oZWxwX3RvX2FncmVlX3N0ZXA .al_toggle" element and stay on the same page
@@ -42,6 +43,7 @@ Scenario: Row #49
     | filling_manner           | electronically |         | 
     | filing_method            | dunno          |         | 
     | domestic_violence        | False          |         | 
+    | ak_patience_assembling   | True           |         | 
     # And I should see the phrase "Your Action Plan for responding in your child custody case in 7 steps"
     And I should see the phrase "Step 1: Options if the other parent wants to talk about a Parenting Plan and starting a custody case"
     And I tap the "#d2FudF9oZWxwX3RvX2FncmVlX3N0ZXA .al_toggle" element and stay on the same page
@@ -64,6 +66,7 @@ Scenario: Row #50
     | type_of_response['None'] | True           |         | 
     | agreement_documents      | False          |         | 
     | domestic_violence        | True           |         | 
+    | ak_patience_assembling   | True           |         | 
     #  And I should see the phrase "Your Action Plan for responding in your child custody case in 3 steps"
     And I should see the phrase "Step 1: Options if the other parent wants to talk about a Parenting Plan and starting a custody case"
     And I tap the "#d2FudF9oZWxwX3RvX2FncmVlX3N0ZXA .al_toggle" element and stay on the same page
@@ -83,6 +86,7 @@ Scenario: Row #51
     | type_of_response['None'] | True              |         | 
     | agreement_documents      | False             |         | 
     | domestic_violence        | False             |         | 
+    | ak_patience_assembling   | True              |         | 
     # And I should see the phrase "Your Action Plan for responding in your child custody case in 2 steps"
     And I should see the phrase "Step 1: Options if the other parent wants to talk about a Parenting Plan and starting a custody case"
     And I tap the "#d2FudF9oZWxwX3RvX2FncmVlX3N0ZXA .al_toggle" element and stay on the same page
